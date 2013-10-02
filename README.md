@@ -8,8 +8,7 @@ This I how I set everything up for myself. You can follow similar steps to get y
 ## Install dependencies
 
 ```bash
-sudo pip install pelican
-sudo pip install ghp-import
+sudo pip install pelican ghp-import markdown
 ```
 
 ## Set up remote
