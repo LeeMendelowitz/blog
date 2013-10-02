@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2013-10-02T17:45:00+02:00</updated><entry><title>Wrapping Python Dictionaries</title><link href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html" rel="alternate"></link><updated>2013-10-02T17:45:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-02:wrapping-python-dictionaries.html</id><summary type="html">&lt;p&gt;Very frequently when I'm programming in python, I write functions that return a
+<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/python.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2013-10-02T17:45:00+02:00</updated><entry><title>Wrapping Python Dictionaries</title><link href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html" rel="alternate"></link><updated>2013-10-02T17:45:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-02:wrapping-python-dictionaries.html</id><summary type="html">&lt;p&gt;Very frequently when I'm programming in python, I write functions that return a
 dictionary with string keys.&lt;/p&gt;
 &lt;p&gt;When developing or debugging such programs in IPython, it's pretty tedious to
 inspect these dictionaries. First, you need to get a list of keys. Then, to see a particular
@@ -25,15 +25,4 @@ using the key/value pairs stored in a dictionary.&lt;/p&gt;
 &lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
         &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iteritems&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
             &lt;span class="nb"&gt;setattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="python"></category><category term="ipython"></category></entry><entry><title>Start Me Up!</title><link href="http://leemendelowitz.github.io/blog/start-me-up.html" rel="alternate"></link><updated>2013-10-02T07:35:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-02:start-me-up.html</id><summary type="html">&lt;!--- #Status: draft --&gt;
-
-&lt;p&gt;Welcome to the blog!&lt;/p&gt;
-&lt;p&gt;After a nice cup of coffee this morning, I impulsively created this blog because I don't
-have a good way of storing programming notes, complete with syntax
-highlighting. I have been using Google Drive, which doesn't really cut it.
-I also thought it would be fun to learn
-how to publish a blog using &lt;a href="http://docs.getpelican.com/"&gt;Pelican&lt;/a&gt; + GitHub, so there's
-also that. Checkout the
-&lt;a href="https://github.com/LeeMendelowitz/blog"&gt;GitHub repo&lt;/a&gt;
-for this blog! I just followed the &lt;code&gt;pelican-quickstart&lt;/code&gt;, modified the Makefile, and was up and running.&lt;/p&gt;
-&lt;p&gt;I'm currently taking the Coursera course &lt;a href="https://class.coursera.org/compdata-003/class"&gt;Computing for Data Science&lt;/a&gt; by Robert Peng, so I'll probably start off with some simple notes on R programming.&lt;/p&gt;</summary></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="python"></category><category term="ipython"></category></entry></feed>
