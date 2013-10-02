@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>To be determined.</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2013-10-02T07:35:00+02:00</updated><entry><title>Start Me Up!</title><link href="/start-me-up.html" rel="alternate"></link><updated>2013-10-02T07:35:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:,2013-10-02:start-me-up.html</id><summary type="html">&lt;!--- #Status: draft --&gt;
+
+&lt;p&gt;Welcome to the blog!&lt;/p&gt;
+&lt;p&gt;After a nice cup of coffee this morning, I impulsively created this blog because I don't
+have a good way of storing programming notes, complete with syntax
+highlighting. I have been using Google Drive, which doesn't really cut it.
+I also thought it would be fun to learn
+how to publish a blog using &lt;a href="http://docs.getpelican.com/"&gt;Pelican&lt;/a&gt; + GitHub, so there's
+also that. Checkout the
+&lt;a href="https://github.com/LeeMendelowitz/LeeMendelowitz.github.io-blog"&gt;GitHub repo&lt;/a&gt;
+for this blog! I just followed the &lt;code&gt;pelican-quickstart&lt;/code&gt;, modified the Makefile, and was up and running.&lt;/p&gt;
+&lt;p&gt;I'm currently taking the Coursera course &lt;a href="https://class.coursera.org/compdata-003/class"&gt;Computing for Data Science&lt;/a&gt; by Robert Peng, so I'll probably start off with some simple notes on R programming.&lt;/p&gt;</summary></entry></feed>
