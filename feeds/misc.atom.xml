@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>To be determined.</title><link href="/" rel="alternate"></link><link href="/feeds/misc.atom.xml" rel="self"></link><id>/</id><updated>2013-10-02T07:35:00+02:00</updated><entry><title>Start Me Up!</title><link href="/start-me-up.html" rel="alternate"></link><updated>2013-10-02T07:35:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:,2013-10-02:start-me-up.html</id><summary type="html">&lt;!--- #Status: draft --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>To be determined.</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/misc.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2013-10-02T07:35:00+02:00</updated><entry><title>Start Me Up!</title><link href="http://leemendelowitz.github.io/blog/start-me-up.html" rel="alternate"></link><updated>2013-10-02T07:35:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-02:start-me-up.html</id><summary type="html">&lt;!--- #Status: draft --&gt;
 
 &lt;p&gt;Welcome to the blog!&lt;/p&gt;
 &lt;p&gt;After a nice cup of coffee this morning, I impulsively created this blog because I don't
