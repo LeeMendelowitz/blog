@@ -8,6 +8,6 @@ highlighting. I have been using Google Drive, which doesn't really cut it.
 I also thought it would be fun to learn
 how to publish a blog using &lt;a href="http://docs.getpelican.com/"&gt;Pelican&lt;/a&gt; + GitHub, so there's
 also that. Checkout the
-&lt;a href="https://github.com/LeeMendelowitz/LeeMendelowitz.github.io-blog"&gt;GitHub repo&lt;/a&gt;
+&lt;a href="https://github.com/LeeMendelowitz/blog"&gt;GitHub repo&lt;/a&gt;
 for this blog! I just followed the &lt;code&gt;pelican-quickstart&lt;/code&gt;, modified the Makefile, and was up and running.&lt;/p&gt;
 &lt;p&gt;I'm currently taking the Coursera course &lt;a href="https://class.coursera.org/compdata-003/class"&gt;Computing for Data Science&lt;/a&gt; by Robert Peng, so I'll probably start off with some simple notes on R programming.&lt;/p&gt;</summary></entry></feed>
