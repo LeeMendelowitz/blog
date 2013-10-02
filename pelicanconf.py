@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'Lee Mendelowitz'
-SITENAME = u'To be determined.'
+SITENAME = u'On Coding'
 SITEURL = ''
 
 TIMEZONE = 'Europe/Paris'
@@ -32,7 +32,7 @@ SOCIAL = (('twitter', 'http://twitter.com/lmendy7'),
           ('github', 'https://github.com/LeeMendelowitz'),)
 TWITTER_USERNAME = "lmendy7"
 
-DEFAULT_PAGINATION = 5
+DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
