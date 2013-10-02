@@ -1,7 +1,9 @@
-LeeMendelowitz/github.io-blog
+Lee Mendelowitz's blog
 ==============
 
-Repo for managing the content and deployment of the blog LeeMendelowitz.github.io. This repo has a Makefile which will push to the LeeMendelowitz/LeeMendelowitz.github.io.git repo.
+Repo for managing the content and deployment of my [blog](http://leemendelowitz.github.io/blog/). This repo has a Makefile which will publish content to the gh-pages branch of this repo.
+
+This I how I set everything up for myself. You can follow similar steps to get your own blog up and running.
 
 ## Install dependencies
 
@@ -12,11 +14,16 @@ sudo pip install ghp-import
 
 ## Set up remote
 
-Set up a remote called "blog" in the local repo for the blog's remote repo, which is hosted on Github at LeeMendelowitz/LeeMendelowitz.github.io.git.
-
 ```bash
-git remote add blog	git@github.com:LeeMendelowitz/LeeMendelowitz.github.io.git
+git remote add github git@github.com:LeeMendelowitz/blog.git
 ```
+
+Only I have write access to this remote repo, but if you are setting up your own blog
+simply replace my repo with yours!
+
+# Add content
+
+Add an article to the ```content``` directory.
 
 ## Generate the blog
 
@@ -26,8 +33,10 @@ The blog can be generated using the Makefile.
 make html
 ```
 
+This will store content in a directory called ```output```.
+
 ## Preview the blog
-You can preview the blog locally by running the server and visiting http://localhost:8000.
+You can preview the blog locally by running the server and visiting [http://localhost:8000](http://localhost:8000).
 ```bash
 make serve
 ```
@@ -36,3 +45,4 @@ make serve
 ```bash
 make github
 ```
+Now checkout the [blog url](http://leemendelowitz.github.io/blog/).
