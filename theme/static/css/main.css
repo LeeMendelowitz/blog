@@ -20,6 +20,9 @@ body {
     background: #F5F4EF;
     background: #ADD6FF;
     background: #E2F0FF;
+    background: #F4F9FF;
+    background: #E0E0EC;
+    background: #E0F0FF;
     color: #000305;
     font-size: 87.5%; /* Base font size: 14px */
     font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -54,12 +57,15 @@ a img {border: 0px; text-decoration: none;}
 a:link, a:visited {
 	color: #C74350;
     color: #71A9FF;
+    color: #3366CC;
+    color: #24478F;
 	padding: 0 1px;
 	text-decoration: underline;
 }
 a:hover, a:active {
 	background-color: #C74350;
     background-color: #71A9FF;
+    background-color: #0029A3;
 	color: #fff;
 	text-decoration: none;
 	text-shadow: 1px 1px 1px #333;
@@ -178,6 +184,7 @@ img.left, figure.left {float: left; margin: 0 2em 2em 0;}
 		background: none;
 		color: #C74350;
         color: #71A9FF;
+        color: #0029A3;
 		text-shadow: none;
 	}
 	
@@ -213,6 +220,7 @@ img.left, figure.left {float: left; margin: 0 2em 2em 0;}
 	#banner nav .active a:link, #banner nav .active a:visited {
 		background: #C74451;
         background: #82B4FF;
+        background: #0029A3;
 		color: #fff;
 		text-shadow: none !important;
 	}
