@@ -12,6 +12,8 @@ DEFAULT_LANG = u'en'
 
 GOOGLE_ANALYTICS = "UA-44545448-1"
 
+#THEME = 'notmyidea-lmm'
+
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = None
