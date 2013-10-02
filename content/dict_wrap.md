@@ -36,3 +36,11 @@ using the key/value pairs stored in a dictionary.
             """
             for k,v in d.iteritems():
                 setattr(self, k, v)
+
+Now in the IPython shell, you can easily inspect your dictionaries using tab-completion!
+
+    :::python
+    myD = {'one' : 1, 'two' : 2, 'three' : 3}
+    d = DictWrap(myD)
+    d.<TAB> # prints d.one d.two d.three
+    d.t<TAB> # prints d.two d.three
