@@ -4,8 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Lee Mendelowitz'
 SITENAME = u'To be determined.'
-SITEURL = 'http://leemendelowitz.github.io/blog'
-#SITEURL = ''
+SITEURL = ''
 
 TIMEZONE = 'Europe/Paris'
 
@@ -15,7 +14,7 @@ GOOGLE_ANALYTICS = "UA-44545448-1"
 THEME = './theme'
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = 'feeds/all.atom.xml'
+FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
