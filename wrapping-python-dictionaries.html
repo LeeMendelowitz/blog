@@ -67,6 +67,14 @@ using the key/value pairs stored in a dictionary.</p>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 </pre></div>
+
+
+<p>Now in the IPython shell, you can easily inspect your dictionaries using tab-completion!</p>
+<div class="highlight"><pre><span class="n">myD</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;one&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;two&#39;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;three&#39;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">DictWrap</span><span class="p">(</span><span class="n">myD</span><span class="p">)</span>
+<span class="n">d</span><span class="o">.&lt;</span><span class="n">TAB</span><span class="o">&gt;</span> <span class="c"># prints d.one d.two d.three</span>
+<span class="n">d</span><span class="o">.</span><span class="n">t</span><span class="o">&lt;</span><span class="n">TAB</span><span class="o">&gt;</span> <span class="c"># prints d.two d.three</span>
+</pre></div>
     </div><!-- /.entry-content -->
 
   </article>
