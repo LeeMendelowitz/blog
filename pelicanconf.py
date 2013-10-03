@@ -31,6 +31,8 @@ LINKS =  (('Pelican', 'http://getpelican.com/'),
 SOCIAL = (('twitter', 'http://twitter.com/lmendy7'),
           ('github', 'https://github.com/LeeMendelowitz'),)
 TWITTER_USERNAME = "lmendy7"
+GITHUB_URL = "https://github.com/LeeMendelowitz/blog"
+DISQUS_SITENAME = "leeoncoding"
 
 DEFAULT_PAGINATION = 10
 
