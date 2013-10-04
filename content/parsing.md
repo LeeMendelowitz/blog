@@ -15,9 +15,9 @@ You can use the built-in type function to get an object's type.
     isinstance(int, type) # Returns True
     isinstance(int, object) # Returns True
     type(type) # Returns type. So type is an object of type type. Truth.
-    type(object) # Returns type. So an object is an object of type type. Mind blown.
+    type(object) # Returns type. So object is an object of type type. Mind blown.
 
-Since everything in Python is an object, you can treat them as such. This means you can store the types themselves in lists.
+Since everything in Python is an object, you can treat them as such. This means you can store the types themselves in a list.
 
     :::python
     my_types = [int, float, str, dict]
@@ -36,8 +36,8 @@ and utilize it to convert each field value to its appropriate type
 with a simple generator expression:
 
     :::python
-    field_types = [str, str, int, float]
     field_names = ['first', 'last', 'age', 'weight']
+    field_types = [str, str, int, float]
 
     def parse_line(l):
         """
