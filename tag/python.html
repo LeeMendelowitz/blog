@@ -26,7 +26,77 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html">Wrapping Python Dictionaries</a></h1>
+                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/parsing-in-python.html">Parsing in Python</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2013-10-03T22:07:00">
+                Thu 03 October 2013
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
+        </address>
+<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
+<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
+</footer><!-- /.post-info --><p>In Python, everything is an object. Even the built-in types themselves
+(i.e. int, str, dict, list, etc.) are object's of type type. 
+You can use the built-in type function to get an object's type.</p>
+<div class="highlight"><pre><span class="nb">type</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c"># Returns type. So int is an object of type type.</span>
+<span class="nb">isinstance</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="c"># Returns True</span>
+<span class="nb">isinstance</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span> <span class="c"># Returns True</span>
+<span class="nb">type</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span> <span class="c"># Returns type. So type is an object of type type. Truth.</span>
+<span class="nb">type</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span> <span class="c"># Returns type. So an object is an object of type type. Mind blown.</span>
+</pre></div>
+
+
+<p>Since everything in Python is an object, you can treat them as such. This means you can store the types themselves in lists.</p>
+<div class="highlight"><pre><span class="n">my_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
+</pre></div>
+
+
+<p>It turns out this is really useful when writing scripts to parse a text file.
+Let's say I'm writing a script to parse the CSV file below. (In reality,
+I should just use the <a href="http://pandas.pydata.org/">pandas</a> library.)</p>
+<div class="highlight"><pre>Bob, Jones, 26, 184.2
+Thomas, Apple, 19, 155.9
+Jake, Wilson, 31, 172.2
+</pre></div>
+
+
+<p>The parser script can store the types of each field in a list,
+and utilize it to convert each field value to its appropriate type
+with a simple generator expression:</p>
+<div class="highlight"><pre><span class="n">field_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+<span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;first&#39;</span><span class="p">,</span> <span class="s">&#39;last&#39;</span><span class="p">,</span> <span class="s">&#39;age&#39;</span><span class="p">,</span> <span class="s">&#39;weight&#39;</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse a single line and return a dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">field_values</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="n">fn</span><span class="p">,</span> <span class="n">ft</span><span class="p">(</span><span class="n">fv</span><span class="p">))</span> <span class="k">for</span> <span class="n">fn</span><span class="p">,</span><span class="n">ft</span><span class="p">,</span><span class="n">fv</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">field_names</span><span class="p">,</span> <span class="n">field_types</span><span class="p">,</span> <span class="n">field_values</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse all of the lines in the file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">parse_line</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)]</span>
+</pre></div>
+
+
+<p>To summarize, storing types in a list is really useful for writing concise scripts to parse text.</p><p>There are <a href="http://leemendelowitz.github.io/blog/parsing-in-python.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html" rel="bookmark"
+                           title="Permalink to Wrapping Python Dictionaries">Wrapping Python Dictionaries</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-10-02T17:45:00">
                 Wed 02 October 2013
@@ -37,46 +107,14 @@
         </address>
 <p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
 <p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a><a href="http://leemendelowitz.github.io/blog/tag/ipython.html">ipython</a></p>
-</footer><!-- /.post-info --><p>Very frequently when I'm programming in python, I write functions that return a
-dictionary with string keys.</p>
-<p>When developing or debugging such programs in IPython, it's pretty tedious to
-inspect these dictionaries. First, you need to get a list of keys. Then, to see a particular
-value in the dictionary <code>d</code>, you need to type out <code>d['key']</code>. It gets tedious
-after a while.</p>
-<p>IPython has really useful object introspection and tab-completion features, but they aren't
-useful in this situation. A simple hack is to implement a class which sets the instance attributes
-using the key/value pairs stored in a dictionary.</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">DictWrap</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to wrap a python dictionary.</span>
-<span class="sd">    This helps with tab completion for object introspection in IPython</span>
-
-<span class="sd">        myD = {&#39;one&#39; : 1, &#39;two&#39; : 2}</span>
-<span class="sd">        d = DictWrap(myD)</span>
-
-<span class="sd">    Now in IPython you can inspect and autocomplete with d.o&lt;TAB&gt;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Construct a DictWrap instance from a python dictionary d</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Now in the IPython shell, you can easily inspect your dictionaries using tab-completion!</p>
-<div class="highlight"><pre><span class="n">myD</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;one&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;two&#39;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;three&#39;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">DictWrap</span><span class="p">(</span><span class="n">myD</span><span class="p">)</span>
-<span class="n">d</span><span class="o">.&lt;</span><span class="n">TAB</span><span class="o">&gt;</span> <span class="c"># prints d.one d.two d.three</span>
-<span class="n">d</span><span class="o">.</span><span class="n">t</span><span class="o">&lt;</span><span class="n">TAB</span><span class="o">&gt;</span> <span class="c"># prints d.two d.three</span>
-</pre></div><p>There are <a href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html#disqus_thread">comments</a>.</p>                </article>
+</footer><!-- /.post-info -->                <p>How to wrap a python dictionary for IPython autocompletion.</p>
+                <a class="readmore" href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html">read more</a>
+<p>There are <a href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+            </ol><!-- /#posts-list -->
 <p class="paginator">
     Page 1 / 1
 </p>
-            </aside><!-- /#featured -->
-            </ol><!-- /#posts-list -->
             </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="social">
