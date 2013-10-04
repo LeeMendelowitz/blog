@@ -50,11 +50,11 @@ You can use the built-in type function to get an object's type.</p>
 <span class="nb">isinstance</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="c"># Returns True</span>
 <span class="nb">isinstance</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span> <span class="c"># Returns True</span>
 <span class="nb">type</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span> <span class="c"># Returns type. So type is an object of type type. Truth.</span>
-<span class="nb">type</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span> <span class="c"># Returns type. So an object is an object of type type. Mind blown.</span>
+<span class="nb">type</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span> <span class="c"># Returns type. So object is an object of type type. Mind blown.</span>
 </pre></div>
 
 
-<p>Since everything in Python is an object, you can treat them as such. This means you can store the types themselves in lists.</p>
+<p>Since everything in Python is an object, you can treat them as such. This means you can store the types themselves in a list.</p>
 <div class="highlight"><pre><span class="n">my_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
 </pre></div>
 
@@ -71,8 +71,8 @@ Jake, Wilson, 31, 172.2
 <p>The parser script can store the types of each field in a list,
 and utilize it to convert each field value to its appropriate type
 with a simple generator expression:</p>
-<div class="highlight"><pre><span class="n">field_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
-<span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;first&#39;</span><span class="p">,</span> <span class="s">&#39;last&#39;</span><span class="p">,</span> <span class="s">&#39;age&#39;</span><span class="p">,</span> <span class="s">&#39;weight&#39;</span><span class="p">]</span>
+<div class="highlight"><pre><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;first&#39;</span><span class="p">,</span> <span class="s">&#39;last&#39;</span><span class="p">,</span> <span class="s">&#39;age&#39;</span><span class="p">,</span> <span class="s">&#39;weight&#39;</span><span class="p">]</span>
+<span class="n">field_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
