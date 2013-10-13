@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>R Base Graphics Plotting</title>
+        <link rel="stylesheet" href="http://leemendelowitz.github.io/blog/theme/css/main.css" />
+        <link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="On Coding Atom Feed" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+<a href="https://github.com/LeeMendelowitz/blog">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+</a>
+        <header id="banner" class="body">
+                <h1><a href="http://leemendelowitz.github.io/blog/">On Coding </a></h1>
+                <nav><ul>
+                    <li><a href="http://leemendelowitz.github.io/blog/pages/about.html">About</a></li>
+                    <li><a href="http://leemendelowitz.github.io/blog/pages/computing-for-data-analysis.html">Computing For Data Analysis</a></li>
+                    <li><a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a></li>
+                    <li><a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a></li>
+                    <li class="active"><a href="http://leemendelowitz.github.io/blog/category/r.html">R</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://leemendelowitz.github.io/blog/r-base-graphics-plotting.html" rel="bookmark"
+           title="Permalink to R Base Graphics Plotting">R Base Graphics Plotting</a></h1>
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="lmendy7">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-10-13T00:00:00">
+                Sun 13 October 2013
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
+        </address>
+<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
+<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
+</footer><!-- /.post-info -->      <!--- R Base Graphics Plotting -->
+
+<p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/basePlotting.rmd">Download as R Markdown</a>.</p>
+<h3>Important parameters</h3>
+<ul>
+<li><strong>pch</strong>: plotting symbol</li>
+<li><strong>lty</strong>: line type</li>
+<li><strong>lwd</strong>: line width</li>
+<li><strong>col</strong>: plotting color</li>
+<li><strong>las</strong>: orientation of axis labels </li>
+<li><strong>bg</strong>: background color</li>
+<li><strong>mar</strong>: margin size</li>
+<li><strong>oma</strong>: outer margin size</li>
+<li><strong>mfrow</strong>: number of plots per row, column. Plots filled in row-wise.</li>
+<li><strong>mfcol</strong>: number of plots per row, column. Plots filled in column-wise.</li>
+</ul>
+<h3>Import functions</h3>
+<ul>
+<li><strong>plot</strong>: make scatterplot</li>
+<li><strong>lines</strong>: add lines to plot</li>
+<li><strong>points</strong>: add points to plot</li>
+<li><strong>text</strong>: add text</li>
+<li><strong>title</strong>: add title to axes or plot</li>
+<li><strong>mtext</strong>: add margin text</li>
+<li><strong>axis</strong>: add axis tick/labels</li>
+</ul>
+<h3>Example 1</h3>
+<div class="highlight"><pre>x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
+y <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
+plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> pch <span class="o">=</span> <span class="m">21</span><span class="p">,</span> mar <span class="o">=</span> c<span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> bg <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> xlim <span class="o">=</span> c<span class="p">(</span><span class="m">-3</span><span class="p">,</span> 
+    <span class="m">3</span><span class="p">),</span> ylim <span class="o">=</span> c<span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">3</span><span class="p">))</span>
+fit <span class="o">&lt;-</span> lm<span class="p">(</span>y <span class="o">~</span> x<span class="p">)</span>
+abline<span class="p">(</span>fit<span class="p">,</span> lwd <span class="o">=</span> <span class="m">3</span><span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">)</span>
+title<span class="p">(</span><span class="s">&quot;My plot&quot;</span><span class="p">)</span>
+text<span class="p">(</span><span class="m">-2</span><span class="p">,</span> <span class="m">-2</span><span class="p">,</span> <span class="s">&quot;My Label&quot;</span><span class="p">)</span>
+legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> legend <span class="o">=</span> <span class="s">&quot;Data&quot;</span><span class="p">,</span> pch <span class="o">=</span> <span class="m">21</span><span class="p">,</span> pt.bg <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="plot of chunk example1" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example1.png" /> </p>
+<h3>Example 2</h3>
+<p>To use multiple plots per page, give a <code>mfrow</code> argument to plot. Then the plots will be filled from left to right across the rows. (Specifying <code>mfcol</code> will fill in plots from top to bottom down the 
+columns. )</p>
+<div class="highlight"><pre>z <span class="o">&lt;-</span> rpois<span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+plot.new<span class="p">()</span>
+par<span class="p">(</span>mfrow <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+par<span class="p">(</span>mar <span class="o">=</span> c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> pch <span class="o">=</span> <span class="m">20</span><span class="p">,</span> main <span class="o">=</span> <span class="s">&quot;plot 1&quot;</span><span class="p">)</span>
+plot<span class="p">(</span>x<span class="p">,</span> z<span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">,</span> main <span class="o">=</span> <span class="s">&quot;plot 2&quot;</span><span class="p">)</span>
+plot<span class="p">(</span>y<span class="p">,</span> z<span class="p">,</span> pch <span class="o">=</span> <span class="m">1</span><span class="p">,</span> main <span class="o">=</span> <span class="s">&quot;plot 3&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="plot of chunk example2" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example2.png" /> </p>
+<h3>Example 3</h3>
+<p>The <code>points</code> function is useful for adding points to a plot for different groups.</p>
+<div class="highlight"><pre>plot.new<span class="p">()</span>
+x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
+y <span class="o">&lt;-</span> x <span class="o">+</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
+g <span class="o">&lt;-</span> gl<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> labels <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;Male&quot;</span><span class="p">,</span> <span class="s">&quot;Female&quot;</span><span class="p">))</span>
+str<span class="p">(</span>g<span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="c">##  Factor w/ 2 levels &quot;Male&quot;,&quot;Female&quot;: 1 1 1 1 1 1 1 1 1 1 ...</span>
+</pre></div>
+
+
+<div class="highlight"><pre>plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;n&quot;</span><span class="p">)</span>  <span class="c1"># Draws no points</span>
+points<span class="p">(</span>x<span class="p">[</span>g <span class="o">==</span> <span class="s">&quot;Male&quot;</span><span class="p">],</span> y<span class="p">[</span>g <span class="o">==</span> <span class="s">&quot;Male&quot;</span><span class="p">],</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> pch <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+points<span class="p">(</span>x<span class="p">[</span>g <span class="o">==</span> <span class="s">&quot;Female&quot;</span><span class="p">],</span> y<span class="p">[</span>g <span class="o">==</span> <span class="s">&quot;Female&quot;</span><span class="p">],</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">)</span>
+legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> c<span class="p">(</span><span class="s">&quot;Male&quot;</span><span class="p">,</span> <span class="s">&quot;Female&quot;</span><span class="p">),</span> col <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">),</span> pch <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">19</span><span class="p">))</span>
+</pre></div>
+
+
+<p><img alt="plot of chunk example3" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example3.png" /> </p>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "r-base-graphics-plotting.html";
+        var disqus_url = "http://leemendelowitz.github.io/blog/r-base-graphics-plotting.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://leeoncoding.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="http://twitter.com/lmendy7">twitter</a></li>
+                            <li><a href="https://github.com/LeeMendelowitz">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-44545448-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'leeoncoding';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

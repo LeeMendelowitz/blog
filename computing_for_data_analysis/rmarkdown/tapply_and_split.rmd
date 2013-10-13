@@ -1,0 +1,111 @@
+<!--- tapply and split -->
+
+```{r, echo=FALSE}
+opts_chunk$set(fig.path="figure/tapplyandsplit_")
+```
+
+## tapply ##
+
+Apply a function over subsets of a vector.
+
+### Example: Take group means with tapply. ###
+
+
+
+```{r}
+x <- c(rnorm(10), runif(10), rnorm(10,1))
+x
+f <- gl(3,10) # Generator factors
+f
+```
+By default, if the applied function returns a scalar, then tapply
+returns a vector. In this case we are applying the mean function,
+so the output of tapply is a numeric vector.
+```{r}
+tapply(x, f, mean) # Take the mean of each group. Returns a vector.
+```
+
+Without simplification, tapply always returns a list.
+
+```{r}
+tapply(x, f, mean, simplify=FALSE)
+```
+
+### Example: Find the group range ###
+
+Range returns the minimum and maximum value for each group.
+Note that since the range function returns a vector, tapply returns
+a list.
+
+```{r}
+tapply(x, f, range)
+```
+
+## split ##
+
+The split function splits a vector int groups using a factor.
+Using split and then applying a function with lapply produces the same 
+resule as tapply:
+
+```{r}
+split(x, f)
+lapply(split(x,f), mean) # Instead of tapply
+```
+
+### Example: Air Quality by month ###
+
+```{r}
+library(datasets)
+head(airquality)
+s <- split(airquality, airquality$Month)
+```
+
+`s` is a list of dataframes split by month:
+
+```{r}
+class(s)
+class(s[[1]])
+lapply(s, function(x) head(x, n=2))
+```
+
+
+After splitting by month, we can use `lapply` to take the column means:
+
+```{r}
+takeMeans <- function(x) colMeans(x[,c("Ozone", "Solar.R", "Wind")], na.rm=TRUE)
+lapply(s, takeMeans)
+```
+
+Using `sapply` instead of `lapply` simplifies the output into a matrix,
+so we can easily see the mean values by month.
+
+```{r}
+sapply(s, takeMeans)
+```
+
+### Splitting on more than one level ###
+
+```{r}
+x <- rnorm(10)
+f1 <- gl(2,5) # Create a factor with two levels
+f2 <- gl(5,2) # Create a factor with five levels
+str(f1)
+str(f2)
+interaction(f1,f2) # Compute a factor with 10 levels, which is the interaction of the two factors
+```
+
+Note that some levels of the interaction are empty for our data vector `x`. For example, none of the samples in `x` have level 2.1.
+
+We can use multiple factor levels with `split` by passing the interaction
+factor. Instead of calling `interaction` explicitly, if we pass the factors in a list, the `interaction` function is automatically called:
+
+```{r}
+str(split( x, list(f1, f2))) # Automatically calls interaction(f1,f2)
+```
+
+Note that some levels are empty, but they still appear in list output by
+`split`.  Empty levels can be dropped by passing  `drop = TRUE`.
+
+```{r}
+str(split(x, list(f1,f2), drop=TRUE))
+```

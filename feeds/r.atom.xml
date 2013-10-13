@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2013-10-13T00:00:00+02:00</updated><entry><title>mapply</title><link href="http://leemendelowitz.github.io/blog/mapply.html" rel="alternate"></link><updated>2013-10-13T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-13:mapply.html</id><summary type="html">&lt;!--- mapply --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/r.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2013-10-13T00:00:00+02:00</updated><entry><title>mapply</title><link href="http://leemendelowitz.github.io/blog/mapply.html" rel="alternate"></link><updated>2013-10-13T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-13:mapply.html</id><summary type="html">&lt;!--- mapply --&gt;
 
 &lt;p&gt;&lt;a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/mapply.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;mapply&lt;/code&gt; gives us a way to call a non-vectorized function in a vectorized way.&lt;/p&gt;
@@ -442,95 +442,4 @@ factor. Instead of calling &lt;code&gt;interaction&lt;/code&gt; explicitly, if w
 &lt;span class="c"&gt;##  $ 2.3: num 1.53&lt;/span&gt;
 &lt;span class="c"&gt;##  $ 2.4: num [1:2] -0.066 -1.64&lt;/span&gt;
 &lt;span class="c"&gt;##  $ 2.5: num [1:2] 0.452 -1.324&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>Parsing in Python</title><link href="http://leemendelowitz.github.io/blog/parsing-in-python.html" rel="alternate"></link><updated>2013-10-03T22:07:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-03:parsing-in-python.html</id><summary type="html">&lt;p&gt;In Python, everything is an object. Even the built-in types themselves
-(i.e. int, str, dict, list, etc.) are object's of type type. 
-You can use the built-in type function to get an object's type.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# Returns type. So int is an object of type type.&lt;/span&gt;
-&lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# Returns True&lt;/span&gt;
-&lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# Returns True&lt;/span&gt;
-&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# Returns type. So type is an object of type type. Truth.&lt;/span&gt;
-&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# Returns type. So object is an object of type type. Mind blown.&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Since everything in Python is an object, you can treat them as such. This means you can store the types themselves in a list.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;my_types&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;float&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;It turns out this is really useful when writing scripts to parse a text file.
-Let's say I'm writing a script to parse the CSV file below. (In reality,
-I should just use the &lt;a href="http://pandas.pydata.org/"&gt;pandas&lt;/a&gt; library.)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Bob, Jones, 26, 184.2
-Thomas, Apple, 19, 155.9
-Jake, Wilson, 31, 172.2
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The parser script can store the types of each field in a list,
-and utilize it to convert each field value to its appropriate type
-with a simple generator expression:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;field_names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;first&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;last&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;weight&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;field_types&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;float&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class="sd"&gt;    Parse a single line and return a dictionary.&lt;/span&gt;
-&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-    &lt;span class="n"&gt;field_values&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;fn&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ft&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fv&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;fn&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;ft&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;fv&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;field_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;field_types&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;field_values&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class="sd"&gt;    Parse all of the lines in the file.&lt;/span&gt;
-&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;parse_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;To summarize, storing types in a list is really useful for writing concise scripts to parse text.&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>Wrapping Python Dictionaries</title><link href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html" rel="alternate"></link><updated>2013-10-02T17:45:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-02:wrapping-python-dictionaries.html</id><summary type="html">&lt;p&gt;Very frequently when I'm programming in python, I write functions that return a
-dictionary with string keys.&lt;/p&gt;
-&lt;p&gt;When developing or debugging such programs in IPython, it's pretty tedious to
-inspect these dictionaries. First, you need to get a list of keys. Then, to see a particular
-value in the dictionary &lt;code&gt;d&lt;/code&gt;, you need to type out &lt;code&gt;d['key']&lt;/code&gt;. It gets tedious
-after a while.&lt;/p&gt;
-&lt;p&gt;IPython has really useful object introspection and tab-completion features, but they aren't
-useful in this situation. A simple hack is to implement a class which sets the instance attributes
-using the key/value pairs stored in a dictionary.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;DictWrap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class="sd"&gt;    Class to wrap a python dictionary.&lt;/span&gt;
-&lt;span class="sd"&gt;    This helps with tab completion for object introspection in IPython&lt;/span&gt;
-
-&lt;span class="sd"&gt;        myD = {&amp;#39;one&amp;#39; : 1, &amp;#39;two&amp;#39; : 2}&lt;/span&gt;
-&lt;span class="sd"&gt;        d = DictWrap(myD)&lt;/span&gt;
-
-&lt;span class="sd"&gt;    Now in IPython you can inspect and autocomplete with d.o&amp;lt;TAB&amp;gt;&lt;/span&gt;
-&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class="sd"&gt;        Construct a DictWrap instance from a python dictionary d&lt;/span&gt;
-&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iteritems&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-            &lt;span class="nb"&gt;setattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Now in the IPython shell, you can easily inspect your dictionaries using tab-completion!&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;myD&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;one&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;two&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;three&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;DictWrap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;myD&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;TAB&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;# prints d.one d.two d.three&lt;/span&gt;
-&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;TAB&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;# prints d.two d.three&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="python"></category><category term="ipython"></category></entry><entry><title>Start Me Up!</title><link href="http://leemendelowitz.github.io/blog/start-me-up.html" rel="alternate"></link><updated>2013-10-02T07:35:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-02:start-me-up.html</id><summary type="html">&lt;!--- #Status: draft --&gt;
-
-&lt;p&gt;Welcome to the blog!&lt;/p&gt;
-&lt;p&gt;After a nice cup of coffee this morning, I impulsively created this blog because I don't
-have a good way of storing programming notes, complete with syntax
-highlighting. I have been using Google Drive, which doesn't really cut it.
-I also thought it would be fun to learn
-how to publish a blog using &lt;a href="http://docs.getpelican.com/"&gt;Pelican&lt;/a&gt; + GitHub, so there's
-also that. Checkout the
-&lt;a href="https://github.com/LeeMendelowitz/blog"&gt;GitHub repo&lt;/a&gt;
-for this blog! I just followed the &lt;code&gt;pelican-quickstart&lt;/code&gt;, modified the Makefile, and was up and running.&lt;/p&gt;
-&lt;p&gt;I'm currently taking the Coursera course &lt;a href="https://class.coursera.org/compdata-003/class"&gt;Computing for Data Science&lt;/a&gt; by Roger Peng, so I'll probably start off with some simple notes on R programming.&lt;/p&gt;</summary></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry></feed>

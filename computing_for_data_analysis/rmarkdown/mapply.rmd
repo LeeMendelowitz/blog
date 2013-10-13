@@ -1,0 +1,46 @@
+<!--- mapply -->
+
+```{r, echo=FALSE}
+opts_chunk$set(fig.path="figure/mapply_")
+```
+
+`mapply` gives us a way to call a non-vectorized function in a vectorized way.
+
+From the R Documentation:
+
+```{text}
+mapply is a multivariate version of sapply. mapply applies FUN to
+the first elements of each  .. argument, the second elements,
+the third elements, and so on. Arguments are recycled if necessary.
+
+mapply(FUN, ..., MoreArgs = NULL, SIMPLIFY = TRUE,
+       USE.NAMES = TRUE)
+```
+
+### Example ###
+
+```{r}
+list(rep(1,4), rep(2,3), rep(3,2), rep(4,1))
+```
+
+We see that we are repeatedly calling the same function (`rep`) where the first argument varies from 1 to 4, and the second argument varies from 4 to 1.
+Instead, we can use `mapply`:
+
+```{r}
+mapply(rep, 1:4, 4:1)
+```
+
+### Example ###
+
+```{r}
+noise <- function(n, mean, std){
+  rnorm(n , mean, std)
+}
+noise(5, 1, 2)
+```
+
+The noise function is not vectorized. `mapply` gives us a way to make a vectorized call to  `noise`:
+
+```{r}
+mapply(noise, 1:5, 1:5, 2)
+```

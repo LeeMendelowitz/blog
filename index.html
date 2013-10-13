@@ -19,14 +19,194 @@
                 <h1><a href="http://leemendelowitz.github.io/blog/">On Coding </a></h1>
                 <nav><ul>
                     <li><a href="http://leemendelowitz.github.io/blog/pages/about.html">About</a></li>
+                    <li><a href="http://leemendelowitz.github.io/blog/pages/computing-for-data-analysis.html">Computing For Data Analysis</a></li>
                     <li><a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a></li>
                     <li><a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a></li>
+                    <li><a href="http://leemendelowitz.github.io/blog/category/r.html">R</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/parsing-in-python.html">Parsing in Python</a></h1>
+                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/mapply.html">mapply</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2013-10-13T00:00:00">
+                Sun 13 October 2013
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
+        </address>
+<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
+<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
+</footer><!-- /.post-info --><!--- mapply -->
+
+<p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/mapply.rmd">Download as R Markdown</a>.</p>
+<p><code>mapply</code> gives us a way to call a non-vectorized function in a vectorized way.</p>
+<p>From the R Documentation:</p>
+<div class="highlight"><pre><span class="n">mapply</span> <span class="n">is</span> <span class="n">a</span> <span class="n">multivariate</span> <span class="n">version</span> <span class="n">of</span> <span class="n">sapply</span><span class="p">.</span> <span class="n">mapply</span> <span class="n">applies</span> <span class="n">FUN</span> <span class="n">to</span>
+<span class="n">the</span> <span class="n">first</span> <span class="n">elements</span> <span class="n">of</span> <span class="n">each</span> <span class="p">...</span> <span class="n">argument</span><span class="p">,</span> <span class="n">the</span> <span class="n">second</span> <span class="n">elements</span><span class="p">,</span>
+<span class="n">the</span> <span class="n">third</span> <span class="n">elements</span><span class="p">,</span> <span class="n">and</span> <span class="n">so</span> <span class="n">on</span><span class="p">.</span> <span class="n">Arguments</span> <span class="n">are</span> <span class="n">recycled</span> <span class="k">if</span> <span class="n">necessary</span><span class="p">.</span>
+
+<span class="n">mapply</span><span class="p">(</span><span class="n">FUN</span><span class="p">,</span> <span class="p">...,</span> <span class="n">MoreArgs</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">SIMPLIFY</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span>
+       <span class="n">USE</span><span class="p">.</span><span class="n">NAMES</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>Example</h3>
+<div class="highlight"><pre>list<span class="p">(</span>rep<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">4</span><span class="p">),</span> rep<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">),</span> rep<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> rep<span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="c">## [[1]]</span>
+<span class="c">## [1] 1 1 1 1</span>
+<span class="c">## </span>
+<span class="c">## [[2]]</span>
+<span class="c">## [1] 2 2 2</span>
+<span class="c">## </span>
+<span class="c">## [[3]]</span>
+<span class="c">## [1] 3 3</span>
+<span class="c">## </span>
+<span class="c">## [[4]]</span>
+<span class="c">## [1] 4</span>
+</pre></div>
+
+
+<p>We see that we are repeatedly calling the same function (<code>rep</code>) where the first argument varies from 1 to 4, and the second argument varies from 4 to 1.
+Instead, we can use <code>mapply</code>:</p>
+<div class="highlight"><pre>mapply<span class="p">(</span>rep<span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="o">:</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="c">## [[1]]</span>
+<span class="c">## [1] 1 1 1 1</span>
+<span class="c">## </span>
+<span class="c">## [[2]]</span>
+<span class="c">## [1] 2 2 2</span>
+<span class="c">## </span>
+<span class="c">## [[3]]</span>
+<span class="c">## [1] 3 3</span>
+<span class="c">## </span>
+<span class="c">## [[4]]</span>
+<span class="c">## [1] 4</span>
+</pre></div>
+
+
+<h3>Example</h3>
+<div class="highlight"><pre>noise <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">,</span> mean<span class="p">,</span> std<span class="p">)</span> <span class="p">{</span>
+    rnorm<span class="p">(</span>n<span class="p">,</span> mean<span class="p">,</span> std<span class="p">)</span>
+<span class="p">}</span>
+noise<span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="c">## [1] 0.84136 0.04806 1.89196 2.76464 4.95360</span>
+</pre></div>
+
+
+<p>The noise function is not vectorized. <code>mapply</code> gives us a way to make a vectorized call to  <code>noise</code>:</p>
+<div class="highlight"><pre>mapply<span class="p">(</span>noise<span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="c">## [[1]]</span>
+<span class="c">## [1] 1.625</span>
+<span class="c">## </span>
+<span class="c">## [[2]]</span>
+<span class="c">## [1]  2.928 -1.840</span>
+<span class="c">## </span>
+<span class="c">## [[3]]</span>
+<span class="c">## [1] 2.459 4.195 1.939</span>
+<span class="c">## </span>
+<span class="c">## [[4]]</span>
+<span class="c">## [1] 5.195 3.731 5.249 2.959</span>
+<span class="c">## </span>
+<span class="c">## [[5]]</span>
+<span class="c">## [1] 8.291 1.949 5.751 4.250 4.868</span>
+</pre></div><p>There are <a href="http://leemendelowitz.github.io/blog/mapply.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://leemendelowitz.github.io/blog/r-base-graphics-plotting.html" rel="bookmark"
+                           title="Permalink to R Base Graphics Plotting">R Base Graphics Plotting</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-10-13T00:00:00">
+                Sun 13 October 2013
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
+        </address>
+<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
+<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
+</footer><!-- /.post-info -->                <!--- R Base Graphics Plotting -->
+
+<p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/basePlotting.rmd">Download as R Markdown</a>.</p>
+<h3>Important parameters</h3>
+<ul>
+<li><strong>pch</strong>: plotting symbol</li>
+<li><strong>lty</strong>: line type</li>
+<li><strong>lwd</strong>: line width</li>
+<li><strong>col</strong>: plotting color</li>
+<li><strong>las</strong>: orientation of axis labels </li>
+<li><strong>bg</strong>: background color</li>
+<li><strong>mar</strong>: margin size</li>
+<li><strong>oma</strong>: outer margin size</li>
+<li><strong>mfrow</strong>: number of plots per row, column. Plots filled in row-wise.</li>
+<li><strong>mfcol</strong>: number of plots per row ...</li></ul></!--->
+                <a class="readmore" href="http://leemendelowitz.github.io/blog/r-base-graphics-plotting.html">read more</a>
+<p>There are <a href="http://leemendelowitz.github.io/blog/r-base-graphics-plotting.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://leemendelowitz.github.io/blog/tapply-and-split.html" rel="bookmark"
+                           title="Permalink to tapply and split">tapply and split</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-10-13T00:00:00">
+                Sun 13 October 2013
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
+        </address>
+<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
+<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
+</footer><!-- /.post-info -->                <!--- tapply and split -->
+
+<p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/tapply_and_split.rmd">Download as R Markdown</a>.</p>
+<h2>tapply</h2>
+<p>Apply a function over subsets of a vector.</p>
+<h3>Example: Take group means with tapply.</h3>
+<div class="highlight"><pre>x <span class="o">&lt;-</span> c<span class="p">(</span>rnorm<span class="p">(</span><span class="m">10</span><span class="p">),</span> runif<span class="p">(</span><span class="m">10</span><span class="p">),</span> rnorm<span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+x
+</pre></div>
+
+
+<div class="highlight"><pre><span class="c">##  [1] -2.04333  0.72651  1.55476 -0.12411  1.08133 -0.30514  1.38638</span>
+<span class="c">##  [8]  0.35047  0.88147  1 ...</span></pre></div></!--->
+                <a class="readmore" href="http://leemendelowitz.github.io/blog/tapply-and-split.html">read more</a>
+<p>There are <a href="http://leemendelowitz.github.io/blog/tapply-and-split.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://leemendelowitz.github.io/blog/parsing-in-python.html" rel="bookmark"
+                           title="Permalink to Parsing in Python">Parsing in Python</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-10-03T22:07:00">
                 Thu 03 October 2013
@@ -37,58 +217,10 @@
         </address>
 <p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
 <p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info --><p>In Python, everything is an object. Even the built-in types themselves
-(i.e. int, str, dict, list, etc.) are object's of type type. 
-You can use the built-in type function to get an object's type.</p>
-<div class="highlight"><pre><span class="nb">type</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c"># Returns type. So int is an object of type type.</span>
-<span class="nb">isinstance</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="c"># Returns True</span>
-<span class="nb">isinstance</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span> <span class="c"># Returns True</span>
-<span class="nb">type</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span> <span class="c"># Returns type. So type is an object of type type. Truth.</span>
-<span class="nb">type</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span> <span class="c"># Returns type. So object is an object of type type. Mind blown.</span>
-</pre></div>
-
-
-<p>Since everything in Python is an object, you can treat them as such. This means you can store the types themselves in a list.</p>
-<div class="highlight"><pre><span class="n">my_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
-</pre></div>
-
-
-<p>It turns out this is really useful when writing scripts to parse a text file.
-Let's say I'm writing a script to parse the CSV file below. (In reality,
-I should just use the <a href="http://pandas.pydata.org/">pandas</a> library.)</p>
-<div class="highlight"><pre>Bob, Jones, 26, 184.2
-Thomas, Apple, 19, 155.9
-Jake, Wilson, 31, 172.2
-</pre></div>
-
-
-<p>The parser script can store the types of each field in a list,
-and utilize it to convert each field value to its appropriate type
-with a simple generator expression:</p>
-<div class="highlight"><pre><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;first&#39;</span><span class="p">,</span> <span class="s">&#39;last&#39;</span><span class="p">,</span> <span class="s">&#39;age&#39;</span><span class="p">,</span> <span class="s">&#39;weight&#39;</span><span class="p">]</span>
-<span class="n">field_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parse a single line and return a dictionary.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">field_values</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="n">fn</span><span class="p">,</span> <span class="n">ft</span><span class="p">(</span><span class="n">fv</span><span class="p">))</span> <span class="k">for</span> <span class="n">fn</span><span class="p">,</span><span class="n">ft</span><span class="p">,</span><span class="n">fv</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">field_names</span><span class="p">,</span> <span class="n">field_types</span><span class="p">,</span> <span class="n">field_values</span><span class="p">))</span>
-
-<span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parse all of the lines in the file.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">parse_line</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)]</span>
-</pre></div>
-
-
-<p>To summarize, storing types in a list is really useful for writing concise scripts to parse text.</p><p>There are <a href="http://leemendelowitz.github.io/blog/parsing-in-python.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>How to parse in python</p>
+                <a class="readmore" href="http://leemendelowitz.github.io/blog/parsing-in-python.html">read more</a>
+<p>There are <a href="http://leemendelowitz.github.io/blog/parsing-in-python.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
