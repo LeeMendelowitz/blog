@@ -12,6 +12,9 @@ DEFAULT_LANG = u'en'
 
 GOOGLE_ANALYTICS = "UA-44545448-1"
 THEME = './theme'
+ARTICLE_EXCLUDES = ['pages', 'computing_for_data_analysis/rmarkdown']
+STATIC_PATHS = ['images', 'computing_for_data_analysis/figure/',
+                'computing_for_data_analysis/rmarkdown/']
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None

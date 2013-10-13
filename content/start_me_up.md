@@ -16,4 +16,4 @@ also that. Checkout the
 [GitHub repo](https://github.com/LeeMendelowitz/blog)
 for this blog! I just followed the `pelican-quickstart`, modified the Makefile, and was up and running.
 
-I'm currently taking the Coursera course [Computing for Data Science](https://class.coursera.org/compdata-003/class) by Robert Peng, so I'll probably start off with some simple notes on R programming.
+I'm currently taking the Coursera course [Computing for Data Science](https://class.coursera.org/compdata-003/class) by Roger Peng, so I'll probably start off with some simple notes on R programming.
