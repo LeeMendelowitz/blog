@@ -1,0 +1,100 @@
+```{r, echo=FALSE}
+opts_chunk$set(fig.path="figure/latticeplotting_")
+```
+The lattice library is useful for quickly making plots of multivariate data. It's easy to make plots which condition on one or more variables.
+
+### Load the lattice library ###
+```{r}
+library(lattice)
+
+# Ask for general information about the lattice package
+package ? lattice
+
+# See what is inside of the lattice package. It includes
+# some datasets.
+library(help = lattice)
+
+# Load the New York City environmental dataset.
+data(environmental)
+?environmental
+head(environmental)
+```
+
+
+### Plot ozone vs. radiation using xyplot###
+```{r section1}
+xyplot(ozone ~ radiation, data = environmental, main = "Ozone vs. Radiation")
+```
+
+### Investigate the relationship between ozone and radiation change as temperature changes ###
+
+To address this, break temperature into 4 overlapping ranges using the `equal.count` function.
+
+```{r section2a}
+summary(environmental$temperature)
+
+# Cut the temperature variable into four different ranges.
+temp.cut <- equal.count(environmental$temperature, 4)
+temp.cut
+    
+# Default layout. This orders panel from left to right, bottom to top.
+xyplot(ozone ~ radiation | temp.cut, data = environmental)
+
+# One column layout.
+xyplot(ozone ~ radiation | temp.cut, data = environmental, layout = c(1,4))
+```
+
+Use the `as.table` argument to draw panels in order from left to right, top to bottom.
+
+```{r section2b}
+# One column, in ascending order of temperature range.
+xyplot(ozone ~ radiation | temp.cut, data = environmental, as.table = TRUE)
+```
+
+### Add a fit to each panel. ###
+
+Add a fit to each panel using a custom panel function. Note the use of `...` which allows for the `xyplot` parameters such as `pch` to be passed through the custom panel function.
+
+```{r section3}
+xyplot(ozone ~ radiation | temp.cut, data = environmental, layout = c(1,4), as.table = TRUE,
+       pch = 20,
+       panel = function(x, y, ... ) {
+               panel.xyplot(x, y, ...)
+               fit <- lm(y ~ x)
+               panel.abline(fit, lwd = 2)
+       })
+
+xyplot(ozone ~ radiation | temp.cut, data = environmental, as.table = TRUE,
+       pch = 20,
+       panel = function(x, y, ... ) {
+               panel.xyplot(x, y, ...)
+               panel.loess(x, y, lwd = 2)
+       }, xlab = "Solar Radiation", ylab = "Ozone (ppb)", main = "Ozone vs. Solar Radiation")
+```
+
+### Condition on both wind and temperature. ###
+
+```{r section4}
+wind.cut <- equal.count(environmental$wind, 4)
+wind.cut
+xyplot(ozone ~ radiation | temp.cut * wind.cut, data = environmental, as.table = TRUE,
+       pch = 20,
+       panel = function(x, y, ... ) {
+               panel.xyplot(x, y, ...)
+               panel.loess(x, y)
+       }, xlab = "Solar Radiation", ylab = "Ozone (ppb)", main = "Ozone vs. Solar Radiation")
+```
+
+### splom ###
+Use splom to draw conditional scatter plot matrices.
+```{r section5}
+splom(~ environmental)
+```
+
+### histogram ###
+
+```{r section 6}
+histogram(~ temperature | wind.cut, data = environmental, as.table=TRUE)
+histogram(~ ozone | wind.cut, data = environmental, as.table=TRUE)
+histogram(~ ozone | wind.cut * temp.cut, data = environmental, as.table=TRUE)
+```

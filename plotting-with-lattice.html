@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>On Coding - Lee Mendelowitz</title>
+        <title>Plotting with Lattice</title>
         <link rel="stylesheet" href="http://leemendelowitz.github.io/blog/theme/css/main.css" />
         <link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="On Coding Atom Feed" />
 
@@ -22,13 +22,19 @@
                     <li><a href="http://leemendelowitz.github.io/blog/pages/computing-for-data-analysis.html">Computing For Data Analysis</a></li>
                     <li><a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a></li>
                     <li><a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/category/r.html">R</a></li>
+                    <li class="active"><a href="http://leemendelowitz.github.io/blog/category/r.html">R</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://leemendelowitz.github.io/blog/plotting-with-lattice.html" rel="bookmark"
+           title="Permalink to Plotting with Lattice">Plotting with Lattice</a></h1>
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="lmendy7">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/plotting-with-lattice.html">Plotting with Lattice</a></h1>
+    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-10-14T00:00:00">
                 Mon 14 October 2013
@@ -39,7 +45,7 @@
         </address>
 <p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
 <p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
-</footer><!-- /.post-info --><p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/lattice_demo.rmd">Download as R Markdown</a>.</p>
+</footer><!-- /.post-info -->      <p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/lattice_demo.rmd">Download as R Markdown</a>.</p>
 <p>The lattice library is useful for quickly making plots of multivariate data. It's easy to make plots which condition on one or more variables.</p>
 <h3>Load the lattice library</h3>
 <div class="highlight"><pre>library<span class="p">(</span>lattice<span class="p">)</span>
@@ -210,182 +216,24 @@ wind.cut
 </pre></div>
 
 
-<p><img alt="plot of chunk section 6" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section_63.png" /> </p><p>There are <a href="http://leemendelowitz.github.io/blog/plotting-with-lattice.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<p><img alt="plot of chunk section 6" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section_63.png" /> </p>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "plotting-with-lattice.html";
+        var disqus_url = "http://leemendelowitz.github.io/blog/plotting-with-lattice.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://leeoncoding.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/mapply.html" rel="bookmark"
-                           title="Permalink to mapply">mapply</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-13T00:00:00">
-                Sun 13 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
-</footer><!-- /.post-info -->                <!--- mapply -->
-
-<p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/mapply.rmd">Download as R Markdown</a>.</p>
-<p><code>mapply</code> gives us a way to call a non-vectorized function in a vectorized way.</p>
-<p>From the R Documentation:</p>
-<div class="highlight"><pre><span class="n">mapply</span> <span class="n">is</span> <span class="n">a</span> <span class="n">multivariate</span> <span class="n">version</span> <span class="n">of</span> <span class="n">sapply</span><span class="p">.</span> <span class="n">mapply</span> <span class="n">applies</span> <span class="n">FUN</span> <span class="n">to</span>
-<span class="n">the</span> <span class="n">first</span> <span class="n">elements</span> <span class="n">of</span> <span class="n">each</span> <span class="p">...</span> <span class="n">argument</span><span class="p">,</span> <span class="n">the</span> <span class="n">second</span> <span class="n">elements</span><span class="p">,</span>
-<span class="n">the</span> <span class="n">third</span> <span class="n">elements</span><span class="p">,</span> <span class="n">and</span> <span class="n">so</span> <span class="n">on</span><span class="p">.</span> <span class="n">Arguments</span> <span class="n">are ...</span></pre></div></!--->
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/mapply.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/mapply.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/r-base-graphics-plotting.html" rel="bookmark"
-                           title="Permalink to R Base Graphics Plotting">R Base Graphics Plotting</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-13T00:00:00">
-                Sun 13 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
-</footer><!-- /.post-info -->                <!--- R Base Graphics Plotting -->
-
-<p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/basePlotting.rmd">Download as R Markdown</a>.</p>
-<h3>Important parameters</h3>
-<ul>
-<li><strong>pch</strong>: plotting symbol</li>
-<li><strong>lty</strong>: line type</li>
-<li><strong>lwd</strong>: line width</li>
-<li><strong>col</strong>: plotting color</li>
-<li><strong>las</strong>: orientation of axis labels </li>
-<li><strong>bg</strong>: background color</li>
-<li><strong>mar</strong>: margin size</li>
-<li><strong>oma</strong>: outer margin size</li>
-<li><strong>mfrow</strong>: number of plots per row, column. Plots filled in row-wise.</li>
-<li><strong>mfcol</strong>: number of plots per row ...</li></ul></!--->
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/r-base-graphics-plotting.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/r-base-graphics-plotting.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/tapply-and-split.html" rel="bookmark"
-                           title="Permalink to tapply and split">tapply and split</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-13T00:00:00">
-                Sun 13 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
-</footer><!-- /.post-info -->                <!--- tapply and split -->
-
-<p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/tapply_and_split.rmd">Download as R Markdown</a>.</p>
-<h2>tapply</h2>
-<p>Apply a function over subsets of a vector.</p>
-<h3>Example: Take group means with tapply.</h3>
-<div class="highlight"><pre>x <span class="o">&lt;-</span> c<span class="p">(</span>rnorm<span class="p">(</span><span class="m">10</span><span class="p">),</span> runif<span class="p">(</span><span class="m">10</span><span class="p">),</span> rnorm<span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
-x
-</pre></div>
-
-
-<div class="highlight"><pre><span class="c">##  [1] -2.04333  0.72651  1.55476 -0.12411  1.08133 -0.30514  1.38638</span>
-<span class="c">##  [8]  0.35047  0.88147  1 ...</span></pre></div></!--->
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/tapply-and-split.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/tapply-and-split.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/parsing-in-python.html" rel="bookmark"
-                           title="Permalink to Parsing in Python">Parsing in Python</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-03T22:07:00">
-                Thu 03 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info -->                <p>How to parse in python</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/parsing-in-python.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/parsing-in-python.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html" rel="bookmark"
-                           title="Permalink to Wrapping Python Dictionaries">Wrapping Python Dictionaries</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-02T17:45:00">
-                Wed 02 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a><a href="http://leemendelowitz.github.io/blog/tag/ipython.html">ipython</a></p>
-</footer><!-- /.post-info -->                <p>How to wrap a python dictionary for IPython autocompletion.</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/start-me-up.html" rel="bookmark"
-                           title="Permalink to Start Me Up!">Start Me Up!</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-02T07:35:00">
-                Wed 02 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>My first post.</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/start-me-up.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/start-me-up.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-            </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 1
-</p>
-            </section><!-- /#content -->
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="social">
                         <h2>social</h2>
