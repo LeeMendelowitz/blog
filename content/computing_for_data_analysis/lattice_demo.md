@@ -43,7 +43,7 @@ head(environmental)
 xyplot(ozone ~ radiation, data = environmental, main = "Ozone vs. Radiation")
 ```
 
-![plot of chunk section1](figure/latticeplotting_section1.png) 
+![plot of chunk section1]({filename}figure/latticeplotting_section1.png) 
 
 
 ### Investigate the relationship between ozone and radiation change as temperature changes ###
@@ -93,7 +93,7 @@ temp.cut
 xyplot(ozone ~ radiation | temp.cut, data = environmental)
 ```
 
-![plot of chunk section2a](figure/latticeplotting_section2a1.png) 
+![plot of chunk section2a]({filename}figure/latticeplotting_section2a1.png) 
 
 ```r
 
@@ -101,7 +101,7 @@ xyplot(ozone ~ radiation | temp.cut, data = environmental)
 xyplot(ozone ~ radiation | temp.cut, data = environmental, layout = c(1, 4))
 ```
 
-![plot of chunk section2a](figure/latticeplotting_section2a2.png) 
+![plot of chunk section2a]({filename}figure/latticeplotting_section2a2.png) 
 
 
 Use the `as.table` argument to draw panels in order from left to right, top to bottom.
@@ -112,7 +112,7 @@ Use the `as.table` argument to draw panels in order from left to right, top to b
 xyplot(ozone ~ radiation | temp.cut, data = environmental, as.table = TRUE)
 ```
 
-![plot of chunk section2b](figure/latticeplotting_section2b.png) 
+![plot of chunk section2b]({filename}figure/latticeplotting_section2b.png) 
 
 
 ### Add a fit to each panel. ###
@@ -129,7 +129,7 @@ xyplot(ozone ~ radiation | temp.cut, data = environmental, layout = c(1, 4),
     })
 ```
 
-![plot of chunk section3](figure/latticeplotting_section31.png) 
+![plot of chunk section3]({filename}figure/latticeplotting_section31.png) 
 
 ```r
 
@@ -140,7 +140,7 @@ xyplot(ozone ~ radiation | temp.cut, data = environmental, as.table = TRUE,
     }, xlab = "Solar Radiation", ylab = "Ozone (ppb)", main = "Ozone vs. Solar Radiation")
 ```
 
-![plot of chunk section3](figure/latticeplotting_section32.png) 
+![plot of chunk section3]({filename}figure/latticeplotting_section32.png) 
 
 
 ### Condition on both wind and temperature. ###
@@ -182,7 +182,7 @@ xyplot(ozone ~ radiation | temp.cut * wind.cut, data = environmental, as.table =
     }, xlab = "Solar Radiation", ylab = "Ozone (ppb)", main = "Ozone vs. Solar Radiation")
 ```
 
-![plot of chunk section4](figure/latticeplotting_section4.png) 
+![plot of chunk section4]({filename}figure/latticeplotting_section4.png) 
 
 
 ### splom ###
@@ -192,7 +192,7 @@ Use splom to draw conditional scatter plot matrices.
 splom(~environmental)
 ```
 
-![plot of chunk section5](figure/latticeplotting_section5.png) 
+![plot of chunk section5]({filename}figure/latticeplotting_section5.png) 
 
 
 ### histogram ###
@@ -202,17 +202,17 @@ splom(~environmental)
 histogram(~temperature | wind.cut, data = environmental, as.table = TRUE)
 ```
 
-![plot of chunk section 6](figure/latticeplotting_section_61.png) 
+![plot of chunk section 6]({filename}figure/latticeplotting_section_61.png) 
 
 ```r
 histogram(~ozone | wind.cut, data = environmental, as.table = TRUE)
 ```
 
-![plot of chunk section 6](figure/latticeplotting_section_62.png) 
+![plot of chunk section 6]({filename}figure/latticeplotting_section_62.png) 
 
 ```r
 histogram(~ozone | wind.cut * temp.cut, data = environmental, as.table = TRUE)
 ```
 
-![plot of chunk section 6](figure/latticeplotting_section_63.png) 
+![plot of chunk section 6]({filename}figure/latticeplotting_section_63.png) 
 
