@@ -24,5 +24,7 @@ For more information on using R Markdown with RStudio, read [this](http://www.rs
 
 * [Base Graphics Plotting]({filename}/computing_for_data_analysis/basePlotting.md)
   [[R Markdown]({filename}/computing_for_data_analysis/rmarkdown/basePlotting.rmd)]
-  * [Lattice Plotting]({filename}/computing_for_data_analysis/lattice_demo.md)
+* [Lattice Plotting]({filename}/computing_for_data_analysis/lattice_demo.md)
   [[R Markdown]({filename}/computing_for_data_analysis/rmarkdown/lattice_demo.rmd)]
+* [Mathematical expressions in plots]({filename}/computing_for_data_analysis/plotmath.md)
+  [[R Markdown]({filename}/computing_for_data_analysis/rmarkdown/plotmath.rmd)]
