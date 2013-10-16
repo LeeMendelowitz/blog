@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Mathematical expressions in plots</title>
+        <link rel="stylesheet" href="http://leemendelowitz.github.io/blog/theme/css/main.css" />
+        <link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="On Coding Atom Feed" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+<a href="https://github.com/LeeMendelowitz/blog">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+</a>
+        <header id="banner" class="body">
+                <h1><a href="http://leemendelowitz.github.io/blog/">On Coding </a></h1>
+                <nav><ul>
+                    <li><a href="http://leemendelowitz.github.io/blog/pages/about.html">About</a></li>
+                    <li><a href="http://leemendelowitz.github.io/blog/pages/computing-for-data-analysis.html">Computing For Data Analysis</a></li>
+                    <li><a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a></li>
+                    <li><a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a></li>
+                    <li class="active"><a href="http://leemendelowitz.github.io/blog/category/r.html">R</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://leemendelowitz.github.io/blog/mathematical-expressions-in-plots.html" rel="bookmark"
+           title="Permalink to Mathematical expressions in plots">Mathematical expressions in plots</a></h1>
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="lmendy7">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-10-15T00:00:00">
+                Tue 15 October 2013
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
+        </address>
+<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
+<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
+</footer><!-- /.post-info -->      <p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/plotmath.rmd">Download as R Markdown</a>.</p>
+<p>Mathematical expressions can be included in the plot title or axis labels. For more information, see <code>?plotmath</code> or run the demo with <code>demo(plotmath)</code>.</p>
+<p>Here are some quick examples.</p>
+<h3>Example 1</h3>
+<div class="highlight"><pre>plot<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> main <span class="o">=</span> expression<span class="p">(</span>theta <span class="o">==</span> <span class="m">0</span><span class="p">),</span> ylab <span class="o">=</span> expression<span class="p">(</span>hat<span class="p">(</span>gamma<span class="p">)</span> <span class="o">==</span> <span class="m">0</span><span class="p">),</span> 
+    xlab <span class="o">=</span> expression<span class="p">(</span>sum<span class="p">(</span>x<span class="p">[</span>i<span class="p">]</span> <span class="o">*</span> y<span class="p">[</span>i<span class="p">],</span> i <span class="o">==</span> <span class="m">1</span><span class="p">,</span> n<span class="p">)))</span>
+</pre></div>
+
+
+<p><img alt="plot of chunk example1" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example1.png" /> </p>
+<h3>Example 2</h3>
+<p>Strings can be pasted together with mathematic expressions:</p>
+<div class="highlight"><pre>x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
+hist<span class="p">(</span>x<span class="p">,</span> xlab <span class="o">=</span> expression<span class="p">(</span><span class="s">&quot;The mean (&quot;</span> <span class="o">*</span> bar<span class="p">(</span>x<span class="p">)</span> <span class="o">*</span> <span class="s">&quot;) is &quot;</span> <span class="o">*</span> sum<span class="p">(</span>x<span class="p">[</span>i<span class="p">]</span><span class="o">/</span>n<span class="p">,</span> i <span class="o">==</span> 
+    <span class="m">1</span><span class="p">,</span> n<span class="p">)))</span>
+</pre></div>
+
+
+<p><img alt="plot of chunk example2" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example2.png" /> </p>
+<h3>Example 3</h3>
+<p>The <code>subsitute</code> function can be used to substitute values into a
+mathematical expression.</p>
+<div class="highlight"><pre>x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
+y <span class="o">&lt;-</span> x <span class="o">+</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">,</span> sd <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span>
+plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> xlab <span class="o">=</span> substitute<span class="p">(</span>bar<span class="p">(</span>x<span class="p">)</span> <span class="o">==</span> k<span class="p">,</span> list<span class="p">(</span>k <span class="o">=</span> mean<span class="p">(</span>x<span class="p">))),</span> ylab <span class="o">=</span> substitute<span class="p">(</span>bar<span class="p">(</span>y<span class="p">)</span> <span class="o">==</span> 
+    k<span class="p">,</span> list<span class="p">(</span>k <span class="o">=</span> mean<span class="p">(</span>y<span class="p">))))</span>
+</pre></div>
+
+
+<p><img alt="plot of chunk example3" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example3.png" /> </p>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "mathematical-expressions-in-plots.html";
+        var disqus_url = "http://leemendelowitz.github.io/blog/mathematical-expressions-in-plots.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://leeoncoding.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="http://twitter.com/lmendy7">twitter</a></li>
+                            <li><a href="https://github.com/LeeMendelowitz">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-44545448-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'leeoncoding';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>
