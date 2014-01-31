@@ -28,7 +28,7 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/parsing-in-python.html">Parsing in Python</a></h1>
+                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/any-all-in-python.html">Any and All</a></h1>
 <footer class="post-info">
         <abbr class="published" title="2013-10-03T22:07:00">
                 Thu 03 October 2013
@@ -39,58 +39,104 @@
         </address>
 <p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
 <p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info --><p>In Python, everything is an object. Even the built-in types themselves
-(i.e. int, str, dict, list, etc.) are object's of type type. 
-You can use the built-in type function to get an object's type.</p>
-<div class="highlight"><pre><span class="nb">type</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c"># Returns type. So int is an object of type type.</span>
-<span class="nb">isinstance</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="c"># Returns True</span>
-<span class="nb">isinstance</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">object</span><span class="p">)</span> <span class="c"># Returns True</span>
-<span class="nb">type</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span> <span class="c"># Returns type. So type is an object of type type. Truth.</span>
-<span class="nb">type</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span> <span class="c"># Returns type. So object is an object of type type. Mind blown.</span>
+</footer><!-- /.post-info --><p>Here's an <a href="http://nbviewer.ipython.org/gist/LeeMendelowitz/8738004">ipython notebook</a> with the code for this post, and the ipython notebook <a href="https://gist.github.com/LeeMendelowitz/8738004">source</a>.</p>
+<p><code>any</code> and <code>all</code> are useful Python functions. Given an iterable (like a list, a generator, an str, etc.), these functions check if any or all of the values are True (or "truthy"). Here is a simple example where we are checking the values of the letters in the word "python":</p>
+<div class="highlight"><pre><span class="nb">any</span><span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span> <span class="c"># Returns True. Same as: &#39;t&#39; in &#39;python&#39;</span>
+<span class="nb">all</span><span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span> <span class="c"># Returns False. Not all of the letters are &#39;t&#39;.</span>
 </pre></div>
 
 
-<p>Since everything in Python is an object, you can treat them as such. This means you can store the types themselves in a list.</p>
-<div class="highlight"><pre><span class="n">my_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
+<p>This seems like a simple function call, but things are slightly more complicated than they look.</p>
+<p>First, a generator is constructed from the expression <code>l == 't' for l in 'python'</code>. What is a generator? A generator is an object which is both an iterator (has the <code>next</code> method) and is also iterable (has the <code>__iter__</code> method which returns an iterator). Strings themselves are iterable, which is how the <code>for l in 'python'</code> part works.</p>
+<p>You can define a generator through a generator expression:</p>
+<div class="highlight"><pre><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span>
 </pre></div>
 
 
-<p>It turns out this is really useful when writing scripts to parse a text file.
-Let's say I'm writing a script to parse the CSV file below. (In reality,
-I should just use the <a href="http://pandas.pydata.org/">pandas</a> library.)</p>
-<div class="highlight"><pre>Bob, Jones, 26, 184.2
-Thomas, Apple, 19, 155.9
-Jake, Wilson, 31, 172.2
+<p>Note that a generator expression is similar to a list comprehension, except uses parentheses instead of brackets. A key difference is that while a list comprehension immediately computes all of the values and stores them in a list in memory, a generator expression generates its values lazily on demand.</p>
+<p>To show that <code>g</code> is an iterator, we can get the first few values by hand:</p>
+<div class="highlight"><pre><span class="k">print</span> <span class="n">g</span><span class="o">.</span><span class="n">next</span><span class="p">()</span> <span class="c"># False. &#39;p&#39; is not equal to &#39;t&#39;</span>
+<span class="k">print</span> <span class="n">g</span><span class="o">.</span><span class="n">next</span><span class="p">()</span> <span class="c"># False. &#39;y&#39; is not equal to &#39;t&#39;</span>
+<span class="k">print</span> <span class="n">g</span><span class="o">.</span><span class="n">next</span><span class="p">()</span> <span class="c"># True. &#39;t&#39; is equal to &#39;t&#39;</span>
 </pre></div>
 
 
-<p>The parser script can store the types of each field in a list,
-and utilize it to convert each field value to its appropriate type
-with a simple generator expression:</p>
-<div class="highlight"><pre><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;first&#39;</span><span class="p">,</span> <span class="s">&#39;last&#39;</span><span class="p">,</span> <span class="s">&#39;age&#39;</span><span class="p">,</span> <span class="s">&#39;weight&#39;</span><span class="p">]</span>
-<span class="n">field_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parse a single line and return a dictionary.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">field_values</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="n">fn</span><span class="p">,</span> <span class="n">ft</span><span class="p">(</span><span class="n">fv</span><span class="p">))</span> <span class="k">for</span> <span class="n">fn</span><span class="p">,</span><span class="n">ft</span><span class="p">,</span><span class="n">fv</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">field_names</span><span class="p">,</span> <span class="n">field_types</span><span class="p">,</span> <span class="n">field_values</span><span class="p">))</span>
-
-<span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parse all of the lines in the file.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">parse_line</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)]</span>
+<p>Again, these True/False responses are lazily computed by the generator only upon demand. You can also use <code>g</code> in a loop, since it's iterable. Under the hood, the <code>for</code> loop calls the <code>__iter__</code> function of g:</p>
+<div class="highlight"><pre><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">value</span>
 </pre></div>
 
 
-<p>To summarize, storing types in a list is really useful for writing concise scripts to parse text.</p><p>There are <a href="http://leemendelowitz.github.io/blog/parsing-in-python.html#disqus_thread">comments</a>.</p>                </article>
+<p>Functions that accept iterable objects, like <code>any</code> and <code>all</code>, will accept a generator expression:</p>
+<div class="highlight"><pre><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span>
+<span class="nb">any</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="nb">any</span><span class="p">(</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span> <span class="p">)</span> <span class="c"># same thing</span>
+</pre></div>
+
+
+<p>Finally, python lets us avoid the "double parentheses" when we pass a generator expression to a function call:</p>
+<div class="highlight"><pre><span class="nb">any</span><span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;l&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;hello&#39;</span><span class="p">)</span> <span class="c"># same thing as any((l == &#39;t&#39; for l in &#39;python&#39;))</span>
+</pre></div>
+
+
+<p>So that's how the function call itself works. How do <code>any</code> and <code>all</code> work with the iterable it is given? </p>
+<p>Let's demonstrate this with a simple example:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">t</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&#39;In True!&#39;</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&#39;In False!&#39;</span>
+    <span class="k">return</span> <span class="bp">False</span>
+
+<span class="c"># Store functions to be called in a list</span>
+<span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">test_any</span><span class="p">():</span>
+    <span class="c"># Pass a generator expression with function calls to any</span>
+    <span class="k">print</span> <span class="nb">any</span><span class="p">(</span><span class="n">func</span><span class="p">()</span> <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_all</span><span class="p">():</span>
+    <span class="c"># Pass a generator expression with function calls to all</span>
+    <span class="k">print</span> <span class="nb">all</span><span class="p">(</span><span class="n">func</span><span class="p">()</span> <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">)</span>
+
+<span class="n">test_any</span><span class="p">()</span> <span class="c"># Calls t() once and stops.</span>
+<span class="n">test_all</span><span class="p">()</span> <span class="c"># Calls t(), then f(), then stops</span>
+</pre></div>
+
+
+<p>In this example, <code>any</code> stopped after the first True value it sees, and 
+<code>all</code> stopped after the first False value. This makes sense - both <code>any</code> and <code>all</code> can stop
+iterating over their argument once they've figured out their return value. </p>
+<p>The more you know!</p><p>There are <a href="http://leemendelowitz.github.io/blog/any-all-in-python.html#disqus_thread">comments</a>.</p>                </article>
             </aside><!-- /#featured -->
                 <section id="content" class="body">
                     <h1>Other articles</h1>
                     <hr />
                     <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://leemendelowitz.github.io/blog/parsing-in-python.html" rel="bookmark"
+                           title="Permalink to Parsing in Python">Parsing in Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-10-03T22:07:00">
+                Thu 03 October 2013
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
+        </address>
+<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
+<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
+</footer><!-- /.post-info -->                <p>How to parse in python</p>
+                <a class="readmore" href="http://leemendelowitz.github.io/blog/parsing-in-python.html">read more</a>
+<p>There are <a href="http://leemendelowitz.github.io/blog/parsing-in-python.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>

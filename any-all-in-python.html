@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>On Coding - Python</title>
+        <title>Any and All</title>
         <link rel="stylesheet" href="http://leemendelowitz.github.io/blog/theme/css/main.css" />
         <link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="On Coding Atom Feed" />
 
@@ -25,10 +25,16 @@
                     <li><a href="http://leemendelowitz.github.io/blog/category/r.html">R</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://leemendelowitz.github.io/blog/any-all-in-python.html" rel="bookmark"
+           title="Permalink to Any and All">Any and All</a></h1>
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="lmendy7">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/any-all-in-python.html">Any and All</a></h1>
+    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2013-10-03T22:07:00">
                 Thu 03 October 2013
@@ -39,7 +45,7 @@
         </address>
 <p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
 <p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info --><p>Here's an <a href="http://nbviewer.ipython.org/gist/LeeMendelowitz/8738004">ipython notebook</a> with the code for this post, and the ipython notebook <a href="https://gist.github.com/LeeMendelowitz/8738004">source</a>.</p>
+</footer><!-- /.post-info -->      <p>Here's an <a href="http://nbviewer.ipython.org/gist/LeeMendelowitz/8738004">ipython notebook</a> with the code for this post, and the ipython notebook <a href="https://gist.github.com/LeeMendelowitz/8738004">source</a>.</p>
 <p><code>any</code> and <code>all</code> are useful Python functions. Given an iterable (like a list, a generator, an str, etc.), these functions check if any or all of the values are True (or "truthy"). Here is a simple example where we are checking the values of the letters in the word "python":</p>
 <div class="highlight"><pre><span class="nb">any</span><span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span> <span class="c"># Returns True. Same as: &#39;t&#39; in &#39;python&#39;</span>
 <span class="nb">all</span><span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span> <span class="c"># Returns False. Not all of the letters are &#39;t&#39;.</span>
@@ -109,61 +115,24 @@
 <p>In this example, <code>any</code> stopped after the first True value it sees, and 
 <code>all</code> stopped after the first False value. This makes sense - both <code>any</code> and <code>all</code> can stop
 iterating over their argument once they've figured out their return value. </p>
-<p>The more you know!</p><p>There are <a href="http://leemendelowitz.github.io/blog/any-all-in-python.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<p>The more you know!</p>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "any-all-in-python.html";
+        var disqus_url = "http://leemendelowitz.github.io/blog/any-all-in-python.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://leeoncoding.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/parsing-in-python.html" rel="bookmark"
-                           title="Permalink to Parsing in Python">Parsing in Python</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-03T22:07:00">
-                Thu 03 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info -->                <p>How to parse in python</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/parsing-in-python.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/parsing-in-python.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html" rel="bookmark"
-                           title="Permalink to Wrapping Python Dictionaries">Wrapping Python Dictionaries</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-02T17:45:00">
-                Wed 02 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a><a href="http://leemendelowitz.github.io/blog/tag/ipython.html">ipython</a></p>
-</footer><!-- /.post-info -->                <p>How to wrap a python dictionary for IPython autocompletion.</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-            </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 1
-</p>
-            </section><!-- /#content -->
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="social">
                         <h2>social</h2>

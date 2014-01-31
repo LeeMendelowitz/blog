@@ -1,5 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/python.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2013-10-03T22:07:00+02:00</updated><entry><title>Parsing in Python</title><link href="http://leemendelowitz.github.io/blog/parsing-in-python.html" rel="alternate"></link><updated>2013-10-03T22:07:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-03:parsing-in-python.html</id><summary type="html">&lt;p&gt;In Python, everything is an object. Even the built-in types themselves
+<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/python.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2013-10-03T22:07:00+02:00</updated><entry><title>Any and All</title><link href="http://leemendelowitz.github.io/blog/any-all-in-python.html" rel="alternate"></link><updated>2013-10-03T22:07:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-03:any-all-in-python.html</id><summary type="html">&lt;p&gt;Here's an &lt;a href="http://nbviewer.ipython.org/gist/LeeMendelowitz/8738004"&gt;ipython notebook&lt;/a&gt; with the code for this post, and the ipython notebook &lt;a href="https://gist.github.com/LeeMendelowitz/8738004"&gt;source&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;any&lt;/code&gt; and &lt;code&gt;all&lt;/code&gt; are useful Python functions. Given an iterable (like a list, a generator, an str, etc.), these functions check if any or all of the values are True (or "truthy"). Here is a simple example where we are checking the values of the letters in the word "python":&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;any&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;t&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# Returns True. Same as: &amp;#39;t&amp;#39; in &amp;#39;python&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;t&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# Returns False. Not all of the letters are &amp;#39;t&amp;#39;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This seems like a simple function call, but things are slightly more complicated than they look.&lt;/p&gt;
+&lt;p&gt;First, a generator is constructed from the expression &lt;code&gt;l == 't' for l in 'python'&lt;/code&gt;. What is a generator? A generator is an object which is both an iterator (has the &lt;code&gt;next&lt;/code&gt; method) and is also iterable (has the &lt;code&gt;__iter__&lt;/code&gt; method which returns an iterator). Strings themselves are iterable, which is how the &lt;code&gt;for l in 'python'&lt;/code&gt; part works.&lt;/p&gt;
+&lt;p&gt;You can define a generator through a generator expression:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;t&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that a generator expression is similar to a list comprehension, except uses parentheses instead of brackets. A key difference is that while a list comprehension immediately computes all of the values and stores them in a list in memory, a generator expression generates its values lazily on demand.&lt;/p&gt;
+&lt;p&gt;To show that &lt;code&gt;g&lt;/code&gt; is an iterator, we can get the first few values by hand:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c"&gt;# False. &amp;#39;p&amp;#39; is not equal to &amp;#39;t&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c"&gt;# False. &amp;#39;y&amp;#39; is not equal to &amp;#39;t&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c"&gt;# True. &amp;#39;t&amp;#39; is equal to &amp;#39;t&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Again, these True/False responses are lazily computed by the generator only upon demand. You can also use &lt;code&gt;g&lt;/code&gt; in a loop, since it's iterable. Under the hood, the &lt;code&gt;for&lt;/code&gt; loop calls the &lt;code&gt;__iter__&lt;/code&gt; function of g:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;t&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Functions that accept iterable objects, like &lt;code&gt;any&lt;/code&gt; and &lt;code&gt;all&lt;/code&gt;, will accept a generator expression:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;t&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;any&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;any&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;t&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# same thing&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Finally, python lets us avoid the "double parentheses" when we pass a generator expression to a function call:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;any&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;l&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# same thing as any((l == &amp;#39;t&amp;#39; for l in &amp;#39;python&amp;#39;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So that's how the function call itself works. How do &lt;code&gt;any&lt;/code&gt; and &lt;code&gt;all&lt;/code&gt; work with the iterable it is given? &lt;/p&gt;
+&lt;p&gt;Let's demonstrate this with a simple example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;t&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;In True!&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;f&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;In False!&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+
+&lt;span class="c"&gt;# Store functions to be called in a list&lt;/span&gt;
+&lt;span class="n"&gt;funcs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_any&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c"&gt;# Pass a generator expression with function calls to any&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;any&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;funcs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_all&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c"&gt;# Pass a generator expression with function calls to all&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;funcs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;test_any&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c"&gt;# Calls t() once and stops.&lt;/span&gt;
+&lt;span class="n"&gt;test_all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c"&gt;# Calls t(), then f(), then stops&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In this example, &lt;code&gt;any&lt;/code&gt; stopped after the first True value it sees, and 
+&lt;code&gt;all&lt;/code&gt; stopped after the first False value. This makes sense - both &lt;code&gt;any&lt;/code&gt; and &lt;code&gt;all&lt;/code&gt; can stop
+iterating over their argument once they've figured out their return value. &lt;/p&gt;
+&lt;p&gt;The more you know!&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>Parsing in Python</title><link href="http://leemendelowitz.github.io/blog/parsing-in-python.html" rel="alternate"></link><updated>2013-10-03T22:07:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-03:parsing-in-python.html</id><summary type="html">&lt;p&gt;In Python, everything is an object. Even the built-in types themselves
 (i.e. int, str, dict, list, etc.) are object's of type type. 
 You can use the built-in type function to get an object's type.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# Returns type. So int is an object of type type.&lt;/span&gt;
