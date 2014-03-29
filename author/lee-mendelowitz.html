@@ -28,7 +28,74 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/any-all-in-python.html">Any and All</a></h1>
+                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html">Python OS X Mavericks Issues</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-03-29T02:00:00">
+                Sat 29 March 2014
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
+        </address>
+<p>In <a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a>. </p>
+<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
+</footer><!-- /.post-info --><p>Yesterday I decided to upgrade OS X on my Late-2011 Mac Book Pro from 10.7 Lion to 10.9 Mavericks. I felt no rush to upgrade - "If it ain't broke, don't fix it!" - but after reading about the new features, particularly the improved support for multiple displays - I decided to give it a shot.</p>
+<p>Everything went smoothly - except that my Python installation completely broke. This was a big break - I work in Python almost everyday. By broke, I mean that Apple wiped out all of the python libraries I've installed - pip, virtualenv, numpy, matplotlib, ipython, pandas, flask, greenlet - all gone.</p>
+<p>In retrospect, it was my mistake. I was installing packages in <code>/Library/Python/2.7/site-packages</code>, which Apple wiped clean when I upgraded to Mavericks.</p>
+<p>I recovered by installing Python using Homebrew. It's a much better option because:</p>
+<ul>
+<li>the installation will come with <code>pip</code> installed</li>
+<li>the Python packages you install will be put in a safe place and you won't need to use <code>sudo</code> to install them.</li>
+<li>You'll avoid some compilation errors when installing some packages.<ul>
+<li>I encountered <a href="http://stackoverflow.com/questions/22313407/clang-error-unknown-argument-mno-fused-madd-python-package-installation-fa">this</a> issue when trying to install <code>greenlet</code> package using an <code>easy_install</code>'ed version of' <code>pip</code>, but <strong>not</strong> with the Homebrew installed <code>pip</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Here are the steps I followed to fix my Python installation:</p>
+<ol>
+<li>
+<p>You need to reinstall XCode and the Command Line Tools to get a compiler. This can be done from the App Store. Lots of resources on how to do this - see <a href="http://railsapps.github.io/xcode-command-line-tools.html">this</a> or <a href="http://railsapps.github.io/xcode-command-line-tools.html">this</a>.</p>
+</li>
+<li>
+<p>Install Python with <a href="http://brew.sh">Homebrew</a> instead of using the Python interpreter which ships with Mavericks. Homebrew will install the latest Python v2.7.6, while Mavericks ships with v2.7.5:</p>
+<div class="highlight"><pre>brew update
+brew install python
+</pre></div>
+
+
+</li>
+<li>
+<p>Upgrade setuptools and pip, as suggested:</p>
+<div class="highlight"><pre>pip install --upgrade setuptools
+pip install --upgrade pip
+</pre></div>
+
+
+</li>
+<li>
+<p>Install your favorite package</p>
+<div class="highlight"><pre>pip install numpy, ipython, matplotlib, pandas, flask, yolk
+</pre></div>
+
+
+</li>
+</ol>
+<p>These will be installed to <code>/usr/local/lib/python2.7/site-packages</code>, which is a safe zone. Future OS X upgrades won't wipe out your installed packages.</p>
+<p>I'm still getting build errors on scipy that I have not yet resolved, but I'll save that for another rainy day.</p>
+<p>In conclusion, use Homebrew to stay <em>mostly</em> sane.</p><p>There are <a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://leemendelowitz.github.io/blog/any-all-in-python.html" rel="bookmark"
+                           title="Permalink to Any and All">Any and All</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-01-31T12:42:00">
                 Fri 31 January 2014
@@ -39,82 +106,10 @@
         </address>
 <p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
 <p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info --><p>Here's an <a href="http://nbviewer.ipython.org/gist/LeeMendelowitz/8738004">ipython notebook</a> with the code for this post, and the ipython notebook <a href="https://gist.github.com/LeeMendelowitz/8738004">source</a>.</p>
-<p><code>any</code> and <code>all</code> are useful Python functions. Given an iterable (like a list, a generator, an str, etc.), these functions check if any or all of the values are True (or "truthy"). Here is a simple example where we are checking the values of the letters in the word "python":</p>
-<div class="highlight"><pre><span class="nb">any</span><span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span> <span class="c"># Returns True. Same as: &#39;t&#39; in &#39;python&#39;</span>
-<span class="nb">all</span><span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span> <span class="c"># Returns False. Not all of the letters are &#39;t&#39;.</span>
-</pre></div>
-
-
-<p>This seems like a simple function call, but things are slightly more complicated than they look.</p>
-<p>First, a generator is constructed from the expression <code>l == 't' for l in 'python'</code>. What is a generator? A generator is an object which is both an iterator (has the <code>next</code> method) and is also iterable (has the <code>__iter__</code> method which returns an iterator). Strings themselves are iterable, which is how the <code>for l in 'python'</code> part works.</p>
-<p>You can define a generator through a generator expression:</p>
-<div class="highlight"><pre><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Note that a generator expression is similar to a list comprehension, except uses parentheses instead of brackets. A key difference is that while a list comprehension immediately computes all of the values and stores them in a list in memory, a generator expression generates its values lazily on demand.</p>
-<p>To show that <code>g</code> is an iterator, we can get the first few values by hand:</p>
-<div class="highlight"><pre><span class="k">print</span> <span class="n">g</span><span class="o">.</span><span class="n">next</span><span class="p">()</span> <span class="c"># False. &#39;p&#39; is not equal to &#39;t&#39;</span>
-<span class="k">print</span> <span class="n">g</span><span class="o">.</span><span class="n">next</span><span class="p">()</span> <span class="c"># False. &#39;y&#39; is not equal to &#39;t&#39;</span>
-<span class="k">print</span> <span class="n">g</span><span class="o">.</span><span class="n">next</span><span class="p">()</span> <span class="c"># True. &#39;t&#39; is equal to &#39;t&#39;</span>
-</pre></div>
-
-
-<p>Again, these True/False responses are lazily computed by the generator only upon demand. You can also use <code>g</code> in a loop, since it's iterable. Under the hood, the <code>for</code> loop calls the <code>__iter__</code> function of g:</p>
-<div class="highlight"><pre><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">value</span>
-</pre></div>
-
-
-<p>Functions that accept iterable objects, like <code>any</code> and <code>all</code>, will accept a generator expression:</p>
-<div class="highlight"><pre><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span>
-<span class="nb">any</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="nb">any</span><span class="p">(</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;t&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;python&#39;</span><span class="p">)</span> <span class="p">)</span> <span class="c"># same thing</span>
-</pre></div>
-
-
-<p>Finally, python lets us avoid the "double parentheses" when we pass a generator expression to a function call:</p>
-<div class="highlight"><pre><span class="nb">any</span><span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="s">&#39;l&#39;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s">&#39;hello&#39;</span><span class="p">)</span> <span class="c"># same thing as any((l == &#39;t&#39; for l in &#39;python&#39;))</span>
-</pre></div>
-
-
-<p>So that's how the function call itself works. How do <code>any</code> and <code>all</code> work with the iterable it is given? </p>
-<p>Let's demonstrate this with a simple example:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">t</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&#39;In True!&#39;</span>
-    <span class="k">return</span> <span class="bp">True</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&#39;In False!&#39;</span>
-    <span class="k">return</span> <span class="bp">False</span>
-
-<span class="c"># Store functions to be called in a list</span>
-<span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">test_any</span><span class="p">():</span>
-    <span class="c"># Pass a generator expression with function calls to any</span>
-    <span class="k">print</span> <span class="nb">any</span><span class="p">(</span><span class="n">func</span><span class="p">()</span> <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">test_all</span><span class="p">():</span>
-    <span class="c"># Pass a generator expression with function calls to all</span>
-    <span class="k">print</span> <span class="nb">all</span><span class="p">(</span><span class="n">func</span><span class="p">()</span> <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">)</span>
-
-<span class="n">test_any</span><span class="p">()</span> <span class="c"># Calls t() once and stops.</span>
-<span class="n">test_all</span><span class="p">()</span> <span class="c"># Calls t(), then f(), then stops</span>
-</pre></div>
-
-
-<p>In this example, <code>any</code> stopped after the first True value it sees, and 
-<code>all</code> stopped after the first False value. This makes sense - both <code>any</code> and <code>all</code> can stop
-iterating over their argument once they've figured out their return value. </p>
-<p>The more you know!</p><p>There are <a href="http://leemendelowitz.github.io/blog/any-all-in-python.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>Demonstration of any/all in Python.</p>
+                <a class="readmore" href="http://leemendelowitz.github.io/blog/any-all-in-python.html">read more</a>
+<p>There are <a href="http://leemendelowitz.github.io/blog/any-all-in-python.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>

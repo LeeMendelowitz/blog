@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>On Coding - misc</title>
+        <title>Python OS X Mavericks Issues</title>
         <link rel="stylesheet" href="http://leemendelowitz.github.io/blog/theme/css/main.css" />
         <link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="On Coding Atom Feed" />
 
@@ -25,10 +25,16 @@
                     <li><a href="http://leemendelowitz.github.io/blog/category/r.html">R</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html" rel="bookmark"
+           title="Permalink to Python OS X Mavericks Issues">Python OS X Mavericks Issues</a></h1>
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="lmendy7">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html">Python OS X Mavericks Issues</a></h1>
+    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-03-29T02:00:00">
                 Sat 29 March 2014
@@ -39,7 +45,7 @@
         </address>
 <p>In <a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a>. </p>
 <p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info --><p>Yesterday I decided to upgrade OS X on my Late-2011 Mac Book Pro from 10.7 Lion to 10.9 Mavericks. I felt no rush to upgrade - "If it ain't broke, don't fix it!" - but after reading about the new features, particularly the improved support for multiple displays - I decided to give it a shot.</p>
+</footer><!-- /.post-info -->      <p>Yesterday I decided to upgrade OS X on my Late-2011 Mac Book Pro from 10.7 Lion to 10.9 Mavericks. I felt no rush to upgrade - "If it ain't broke, don't fix it!" - but after reading about the new features, particularly the improved support for multiple displays - I decided to give it a shot.</p>
 <p>Everything went smoothly - except that my Python installation completely broke. This was a big break - I work in Python almost everyday. By broke, I mean that Apple wiped out all of the python libraries I've installed - pip, virtualenv, numpy, matplotlib, ipython, pandas, flask, greenlet - all gone.</p>
 <p>In retrospect, it was my mistake. I was installing packages in <code>/Library/Python/2.7/site-packages</code>, which Apple wiped clean when I upgraded to Mavericks.</p>
 <p>I recovered by installing Python using Homebrew. It's a much better option because:</p>
@@ -82,39 +88,24 @@ pip install --upgrade pip
 </ol>
 <p>These will be installed to <code>/usr/local/lib/python2.7/site-packages</code>, which is a safe zone. Future OS X upgrades won't wipe out your installed packages.</p>
 <p>I'm still getting build errors on scipy that I have not yet resolved, but I'll save that for another rainy day.</p>
-<p>In conclusion, use Homebrew to stay <em>mostly</em> sane.</p><p>There are <a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<p>In conclusion, use Homebrew to stay <em>mostly</em> sane.</p>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "python-mavericks-issues.html";
+        var disqus_url = "http://leemendelowitz.github.io/blog/python-mavericks-issues.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://leeoncoding.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/start-me-up.html" rel="bookmark"
-                           title="Permalink to Start Me Up!">Start Me Up!</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-02T07:35:00">
-                Wed 02 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>My first post.</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/start-me-up.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/start-me-up.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-            </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 1
-</p>
-            </section><!-- /#content -->
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="social">
                         <h2>social</h2>

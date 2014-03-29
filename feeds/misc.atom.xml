@@ -1,5 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/misc.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2013-10-02T07:35:00+02:00</updated><entry><title>Start Me Up!</title><link href="http://leemendelowitz.github.io/blog/start-me-up.html" rel="alternate"></link><updated>2013-10-02T07:35:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-02:start-me-up.html</id><summary type="html">&lt;!--- #Status: draft --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/misc.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2014-03-29T02:00:00+01:00</updated><entry><title>Python OS X Mavericks Issues</title><link href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html" rel="alternate"></link><updated>2014-03-29T02:00:00+01:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2014-03-29:python-mavericks-issues.html</id><summary type="html">&lt;p&gt;Yesterday I decided to upgrade OS X on my Late-2011 Mac Book Pro from 10.7 Lion to 10.9 Mavericks. I felt no rush to upgrade - "If it ain't broke, don't fix it!" - but after reading about the new features, particularly the improved support for multiple displays - I decided to give it a shot.&lt;/p&gt;
+&lt;p&gt;Everything went smoothly - except that my Python installation completely broke. This was a big break - I work in Python almost everyday. By broke, I mean that Apple wiped out all of the python libraries I've installed - pip, virtualenv, numpy, matplotlib, ipython, pandas, flask, greenlet - all gone.&lt;/p&gt;
+&lt;p&gt;In retrospect, it was my mistake. I was installing packages in &lt;code&gt;/Library/Python/2.7/site-packages&lt;/code&gt;, which Apple wiped clean when I upgraded to Mavericks.&lt;/p&gt;
+&lt;p&gt;I recovered by installing Python using Homebrew. It's a much better option because:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the installation will come with &lt;code&gt;pip&lt;/code&gt; installed&lt;/li&gt;
+&lt;li&gt;the Python packages you install will be put in a safe place and you won't need to use &lt;code&gt;sudo&lt;/code&gt; to install them.&lt;/li&gt;
+&lt;li&gt;You'll avoid some compilation errors when installing some packages.&lt;ul&gt;
+&lt;li&gt;I encountered &lt;a href="http://stackoverflow.com/questions/22313407/clang-error-unknown-argument-mno-fused-madd-python-package-installation-fa"&gt;this&lt;/a&gt; issue when trying to install &lt;code&gt;greenlet&lt;/code&gt; package using an &lt;code&gt;easy_install&lt;/code&gt;'ed version of' &lt;code&gt;pip&lt;/code&gt;, but &lt;strong&gt;not&lt;/strong&gt; with the Homebrew installed &lt;code&gt;pip&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here are the steps I followed to fix my Python installation:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You need to reinstall XCode and the Command Line Tools to get a compiler. This can be done from the App Store. Lots of resources on how to do this - see &lt;a href="http://railsapps.github.io/xcode-command-line-tools.html"&gt;this&lt;/a&gt; or &lt;a href="http://railsapps.github.io/xcode-command-line-tools.html"&gt;this&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install Python with &lt;a href="http://brew.sh"&gt;Homebrew&lt;/a&gt; instead of using the Python interpreter which ships with Mavericks. Homebrew will install the latest Python v2.7.6, while Mavericks ships with v2.7.5:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;brew update
+brew install python
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Upgrade setuptools and pip, as suggested:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pip install --upgrade setuptools
+pip install --upgrade pip
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install your favorite package&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pip install numpy, ipython, matplotlib, pandas, flask, yolk
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These will be installed to &lt;code&gt;/usr/local/lib/python2.7/site-packages&lt;/code&gt;, which is a safe zone. Future OS X upgrades won't wipe out your installed packages.&lt;/p&gt;
+&lt;p&gt;I'm still getting build errors on scipy that I have not yet resolved, but I'll save that for another rainy day.&lt;/p&gt;
+&lt;p&gt;In conclusion, use Homebrew to stay &lt;em&gt;mostly&lt;/em&gt; sane.&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>Start Me Up!</title><link href="http://leemendelowitz.github.io/blog/start-me-up.html" rel="alternate"></link><updated>2013-10-02T07:35:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-02:start-me-up.html</id><summary type="html">&lt;!--- #Status: draft --&gt;
 
 &lt;p&gt;Welcome to the blog!&lt;/p&gt;
 &lt;p&gt;After a nice cup of coffee this morning, I impulsively created this blog because I don't
