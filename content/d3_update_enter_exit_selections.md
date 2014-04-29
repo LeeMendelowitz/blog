@@ -15,4 +15,4 @@ I challenged myself to create a demo which illustrates populating a table with c
 
 You can see the demo below and check out the source [here](http://bl.ocks.org/LeeMendelowitz/11383724).
 
-<iframe src="/code/d3_updating_table.html" marginwidth="0" marginheight="0" width="600" height="1000"></iframe>
+<iframe src="code/d3_updating_table.html" marginwidth="0" marginheight="0" width="600" height="1000"></iframe>
