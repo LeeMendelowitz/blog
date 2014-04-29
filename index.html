@@ -28,7 +28,36 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html">Python OS X Mavericks Issues</a></h1>
+                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html">D3 Update Enter Exit Selections</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-04-28T12:00:00">
+                Mon 28 April 2014
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
+        </address>
+<p>In <a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a>. </p>
+<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/d3.html">d3</a><a href="http://leemendelowitz.github.io/blog/tag/javascript.html">javascript</a></p>
+</footer><!-- /.post-info --><p>Lately I've been playing around with the D3 javascript library for data visualizations in a browser. D3 stands for "Data Driven Documents" and provides utilities for manipulating elements on a webpage based on data. The D3 <a href="https://github.com/mbostock/d3/wiki/Gallery">gallery</a> is very impressive.</p>
+<p>I've had trouble wrapping my head around the update, enter, and exit selections, which provide a mechanism for updating, inserting, and removing elements from a page based on changes in data.</p>
+<p>There are already some great <a href="https://github.com/mbostock/d3/wiki/Tutorials">tutorials</a> by Mike Bostock and others on <a href="http://bost.ocks.org/mike/join/">joins</a>, <a href="http://bl.ocks.org/mbostock/3808234">updates</a> and <a href="http://bost.ocks.org/mike/selection/">selections</a>.</p>
+<p>I challenged myself to create a demo which illustrates populating a table with changing data using the full update pattern. The table is a little more challenging because the data is nested; data is first bound to each row as an array of values, then data is bound to each cell of the row as a single value. We have to handle cases where cells are added to or deleted from existing rows, and where entire rows are added or deleted.</p>
+<p>You can see the demo below and check out the source <a href="http://bl.ocks.org/LeeMendelowitz/11383724">here</a>.</p>
+<iframe src="/code/d3_updating_table.html" marginwidth="0" marginheight="0" width="600" height="1000"></iframe><p>There are <a href="http://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html" rel="bookmark"
+                           title="Permalink to Python OS X Mavericks Issues">Python OS X Mavericks Issues</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-03-29T02:00:00">
                 Sat 29 March 2014
@@ -39,55 +68,10 @@
         </address>
 <p>In <a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a>. </p>
 <p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info --><p>Yesterday I decided to upgrade OS X on my Late-2011 Mac Book Pro from 10.7 Lion to 10.9 Mavericks. I felt no rush to upgrade - "If it ain't broke, don't fix it!" - but after reading about the new features, particularly the improved support for multiple displays - I decided to give it a shot.</p>
-<p>Everything went smoothly - except that my Python installation completely broke. This was a big break - I work in Python almost everyday. By broke, I mean that Apple wiped out all of the python libraries I've installed - pip, virtualenv, numpy, matplotlib, ipython, pandas, flask, greenlet - all gone.</p>
-<p>In retrospect, it was my mistake. I was installing packages in <code>/Library/Python/2.7/site-packages</code>, which Apple wiped clean when I upgraded to Mavericks.</p>
-<p>I recovered by installing Python using Homebrew. It's a much better option because:</p>
-<ul>
-<li>the installation will come with <code>pip</code> installed</li>
-<li>the Python packages you install will be put in a safe place and you won't need to use <code>sudo</code> to install them.</li>
-<li>You'll avoid some compilation errors when installing some packages.<ul>
-<li>I encountered <a href="http://stackoverflow.com/questions/22313407/clang-error-unknown-argument-mno-fused-madd-python-package-installation-fa">this</a> issue when trying to install <code>greenlet</code> package using an <code>easy_install</code>'ed version of' <code>pip</code>, but <strong>not</strong> with the Homebrew installed <code>pip</code>.</li>
-</ul>
-</li>
-</ul>
-<p>Here are the steps I followed to fix my Python installation:</p>
-<ol>
-<li>
-<p>You need to reinstall XCode and the Command Line Tools to get a compiler. This can be done from the App Store. Lots of resources on how to do this - see <a href="http://railsapps.github.io/xcode-command-line-tools.html">this</a> or <a href="http://railsapps.github.io/xcode-command-line-tools.html">this</a>.</p>
-</li>
-<li>
-<p>Install Python with <a href="http://brew.sh">Homebrew</a> instead of using the Python interpreter which ships with Mavericks. Homebrew will install the latest Python v2.7.6, while Mavericks ships with v2.7.5:</p>
-<div class="highlight"><pre>brew update
-brew install python
-</pre></div>
-
-
-</li>
-<li>
-<p>Upgrade setuptools and pip, as suggested:</p>
-<div class="highlight"><pre>pip install --upgrade setuptools
-pip install --upgrade pip
-</pre></div>
-
-
-</li>
-<li>
-<p>Install your favorite package</p>
-<div class="highlight"><pre>pip install numpy, ipython, matplotlib, pandas, flask, yolk
-</pre></div>
-
-
-</li>
-</ol>
-<p>These will be installed to <code>/usr/local/lib/python2.7/site-packages</code>, which is a safe zone. Future OS X upgrades won't wipe out your installed packages.</p>
-<p>I'm still getting build errors on scipy that I have not yet resolved, but I'll save that for another rainy day.</p>
-<p>In conclusion, use Homebrew to stay <em>mostly</em> sane.</p><p>There are <a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>Some issues I encountered with my Python installation after upgrading to OS X Mavericks.</p>
+                <a class="readmore" href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html">read more</a>
+<p>There are <a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -310,31 +294,10 @@ x
                 <a class="readmore" href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html">read more</a>
 <p>There are <a href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/start-me-up.html" rel="bookmark"
-                           title="Permalink to Start Me Up!">Start Me Up!</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-02T07:35:00">
-                Wed 02 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>My first post.</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/start-me-up.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/start-me-up.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
             </ol><!-- /#posts-list -->
 <p class="paginator">
-    Page 1 / 1
+    Page 1 / 2
+        <a href="http://leemendelowitz.github.io/blog/index2.html">&raquo;</a>
 </p>
             </section><!-- /#content -->
         <section id="extras" class="body">
