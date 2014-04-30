@@ -1,5 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/python.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2014-01-31T12:42:00+01:00</updated><entry><title>Any and All</title><link href="http://leemendelowitz.github.io/blog/any-all-in-python.html" rel="alternate"></link><updated>2014-01-31T12:42:00+01:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2014-01-31:any-all-in-python.html</id><summary type="html">&lt;p&gt;Here's an &lt;a href="http://nbviewer.ipython.org/gist/LeeMendelowitz/8738004"&gt;ipython notebook&lt;/a&gt; with the code for this post, and the ipython notebook &lt;a href="https://gist.github.com/LeeMendelowitz/8738004"&gt;source&lt;/a&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/python.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2014-04-30T16:45:00+02:00</updated><entry><title>Decorating Python File Functions</title><link href="http://leemendelowitz.github.io/blog/decorating-python-file-functions.html" rel="alternate"></link><updated>2014-04-30T16:45:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2014-04-30:decorating-python-file-functions.html</id><summary type="html">&lt;p&gt;Today I came up with a cool Python snippet that I'd like to share.
+In my work I frequently write functions which write to or read from files, taking a &lt;code&gt;file&lt;/code&gt;-like
+instance as the first argument &lt;code&gt;f&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;write_to_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hi!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To make things more flexible, we can modify the function to accept a &lt;code&gt;file&lt;/code&gt;-like instance or
+a &lt;code&gt;str&lt;/code&gt; specifying the path to the file to open:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;write_to_file_ver2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;close&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+        &lt;span class="n"&gt;close&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
+
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hi!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This pattern is common enough that it's worth creating a decorator for it. We can wrap functions so they 
+accept either a &lt;code&gt;file&lt;/code&gt;-like handle as the first argument, or a &lt;code&gt;str&lt;/code&gt; to a file.&lt;/p&gt;
+&lt;p&gt;The decorated function &lt;code&gt;write_hi_ver3&lt;/code&gt; below is identical to &lt;code&gt;write_hi_ver2&lt;/code&gt; above, but with less code.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nd"&gt;@wrap_file_function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;write_hi_ver_3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hi!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here is the source for the decorator:&lt;/p&gt;
+&lt;div class="gist"&gt;
+    &lt;script src='https://gist.github.com/36941676def5c521a960.js'&gt;&lt;/script&gt;
+    &lt;noscript&gt;
+        &lt;pre&gt;&lt;code&gt;class wrap_file_function(object):
+  """
+  Wrap a function which takes a file or a str as it's first argument.
+  If a str is provided, replace the first argument of the wrapped function
+  with a file handle, and close the file afterwards
+
+  Example:
+
+  @wrap_file_function('w')
+  def write_hi(f):
+    f.write('hi!\n')
+
+  # This will write to already open file handle.
+  f = open('f1.txt', 'w')
+  write_hi(f)
+  f.close()
+
+  # This will open file f2.txt with mode 'w', write to it, and close the file.
+  write_hi('f2.txt')
+  """
+
+  def __init__(self, mode='r'):
+    self.mode = mode
+
+  def __call__(self, func):
+
+    def wrapped(f, *args, **kwargs):
+      close = False
+      if isinstance(f, str):
+        f = open(f, self.mode)
+        close = True
+
+      try:
+
+        ret = func(f, *args, **kwargs)
+
+      finally:
+        if close:
+          f.close()
+
+      return ret
+
+    return wrapped
+
+if __name__ == "__main__":
+
+  # Demonstration of wrapping a function which writes to a file.
+  @wrap_file_function('w')
+  def write_hi(f):
+    f.write('hi!\n')
+
+  f = open('temp.txt', 'w')
+  write_hi(f)
+  write_hi(f)
+  write_hi(f)
+  f.close()
+
+  write_hi('temp2.txt')
+
+  # Demonstration of wrapping a function which reads from a file.
+  @wrap_file_function('r')
+  def read_file(f):
+      print f.read()
+
+  f = open('temp.txt')
+  print 'Reading file temp.txt from handle f:'
+  read_file(f)
+  print 'Reading file temp2.txt'
+  read_file('temp2.txt')&lt;/code&gt;&lt;/pre&gt;
+    &lt;/noscript&gt;
+&lt;/div&gt;</summary><category term="python"></category></entry><entry><title>Any and All</title><link href="http://leemendelowitz.github.io/blog/any-all-in-python.html" rel="alternate"></link><updated>2014-01-31T12:42:00+01:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2014-01-31:any-all-in-python.html</id><summary type="html">&lt;p&gt;Here's an &lt;a href="http://nbviewer.ipython.org/gist/LeeMendelowitz/8738004"&gt;ipython notebook&lt;/a&gt; with the code for this post, and the ipython notebook &lt;a href="https://gist.github.com/LeeMendelowitz/8738004"&gt;source&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;any&lt;/code&gt; and &lt;code&gt;all&lt;/code&gt; are useful Python functions. Given an iterable (like a list, a generator, an str, etc.), these functions check if any or all of the values are True (or "truthy"). Here is a simple example where we are checking the values of the letters in the word "python":&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;any&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;t&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# Returns True. Same as: &amp;#39;t&amp;#39; in &amp;#39;python&amp;#39;&lt;/span&gt;
 &lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;t&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# Returns False. Not all of the letters are &amp;#39;t&amp;#39;.&lt;/span&gt;

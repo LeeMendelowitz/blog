@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>On Coding - python</title>
+        <title>Decorating Python File Functions</title>
         <link rel="stylesheet" href="http://leemendelowitz.github.io/blog/theme/css/main.css" />
         <link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="On Coding Atom Feed" />
 
@@ -21,14 +21,20 @@
                     <li><a href="http://leemendelowitz.github.io/blog/pages/about.html">About</a></li>
                     <li><a href="http://leemendelowitz.github.io/blog/pages/computing-for-data-analysis.html">Computing For Data Analysis</a></li>
                     <li><a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a></li>
+                    <li class="active"><a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a></li>
                     <li><a href="http://leemendelowitz.github.io/blog/category/r.html">R</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://leemendelowitz.github.io/blog/decorating-python-file-functions.html" rel="bookmark"
+           title="Permalink to Decorating Python File Functions">Decorating Python File Functions</a></h1>
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="lmendy7">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/decorating-python-file-functions.html">Decorating Python File Functions</a></h1>
+    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-04-30T16:45:00">
                 Wed 30 April 2014
@@ -39,7 +45,7 @@
         </address>
 <p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
 <p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info --><p>Today I came up with a cool Python snippet that I'd like to share.
+</footer><!-- /.post-info -->      <p>Today I came up with a cool Python snippet that I'd like to share.
 In my work I frequently write functions which write to or read from files, taking a <code>file</code>-like
 instance as the first argument <code>f</code>:</p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">write_to_file</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
@@ -145,105 +151,24 @@ if __name__ == "__main__":
   print 'Reading file temp2.txt'
   read_file('temp2.txt')</code></pre>
     </noscript>
-</div><p>There are <a href="http://leemendelowitz.github.io/blog/decorating-python-file-functions.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</div>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "decorating-python-file-functions.html";
+        var disqus_url = "http://leemendelowitz.github.io/blog/decorating-python-file-functions.html";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://leeoncoding.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html" rel="bookmark"
-                           title="Permalink to Python OS X Mavericks Issues">Python OS X Mavericks Issues</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-03-29T02:00:00">
-                Sat 29 March 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info -->                <p>Some issues I encountered with my Python installation after upgrading to OS X Mavericks.</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/any-all-in-python.html" rel="bookmark"
-                           title="Permalink to Any and All">Any and All</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-01-31T12:42:00">
-                Fri 31 January 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info -->                <p>Demonstration of any/all in Python.</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/any-all-in-python.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/any-all-in-python.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/parsing-in-python.html" rel="bookmark"
-                           title="Permalink to Parsing in Python">Parsing in Python</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-03T22:07:00">
-                Thu 03 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info -->                <p>How to parse in python</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/parsing-in-python.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/parsing-in-python.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html" rel="bookmark"
-                           title="Permalink to Wrapping Python Dictionaries">Wrapping Python Dictionaries</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-02T17:45:00">
-                Wed 02 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a><a href="http://leemendelowitz.github.io/blog/tag/ipython.html">ipython</a></p>
-</footer><!-- /.post-info -->                <p>How to wrap a python dictionary for IPython autocompletion.</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/wrapping-python-dictionaries.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-            </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 1
-</p>
-            </section><!-- /#content -->
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="social">
                         <h2>social</h2>

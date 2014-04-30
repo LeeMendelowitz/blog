@@ -1,5 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2014-04-28T12:00:00+02:00</updated><entry><title>D3 Update Enter Exit Selections</title><link href="http://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html" rel="alternate"></link><updated>2014-04-28T12:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2014-04-28:d3-update-enter-exit-selections.html</id><summary type="html">&lt;p&gt;Lately I've been playing around with the D3 javascript library for data visualizations in a browser. D3 stands for "Data Driven Documents" and provides utilities for manipulating elements on a webpage based on data. The D3 &lt;a href="https://github.com/mbostock/d3/wiki/Gallery"&gt;gallery&lt;/a&gt; is very impressive.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2014-04-30T16:45:00+02:00</updated><entry><title>Decorating Python File Functions</title><link href="http://leemendelowitz.github.io/blog/decorating-python-file-functions.html" rel="alternate"></link><updated>2014-04-30T16:45:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2014-04-30:decorating-python-file-functions.html</id><summary type="html">&lt;p&gt;Today I came up with a cool Python snippet that I'd like to share.
+In my work I frequently write functions which write to or read from files, taking a &lt;code&gt;file&lt;/code&gt;-like
+instance as the first argument &lt;code&gt;f&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;write_to_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hi!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To make things more flexible, we can modify the function to accept a &lt;code&gt;file&lt;/code&gt;-like instance or
+a &lt;code&gt;str&lt;/code&gt; specifying the path to the file to open:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;write_to_file_ver2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;close&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+        &lt;span class="n"&gt;close&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
+
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hi!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This pattern is common enough that it's worth creating a decorator for it. We can wrap functions so they 
+accept either a &lt;code&gt;file&lt;/code&gt;-like handle as the first argument, or a &lt;code&gt;str&lt;/code&gt; to a file.&lt;/p&gt;
+&lt;p&gt;The decorated function &lt;code&gt;write_hi_ver3&lt;/code&gt; below is identical to &lt;code&gt;write_hi_ver2&lt;/code&gt; above, but with less code.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nd"&gt;@wrap_file_function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;write_hi_ver_3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hi!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here is the source for the decorator:&lt;/p&gt;
+&lt;div class="gist"&gt;
+    &lt;script src='https://gist.github.com/36941676def5c521a960.js'&gt;&lt;/script&gt;
+    &lt;noscript&gt;
+        &lt;pre&gt;&lt;code&gt;class wrap_file_function(object):
+  """
+  Wrap a function which takes a file or a str as it's first argument.
+  If a str is provided, replace the first argument of the wrapped function
+  with a file handle, and close the file afterwards
+
+  Example:
+
+  @wrap_file_function('w')
+  def write_hi(f):
+    f.write('hi!\n')
+
+  # This will write to already open file handle.
+  f = open('f1.txt', 'w')
+  write_hi(f)
+  f.close()
+
+  # This will open file f2.txt with mode 'w', write to it, and close the file.
+  write_hi('f2.txt')
+  """
+
+  def __init__(self, mode='r'):
+    self.mode = mode
+
+  def __call__(self, func):
+
+    def wrapped(f, *args, **kwargs):
+      close = False
+      if isinstance(f, str):
+        f = open(f, self.mode)
+        close = True
+
+      try:
+
+        ret = func(f, *args, **kwargs)
+
+      finally:
+        if close:
+          f.close()
+
+      return ret
+
+    return wrapped
+
+if __name__ == "__main__":
+
+  # Demonstration of wrapping a function which writes to a file.
+  @wrap_file_function('w')
+  def write_hi(f):
+    f.write('hi!\n')
+
+  f = open('temp.txt', 'w')
+  write_hi(f)
+  write_hi(f)
+  write_hi(f)
+  f.close()
+
+  write_hi('temp2.txt')
+
+  # Demonstration of wrapping a function which reads from a file.
+  @wrap_file_function('r')
+  def read_file(f):
+      print f.read()
+
+  f = open('temp.txt')
+  print 'Reading file temp.txt from handle f:'
+  read_file(f)
+  print 'Reading file temp2.txt'
+  read_file('temp2.txt')&lt;/code&gt;&lt;/pre&gt;
+    &lt;/noscript&gt;
+&lt;/div&gt;</summary><category term="python"></category></entry><entry><title>D3 Update Enter Exit Selections</title><link href="http://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html" rel="alternate"></link><updated>2014-04-28T12:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2014-04-28:d3-update-enter-exit-selections.html</id><summary type="html">&lt;p&gt;Lately I've been playing around with the D3 javascript library for data visualizations in a browser. D3 stands for "Data Driven Documents" and provides utilities for manipulating elements on a webpage based on data. The D3 &lt;a href="https://github.com/mbostock/d3/wiki/Gallery"&gt;gallery&lt;/a&gt; is very impressive.&lt;/p&gt;
 &lt;p&gt;I've had trouble wrapping my head around the update, enter, and exit selections, which provide a mechanism for updating, inserting, and removing elements from a page based on changes in data.&lt;/p&gt;
 &lt;p&gt;There are already some great &lt;a href="https://github.com/mbostock/d3/wiki/Tutorials"&gt;tutorials&lt;/a&gt; by Mike Bostock and others on &lt;a href="http://bost.ocks.org/mike/join/"&gt;joins&lt;/a&gt;, &lt;a href="http://bl.ocks.org/mbostock/3808234"&gt;updates&lt;/a&gt; and &lt;a href="http://bost.ocks.org/mike/selection/"&gt;selections&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I challenged myself to create a demo which illustrates populating a table with changing data using the full update pattern. The table is a little more challenging because the data is nested; data is first bound to each row as an array of values, then data is bound to each cell of the row as a single value. We have to handle cases where cells are added to or deleted from existing rows, and where entire rows are added or deleted.&lt;/p&gt;
