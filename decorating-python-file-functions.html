@@ -68,6 +68,17 @@ a <code>str</code> specifying the path to the file to open:</p>
 </pre></div>
 
 
+<p>Now we can pass this function a <code>file</code> or a <code>str</code> with a file path:</p>
+<div class="highlight"><pre><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;hi.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">write_to_file_ver2</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c"># Or</span>
+
+<span class="n">write_to_file_ver2</span><span class="p">(</span><span class="s">&#39;hi.txt&#39;</span><span class="p">)</span>
+</pre></div>
+
+
 <p>This pattern is common enough that it's worth creating a decorator for it. We can wrap functions so they 
 accept either a <code>file</code>-like handle as the first argument, or a <code>str</code> to a file.</p>
 <p>The decorated function <code>write_hi_ver3</code> below is identical to <code>write_hi_ver2</code> above, but with less code.</p>
@@ -77,7 +88,18 @@ accept either a <code>file</code>-like handle as the first argument, or a <code>
 </pre></div>
 
 
-<p>Here is the source for the decorator:</p>
+<p>The decorator can also wrap a function which takes multiple file handles by specifiying
+multiple file access modes: </p>
+<div class="highlight"><pre><span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">copy_file</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
+    <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="n">copy_file</span><span class="p">(</span><span class="s">&#39;hi.txt&#39;</span><span class="p">,</span> <span class="s">&#39;hi.copy.txt&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Here is the source for the decorator, which also takes care to close any files it opens
+in the event that the wrapped function throws an exception.</p>
 <div class="gist">
     <script src='https://gist.github.com/36941676def5c521a960.js'></script>
     <noscript>

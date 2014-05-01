@@ -22,6 +22,17 @@ a &lt;code&gt;str&lt;/code&gt; specifying the path to the file to open:&lt;/p&gt
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;p&gt;Now we can pass this function a &lt;code&gt;file&lt;/code&gt; or a &lt;code&gt;str&lt;/code&gt; with a file path:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hi.txt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;write_to_file_ver2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="c"&gt;# Or&lt;/span&gt;
+
+&lt;span class="n"&gt;write_to_file_ver2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hi.txt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;This pattern is common enough that it's worth creating a decorator for it. We can wrap functions so they 
 accept either a &lt;code&gt;file&lt;/code&gt;-like handle as the first argument, or a &lt;code&gt;str&lt;/code&gt; to a file.&lt;/p&gt;
 &lt;p&gt;The decorated function &lt;code&gt;write_hi_ver3&lt;/code&gt; below is identical to &lt;code&gt;write_hi_ver2&lt;/code&gt; above, but with less code.&lt;/p&gt;
@@ -31,7 +42,18 @@ accept either a &lt;code&gt;file&lt;/code&gt;-like handle as the first argument,
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Here is the source for the decorator:&lt;/p&gt;
+&lt;p&gt;The decorator can also wrap a function which takes multiple file handles by specifiying
+multiple file access modes: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nd"&gt;@wrap_file_function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;copy_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f2&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;f2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+&lt;span class="n"&gt;copy_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hi.txt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;hi.copy.txt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here is the source for the decorator, which also takes care to close any files it opens
+in the event that the wrapped function throws an exception.&lt;/p&gt;
 &lt;div class="gist"&gt;
     &lt;script src='https://gist.github.com/36941676def5c521a960.js'&gt;&lt;/script&gt;
     &lt;noscript&gt;
