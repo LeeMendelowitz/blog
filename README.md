@@ -1,7 +1,7 @@
 Lee Mendelowitz's blog
 ==============
 
-Repo for managing the content and deployment of my [blog](http://leemendelowitz.github.io/blog/). This repo has a Makefile which will publish content to the gh-pages branch of this repo.
+Repo for managing the content and deployment of my [blog](https://leemendelowitz.github.io/blog/). This repo has a Makefile which will publish content to the gh-pages branch of this repo.
 
 This I how I set everything up for myself. You can follow similar steps to get your own blog up and running.
 
