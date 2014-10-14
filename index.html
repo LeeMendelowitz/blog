@@ -1,290 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>On Coding</title>
-        <link rel="stylesheet" href="http://leemendelowitz.github.io/blog/theme/css/main.css" />
-        <link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="On Coding Atom Feed" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lee On Coding, My blog about coding and stuff.">
 
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <link rel="alternate"  href="https://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" title="Lee On Coding Full Atom Feed"/>
+
+        <title>Lee On Coding // My blog about coding and stuff.</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://leemendelowitz.github.io/blog/theme/css/pure.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 </head>
 
-<body id="index" class="home">
-<a href="https://github.com/LeeMendelowitz/blog">
-<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
-</a>
-        <header id="banner" class="body">
-                <h1><a href="http://leemendelowitz.github.io/blog/">On Coding </a></h1>
-                <nav><ul>
-                    <li><a href="http://leemendelowitz.github.io/blog/pages/about.html">About</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/pages/computing-for-data-analysis.html">Computing For Data Analysis</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/category/r.html">R</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/decorating-python-file-functions.html">Decorating Python File Functions</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2014-04-30T16:45:00">
-                Wed 30 April 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info --><p>Today I came up with a cool Python snippet that I'd like to share.
-In my work I frequently write functions which write to or read from files, taking a <code>file</code>-like
-instance as the first argument <code>f</code>:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">write_to_file</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;hi!</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-</pre></div>
-
-
-<p>To make things more flexible, we can modify the function to accept a <code>file</code>-like instance or
-a <code>str</code> specifying the path to the file to open:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">write_to_file_ver2</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="n">close</span> <span class="o">=</span> <span class="bp">False</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> 
-        <span class="n">close</span> <span class="o">=</span> <span class="bp">True</span>
-
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;hi!</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-
-
-<p>Now we can pass this function a <code>file</code> or a <code>str</code> with a file path:</p>
-<div class="highlight"><pre><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;hi.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">write_to_file_ver2</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-<span class="c"># Or</span>
-
-<span class="n">write_to_file_ver2</span><span class="p">(</span><span class="s">&#39;hi.txt&#39;</span><span class="p">)</span>
-</pre></div>
-
-
-<p>This pattern is common enough that it's worth creating a decorator for it. We can wrap functions so they 
-accept either a <code>file</code>-like handle as the first argument, or a <code>str</code> to a file.</p>
-<p>The decorated function <code>write_hi_ver3</code> below is identical to <code>write_hi_ver2</code> above, but with less code.</p>
-<div class="highlight"><pre><span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;w&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">write_hi_ver_3</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;hi!</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-</pre></div>
-
-
-<p>The decorator can also wrap a function which takes multiple file handles by specifiying
-multiple file access modes: </p>
-<div class="highlight"><pre><span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">copy_file</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
-    <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-
-<span class="n">copy_file</span><span class="p">(</span><span class="s">&#39;hi.txt&#39;</span><span class="p">,</span> <span class="s">&#39;hi.copy.txt&#39;</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Here is the source for the decorator, which also takes care to close any files it opens
-in the event that the wrapped function throws an exception.</p>
-<div class="gist">
-    <script src='https://gist.github.com/36941676def5c521a960.js'></script>
-    <noscript>
-        <pre><code>class wrap_file_function(object):
-  """
-  Wrap a function which takes a file or a str as it's first argument.
-  If a str is provided, replace the first argument of the wrapped function
-  with a file handle, and close the file afterwards
-
-  Example:
-
-  @wrap_file_function('w')
-  def write_hi(f):
-    f.write('hi!\n')
-
-  # This will write to already open file handle.
-  f = open('f1.txt', 'w')
-  write_hi(f)
-  f.close()
-
-  # This will open file f2.txt with mode 'w', write to it, and close the file.
-  write_hi('f2.txt')
-  """
-
-  def __init__(self, mode='r'):
-    self.mode = mode
-
-  def __call__(self, func):
-
-    def wrapped(f, *args, **kwargs):
-      close = False
-      if isinstance(f, str):
-        f = open(f, self.mode)
-        close = True
-
-      try:
-
-        ret = func(f, *args, **kwargs)
-
-      finally:
-        if close:
-          f.close()
-
-      return ret
-
-    return wrapped
-
-if __name__ == "__main__":
-
-  # Demonstration of wrapping a function which writes to a file.
-  @wrap_file_function('w')
-  def write_hi(f):
-    f.write('hi!\n')
-
-  f = open('temp.txt', 'w')
-  write_hi(f)
-  write_hi(f)
-  write_hi(f)
-  f.close()
-
-  write_hi('temp2.txt')
-
-  # Demonstration of wrapping a function which reads from a file.
-  @wrap_file_function('r')
-  def read_file(f):
-      print f.read()
-
-  f = open('temp.txt')
-  print 'Reading file temp.txt from handle f:'
-  read_file(f)
-  print 'Reading file temp2.txt'
-  read_file('temp2.txt')</code></pre>
-    </noscript>
-</div><p>There are <a href="http://leemendelowitz.github.io/blog/decorating-python-file-functions.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html" rel="bookmark"
-                           title="Permalink to D3 Update Enter Exit Selections">D3 Update Enter Exit Selections</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-04-28T12:00:00">
-                Mon 28 April 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/d3.html">d3</a><a href="http://leemendelowitz.github.io/blog/tag/javascript.html">javascript</a></p>
-</footer><!-- /.post-info -->                <p>A demo on D3's update, enter, and exit selections.</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html" rel="bookmark"
-                           title="Permalink to Python OS X Mavericks Issues">Python OS X Mavericks Issues</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-03-29T02:00:00">
-                Sat 29 March 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info -->                <p>Some issues I encountered with my Python installation after upgrading to OS X Mavericks.</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/python-mavericks-issues.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/any-all-in-python.html" rel="bookmark"
-                           title="Permalink to Any and All">Any and All</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-01-31T12:42:00">
-                Fri 31 January 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info -->                <p>Demonstration of any/all in Python.</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/any-all-in-python.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/any-all-in-python.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/mathematical-expressions-in-plots.html" rel="bookmark"
-                           title="Permalink to Mathematical expressions in plots">Mathematical expressions in plots</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-15T00:00:00">
-                Tue 15 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
-</footer><!-- /.post-info -->                <p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/plotmath.rmd">Download as R Markdown</a>.</p>
+<body>
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <div class="cover-img" style="background-image: url('images/ss3.psd.png')">
+                <div class="cover-body">
+                    <header class="header">
+                        <hgroup>
+                            <img class="avatar" src="images/twitter_img.png">
+                            <h1 class="brand-main"><a href="/">Lee On Coding</a></h1>
+                            <p class="tagline">My blog about coding and stuff.</p>
+                                <p class="social">
+                                    <a href="http://twitter.com/lmendy7">
+                                        <i class="fa fa-twitter fa-3x"></i>
+                                    </a>
+                                    <a href="https://github.com/LeeMendelowitz">
+                                        <i class="fa fa-github fa-3x"></i>
+                                    </a>
+                                <p>
+                        </hgroup>
+                    </header>
+                </div>
+            </div>
+        </div>
+    <div class="pure-u">
+        <div class="content">
+            <!-- A wrapper for all the blog posts -->
+            <div class="posts">
+                <h1 class="content-subhead">
+                            Latest posts
+                </h1>
+                    <section class="post">
+                        <header class="post-header">
+                            <h3><a class="post-title" href="https://leemendelowitz.github.io/blog/ubuntu-server-virtualbox.html">Ubuntu Server Virtual Machine with SSH using VirtualBox on Mac OS X</a></h3>
+                            <p class="post-meta"><p>How to set up an Ubuntu Server guest virtual machine on OS X in Virtual Box</p></p>
+                            <p class="post-meta">
+                                in <a href="https://leemendelowitz.github.io/blog/category/misc.html">misc</a> &middot; Mon 13 October 2014
+                            </p>
+                        </header>
+                    </section>
+                    <section class="post">
+                        <header class="post-header">
+                            <h3><a class="post-title" href="https://leemendelowitz.github.io/blog/decorating-python-file-functions.html">Decorating Python File Functions</a></h3>
+                            <p class="post-meta"><p>How to wrap a Python function which writes to a file.</p></p>
+                            <p class="post-meta">
+                                in <a href="https://leemendelowitz.github.io/blog/category/python.html">Python</a> &middot; Wed 30 April 2014
+                            </p>
+                        </header>
+                    </section>
+                    <section class="post">
+                        <header class="post-header">
+                            <h3><a class="post-title" href="https://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html">D3 Update Enter Exit Selections</a></h3>
+                            <p class="post-meta"><p>A demo on D3's update, enter, and exit selections.</p></p>
+                            <p class="post-meta">
+                                in <a href="https://leemendelowitz.github.io/blog/category/misc.html">misc</a> &middot; Mon 28 April 2014
+                            </p>
+                        </header>
+                    </section>
+                    <section class="post">
+                        <header class="post-header">
+                            <h3><a class="post-title" href="https://leemendelowitz.github.io/blog/python-mavericks-issues.html">Python OS X Mavericks Issues</a></h3>
+                            <p class="post-meta"><p>Some issues I encountered with my Python installation after upgrading to OS X Mavericks.</p></p>
+                            <p class="post-meta">
+                                in <a href="https://leemendelowitz.github.io/blog/category/misc.html">misc</a> &middot; Sat 29 March 2014
+                            </p>
+                        </header>
+                    </section>
+                    <section class="post">
+                        <header class="post-header">
+                            <h3><a class="post-title" href="https://leemendelowitz.github.io/blog/any-all-in-python.html">Any and All</a></h3>
+                            <p class="post-meta"><p>Demonstration of any/all in Python.</p></p>
+                            <p class="post-meta">
+                                in <a href="https://leemendelowitz.github.io/blog/category/python.html">Python</a> &middot; Fri 31 January 2014
+                            </p>
+                        </header>
+                    </section>
+                    <section class="post">
+                        <header class="post-header">
+                            <h3><a class="post-title" href="https://leemendelowitz.github.io/blog/mathematical-expressions-in-plots.html">Mathematical expressions in plots</a></h3>
+                            <p class="post-meta"><p><a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/plotmath.rmd">Download as R Markdown</a>.</p>
 <p>Mathematical expressions can be included in the plot title or axis labels. For more information, see <code>?plotmath</code> or run the demo with <code>demo(plotmath)</code>.</p>
 <p>Here are some quick examples.</p>
 <h3>Example 1</h3>
 <div class="highlight"><pre>plot<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> main <span class="o">=</span> expression<span class="p">(</span>theta <span class="o">==</span> <span class="m">0</span><span class="p">),</span> ylab <span class="o">=</span> expression<span class="p">(</span>hat<span class="p">(</span>gamma<span class="p">)</span> <span class="o">==</span> <span class="m">0</span><span class="p">),</span> 
-    xlab <span class="o">=</span> expression<span class="p">(</span>sum ...</pre></div>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/mathematical-expressions-in-plots.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/mathematical-expressions-in-plots.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/plotting-with-lattice.html" rel="bookmark"
-                           title="Permalink to Plotting with Lattice">Plotting with Lattice</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-14T00:00:00">
-                Mon 14 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
-</footer><!-- /.post-info -->                <p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/lattice_demo.rmd">Download as R Markdown</a>.</p>
+    xlab <span class="o">=</span> expression<span class="p">(</span>sum ...</pre></div></p>
+                            <p class="post-meta">
+                                in <a href="https://leemendelowitz.github.io/blog/category/r.html">R</a> &middot; Tue 15 October 2013
+                            </p>
+                        </header>
+                    </section>
+                    <section class="post">
+                        <header class="post-header">
+                            <h3><a class="post-title" href="https://leemendelowitz.github.io/blog/plotting-with-lattice.html">Plotting with Lattice</a></h3>
+                            <p class="post-meta"><p><a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/lattice_demo.rmd">Download as R Markdown</a>.</p>
 <p>The lattice library is useful for quickly making plots of multivariate data. It's easy to make plots which condition on one or more variables.</p>
 <h3>Load the lattice library</h3>
 <div class="highlight"><pre>library<span class="p">(</span>lattice<span class="p">)</span>
@@ -292,60 +117,34 @@ if __name__ == "__main__":
 <span class="c1"># Ask for general information about the lattice package</span>
 <span class="sb">`?`</span><span class="p">(</span>package<span class="p">,</span> lattice<span class="p">)</span>
 
-<span class="c1"># See what is inside of ...</span></pre></div>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/plotting-with-lattice.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/plotting-with-lattice.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
+<span class="c1"># See what is inside of ...</span></pre></div></p>
+                            <p class="post-meta">
+                                in <a href="https://leemendelowitz.github.io/blog/category/r.html">R</a> &middot; Mon 14 October 2013
+                            </p>
+                        </header>
+                    </section>
+                    <section class="post">
+                        <header class="post-header">
+                            <h3><a class="post-title" href="https://leemendelowitz.github.io/blog/mapply.html">mapply</a></h3>
+                            <p class="post-meta"><!--- mapply -->
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/mapply.html" rel="bookmark"
-                           title="Permalink to mapply">mapply</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-13T00:00:00">
-                Sun 13 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
-</footer><!-- /.post-info -->                <!--- mapply -->
-
-<p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/mapply.rmd">Download as R Markdown</a>.</p>
+<p><a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/mapply.rmd">Download as R Markdown</a>.</p>
 <p><code>mapply</code> gives us a way to call a non-vectorized function in a vectorized way.</p>
 <p>From the R Documentation:</p>
 <div class="highlight"><pre><span class="n">mapply</span> <span class="n">is</span> <span class="n">a</span> <span class="n">multivariate</span> <span class="n">version</span> <span class="n">of</span> <span class="n">sapply</span><span class="p">.</span> <span class="n">mapply</span> <span class="n">applies</span> <span class="n">FUN</span> <span class="n">to</span>
 <span class="n">the</span> <span class="n">first</span> <span class="n">elements</span> <span class="n">of</span> <span class="n">each</span> <span class="p">...</span> <span class="n">argument</span><span class="p">,</span> <span class="n">the</span> <span class="n">second</span> <span class="n">elements</span><span class="p">,</span>
-<span class="n">the</span> <span class="n">third</span> <span class="n">elements</span><span class="p">,</span> <span class="n">and</span> <span class="n">so</span> <span class="n">on</span><span class="p">.</span> <span class="n">Arguments</span> <span class="n">are ...</span></pre></div></!--->
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/mapply.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/mapply.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
+<span class="n">the</span> <span class="n">third</span> <span class="n">elements</span><span class="p">,</span> <span class="n">and</span> <span class="n">so</span> <span class="n">on</span><span class="p">.</span> <span class="n">Arguments</span> <span class="n">are ...</span></pre></div></!---></p>
+                            <p class="post-meta">
+                                in <a href="https://leemendelowitz.github.io/blog/category/r.html">R</a> &middot; Sun 13 October 2013
+                            </p>
+                        </header>
+                    </section>
+                    <section class="post">
+                        <header class="post-header">
+                            <h3><a class="post-title" href="https://leemendelowitz.github.io/blog/r-base-graphics-plotting.html">R Base Graphics Plotting</a></h3>
+                            <p class="post-meta"><!--- R Base Graphics Plotting -->
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/r-base-graphics-plotting.html" rel="bookmark"
-                           title="Permalink to R Base Graphics Plotting">R Base Graphics Plotting</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-13T00:00:00">
-                Sun 13 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
-</footer><!-- /.post-info -->                <!--- R Base Graphics Plotting -->
-
-<p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/basePlotting.rmd">Download as R Markdown</a>.</p>
+<p><a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/basePlotting.rmd">Download as R Markdown</a>.</p>
 <h3>Important parameters</h3>
 <ul>
 <li><strong>pch</strong>: plotting symbol</li>
@@ -357,31 +156,18 @@ if __name__ == "__main__":
 <li><strong>mar</strong>: margin size</li>
 <li><strong>oma</strong>: outer margin size</li>
 <li><strong>mfrow</strong>: number of plots per row, column. Plots filled in row-wise.</li>
-<li><strong>mfcol</strong>: number of plots per row ...</li></ul></!--->
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/r-base-graphics-plotting.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/r-base-graphics-plotting.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
+<li><strong>mfcol</strong>: number of plots per row ...</li></ul></!---></p>
+                            <p class="post-meta">
+                                in <a href="https://leemendelowitz.github.io/blog/category/r.html">R</a> &middot; Sun 13 October 2013
+                            </p>
+                        </header>
+                    </section>
+                    <section class="post">
+                        <header class="post-header">
+                            <h3><a class="post-title" href="https://leemendelowitz.github.io/blog/tapply-and-split.html">tapply and split</a></h3>
+                            <p class="post-meta"><!--- tapply and split -->
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/tapply-and-split.html" rel="bookmark"
-                           title="Permalink to tapply and split">tapply and split</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-13T00:00:00">
-                Sun 13 October 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/r.html">R</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/r.html">R</a><a href="http://leemendelowitz.github.io/blog/tag/computing-for-data-analysis.html">Computing For Data Analysis</a></p>
-</footer><!-- /.post-info -->                <!--- tapply and split -->
-
-<p><a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/tapply_and_split.rmd">Download as R Markdown</a>.</p>
+<p><a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/tapply_and_split.rmd">Download as R Markdown</a>.</p>
 <h2>tapply</h2>
 <p>Apply a function over subsets of a vector.</p>
 <h3>Example: Take group means with tapply.</h3>
@@ -391,76 +177,65 @@ x
 
 
 <div class="highlight"><pre><span class="c">##  [1] -2.04333  0.72651  1.55476 -0.12411  1.08133 -0.30514  1.38638</span>
-<span class="c">##  [8]  0.35047  0.88147  1 ...</span></pre></div></!--->
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/tapply-and-split.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/tapply-and-split.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
+<span class="c">##  [8]  0.35047  0.88147  1 ...</span></pre></div></!---></p>
+                            <p class="post-meta">
+                                in <a href="https://leemendelowitz.github.io/blog/category/r.html">R</a> &middot; Sun 13 October 2013
+                            </p>
+                        </header>
+                    </section>
+<div class="pagination-wrapper content-subhead">
+    <div class="pagination">
+        <div class="pagination-left">
+                &nbsp;
+        </div>
+        <span>Page 1 / 2</span>
+        <div class="pagination-right">
+                <a href="https://leemendelowitz.github.io/blog/index2.html">Older posts&nbsp;&rarr;</a>
+        </div>
+    </div>
+</div><footer class="footer">
+    <p>&copy; Lee Mendelowitz &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        var $top = $('.go-top');
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://leemendelowitz.github.io/blog/parsing-in-python.html" rel="bookmark"
-                           title="Permalink to Parsing in Python">Parsing in Python</a></h1>
-                </header>
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-10-03T22:07:00">
-                Thu 03 October 2013
-        </abbr>
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
 
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info -->                <p>How to parse in python</p>
-                <a class="readmore" href="http://leemendelowitz.github.io/blog/parsing-in-python.html">read more</a>
-<p>There are <a href="http://leemendelowitz.github.io/blog/parsing-in-python.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-            </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 2
-        <a href="http://leemendelowitz.github.io/blog/index2.html">&raquo;</a>
-</p>
-            </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
-
-                            <li><a href="http://twitter.com/lmendy7">twitter</a></li>
-                            <li><a href="https://github.com/LeeMendelowitz">github</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
-
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-44545448-1']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
     </script>
-<script type="text/javascript">
-    var disqus_shortname = 'leeoncoding';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-44545448-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+
 </body>
 </html>

@@ -1,94 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>On Coding - javascript</title>
-        <link rel="stylesheet" href="http://leemendelowitz.github.io/blog/theme/css/main.css" />
-        <link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="On Coding Atom Feed" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lee On Coding, My blog about coding and stuff.">
 
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <link rel="alternate"  href="https://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" title="Lee On Coding Full Atom Feed"/>
+
+        <title>javascript tag // Lee On Coding // My blog about coding and stuff.</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://leemendelowitz.github.io/blog/theme/css/pure.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 </head>
 
-<body id="index" class="home">
-<a href="https://github.com/LeeMendelowitz/blog">
-<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
-</a>
-        <header id="banner" class="body">
-                <h1><a href="http://leemendelowitz.github.io/blog/">On Coding </a></h1>
-                <nav><ul>
-                    <li><a href="http://leemendelowitz.github.io/blog/pages/about.html">About</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/pages/computing-for-data-analysis.html">Computing For Data Analysis</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/category/r.html">R</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+<body>
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <div class="cover-img" style="background-image: url('images/ss3.psd.png')">
+                <div class="cover-body">
+                    <header class="header">
+                        <hgroup>
+                            <img class="avatar" src="images/twitter_img.png">
+                            <h1 class="brand-main"><a href="/">Lee On Coding</a></h1>
+                            <p class="tagline">My blog about coding and stuff.</p>
+                                <p class="social">
+                                    <a href="http://twitter.com/lmendy7">
+                                        <i class="fa fa-twitter fa-3x"></i>
+                                    </a>
+                                    <a href="https://github.com/LeeMendelowitz">
+                                        <i class="fa fa-github fa-3x"></i>
+                                    </a>
+                                <p>
+                        </hgroup>
+                    </header>
+                </div>
+            </div>
+        </div>
+    <div class="pure-u">
+        <div class="content">
+            <!-- A wrapper for all the blog posts -->
+            <div class="posts">
+                <h1 class="content-subhead">
+Posts tagged 'javascript'                </h1>
+                    <section class="post">
+                        <header class="post-header">
+                            <h3><a class="post-title" href="https://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html">D3 Update Enter Exit Selections</a></h3>
+                            <p class="post-meta"><p>A demo on D3's update, enter, and exit selections.</p></p>
+                            <p class="post-meta">
+                                in <a href="https://leemendelowitz.github.io/blog/category/misc.html">misc</a> &middot; Mon 28 April 2014
+                            </p>
+                        </header>
+                    </section>
+<div class="pagination-wrapper content-subhead">
+    <div class="pagination">
+        <div class="pagination-left">
+                &nbsp;
+        </div>
+        <span>Page 1 / 1</span>
+        <div class="pagination-right">
+        </div>
+    </div>
+</div><footer class="footer">
+    <p>&copy; Lee Mendelowitz &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        var $top = $('.go-top');
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="http://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html">D3 Update Enter Exit Selections</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2014-04-28T12:00:00">
-                Mon 28 April 2014
-        </abbr>
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
 
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/d3.html">d3</a><a href="http://leemendelowitz.github.io/blog/tag/javascript.html">javascript</a></p>
-</footer><!-- /.post-info --><p>Lately I've been playing around with the D3 javascript library for data visualizations in a browser. D3 stands for "Data Driven Documents" and provides utilities for manipulating elements on a webpage based on data. The D3 <a href="https://github.com/mbostock/d3/wiki/Gallery">gallery</a> is very impressive.</p>
-<p>I've had trouble wrapping my head around the update, enter, and exit selections, which provide a mechanism for updating, inserting, and removing elements from a page based on changes in data.</p>
-<p>There are already some great <a href="https://github.com/mbostock/d3/wiki/Tutorials">tutorials</a> by Mike Bostock and others on <a href="http://bost.ocks.org/mike/join/">joins</a>, <a href="http://bl.ocks.org/mbostock/3808234">updates</a> and <a href="http://bost.ocks.org/mike/selection/">selections</a>.</p>
-<p>I challenged myself to create a demo which illustrates populating a table with changing data using the full update pattern. The table is a little more challenging because the data is nested; data is first bound to each row as an array of values, then data is bound to each cell of the row as a single value. We have to handle cases where cells are added to or deleted from existing rows, and where entire rows are added or deleted.</p>
-<p>You can see the demo below and check out the source <a href="http://bl.ocks.org/LeeMendelowitz/11383724">here</a>.</p>
-<iframe src="code/d3_updating_table.html" marginwidth="0" marginheight="0" width="600" height="1000"></iframe><p>There are <a href="http://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html#disqus_thread">comments</a>.</p>                </article>
-<p class="paginator">
-    Page 1 / 1
-</p>
-            </aside><!-- /#featured -->
-            </ol><!-- /#posts-list -->
-            </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
 
-                            <li><a href="http://twitter.com/lmendy7">twitter</a></li>
-                            <li><a href="https://github.com/LeeMendelowitz">github</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
-
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-44545448-1']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
     </script>
-<script type="text/javascript">
-    var disqus_shortname = 'leeoncoding';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-44545448-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+
 </body>
 </html>

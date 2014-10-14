@@ -1,51 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>Decorating Python File Functions</title>
-        <link rel="stylesheet" href="http://leemendelowitz.github.io/blog/theme/css/main.css" />
-        <link href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="On Coding Atom Feed" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lee On Coding, My blog about coding and stuff.">
 
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <link rel="alternate"  href="https://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" title="Lee On Coding Full Atom Feed"/>
+
+        <title>Decorating Python File Functions // Lee On Coding // My blog about coding and stuff.</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://leemendelowitz.github.io/blog/theme/css/pure.css">
+    <link rel="stylesheet" href="https://leemendelowitz.github.io/blog/theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
 </head>
 
-<body id="index" class="home">
-<a href="https://github.com/LeeMendelowitz/blog">
-<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
-</a>
-        <header id="banner" class="body">
-                <h1><a href="http://leemendelowitz.github.io/blog/">On Coding </a></h1>
-                <nav><ul>
-                    <li><a href="http://leemendelowitz.github.io/blog/pages/about.html">About</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/pages/computing-for-data-analysis.html">Computing For Data Analysis</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/category/misc.html">misc</a></li>
-                    <li class="active"><a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a></li>
-                    <li><a href="http://leemendelowitz.github.io/blog/category/r.html">R</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-  <article>
-    <header>
-      <h1 class="entry-title">
-        <a href="http://leemendelowitz.github.io/blog/decorating-python-file-functions.html" rel="bookmark"
-           title="Permalink to Decorating Python File Functions">Decorating Python File Functions</a></h1>
-<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="lmendy7">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    </header>
-
-    <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-04-30T16:45:00">
-                Wed 30 April 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://leemendelowitz.github.io/blog/author/lee-mendelowitz.html">Lee Mendelowitz</a>
-        </address>
-<p>In <a href="http://leemendelowitz.github.io/blog/category/python.html">Python</a>. </p>
-<p>tags: <a href="http://leemendelowitz.github.io/blog/tag/python.html">python</a></p>
-</footer><!-- /.post-info -->      <p>Today I came up with a cool Python snippet that I'd like to share.
+<body>
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <div class="cover-img" style="background-image: url('images/ss3.psd.png')">
+                <div class="cover-body">
+                    <header class="header">
+                        <hgroup>
+                            <img class="avatar" src="images/twitter_img.png">
+                            <h1 class="brand-main"><a href="/">Lee On Coding</a></h1>
+                            <p class="tagline">My blog about coding and stuff.</p>
+                                <p class="social">
+                                    <a href="http://twitter.com/lmendy7">
+                                        <i class="fa fa-twitter fa-3x"></i>
+                                    </a>
+                                    <a href="https://github.com/LeeMendelowitz">
+                                        <i class="fa fa-github fa-3x"></i>
+                                    </a>
+                                <p>
+                        </hgroup>
+                    </header>
+                </div>
+            </div>
+        </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Decorating Python File Functions</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="https://leemendelowitz.github.io/blog/tag/python.html">python</a>
+                        </p>
+                </header>
+            </section>
+            <p>Today I came up with a cool Python snippet that I'd like to share.
 In my work I frequently write functions which write to or read from files, taking a <code>file</code>-like
 instance as the first argument <code>f</code>:</p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">write_to_file</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
@@ -98,137 +110,200 @@ multiple file access modes: </p>
 </pre></div>
 
 
-<p>Here is the source for the decorator, which also takes care to close any files it opens
-in the event that the wrapped function throws an exception.</p>
-<div class="gist">
-    <script src='https://gist.github.com/36941676def5c521a960.js'></script>
-    <noscript>
-        <pre><code>class wrap_file_function(object):
-  """
-  Wrap a function which takes a file or a str as it's first argument.
-  If a str is provided, replace the first argument of the wrapped function
-  with a file handle, and close the file afterwards
+<p>Here is the <a href="https://gist.github.com/LeeMendelowitz/36941676def5c521a960">source</a> for the decorator, which also takes care to close any files it opens
+in the event that the wrapped function throws an exception:</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">wrap_file_function</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Wrap a function which takes a file or a str as it&#39;s first argument.</span>
+<span class="sd">  If a str is provided, replace the first argument of the wrapped function</span>
+<span class="sd">  with a file handle, and close the file afterwards</span>
 
-  Example:
+<span class="sd">  Example:</span>
 
-  @wrap_file_function('w')
-  def write_hi(f):
-    f.write('hi!\n')
+<span class="sd">  @wrap_file_function(&#39;w&#39;)</span>
+<span class="sd">  def write_hi(f):</span>
+<span class="sd">    f.write(&#39;hi!\n&#39;)</span>
 
-  # This will write to already open file handle.
-  f = open('f1.txt', 'w')
-  write_hi(f)
-  f.close()
+<span class="sd">  # This will write to already open file handle.</span>
+<span class="sd">  f = open(&#39;f1.txt&#39;, &#39;w&#39;)</span>
+<span class="sd">  write_hi(f)</span>
+<span class="sd">  f.close()</span>
 
-  # This will open file f2.txt with mode 'w', write to it, and close the file.
-  write_hi('f2.txt')
-  """
+<span class="sd">  # This will open file f2.txt with mode &#39;w&#39;, write to it, and close the file.</span>
+<span class="sd">  write_hi(&#39;f2.txt&#39;)</span>
+<span class="sd">  &quot;&quot;&quot;</span>
 
-  def __init__(self, mode='r'):
-    self.mode = mode
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="o">=</span> <span class="n">args</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="p">(</span><span class="s">&#39;r&#39;</span><span class="p">,)</span>
 
-  def __call__(self, func):
+  <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
 
-    def wrapped(f, *args, **kwargs):
-      close = False
-      if isinstance(f, str):
-        f = open(f, self.mode)
-        close = True
+    <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
-      try:
+      <span class="n">close</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># Files that should be closed</span>
+      <span class="n">files</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># File handles that should be passed to func</span>
+      <span class="n">num_files</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">)</span>
 
-        ret = func(f, *args, **kwargs)
+      <span class="k">try</span><span class="p">:</span>
 
-      finally:
-        if close:
-          f.close()
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mode</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">):</span>
 
-      return ret
+          <span class="n">fp</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
-    return wrapped
+          <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+            <span class="n">close</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 
-if __name__ == "__main__":
+          <span class="n">files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 
-  # Demonstration of wrapping a function which writes to a file.
-  @wrap_file_function('w')
-  def write_hi(f):
-    f.write('hi!\n')
+        <span class="c"># Replace the files in args when calling func</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">files</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">num_files</span><span class="p">:])</span>
 
-  f = open('temp.txt', 'w')
-  write_hi(f)
-  write_hi(f)
-  write_hi(f)
-  f.close()
+        <span class="c"># Make function call and return value</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-  write_hi('temp2.txt')
+      <span class="k">finally</span><span class="p">:</span>
 
-  # Demonstration of wrapping a function which reads from a file.
-  @wrap_file_function('r')
-  def read_file(f):
-      print f.read()
+        <span class="k">for</span> <span class="n">fp</span> <span class="ow">in</span> <span class="n">close</span><span class="p">:</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-  f = open('temp.txt')
-  print 'Reading file temp.txt from handle f:'
-  read_file(f)
-  print 'Reading file temp2.txt'
-  read_file('temp2.txt')</code></pre>
-    </noscript>
-</div>
-    </div><!-- /.entry-content -->
+    <span class="k">return</span> <span class="n">wrapped</span>
+
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+
+  <span class="c"># Demonstration of wrapping a function which writes to a file.</span>
+  <span class="k">print</span> <span class="s">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span>
+  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;w&#39;</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">write_hi</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;hi!</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+
+  <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+  <span class="n">write_hi</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">write_hi</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">write_hi</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+  <span class="n">write_hi</span><span class="p">(</span><span class="s">&#39;temp2.txt&#39;</span><span class="p">)</span>
+
+
+  <span class="c"># Demonstration of wrapping a function which reads from a file.</span>
+  <span class="k">print</span> <span class="s">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span>
+  <span class="nd">@wrap_file_function</span><span class="p">()</span>
+  <span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+      <span class="k">print</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+  <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;temp.txt&#39;</span><span class="p">)</span>
+  <span class="k">print</span> <span class="s">&#39;Reading file temp.txt from handle f:&#39;</span>
+  <span class="n">read_file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+  <span class="k">print</span> <span class="s">&#39;Reading file temp2.txt&#39;</span>
+  <span class="n">read_file</span><span class="p">(</span><span class="s">&#39;temp2.txt&#39;</span><span class="p">)</span>
+
+  <span class="c"># Demonstration of wrapping a function takes multiple files</span>
+  <span class="k">print</span> <span class="s">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span>
+  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">read_files</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
+      <span class="k">print</span> <span class="s">&#39;reading f1: &#39;</span>
+      <span class="k">print</span> <span class="n">f1</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+      <span class="k">print</span> <span class="s">&#39;reading f2: &#39;</span>
+      <span class="k">print</span> <span class="n">f2</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">read_write</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
+    <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">write_to_from</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">f1</span><span class="p">):</span>
+    <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+  <span class="n">read_files</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">&#39;temp.txt&#39;</span><span class="p">),</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;temp2.txt&#39;</span><span class="p">))</span>
+  <span class="n">read_files</span><span class="p">(</span><span class="s">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s">&#39;temp2.txt&#39;</span><span class="p">)</span>
+  <span class="n">read_write</span><span class="p">(</span><span class="s">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s">&#39;temp.copy.txt&#39;</span><span class="p">)</span>
+
+  <span class="kn">import</span> <span class="nn">sys</span>
+  <span class="k">print</span> <span class="s">&#39;writing temp.txt to stdout:&#39;</span>
+  <span class="n">read_write</span><span class="p">(</span><span class="s">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+
+  <span class="k">print</span> <span class="s">&#39;Contents of temp.copy.txt:&#39;</span>
+  <span class="n">read_file</span><span class="p">(</span><span class="s">&#39;temp.copy.txt&#39;</span><span class="p">)</span>
+
+  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;w&#39;</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">throw_exception</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;BLAH!&#39;</span><span class="p">)</span>
+
+  <span class="k">print</span> <span class="s">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span>
+  <span class="k">print</span> <span class="s">&#39;Reading a file that does not exist:&#39;</span>
+  <span class="n">write_to_from</span><span class="p">(</span><span class="s">&#39;dest.txt&#39;</span><span class="p">,</span> <span class="s">&#39;file_doesnt_exist.txt&#39;</span><span class="p">)</span>
+
+  <span class="c">#print &#39;-&#39;*50</span>
+  <span class="c">#throw_exception(&#39;exception.txt&#39;)</span>
+</pre></div>
+
+
+<!-- the gist styles look bad! Instead, we'll just paste the source --!>
+<!-- <script src="https://gist.github.com/LeeMendelowitz/36941676def5c521a960.js"></script> -->
+
+<!-- [gist:id=36941676def5c521a960] -->
+            <a href="#" class="go-top">Go Top</a>
     <div class="comments">
-      <h2>Comments !</h2>
-      <div id="disqus_thread"></div>
-      <script type="text/javascript">
-        var disqus_identifier = "decorating-python-file-functions.html";
-        var disqus_url = "http://leemendelowitz.github.io/blog/decorating-python-file-functions.html";
-        (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://leeoncoding.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = "leeoncoding"; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
+<footer class="footer">
+    <p>&copy; Lee Mendelowitz &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+    </div>
+    <script>
+        var $top = $('.go-top');
 
-  </article>
-</section>
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="http://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
 
-                            <li><a href="http://twitter.com/lmendy7">twitter</a></li>
-                            <li><a href="https://github.com/LeeMendelowitz">github</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
-
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-44545448-1']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
     </script>
-<script type="text/javascript">
-    var disqus_shortname = 'leeoncoding';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-44545448-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+
 </body>
 </html>

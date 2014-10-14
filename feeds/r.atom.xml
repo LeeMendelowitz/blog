@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>On Coding</title><link href="http://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="http://leemendelowitz.github.io/blog/feeds/r.atom.xml" rel="self"></link><id>http://leemendelowitz.github.io/blog/</id><updated>2013-10-15T00:00:00+02:00</updated><entry><title>Mathematical expressions in plots</title><link href="http://leemendelowitz.github.io/blog/mathematical-expressions-in-plots.html" rel="alternate"></link><updated>2013-10-15T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-15:mathematical-expressions-in-plots.html</id><summary type="html">&lt;p&gt;&lt;a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/plotmath.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lee On Coding</title><link href="https://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="https://leemendelowitz.github.io/blog/feeds/r.atom.xml" rel="self"></link><id>https://leemendelowitz.github.io/blog/</id><updated>2013-10-15T00:00:00+02:00</updated><entry><title>Mathematical expressions in plots</title><link href="https://leemendelowitz.github.io/blog/mathematical-expressions-in-plots.html" rel="alternate"></link><updated>2013-10-15T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-15:blog/mathematical-expressions-in-plots.html</id><summary type="html">&lt;p&gt;&lt;a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/plotmath.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Mathematical expressions can be included in the plot title or axis labels. For more information, see &lt;code&gt;?plotmath&lt;/code&gt; or run the demo with &lt;code&gt;demo(plotmath)&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Here are some quick examples.&lt;/p&gt;
 &lt;h3&gt;Example 1&lt;/h3&gt;
@@ -8,7 +8,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk example1" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example1.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk example1" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example1.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;Example 2&lt;/h3&gt;
 &lt;p&gt;Strings can be pasted together with mathematic expressions:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;x &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -17,7 +17,7 @@ hist&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; xl
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk example2" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example2.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk example2" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example2.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;Example 3&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;subsitute&lt;/code&gt; function can be used to substitute values into a
 mathematical expression.&lt;/p&gt;
@@ -28,7 +28,7 @@ plot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk example3" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example3.png" /&gt; &lt;/p&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>Plotting with Lattice</title><link href="http://leemendelowitz.github.io/blog/plotting-with-lattice.html" rel="alternate"></link><updated>2013-10-14T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-14:plotting-with-lattice.html</id><summary type="html">&lt;p&gt;&lt;a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/lattice_demo.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk example3" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example3.png" /&gt; &lt;/p&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>Plotting with Lattice</title><link href="https://leemendelowitz.github.io/blog/plotting-with-lattice.html" rel="alternate"></link><updated>2013-10-14T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-14:blog/plotting-with-lattice.html</id><summary type="html">&lt;p&gt;&lt;a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/lattice_demo.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The lattice library is useful for quickly making plots of multivariate data. It's easy to make plots which condition on one or more variables.&lt;/p&gt;
 &lt;h3&gt;Load the lattice library&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;library&lt;span class="p"&gt;(&lt;/span&gt;lattice&lt;span class="p"&gt;)&lt;/span&gt;
@@ -61,7 +61,7 @@ head&lt;span class="p"&gt;(&lt;/span&gt;environmental&lt;span class="p"&gt;)&lt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk section1" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section1.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk section1" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section1.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;Investigate the relationship between ozone and radiation change as temperature changes&lt;/h3&gt;
 &lt;p&gt;To address this, break temperature into 4 overlapping ranges using the &lt;code&gt;equal.count&lt;/code&gt; function.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;summary&lt;span class="p"&gt;(&lt;/span&gt;environmental&lt;span class="o"&gt;$&lt;/span&gt;temperature&lt;span class="p"&gt;)&lt;/span&gt;
@@ -104,20 +104,20 @@ xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk section2a" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section2a1.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk section2a" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section2a1.png" /&gt; &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# One column layout.&lt;/span&gt;
 xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; layout &lt;span class="o"&gt;=&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk section2a" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section2a2.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk section2a" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section2a2.png" /&gt; &lt;/p&gt;
 &lt;p&gt;Use the &lt;code&gt;as.table&lt;/code&gt; argument to draw panels in order from left to right, top to bottom.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# One column, in ascending order of temperature range.&lt;/span&gt;
 xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk section2b" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section2b.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk section2b" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section2b.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;Add a fit to each panel.&lt;/h3&gt;
 &lt;p&gt;Add a fit to each panel using a custom panel function. Note the use of &lt;code&gt;...&lt;/code&gt; which allows for the &lt;code&gt;xyplot&lt;/code&gt; parameters such as &lt;code&gt;pch&lt;/code&gt; to be passed through the custom panel function.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; layout &lt;span class="o"&gt;=&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; 
@@ -129,7 +129,7 @@ xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk section3" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section31.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk section3" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section31.png" /&gt; &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
     pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; panel &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         panel.xyplot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -138,7 +138,7 @@ xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk section3" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section32.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk section3" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section32.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;Condition on both wind and temperature.&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;wind.cut &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; equal.count&lt;span class="p"&gt;(&lt;/span&gt;environmental&lt;span class="o"&gt;$&lt;/span&gt;wind&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 wind.cut
@@ -176,32 +176,32 @@ wind.cut
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk section4" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section4.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk section4" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section4.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;splom&lt;/h3&gt;
 &lt;p&gt;Use splom to draw conditional scatter plot matrices.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;splom&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;environmental&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk section5" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section5.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk section5" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section5.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;histogram&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;histogram&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;temperature &lt;span class="o"&gt;|&lt;/span&gt; wind.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk section 6" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section_61.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk section 6" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section_61.png" /&gt; &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;histogram&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;ozone &lt;span class="o"&gt;|&lt;/span&gt; wind.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk section 6" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section_62.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk section 6" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section_62.png" /&gt; &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;histogram&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;ozone &lt;span class="o"&gt;|&lt;/span&gt; wind.cut &lt;span class="o"&gt;*&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk section 6" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section_63.png" /&gt; &lt;/p&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>mapply</title><link href="http://leemendelowitz.github.io/blog/mapply.html" rel="alternate"></link><updated>2013-10-13T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-13:mapply.html</id><summary type="html">&lt;!--- mapply --&gt;
+&lt;p&gt;&lt;img alt="plot of chunk section 6" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section_63.png" /&gt; &lt;/p&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>mapply</title><link href="https://leemendelowitz.github.io/blog/mapply.html" rel="alternate"></link><updated>2013-10-13T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-13:blog/mapply.html</id><summary type="html">&lt;!--- mapply --&gt;
 
-&lt;p&gt;&lt;a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/mapply.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/mapply.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;mapply&lt;/code&gt; gives us a way to call a non-vectorized function in a vectorized way.&lt;/p&gt;
 &lt;p&gt;From the R Documentation:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;mapply&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;multivariate&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;sapply&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;mapply&lt;/span&gt; &lt;span class="n"&gt;applies&lt;/span&gt; &lt;span class="n"&gt;FUN&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt;
@@ -283,9 +283,9 @@ noise&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt
 &lt;span class="c"&gt;## &lt;/span&gt;
 &lt;span class="c"&gt;## [[5]]&lt;/span&gt;
 &lt;span class="c"&gt;## [1] 8.291 1.949 5.751 4.250 4.868&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>R Base Graphics Plotting</title><link href="http://leemendelowitz.github.io/blog/r-base-graphics-plotting.html" rel="alternate"></link><updated>2013-10-13T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-13:r-base-graphics-plotting.html</id><summary type="html">&lt;!--- R Base Graphics Plotting --&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>R Base Graphics Plotting</title><link href="https://leemendelowitz.github.io/blog/r-base-graphics-plotting.html" rel="alternate"></link><updated>2013-10-13T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-13:blog/r-base-graphics-plotting.html</id><summary type="html">&lt;!--- R Base Graphics Plotting --&gt;
 
-&lt;p&gt;&lt;a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/basePlotting.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/basePlotting.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;Important parameters&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;pch&lt;/strong&gt;: plotting symbol&lt;/li&gt;
@@ -322,7 +322,7 @@ legend&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;toplef
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk example1" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example1.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk example1" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example1.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;Example 2&lt;/h3&gt;
 &lt;p&gt;To use multiple plots per page, give a &lt;code&gt;mfrow&lt;/code&gt; argument to plot. Then the plots will be filled from left to right across the rows. (Specifying &lt;code&gt;mfcol&lt;/code&gt; will fill in plots from top to bottom down the 
 columns. )&lt;/p&gt;
@@ -336,7 +336,7 @@ plot&lt;span class="p"&gt;(&lt;/span&gt;y&lt;span class="p"&gt;,&lt;/span&gt; z&
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk example2" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example2.png" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk example2" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example2.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;Example 3&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;points&lt;/code&gt; function is useful for adding points to a plot for different groups.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;plot.new&lt;span class="p"&gt;()&lt;/span&gt;
@@ -358,9 +358,9 @@ legend&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;toplef
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk example3" src="http://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example3.png" /&gt; &lt;/p&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>tapply and split</title><link href="http://leemendelowitz.github.io/blog/tapply-and-split.html" rel="alternate"></link><updated>2013-10-13T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io/blog,2013-10-13:tapply-and-split.html</id><summary type="html">&lt;!--- tapply and split --&gt;
+&lt;p&gt;&lt;img alt="plot of chunk example3" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example3.png" /&gt; &lt;/p&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>tapply and split</title><link href="https://leemendelowitz.github.io/blog/tapply-and-split.html" rel="alternate"></link><updated>2013-10-13T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-13:blog/tapply-and-split.html</id><summary type="html">&lt;!--- tapply and split --&gt;
 
-&lt;p&gt;&lt;a href="http://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/tapply_and_split.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/tapply_and_split.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;tapply&lt;/h2&gt;
 &lt;p&gt;Apply a function over subsets of a vector.&lt;/p&gt;
 &lt;h3&gt;Example: Take group means with tapply.&lt;/h3&gt;
