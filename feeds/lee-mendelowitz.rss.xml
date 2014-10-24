@@ -1,5 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lee On Coding</title><link>https://leemendelowitz.github.io/blog/</link><description></description><atom:link href="https://leemendelowitz.github.io/blog/feeds/lee-mendelowitz.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 13 Oct 2014 12:00:00 +0200</lastBuildDate><item><title>Ubuntu Server Virtual Machine with SSH using VirtualBox on Mac OS X</title><link>https://leemendelowitz.github.io/blog/ubuntu-server-virtualbox.html</link><description>&lt;p&gt;My laptop is a late 2011 MacBook Pro running OS X 10.9 Mavericks. It's my personal laptop, so I use it for everything - browsing, e-mail, and programming. While the OS X experience is wonderful, application development can be frustrating. For example, right now I'm trying to develop a Boost Python module, and I am having trouble compiling it on OS X.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lee On Coding</title><link>https://leemendelowitz.github.io/blog/</link><description></description><atom:link href="https://leemendelowitz.github.io/blog/feeds/lee-mendelowitz.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 23 Oct 2014 09:20:00 +0200</lastBuildDate><item><title>Installing Numpy with OpenBlas</title><link>https://leemendelowitz.github.io/blog/installing-numpy-with-openblas.html</link><description>&lt;p&gt;I just went through a frustrating experience trying to install numpy in my school computing RHEL5 environment where I don't have sudo privileges or much control over the environment.&lt;/p&gt;
+&lt;p&gt;My first attempt to install was through the normal path, where I activate a virtual environment created with &lt;code&gt;virtualenv&lt;/code&gt; and then use pip to install numpy:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~
+virtualenv env
+&lt;span class="nb"&gt;source &lt;/span&gt;env/bin/activate
+pip install numpy
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;But trying to build numpy in my environment led to this error:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ImportError&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="sr"&gt;/venv/lib/python2.7/site-packages/numpy/linalg/&lt;/span&gt;&lt;span class="n"&gt;lapack_lite&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;so&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;undefined&lt;/span&gt; &lt;span class="n"&gt;symbol&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;zgelsd_&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So that's the clue - something is wrong with the lapack library numpy is trying to use from my environment. It's probably linked against something broken or something incompatible... or something missing.&lt;/p&gt;
+&lt;p&gt;Here's what &lt;code&gt;ldd&lt;/code&gt; on the &lt;strong&gt;broken&lt;/strong&gt; lapack_lite.so gives:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ldd home/venv/lib/python2.7/site-packages/numpy/linalg/lapack_lite.so
+        linux-vdso.so.1 &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt;  &lt;span class="o"&gt;(&lt;/span&gt;0x0000000000000000&lt;span class="o"&gt;)&lt;/span&gt;
+        libpython2.7.so.1.0 &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; not found
+        libpthread.so.0 &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; /path/to/lib64/libpthread.so.0 &lt;span class="o"&gt;(&lt;/span&gt;0x0000000000000000&lt;span class="o"&gt;)&lt;/span&gt;
+        libc.so.6 &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; /path/to/lib64/libc.so.6 &lt;span class="o"&gt;(&lt;/span&gt;0x0000000000000000&lt;span class="o"&gt;)&lt;/span&gt;
+        /path/to/lib64/ld-linux-x86-64.so.2 &lt;span class="o"&gt;(&lt;/span&gt;0x0000000000000000&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So, after some searching around, it seems like the best option was to compile the &lt;a href="https://github.com/xianyi/OpenBLAS"&gt;OpenBlas&lt;/a&gt; library and use that during the numpy build. I was able to salvage bits from &lt;a href="https://gist.github.com/sniderbr/5891950"&gt;this&lt;/a&gt;, and &lt;a href="http://gromgull.net/blog/2013/07/multithreaded-scipynumpy-with-openblas-on-debian/"&gt;this&lt;/a&gt; to get it to work.&lt;/p&gt;
+&lt;h1&gt;Build OpenBlas&lt;/h1&gt;
+&lt;p&gt;Untar the OpenBlas distribution &lt;a href="http://www.openblas.net/"&gt;available here&lt;/a&gt; and build using the makefile:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;make &lt;span class="nv"&gt;BINARY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;64 &lt;span class="nv"&gt;FC&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;gfortran &lt;span class="nv"&gt;USE_THREAD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+make &lt;span class="nv"&gt;PREFIX&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/path/to/openblas install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;where &lt;code&gt;/path/to/openblas&lt;/code&gt; is the path where you'd like to install openblas. Again, since I did have &lt;code&gt;sudo&lt;/code&gt; privilegs, I chose a non-standard location.&lt;/p&gt;
+&lt;h1&gt;Build Numpy&lt;/h1&gt;
+&lt;p&gt;We need to build numpy and link it with the OpenBlas library. I couldn't achieve this with the default &lt;code&gt;pip&lt;/code&gt; install, so things had to be done manually as suggested in &lt;a href="http://gromgull.net/blog/2013/07/multithreaded-scipynumpy-with-openblas-on-debian/"&gt;this post&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;source &lt;/span&gt;env/bin/activate
+pip uninstall numpy &lt;span class="c"&gt;# Uninstall the broken installation&lt;/span&gt;
+mkdir env/download
+pip install -d env/download numpy
+mkdir env/build
+&lt;span class="nb"&gt;cd &lt;/span&gt;env/build
+tar xzf ../download/numpy-1.9.0.tar.gz
+&lt;span class="nb"&gt;cd &lt;/span&gt;numpy-1.9.0
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In the &lt;code&gt;numpy-1.9.0&lt;/code&gt; directory, create the &lt;code&gt;site.cfg&lt;/code&gt; file to customize the libraries that numpy uses on install. We need to point things to OpenBlas. Check out the &lt;code&gt;site.cfg.example&lt;/code&gt; file for what options you can set. This worked for me:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;DEFAULT&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;library_dirs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /path/to/openblas/lib
+&lt;span class="nv"&gt;include_dirs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /path/to/openblas/include
+
+&lt;span class="o"&gt;[&lt;/span&gt;atlas&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;atlas_libs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; openblas
+&lt;span class="nv"&gt;libraries&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; openblas
+
+&lt;span class="o"&gt;[&lt;/span&gt;openblas&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;libraries&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; openblas
+&lt;span class="nv"&gt;library_dirs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  /path/to/openblas/lib
+&lt;span class="nv"&gt;include_dirs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  /path/to/openblas/include
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next, build numpy &lt;strong&gt;being sure to specify the same fortran compiler that was used to build the OpenBlas library&lt;/strong&gt; (important point mentioned in the &lt;a href="http://docs.scipy.org/doc/numpy/user/install.html"&gt;scipy install docs&lt;/a&gt;). For good measure, I cleaned out all of the standard compile and linking flags from my environment to make sure I wasn't contaminating the build:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;unset &lt;/span&gt;CPPFLAGS
+&lt;span class="nb"&gt;unset &lt;/span&gt;LDFLAGS
+python setup.py build --fcompiler&lt;span class="o"&gt;=&lt;/span&gt;gnu95
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;When the build completes, install:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;python setup.py install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Since the virtual environment is active, this will install to the virtual environment.&lt;/p&gt;
+&lt;p&gt;Finally, here's what &lt;code&gt;ldd&lt;/code&gt; on the working &lt;code&gt;lapack_lite.so&lt;/code&gt; library gives:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ldd&lt;/span&gt; &lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;venv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;python2&lt;/span&gt;&lt;span class="mf"&gt;.7&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;numpy&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;linalg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lapack_lite&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;
+        &lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;vdso&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x0000000000000000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;libopenblas&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openblas&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libopenblas&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x0000000000000000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;libpython2&lt;/span&gt;&lt;span class="mf"&gt;.7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.1.0&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;found&lt;/span&gt;
+        &lt;span class="n"&gt;libgfortran&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.3&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libgfortran&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.3&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x0000000000000000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;libm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.6&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.6&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x0000000000000000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;libgcc_s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;gcc&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.8.3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libgcc_s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x0000000000000000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;libquadmath&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;gcc&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.8.3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libquadmath&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x0000000000000000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;libc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.6&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.6&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x0000000000000000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;libpthread&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libpthread&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x0000000000000000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ld&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x86&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;64.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.2&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x0000000000000000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Looks much healthier!&lt;/p&gt;
+&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;p&gt;I was able to install &lt;code&gt;numpy&lt;/code&gt; by first building and installing OpenBlas to a non-standard location, and then
+manually building &lt;code&gt;numpy&lt;/code&gt; by creating the &lt;code&gt;site.cfg&lt;/code&gt; file to point to the OpenBlas libraries
+and specifying which Fortan compiler to use.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Lee Mendelowitz</dc:creator><pubDate>Thu, 23 Oct 2014 09:20:00 +0200</pubDate><guid>tag:leemendelowitz.github.io,2014-10-23:blog/installing-numpy-with-openblas.html</guid><category>python</category><category>numpy</category></item><item><title>Ubuntu Server Virtual Machine with SSH using VirtualBox on Mac OS X</title><link>https://leemendelowitz.github.io/blog/ubuntu-server-virtualbox.html</link><description>&lt;p&gt;My laptop is a late 2011 MacBook Pro running OS X 10.9 Mavericks. It's my personal laptop, so I use it for everything - browsing, e-mail, and programming. While the OS X experience is wonderful, application development can be frustrating. For example, right now I'm trying to develop a Boost Python module, and I am having trouble compiling it on OS X.&lt;/p&gt;
 &lt;p&gt;I intend to run my application in a Linux environment, so instead of learning the intricacies of porting my code and makefile to Mac OS X, I decided to install a local Ubuntu Server virtual machine (VM) on my MacBook. I installed Ubuntu Server instead of Ubuntu Desktop because I wanted to run a lightweight Linux environment, which should save laptop resources. I simply run the VM in the background, and ssh into it from the Mac terminal. Easy and awesome!&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt; This entire tutorial should take approximately 20 minutes (not including download times). &lt;/strong&gt;&lt;/p&gt;
 &lt;h2&gt;Install VirtualBox&lt;/h2&gt;

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lee On Coding, My blog about coding and stuff.">
+
+        <link rel="alternate"  href="https://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" title="Lee On Coding Full Atom Feed"/>
+
+        <title>Installing Numpy with OpenBlas // Lee On Coding // My blog about coding and stuff.</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://leemendelowitz.github.io/blog/theme/css/pure.css">
+    <link rel="stylesheet" href="https://leemendelowitz.github.io/blog/theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <div class="cover-img" style="background-image: url('https://leemendelowitz.github.io/blog/images/ss3.psd.png')">
+                <div class="cover-body">
+                    <header class="header">
+                        <hgroup>
+                            <img class="avatar" src="https://leemendelowitz.github.io/blog/images/twitter_img.png">
+                            <h1 class="brand-main"><a href="https://leemendelowitz.github.io/blog">Lee On Coding</a></h1>
+                            <p class="tagline">My blog about coding and stuff.</p>
+                                <p class="social">
+                                    <a href="http://twitter.com/lmendy7">
+                                        <i class="fa fa-twitter fa-3x"></i>
+                                    </a>
+                                    <a href="https://github.com/LeeMendelowitz">
+                                        <i class="fa fa-github fa-3x"></i>
+                                    </a>
+                                <p>
+                        </hgroup>
+                    </header>
+                </div>
+            </div>
+        </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Installing Numpy with OpenBlas</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="https://leemendelowitz.github.io/blog/tag/python.html">python</a>
+                                <a class="post-category" href="https://leemendelowitz.github.io/blog/tag/numpy.html">numpy</a>
+                        </p>
+                </header>
+            </section>
+            <p>I just went through a frustrating experience trying to install numpy in my school computing RHEL5 environment where I don't have sudo privileges or much control over the environment.</p>
+<p>My first attempt to install was through the normal path, where I activate a virtual environment created with <code>virtualenv</code> and then use pip to install numpy:</p>
+<div class="highlight"><pre><span class="nb">cd</span> ~
+virtualenv env
+<span class="nb">source </span>env/bin/activate
+pip install numpy
+</pre></div>
+
+
+<p>But trying to build numpy in my environment led to this error:</p>
+<div class="highlight"><pre><span class="n">ImportError</span><span class="o">:</span> <span class="n">home</span><span class="sr">/venv/lib/python2.7/site-packages/numpy/linalg/</span><span class="n">lapack_lite</span><span class="o">.</span><span class="na">so</span><span class="o">:</span> <span class="kc">undefined</span> <span class="n">symbol</span><span class="o">:</span> <span class="n">zgelsd_</span>
+</pre></div>
+
+
+<p>So that's the clue - something is wrong with the lapack library numpy is trying to use from my environment. It's probably linked against something broken or something incompatible... or something missing.</p>
+<p>Here's what <code>ldd</code> on the <strong>broken</strong> lapack_lite.so gives:</p>
+<div class="highlight"><pre>ldd home/venv/lib/python2.7/site-packages/numpy/linalg/lapack_lite.so
+        linux-vdso.so.1 <span class="o">=</span>&gt;  <span class="o">(</span>0x0000000000000000<span class="o">)</span>
+        libpython2.7.so.1.0 <span class="o">=</span>&gt; not found
+        libpthread.so.0 <span class="o">=</span>&gt; /path/to/lib64/libpthread.so.0 <span class="o">(</span>0x0000000000000000<span class="o">)</span>
+        libc.so.6 <span class="o">=</span>&gt; /path/to/lib64/libc.so.6 <span class="o">(</span>0x0000000000000000<span class="o">)</span>
+        /path/to/lib64/ld-linux-x86-64.so.2 <span class="o">(</span>0x0000000000000000<span class="o">)</span>
+</pre></div>
+
+
+<p>So, after some searching around, it seems like the best option was to compile the <a href="https://github.com/xianyi/OpenBLAS">OpenBlas</a> library and use that during the numpy build. I was able to salvage bits from <a href="https://gist.github.com/sniderbr/5891950">this</a>, and <a href="http://gromgull.net/blog/2013/07/multithreaded-scipynumpy-with-openblas-on-debian/">this</a> to get it to work.</p>
+<h1>Build OpenBlas</h1>
+<p>Untar the OpenBlas distribution <a href="http://www.openblas.net/">available here</a> and build using the makefile:</p>
+<div class="highlight"><pre>make <span class="nv">BINARY</span><span class="o">=</span>64 <span class="nv">FC</span><span class="o">=</span>gfortran <span class="nv">USE_THREAD</span><span class="o">=</span>1
+make <span class="nv">PREFIX</span><span class="o">=</span>/path/to/openblas install
+</pre></div>
+
+
+<p>where <code>/path/to/openblas</code> is the path where you'd like to install openblas. Again, since I did have <code>sudo</code> privilegs, I chose a non-standard location.</p>
+<h1>Build Numpy</h1>
+<p>We need to build numpy and link it with the OpenBlas library. I couldn't achieve this with the default <code>pip</code> install, so things had to be done manually as suggested in <a href="http://gromgull.net/blog/2013/07/multithreaded-scipynumpy-with-openblas-on-debian/">this post</a>:</p>
+<div class="highlight"><pre><span class="nb">source </span>env/bin/activate
+pip uninstall numpy <span class="c"># Uninstall the broken installation</span>
+mkdir env/download
+pip install -d env/download numpy
+mkdir env/build
+<span class="nb">cd </span>env/build
+tar xzf ../download/numpy-1.9.0.tar.gz
+<span class="nb">cd </span>numpy-1.9.0
+</pre></div>
+
+
+<p>In the <code>numpy-1.9.0</code> directory, create the <code>site.cfg</code> file to customize the libraries that numpy uses on install. We need to point things to OpenBlas. Check out the <code>site.cfg.example</code> file for what options you can set. This worked for me:  </p>
+<div class="highlight"><pre><span class="o">[</span>DEFAULT<span class="o">]</span>
+<span class="nv">library_dirs</span> <span class="o">=</span> /path/to/openblas/lib
+<span class="nv">include_dirs</span> <span class="o">=</span> /path/to/openblas/include
+
+<span class="o">[</span>atlas<span class="o">]</span>
+<span class="nv">atlas_libs</span> <span class="o">=</span> openblas
+<span class="nv">libraries</span> <span class="o">=</span> openblas
+
+<span class="o">[</span>openblas<span class="o">]</span>
+<span class="nv">libraries</span> <span class="o">=</span> openblas
+<span class="nv">library_dirs</span> <span class="o">=</span>  /path/to/openblas/lib
+<span class="nv">include_dirs</span> <span class="o">=</span>  /path/to/openblas/include
+</pre></div>
+
+
+<p>Next, build numpy <strong>being sure to specify the same fortran compiler that was used to build the OpenBlas library</strong> (important point mentioned in the <a href="http://docs.scipy.org/doc/numpy/user/install.html">scipy install docs</a>). For good measure, I cleaned out all of the standard compile and linking flags from my environment to make sure I wasn't contaminating the build:</p>
+<div class="highlight"><pre><span class="nb">unset </span>CPPFLAGS
+<span class="nb">unset </span>LDFLAGS
+python setup.py build --fcompiler<span class="o">=</span>gnu95
+</pre></div>
+
+
+<p>When the build completes, install:</p>
+<div class="highlight"><pre>python setup.py install
+</pre></div>
+
+
+<p>Since the virtual environment is active, this will install to the virtual environment.</p>
+<p>Finally, here's what <code>ldd</code> on the working <code>lapack_lite.so</code> library gives:</p>
+<div class="highlight"><pre><span class="n">ldd</span> <span class="n">home</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">linalg</span><span class="o">/</span><span class="n">lapack_lite</span><span class="p">.</span><span class="n">so</span>
+        <span class="n">linux</span><span class="o">-</span><span class="n">vdso</span><span class="p">.</span><span class="n">so</span><span class="mf">.1</span> <span class="o">=&gt;</span>  <span class="p">(</span><span class="mh">0x0000000000000000</span><span class="p">)</span>
+        <span class="n">libopenblas</span><span class="p">.</span><span class="n">so</span><span class="mf">.0</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">openblas</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libopenblas</span><span class="p">.</span><span class="n">so</span><span class="mf">.0</span> <span class="p">(</span><span class="mh">0x0000000000000000</span><span class="p">)</span>
+        <span class="n">libpython2</span><span class="mf">.7</span><span class="p">.</span><span class="n">so</span><span class="mf">.1.0</span> <span class="o">=&gt;</span> <span class="n">not</span> <span class="n">found</span>
+        <span class="n">libgfortran</span><span class="p">.</span><span class="n">so</span><span class="mf">.3</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">libgfortran</span><span class="p">.</span><span class="n">so</span><span class="mf">.3</span> <span class="p">(</span><span class="mh">0x0000000000000000</span><span class="p">)</span>
+        <span class="n">libm</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libm</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span> <span class="p">(</span><span class="mh">0x0000000000000000</span><span class="p">)</span>
+        <span class="n">libgcc_s</span><span class="p">.</span><span class="n">so</span><span class="mf">.1</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">gcc</span><span class="o">-</span><span class="mf">4.8.3</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libgcc_s</span><span class="p">.</span><span class="n">so</span><span class="mf">.1</span> <span class="p">(</span><span class="mh">0x0000000000000000</span><span class="p">)</span>
+        <span class="n">libquadmath</span><span class="p">.</span><span class="n">so</span><span class="mf">.0</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">gcc</span><span class="o">-</span><span class="mf">4.8.3</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libquadmath</span><span class="p">.</span><span class="n">so</span><span class="mf">.0</span> <span class="p">(</span><span class="mh">0x0000000000000000</span><span class="p">)</span>
+        <span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span> <span class="p">(</span><span class="mh">0x0000000000000000</span><span class="p">)</span>
+        <span class="n">libpthread</span><span class="p">.</span><span class="n">so</span><span class="mf">.0</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libpthread</span><span class="p">.</span><span class="n">so</span><span class="mf">.0</span> <span class="p">(</span><span class="mh">0x0000000000000000</span><span class="p">)</span>
+        <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">ld</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mf">64.</span><span class="n">so</span><span class="mf">.2</span> <span class="p">(</span><span class="mh">0x0000000000000000</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Looks much healthier!</p>
+<h1>Summary</h1>
+<p>I was able to install <code>numpy</code> by first building and installing OpenBlas to a non-standard location, and then
+manually building <code>numpy</code> by creating the <code>site.cfg</code> file to point to the OpenBlas libraries
+and specifying which Fortan compiler to use.</p>
+            <a href="#" class="go-top">Go Top</a>
+    <div class="comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = "leeoncoding"; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+<footer class="footer">
+    <p>&copy; Lee Mendelowitz &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+    </div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-44545448-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+
+</body>
+</html>
