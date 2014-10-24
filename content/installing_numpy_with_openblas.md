@@ -6,7 +6,7 @@ Tags: python, numpy
 Author: Lee Mendelowitz
 Summary: How to install numpy with OpenBlas.
 
-I just went through a frustrating experience trying to install numpy in my school computing RHEL5 environment where I don't have sudo privileges or much control over the environment.
+I just went through the frustrating but in the end rewarding experience of trying to install numpy in my school computing RHEL5 environment where I don't have sudo privileges or much control over the environment. In the end, I learned quite a bit!
 
 My first attempt to install was through the normal path, where I activate a virtual environment created with `virtualenv` and then use pip to install numpy:
 
