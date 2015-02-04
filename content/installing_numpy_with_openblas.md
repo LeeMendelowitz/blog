@@ -29,11 +29,11 @@ Here's what `ldd` on the **broken** lapack_lite.so gives:
 
 ```bash
 ldd home/venv/lib/python2.7/site-packages/numpy/linalg/lapack_lite.so
-        linux-vdso.so.1 =>  (0x0000000000000000)
+        linux-vdso.so.1 =>  (0x00007fff08126000)
         libpython2.7.so.1.0 => not found
-        libpthread.so.0 => /path/to/lib64/libpthread.so.0 (0x0000000000000000)
-        libc.so.6 => /path/to/lib64/libc.so.6 (0x0000000000000000)
-        /path/to/lib64/ld-linux-x86-64.so.2 (0x0000000000000000)
+        libpthread.so.0 => /lib64/libpthread.so.0 (0x00002b39c2bc9000)
+        libc.so.6 => /lib64/libc.so.6 (0x00002b39c2de5000)
+        /lib64/ld-linux-x86-64.so.2 (0x0000003185e00000)
 ```
 
 So, after some searching around, it seems like the best option was to compile the [OpenBlas](https://github.com/xianyi/OpenBLAS) library and use that during the numpy build. I was able to salvage bits from [this](https://gist.github.com/sniderbr/5891950), and [this](http://gromgull.net/blog/2013/07/multithreaded-scipynumpy-with-openblas-on-debian/) to get it to work.
@@ -101,19 +101,20 @@ Finally, here's what `ldd` on the working `lapack_lite.so` library gives:
 
 ```
 ldd home/venv/lib/python2.7/site-packages/numpy/linalg/lapack_lite.so
-        linux-vdso.so.1 =>  (0x0000000000000000)
-        libopenblas.so.0 => /path/to/openblas/lib/libopenblas.so.0 (0x0000000000000000)
+(venv)bash-3.2$ ldd lapack_lite.so
+        linux-vdso.so.1 =>  (0x00007ffff40b9000)
+        libopenblas.so.0 => ../lib/libopenblas.so.0 (0x00002b098e0a1000)
         libpython2.7.so.1.0 => not found
-        libgfortran.so.3 => /path/to/libgfortran.so.3 (0x0000000000000000)
-        libm.so.6 => /path/to/lib64/libm.so.6 (0x0000000000000000)
-        libgcc_s.so.1 => /path/to/gcc-4.8.3/lib64/libgcc_s.so.1 (0x0000000000000000)
-        libquadmath.so.0 => /path/to/gcc-4.8.3/lib64/libquadmath.so.0 (0x0000000000000000)
-        libc.so.6 => /path/to/lib64/libc.so.6 (0x0000000000000000)
-        libpthread.so.0 => /path/to/lib64/libpthread.so.0 (0x0000000000000000)
-        /path/to/lib64/ld-linux-x86-64.so.2 (0x0000000000000000)
+        libgfortran.so.3 => .../libgfortran.so.3 (0x00002b098f00c000)
+        libm.so.6 => /lib64/libm.so.6 (0x00002b098f331000)
+        libgcc_s.so.1 => .../libgcc_s.so.1 (0x00002b098f5b4000)
+        libquadmath.so.0 => .../libquadmath.so.0 (0x00002b098f7cb000)
+        libc.so.6 => /lib64/libc.so.6 (0x00002b098fa07000)
+        libpthread.so.0 => /lib64/libpthread.so.0 (0x00002b098fd60000)
+        /lib64/ld-linux-x86-64.so.2 (0x0000003185e00000)
 ```
 
-Looks much healthier!
+Looks much healthier! (I've shortened some of the library paths)
 
 # Summary
 
