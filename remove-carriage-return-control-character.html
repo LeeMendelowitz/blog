@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lee On Coding, My blog about coding and stuff.">
+
+        <link rel="alternate"  href="https://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" title="Lee On Coding Full Atom Feed"/>
+
+        <title>Fix the pesky "^M" carriage return control character using tr // Lee On Coding // My blog about coding and stuff.</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://leemendelowitz.github.io/blog/theme/css/pure.css">
+    <link rel="stylesheet" href="https://leemendelowitz.github.io/blog/theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <div class="cover-img" style="background-image: url('https://leemendelowitz.github.io/blog/images/ss3.psd.png')">
+                <div class="cover-body">
+                    <header class="header">
+                        <hgroup>
+                            <img class="avatar" src="https://leemendelowitz.github.io/blog/images/twitter_img.png">
+                            <h1 class="brand-main"><a href="https://leemendelowitz.github.io/blog">Lee On Coding</a></h1>
+                            <p class="tagline">My blog about coding and stuff.</p>
+                                <p class="social">
+                                    <a href="http://twitter.com/lmendy7">
+                                        <i class="fa fa-twitter fa-3x"></i>
+                                    </a>
+                                    <a href="https://github.com/LeeMendelowitz">
+                                        <i class="fa fa-github fa-3x"></i>
+                                    </a>
+                                <p>
+                        </hgroup>
+                    </header>
+                </div>
+            </div>
+        </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Fix the pesky "^M" carriage return control character using tr</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="https://leemendelowitz.github.io/blog/tag/python.html">python</a>
+                        </p>
+                </header>
+            </section>
+            <p>When working with Microsoft Excel 2011 on Mac OS X, it will export spreadsheets to comma separated .csv files or
+tab delimited .txt plain text files using the old Mac OS 9 line endings of a carriage return (<code>\r</code>).
+When viewed with <code>less</code> or <code>vi</code>, these characters appear as <code>^M</code>, and the text file appears as one massively long line.</p>
+<p>These end of line characters can be handled when importing data using R or Python's pandas library, but it's still a 
+nuisance for other common Unix utilities like GNU's <code>head</code>, <code>tail</code>, <code>less</code>, <code>wc -l</code>, etc.</p>
+<p>There are a few ways to convert these line endings using GNU utilities. You can use <code>tr</code> or <code>dos2unix</code>. </p>
+<h1>Using tr</h1>
+<h3>Mac (<code>\r</code>) to Unix (<code>\n</code>)</h3>
+<p>To replace those <code>^M</code>'s with Unix line endings, use the <code>tr</code> utility:</p>
+<div class="highlight"><pre>tr <span class="s1">&#39;\r&#39;</span> <span class="s1">&#39;\n&#39;</span> &lt; DC_Metrorail_Ridership.mac.csv &gt; DC_Metrorail_Ridership.unix.csv
+</pre></div>
+
+
+<p>This will replace all carriage returns with line feeds.</p>
+<h3>Windows (<code>\r\n</code>) to Unix (<code>\n</code>)</h3>
+<p>Windows line endings use carriage return followed by line feed, so to convert Microsoft text files line endings to Unix use the following:</p>
+<div class="highlight"><pre>tr -d <span class="s1">&#39;\r&#39;</span> &lt; DC_Metrorail_Ridership.windows.csv &gt; DC_Metrorail_Ridership.unix.csv
+</pre></div>
+
+
+<h1>Using dos2unix or mac2unix</h1>
+<p>Another option is to use the <code>dos2unix</code> utility. To install on Mac OS X using Homebrew:</p>
+<div class="highlight"><pre>brew update
+brew install dos2unix
+</pre></div>
+
+
+<h3>Mac (<code>\r</code>) to Unix (<code>\n</code>)</h3>
+<div class="highlight"><pre>mac2unix -n DC_Metrorail_Ridership.mac.csv DC_Metrorail_Ridership.unix.csv
+</pre></div>
+
+
+<h3>Windows (<code>\r\n</code>) to Unix (<code>\n</code>)</h3>
+<div class="highlight"><pre>dos2unix -n DC_Metrorail_Ridership.windows.csv DC_Metrorail_Ridership.unix.csv
+</pre></div>
+
+
+<p>I made a <a href="https://gist.github.com/LeeMendelowitz/7509ae7cfeaf1072822a">GitHub gist</a> where you can test all of this out. Clone the gist with:</p>
+<div class="highlight"><pre>git clone https://gist.github.com/7509ae7cfeaf1072822a.git
+</pre></div>
+            <a href="#" class="go-top">Go Top</a>
+    <div class="comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = "leeoncoding"; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+<footer class="footer">
+    <p>&copy; Lee Mendelowitz &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+    </div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-44545448-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+
+</body>
+</html>
