@@ -12,8 +12,8 @@ My first attempt to install was through the normal path, where I activate a virt
 
 ```bash
 cd ~
-virtualenv env
-source env/bin/activate
+virtualenv venv
+source venv/bin/activate
 pip install numpy
 ```
 
@@ -55,12 +55,12 @@ where `/path/to/openblas` is the path where you'd like to install openblas. Agai
 We need to build numpy and link it with the OpenBlas library. I couldn't achieve this with the default `pip` install, so things had to be done manually as suggested in [this post](http://gromgull.net/blog/2013/07/multithreaded-scipynumpy-with-openblas-on-debian/):
 
 ```bash
-source env/bin/activate
+source venv/bin/activate
 pip uninstall numpy # Uninstall the broken installation
-mkdir env/download
-pip install -d env/download numpy
-mkdir env/build
-cd env/build
+mkdir venv/download
+pip install -d venv/download numpy
+mkdir venv/build
+cd venv/build
 tar xzf ../download/numpy-1.9.0.tar.gz
 cd numpy-1.9.0
 ```
