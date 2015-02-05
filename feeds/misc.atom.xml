@@ -41,8 +41,8 @@ brew install dos2unix
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="python"></category></entry><entry><title>Installing Numpy with OpenBlas</title><link href="https://leemendelowitz.github.io/blog/installing-numpy-with-openblas.html" rel="alternate"></link><updated>2014-10-23T09:20:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2014-10-23:blog/installing-numpy-with-openblas.html</id><summary type="html">&lt;p&gt;I just went through the frustrating but in the end rewarding experience of trying to install numpy in my school computing RHEL5 environment where I don't have sudo privileges or much control over the environment. In the end, I learned quite a bit!&lt;/p&gt;
 &lt;p&gt;My first attempt to install was through the normal path, where I activate a virtual environment created with &lt;code&gt;virtualenv&lt;/code&gt; and then use pip to install numpy:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~
-virtualenv env
-&lt;span class="nb"&gt;source &lt;/span&gt;env/bin/activate
+virtualenv venv
+&lt;span class="nb"&gt;source &lt;/span&gt;venv/bin/activate
 pip install numpy
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -74,12 +74,12 @@ make &lt;span class="nv"&gt;PREFIX&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&
 &lt;p&gt;where &lt;code&gt;/path/to/openblas&lt;/code&gt; is the path where you'd like to install openblas. Again, since I did have &lt;code&gt;sudo&lt;/code&gt; privilegs, I chose a non-standard location.&lt;/p&gt;
 &lt;h1&gt;Build Numpy&lt;/h1&gt;
 &lt;p&gt;We need to build numpy and link it with the OpenBlas library. I couldn't achieve this with the default &lt;code&gt;pip&lt;/code&gt; install, so things had to be done manually as suggested in &lt;a href="http://gromgull.net/blog/2013/07/multithreaded-scipynumpy-with-openblas-on-debian/"&gt;this post&lt;/a&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;source &lt;/span&gt;env/bin/activate
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;source &lt;/span&gt;venv/bin/activate
 pip uninstall numpy &lt;span class="c"&gt;# Uninstall the broken installation&lt;/span&gt;
-mkdir env/download
-pip install -d env/download numpy
-mkdir env/build
-&lt;span class="nb"&gt;cd &lt;/span&gt;env/build
+mkdir venv/download
+pip install -d venv/download numpy
+mkdir venv/build
+&lt;span class="nb"&gt;cd &lt;/span&gt;venv/build
 tar xzf ../download/numpy-1.9.0.tar.gz
 &lt;span class="nb"&gt;cd &lt;/span&gt;numpy-1.9.0
 &lt;/pre&gt;&lt;/div&gt;

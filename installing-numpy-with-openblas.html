@@ -61,8 +61,8 @@
             <p>I just went through the frustrating but in the end rewarding experience of trying to install numpy in my school computing RHEL5 environment where I don't have sudo privileges or much control over the environment. In the end, I learned quite a bit!</p>
 <p>My first attempt to install was through the normal path, where I activate a virtual environment created with <code>virtualenv</code> and then use pip to install numpy:</p>
 <div class="highlight"><pre><span class="nb">cd</span> ~
-virtualenv env
-<span class="nb">source </span>env/bin/activate
+virtualenv venv
+<span class="nb">source </span>venv/bin/activate
 pip install numpy
 </pre></div>
 
@@ -94,12 +94,12 @@ make <span class="nv">PREFIX</span><span class="o">=</span>/path/to/openblas ins
 <p>where <code>/path/to/openblas</code> is the path where you'd like to install openblas. Again, since I did have <code>sudo</code> privilegs, I chose a non-standard location.</p>
 <h1>Build Numpy</h1>
 <p>We need to build numpy and link it with the OpenBlas library. I couldn't achieve this with the default <code>pip</code> install, so things had to be done manually as suggested in <a href="http://gromgull.net/blog/2013/07/multithreaded-scipynumpy-with-openblas-on-debian/">this post</a>:</p>
-<div class="highlight"><pre><span class="nb">source </span>env/bin/activate
+<div class="highlight"><pre><span class="nb">source </span>venv/bin/activate
 pip uninstall numpy <span class="c"># Uninstall the broken installation</span>
-mkdir env/download
-pip install -d env/download numpy
-mkdir env/build
-<span class="nb">cd </span>env/build
+mkdir venv/download
+pip install -d venv/download numpy
+mkdir venv/build
+<span class="nb">cd </span>venv/build
 tar xzf ../download/numpy-1.9.0.tar.gz
 <span class="nb">cd </span>numpy-1.9.0
 </pre></div>
