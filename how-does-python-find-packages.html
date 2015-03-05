@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lee On Coding, My blog about coding and stuff.">
+
+        <link rel="alternate"  href="https://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" title="Lee On Coding Full Atom Feed"/>
+
+        <title>How does python find packages? // Lee On Coding // My blog about coding and stuff.</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://leemendelowitz.github.io/blog/theme/css/pure.css">
+    <link rel="stylesheet" href="https://leemendelowitz.github.io/blog/theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <div class="cover-img" style="background-image: url('https://leemendelowitz.github.io/blog/images/ss3.psd.png')">
+                <div class="cover-body">
+                    <header class="header">
+                        <hgroup>
+                            <img class="avatar" src="https://leemendelowitz.github.io/blog/images/twitter_img.png">
+                            <h1 class="brand-main"><a href="https://leemendelowitz.github.io/blog">Lee On Coding</a></h1>
+                            <p class="tagline">My blog about coding and stuff.</p>
+                                <p class="social">
+                                    <a href="http://twitter.com/lmendy7">
+                                        <i class="fa fa-twitter fa-3x"></i>
+                                    </a>
+                                    <a href="https://github.com/LeeMendelowitz">
+                                        <i class="fa fa-github fa-3x"></i>
+                                    </a>
+                                <p>
+                        </hgroup>
+                    </header>
+                </div>
+            </div>
+        </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>How does python find packages?</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="https://leemendelowitz.github.io/blog/tag/python.html">Python</a>
+                        </p>
+                </header>
+            </section>
+            <p>I just ran into a situation where I compiled and installed Python 2.7.9 from source on Ubuntu, but Python could not find the packages I had previously installed. This naturally raises the question - how does Python know where to find packages when you call <code>import</code>? This post applies specifically to Python 2.7.9, but I'm guessing Python 3x works very similarly.</p>
+<p>In this post I first describe how Python finds packages, and then I'll finish with the discovery I made regarding the default Python that ships with Ubuntu and how it differs from vanilla Python in how it finds packages.</p>
+<h2><code>sys.path</code></h2>
+<p>Python imports work by searching the directories listed in <code>sys.path</code>. </p>
+<p>Using my default Ubuntu 14.04 Python:</p>
+<div class="highlight"><pre>&gt; import sys
+&gt; print <span class="s1">&#39;\n&#39;</span>.join<span class="o">(</span>sys.path<span class="o">)</span>
+
+/usr/lib/python2.7
+/usr/lib/python2.7/plat-x86_64-linux-gnu
+/usr/lib/python2.7/lib-tk
+/usr/lib/python2.7/lib-old
+/usr/lib/python2.7/lib-dynload
+/usr/local/lib/python2.7/dist-packages
+/usr/lib/python2.7/dist-packages
+</pre></div>
+
+
+<p>So Python will find any packages that have been installed to those locations.</p>
+<h3>How sys.path gets populated</h3>
+<p>As the <a href="https://docs.python.org/2/library/sys.html#sys.path">docs</a> explain, <code>sys.path</code> is populated using
+the current working directory, followed by directories listed in your <code>PYTHONPATH</code> environment variable,
+followed by installation-dependent default paths, which are controlled by the <code>site</code> module.</p>
+<p>You can read more about <code>sys.path</code> in the <a href="https://docs.python.org/2/library/sys.html#sys.path">Python docs</a>.</p>
+<p>Assuming your <code>PYTHONPATH</code> environment variable is not set, <code>sys.path</code> will consist of the current working directory plus
+any manipulations made to it by the <code>site</code> module.</p>
+<p>The <code>site</code> module is automatically imported when you start Python, you can read more about how it manipulates your
+<code>sys.path</code> in the <a href="https://docs.python.org/2/library/site.html#module-site">Python docs</a>.</p>
+<p>It's a bit involved.</p>
+<h3>You can manipulate <code>sys.path</code></h3>
+<p>You can manipulate <code>sys.path</code> during a Python session and this will change how Python finds modules. For example:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+
+<span class="c"># This won&#39;t work - there is no hi module</span>
+<span class="kn">import</span> <span class="nn">hi</span> 
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">ImportError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="n">hi</span>
+
+<span class="c"># Create a hi module in your home directory.</span>
+<span class="n">home_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">&quot;~&quot;</span><span class="p">)</span>
+<span class="n">my_module_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">home_dir</span><span class="p">,</span> <span class="s">&quot;hi.py&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">my_module_file</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;print &quot;hi&quot;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;a=10</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+
+<span class="c"># Add the home directory to sys.path</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span>
+
+<span class="c"># Now this works, and prints hi!</span>
+<span class="kn">import</span> <span class="nn">hi</span> 
+<span class="k">print</span> <span class="n">hi</span><span class="o">.</span><span class="n">a</span>
+</pre></div>
+
+
+<h3>The module <code>__file__</code> attribute</h3>
+<p>When you import a module, you usually can check the <code>__file__</code> attribute of the module to see where the module is in your filesystem:</p>
+<div class="highlight"><pre><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span>
+<span class="o">&gt;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">__file__</span>
+<span class="s">&#39;/usr/local/lib/python2.7/dist-packages/numpy/__init__.pyc&#39;</span>
+</pre></div>
+
+
+<p>However, the <a href="https://docs.python.org/2/reference/datamodel.html#the-standard-type-hierarchy">Python docs</a> state that:</p>
+<blockquote>
+<p>The <strong>file</strong> attribute is not present for C modules that are statically linked into the interpreter; for extension modules loaded dynamically from a shared library, it is the pathname of the shared library file.</p>
+</blockquote>
+<p>So, for example this doesn't work:</p>
+<div class="highlight"><pre><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">sys</span>
+<span class="o">&gt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">__file__</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s">&#39;module&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s">&#39;__file__&#39;</span>
+</pre></div>
+
+
+<p>It makes sense that the <code>sys</code> module is statically linked to the interpreter - it is essentially part of the interpreter!</p>
+<h2>The <code>imp</code> module</h2>
+<p>Python exposes the entire <code>import</code> system through the <a href="https://docs.python.org/2.7/library/imp.html"><code>imp</code> module</a>. 
+That's pretty cool that all of this stuff is exposed for us to abuse, if we wanted to.</p>
+<p><code>imp.find_module</code> can be used to find a module:</p>
+<div class="highlight"><pre><span class="o">&gt;</span> <span class="n">imp</span><span class="o">.</span><span class="n">find_module</span><span class="p">(</span><span class="s">&#39;numpy&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">&#39;/usr/local/lib/python2.7/dist-packages/numpy&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+
+
+<p>You can also <code>import</code> and arbitrary Python source as a module using <code>imp.load_source</code>. This is the same example before,
+except imports our module using <code>imp</code> instead of by manipulating <code>sys.path</code>:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+
+<span class="c"># Create a hi module in your home directory.</span>
+<span class="n">home_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">&quot;~&quot;</span><span class="p">)</span>
+<span class="n">my_module_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">home_dir</span><span class="p">,</span> <span class="s">&quot;hi.py&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">my_module_file</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;print &quot;hi&quot;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;a=10</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+
+<span class="c"># Load the hi module using imp</span>
+<span class="n">hi</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="s">&#39;hi&#39;</span><span class="p">,</span> <span class="n">my_module_file</span><span class="p">)</span>
+
+<span class="c"># Now this works, and prints hi!</span>
+<span class="kn">import</span> <span class="nn">hi</span> 
+<span class="k">print</span> <span class="n">hi</span><span class="o">.</span><span class="n">a</span> <span class="c"># a is 10!</span>
+<span class="k">print</span> <span class="nb">type</span><span class="p">(</span><span class="n">hi</span><span class="p">)</span> <span class="c"># it&#39;s a module!</span>
+</pre></div>
+
+
+<p>Passing <code>'hi'</code> to <code>imp.load_source</code> simply sets the <code>__name__</code> attribute of the module.</p>
+<h2>Ubuntu Python</h2>
+<p>Now back to the issue of missing packages after installing a new version of Python compiled from source. By comparing the 
+<code>sys.path</code> from both the Ubuntu Python, which resides at <code>/usr/bin/python</code>, and the newly installed Python, which
+resides at <code>/usr/local/bin/python</code>, I could sort things out:</p>
+<h3>Ubuntu Python (<code>/usr/bin/python</code>):</h3>
+<div class="highlight"><pre>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; print <span class="s1">&#39;\n&#39;</span>.join<span class="o">(</span>sys.path<span class="o">)</span>
+
+/usr/lib/python2.7
+/usr/lib/python2.7/plat-x86_64-linux-gnu
+/usr/lib/python2.7/lib-tk
+/usr/lib/python2.7/lib-old
+/usr/lib/python2.7/lib-dynload
+/usr/local/lib/python2.7/dist-packages
+/usr/lib/python2.7/dist-packages
+</pre></div>
+
+
+<h3>Python compiled from source (<code>/usr/local/bin/python</code>)</h3>
+<div class="highlight"><pre>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; print <span class="s1">&#39;\n&#39;</span>.join<span class="o">(</span>sys.path<span class="o">)</span>
+
+/usr/local/lib/python2.7/dist-packages
+/usr/local/lib/python27.zip
+/usr/local/lib/python2.7
+/usr/local/lib/python2.7/plat-linux2
+/usr/local/lib/python2.7/lib-tk
+/usr/local/lib/python2.7/lib-old
+/usr/local/lib/python2.7/lib-dynload
+/usr/local/lib/python2.7/site-packages
+</pre></div>
+
+
+<p>Turns out what mattered for me was <code>dist-packages</code> vs. <code>site-packages</code>. Using Ubuntu's Python, my packges were installed to <code>/usr/local/lib/python2.7/dist-packages</code>, whereas the new Python I installed expects packages to be installed to <code>/usr/local/lib/python2.7/site-packages</code>. I just had to manipulate the <code>PYTHONPATH</code> environment variable to point to <code>dist-packages</code> in order to gain access to the previously installed packaged with the newly installed version of Python.</p>
+<h4>How did Ubuntu manipulate the <code>sys.path</code>?</h4>
+<p>So how does the Ubuntu distribution of Python know to use <code>/usr/local/lib/python2.7/dist-packages</code> in <code>sys.path</code>? It's hardcoded
+into their <code>site</code> module! First, find where the <code>site</code> module code lives:</p>
+<div class="highlight"><pre><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">site</span>
+<span class="o">&gt;</span> <span class="n">site</span><span class="o">.</span><span class="n">__file__</span>
+<span class="s">&#39;/usr/lib/python2.7/site.pyc&#39;</span>
+</pre></div>
+
+
+<p>Here is an excerpt from Ubuntu Python's <code>site.py</code>, which I peeked by opening <code>/usr/lib/python2.7/site.py</code> in a text editor. First, a comment at the top:</p>
+<blockquote>
+<p>For Debian and derivatives, this sys.path is augmented with directories
+for packages distributed within the distribution. Local addons go
+into /usr/local/lib/python<version>/dist-packages, Debian addons
+install into /usr/{lib,share}/python<version>/dist-packages.
+/usr/lib/python<version>/site-packages is not used.</p>
+</blockquote>
+<p>OK so there you have it. They explain how the Debian distribution of Python is different.</p>
+<p>And now, for the code that implementes this change:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">getsitepackages</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Returns a list containing all global site-packages directories</span>
+<span class="sd">    (and possibly site-python).</span>
+
+<span class="sd">    For each directory present in the global ``PREFIXES``, this function</span>
+<span class="sd">    will find its `site-packages` subdirectory depending on the system</span>
+<span class="sd">    environment, and will return a list of full paths.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sitepackages</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">PREFIXES</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">prefix</span> <span class="ow">or</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;os2emx&#39;</span><span class="p">,</span> <span class="s">&#39;riscos&#39;</span><span class="p">):</span>
+            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s">&quot;Lib&quot;</span><span class="p">,</span> <span class="s">&quot;site-packages&quot;</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">==</span> <span class="s">&#39;/&#39;</span><span class="p">:</span>
+            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s">&quot;local/lib&quot;</span><span class="p">,</span>
+                                        <span class="s">&quot;python&quot;</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span>
+                                        <span class="s">&quot;dist-packages&quot;</span><span class="p">))</span>
+            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s">&quot;lib&quot;</span><span class="p">,</span>
+                                        <span class="s">&quot;python&quot;</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span>
+                                        <span class="s">&quot;dist-packages&quot;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s">&quot;lib&quot;</span><span class="p">,</span> <span class="s">&quot;site-packages&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s">&quot;darwin&quot;</span><span class="p">:</span>
+            <span class="c"># for framework builds *only* we add the standard Apple</span>
+            <span class="c"># locations.</span>
+            <span class="kn">from</span> <span class="nn">sysconfig</span> <span class="kn">import</span> <span class="n">get_config_var</span>
+            <span class="n">framework</span> <span class="o">=</span> <span class="n">get_config_var</span><span class="p">(</span><span class="s">&quot;PYTHONFRAMEWORK&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">framework</span><span class="p">:</span>
+                <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;/Library&quot;</span><span class="p">,</span> <span class="n">framework</span><span class="p">,</span>
+                            <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="s">&quot;site-packages&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">sitepackages</span>
+</pre></div>
+
+
+<p>It's all there, if you are crazy enough to dig this deep.</p>
+            <a href="#" class="go-top">Go Top</a>
+    <div class="comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = "leeoncoding"; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+<footer class="footer">
+    <p>&copy; Lee Mendelowitz &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+    </div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-44545448-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+
+</body>
+</html>

@@ -7,7 +7,7 @@
 
         <link rel="alternate"  href="https://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" title="Lee On Coding Full Atom Feed"/>
 
-        <title>Fix the pesky "^M" carriage return control character using tr // Lee On Coding // My blog about coding and stuff.</title>
+        <title>Scraping data from dynamic webpages with PhantomJS // Lee On Coding // My blog about coding and stuff.</title>
 
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
@@ -51,12 +51,16 @@
         <div class="content">
             <section class="post">
                 <header class="post-header">
-                    <h1>Fix the pesky "^M" carriage return control character using tr</h1>
+                    <h1>Scraping data from dynamic webpages with PhantomJS</h1>
                         <p class="post-meta">
-                            // under                         </p>
+                            // under                                 <a class="post-category" href="https://leemendelowitz.github.io/blog/tag/r.html">R</a>
+                        </p>
                 </header>
             </section>
-            <p>When working with Microsoft Excel 2011 on Mac OS X, it will export spreadsheets to comma separated .csv files or
+            <p>The <code>readHTMLTable</code> function in R from the WHATEVER package is really useful for
+quickly grabbing data from a webpage and formatting it into a <code>data.frame</code>. However, this only works if the table is embedded in the html page source. More and more webpages today have content that is injected dynamically into the page using javascript. This makes it much more difficult to scrape data from a webpage.</p>
+<p>Fortunately, there are still ways to scrape data from dynamic pages. PhantomJS is a really cool tool which works as a "headless" browser (i.e. without a display). PhantomJS can load webpage, execute the javascript on that page, and </p>
+<p>When working with Microsoft Excel 2011 on Mac OS X, it will export spreadsheets to comma separated .csv files or
 tab delimited .txt plain text files using the old Mac OS 9 line endings of a carriage return (<code>\r</code>).
 When viewed with <code>less</code> or <code>vi</code>, these characters appear as <code>^M</code>, and the text file appears as one massively long line.</p>
 <p>These end of line characters can be handled when importing data using R or Python's pandas library, but it's still a 

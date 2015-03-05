@@ -1,5 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lee On Coding</title><link href="https://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="https://leemendelowitz.github.io/blog/feeds/misc.atom.xml" rel="self"></link><id>https://leemendelowitz.github.io/blog/</id><updated>2015-02-04T03:20:00+01:00</updated><entry><title>Fix the pesky "^M" carriage return control character using tr</title><link href="https://leemendelowitz.github.io/blog/remove-carriage-return-control-character.html" rel="alternate"></link><updated>2015-02-04T03:20:00+01:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2015-02-04:blog/remove-carriage-return-control-character.html</id><summary type="html">&lt;p&gt;When working with Microsoft Excel 2011 on Mac OS X, it will export spreadsheets to comma separated .csv files or
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lee On Coding</title><link href="https://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="https://leemendelowitz.github.io/blog/feeds/misc.atom.xml" rel="self"></link><id>https://leemendelowitz.github.io/blog/</id><updated>2015-03-04T17:30:00+01:00</updated><entry><title>How does python find packages?</title><link href="https://leemendelowitz.github.io/blog/how-does-python-find-packages.html" rel="alternate"></link><updated>2015-03-04T17:30:00+01:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2015-03-04:blog/how-does-python-find-packages.html</id><summary type="html">&lt;p&gt;I just ran into a situation where I compiled and installed Python 2.7.9 from source on Ubuntu, but Python could not find the packages I had previously installed. This naturally raises the question - how does Python know where to find packages when you call &lt;code&gt;import&lt;/code&gt;? This post applies specifically to Python 2.7.9, but I'm guessing Python 3x works very similarly.&lt;/p&gt;
+&lt;p&gt;In this post I first describe how Python finds packages, and then I'll finish with the discovery I made regarding the default Python that ships with Ubuntu and how it differs from vanilla Python in how it finds packages.&lt;/p&gt;
+&lt;h2&gt;&lt;code&gt;sys.path&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Python imports work by searching the directories listed in &lt;code&gt;sys.path&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;Using my default Ubuntu 14.04 Python:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; import sys
+&amp;gt; print &lt;span class="s1"&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;.join&lt;span class="o"&gt;(&lt;/span&gt;sys.path&lt;span class="o"&gt;)&lt;/span&gt;
+
+/usr/lib/python2.7
+/usr/lib/python2.7/plat-x86_64-linux-gnu
+/usr/lib/python2.7/lib-tk
+/usr/lib/python2.7/lib-old
+/usr/lib/python2.7/lib-dynload
+/usr/local/lib/python2.7/dist-packages
+/usr/lib/python2.7/dist-packages
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So Python will find any packages that have been installed to those locations.&lt;/p&gt;
+&lt;h3&gt;How sys.path gets populated&lt;/h3&gt;
+&lt;p&gt;As the &lt;a href="https://docs.python.org/2/library/sys.html#sys.path"&gt;docs&lt;/a&gt; explain, &lt;code&gt;sys.path&lt;/code&gt; is populated using
+the current working directory, followed by directories listed in your &lt;code&gt;PYTHONPATH&lt;/code&gt; environment variable,
+followed by installation-dependent default paths, which are controlled by the &lt;code&gt;site&lt;/code&gt; module.&lt;/p&gt;
+&lt;p&gt;You can read more about &lt;code&gt;sys.path&lt;/code&gt; in the &lt;a href="https://docs.python.org/2/library/sys.html#sys.path"&gt;Python docs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Assuming your &lt;code&gt;PYTHONPATH&lt;/code&gt; environment variable is not set, &lt;code&gt;sys.path&lt;/code&gt; will consist of the current working directory plus
+any manipulations made to it by the &lt;code&gt;site&lt;/code&gt; module.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;site&lt;/code&gt; module is automatically imported when you start Python, you can read more about how it manipulates your
+&lt;code&gt;sys.path&lt;/code&gt; in the &lt;a href="https://docs.python.org/2/library/site.html#module-site"&gt;Python docs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It's a bit involved.&lt;/p&gt;
+&lt;h3&gt;You can manipulate &lt;code&gt;sys.path&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;You can manipulate &lt;code&gt;sys.path&lt;/code&gt; during a Python session and this will change how Python finds modules. For example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+
+&lt;span class="c"&gt;# This won&amp;#39;t work - there is no hi module&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;hi&lt;/span&gt; 
+&lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;stdin&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="ne"&gt;ImportError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;No&lt;/span&gt; &lt;span class="n"&gt;module&lt;/span&gt; &lt;span class="n"&gt;named&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;
+
+&lt;span class="c"&gt;# Create a hi module in your home directory.&lt;/span&gt;
+&lt;span class="n"&gt;home_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;expanduser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;~&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;my_module_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;home_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hi.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;my_module_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;print &amp;quot;hi&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;a=10&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Add the home directory to sys.path&lt;/span&gt;
+&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;home_dir&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Now this works, and prints hi!&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;hi&lt;/span&gt; 
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;The module &lt;code&gt;__file__&lt;/code&gt; attribute&lt;/h3&gt;
+&lt;p&gt;When you import a module, you usually can check the &lt;code&gt;__file__&lt;/code&gt; attribute of the module to see where the module is in your filesystem:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;numpy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__file__&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;/usr/local/lib/python2.7/dist-packages/numpy/__init__.pyc&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;However, the &lt;a href="https://docs.python.org/2/reference/datamodel.html#the-standard-type-hierarchy"&gt;Python docs&lt;/a&gt; state that:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The &lt;strong&gt;file&lt;/strong&gt; attribute is not present for C modules that are statically linked into the interpreter; for extension modules loaded dynamically from a shared library, it is the pathname of the shared library file.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, for example this doesn't work:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__file__&lt;/span&gt;
+&lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;stdin&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="ne"&gt;AttributeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;module&amp;#39;&lt;/span&gt; &lt;span class="nb"&gt;object&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;attribute&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;__file__&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It makes sense that the &lt;code&gt;sys&lt;/code&gt; module is statically linked to the interpreter - it is essentially part of the interpreter!&lt;/p&gt;
+&lt;h2&gt;The &lt;code&gt;imp&lt;/code&gt; module&lt;/h2&gt;
+&lt;p&gt;Python exposes the entire &lt;code&gt;import&lt;/code&gt; system through the &lt;a href="https://docs.python.org/2.7/library/imp.html"&gt;&lt;code&gt;imp&lt;/code&gt; module&lt;/a&gt;. 
+That's pretty cool that all of this stuff is exposed for us to abuse, if we wanted to.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;imp.find_module&lt;/code&gt; can be used to find a module:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;imp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_module&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;numpy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/usr/local/lib/python2.7/dist-packages/numpy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can also &lt;code&gt;import&lt;/code&gt; and arbitrary Python source as a module using &lt;code&gt;imp.load_source&lt;/code&gt;. This is the same example before,
+except imports our module using &lt;code&gt;imp&lt;/code&gt; instead of by manipulating &lt;code&gt;sys.path&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+
+&lt;span class="c"&gt;# Create a hi module in your home directory.&lt;/span&gt;
+&lt;span class="n"&gt;home_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;expanduser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;~&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;my_module_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;home_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hi.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;my_module_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;print &amp;quot;hi&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;a=10&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Load the hi module using imp&lt;/span&gt;
+&lt;span class="n"&gt;hi&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;imp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load_source&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;my_module_file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Now this works, and prints hi!&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;hi&lt;/span&gt; 
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="c"&gt;# a is 10!&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# it&amp;#39;s a module!&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Passing &lt;code&gt;'hi'&lt;/code&gt; to &lt;code&gt;imp.load_source&lt;/code&gt; simply sets the &lt;code&gt;__name__&lt;/code&gt; attribute of the module.&lt;/p&gt;
+&lt;h2&gt;Ubuntu Python&lt;/h2&gt;
+&lt;p&gt;Now back to the issue of missing packages after installing a new version of Python compiled from source. By comparing the 
+&lt;code&gt;sys.path&lt;/code&gt; from both the Ubuntu Python, which resides at &lt;code&gt;/usr/bin/python&lt;/code&gt;, and the newly installed Python, which
+resides at &lt;code&gt;/usr/local/bin/python&lt;/code&gt;, I could sort things out:&lt;/p&gt;
+&lt;h3&gt;Ubuntu Python (&lt;code&gt;/usr/bin/python&lt;/code&gt;):&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; import sys
+&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s1"&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;.join&lt;span class="o"&gt;(&lt;/span&gt;sys.path&lt;span class="o"&gt;)&lt;/span&gt;
+
+/usr/lib/python2.7
+/usr/lib/python2.7/plat-x86_64-linux-gnu
+/usr/lib/python2.7/lib-tk
+/usr/lib/python2.7/lib-old
+/usr/lib/python2.7/lib-dynload
+/usr/local/lib/python2.7/dist-packages
+/usr/lib/python2.7/dist-packages
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Python compiled from source (&lt;code&gt;/usr/local/bin/python&lt;/code&gt;)&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; import sys
+&amp;gt;&amp;gt;&amp;gt; print &lt;span class="s1"&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;.join&lt;span class="o"&gt;(&lt;/span&gt;sys.path&lt;span class="o"&gt;)&lt;/span&gt;
+
+/usr/local/lib/python2.7/dist-packages
+/usr/local/lib/python27.zip
+/usr/local/lib/python2.7
+/usr/local/lib/python2.7/plat-linux2
+/usr/local/lib/python2.7/lib-tk
+/usr/local/lib/python2.7/lib-old
+/usr/local/lib/python2.7/lib-dynload
+/usr/local/lib/python2.7/site-packages
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Turns out what mattered for me was &lt;code&gt;dist-packages&lt;/code&gt; vs. &lt;code&gt;site-packages&lt;/code&gt;. Using Ubuntu's Python, my packges were installed to &lt;code&gt;/usr/local/lib/python2.7/dist-packages&lt;/code&gt;, whereas the new Python I installed expects packages to be installed to &lt;code&gt;/usr/local/lib/python2.7/site-packages&lt;/code&gt;. I just had to manipulate the &lt;code&gt;PYTHONPATH&lt;/code&gt; environment variable to point to &lt;code&gt;dist-packages&lt;/code&gt; in order to gain access to the previously installed packaged with the newly installed version of Python.&lt;/p&gt;
+&lt;h4&gt;How did Ubuntu manipulate the &lt;code&gt;sys.path&lt;/code&gt;?&lt;/h4&gt;
+&lt;p&gt;So how does the Ubuntu distribution of Python know to use &lt;code&gt;/usr/local/lib/python2.7/dist-packages&lt;/code&gt; in &lt;code&gt;sys.path&lt;/code&gt;? It's hardcoded
+into their &lt;code&gt;site&lt;/code&gt; module! First, find where the &lt;code&gt;site&lt;/code&gt; module code lives:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;site&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__file__&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;/usr/lib/python2.7/site.pyc&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here is an excerpt from Ubuntu Python's &lt;code&gt;site.py&lt;/code&gt;, which I peeked by opening &lt;code&gt;/usr/lib/python2.7/site.py&lt;/code&gt; in a text editor. First, a comment at the top:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For Debian and derivatives, this sys.path is augmented with directories
+for packages distributed within the distribution. Local addons go
+into /usr/local/lib/python&lt;version&gt;/dist-packages, Debian addons
+install into /usr/{lib,share}/python&lt;version&gt;/dist-packages.
+/usr/lib/python&lt;version&gt;/site-packages is not used.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;OK so there you have it. They explain how the Debian distribution of Python is different.&lt;/p&gt;
+&lt;p&gt;And now, for the code that implementes this change:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;getsitepackages&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Returns a list containing all global site-packages directories&lt;/span&gt;
+&lt;span class="sd"&gt;    (and possibly site-python).&lt;/span&gt;
+
+&lt;span class="sd"&gt;    For each directory present in the global ``PREFIXES``, this function&lt;/span&gt;
+&lt;span class="sd"&gt;    will find its `site-packages` subdirectory depending on the system&lt;/span&gt;
+&lt;span class="sd"&gt;    environment, and will return a list of full paths.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;sitepackages&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="n"&gt;seen&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;prefix&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;PREFIXES&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;prefix&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;prefix&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;seen&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;continue&lt;/span&gt;
+        &lt;span class="n"&gt;seen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;platform&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;os2emx&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;riscos&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;site-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sep&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;local/lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                        &lt;span class="s"&gt;&amp;quot;python&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                                        &lt;span class="s"&gt;&amp;quot;dist-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                        &lt;span class="s"&gt;&amp;quot;python&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                                        &lt;span class="s"&gt;&amp;quot;dist-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;site-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;platform&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;darwin&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="c"&gt;# for framework builds *only* we add the standard Apple&lt;/span&gt;
+            &lt;span class="c"&gt;# locations.&lt;/span&gt;
+            &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sysconfig&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;get_config_var&lt;/span&gt;
+            &lt;span class="n"&gt;framework&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_config_var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;PYTHONFRAMEWORK&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;framework&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                        &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/Library&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;framework&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;site-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;sitepackages&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It's all there, if you are crazy enough to dig this deep.&lt;/p&gt;</summary><category term="Python"></category></entry><entry><title>Fix the pesky "^M" carriage return control character using tr</title><link href="https://leemendelowitz.github.io/blog/remove-carriage-return-control-character.html" rel="alternate"></link><updated>2015-02-04T03:20:00+01:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2015-02-04:blog/remove-carriage-return-control-character.html</id><summary type="html">&lt;p&gt;When working with Microsoft Excel 2011 on Mac OS X, it will export spreadsheets to comma separated .csv files or
 tab delimited .txt plain text files using the old Mac OS 9 line endings of a carriage return (&lt;code&gt;\r&lt;/code&gt;).
 When viewed with &lt;code&gt;less&lt;/code&gt; or &lt;code&gt;vi&lt;/code&gt;, these characters appear as &lt;code&gt;^M&lt;/code&gt;, and the text file appears as one massively long line.&lt;/p&gt;
 &lt;p&gt;These end of line characters can be handled when importing data using R or Python's pandas library, but it's still a 
@@ -38,7 +240,7 @@ brew install dos2unix
 
 &lt;p&gt;I made a &lt;a href="https://gist.github.com/LeeMendelowitz/7509ae7cfeaf1072822a"&gt;GitHub gist&lt;/a&gt; where you can test all of this out. Clone the gist with:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;git clone https://gist.github.com/7509ae7cfeaf1072822a.git
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="python"></category></entry><entry><title>Installing Numpy with OpenBlas</title><link href="https://leemendelowitz.github.io/blog/installing-numpy-with-openblas.html" rel="alternate"></link><updated>2014-10-23T09:20:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2014-10-23:blog/installing-numpy-with-openblas.html</id><summary type="html">&lt;p&gt;I just went through the frustrating but in the end rewarding experience of trying to install numpy in my school computing RHEL5 environment where I don't have sudo privileges or much control over the environment. In the end, I learned quite a bit!&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Installing Numpy with OpenBlas</title><link href="https://leemendelowitz.github.io/blog/installing-numpy-with-openblas.html" rel="alternate"></link><updated>2014-10-23T09:20:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2014-10-23:blog/installing-numpy-with-openblas.html</id><summary type="html">&lt;p&gt;I just went through the frustrating but in the end rewarding experience of trying to install numpy in my school computing RHEL5 environment where I don't have sudo privileges or much control over the environment. In the end, I learned quite a bit!&lt;/p&gt;
 &lt;p&gt;My first attempt to install was through the normal path, where I activate a virtual environment created with &lt;code&gt;virtualenv&lt;/code&gt; and then use pip to install numpy:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~
 virtualenv venv
