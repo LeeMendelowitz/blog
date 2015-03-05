@@ -1,8 +1,17 @@
-Title: Fix the pesky "^M" carriage return control character using tr
-Date: 2015-02-04 3:20
-Slug: remove-carriage-return-control-character
+Title: Scraping data from dynamic webpages with PhantomJS
+Date: 2015-02-25 23:00
+Slug: scraping-data-from-dynamic-webpages
 Author: Lee Mendelowitz
-Summary: How to fix the "^M" carriage return control character using tr
+Tags: R
+Summary: How to scrape data from dynamic webpages using PhantomJS
+Status: draft
+
+
+The `readHTMLTable` function in R from the WHATEVER package is really useful for
+quickly grabbing data from a webpage and formatting it into a `data.frame`. However, this only works if the table is embedded in the html page source. More and more webpages today have content that is injected dynamically into the page using javascript. This makes it much more difficult to scrape data from a webpage.
+
+Fortunately, there are still ways to scrape data from dynamic pages. PhantomJS is a really cool tool which works as a "headless" browser (i.e. without a display). PhantomJS can load webpage, execute the javascript on that page, and 
+
 
 When working with Microsoft Excel 2011 on Mac OS X, it will export spreadsheets to comma separated .csv files or
 tab delimited .txt plain text files using the old Mac OS 9 line endings of a carriage return (`\r`).
