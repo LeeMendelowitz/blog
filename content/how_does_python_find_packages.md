@@ -112,6 +112,7 @@ That's pretty cool that all of this stuff is exposed for us to abuse, if we want
 `imp.find_module` can be used to find a module:
 
 ```python
+> import imp
 > imp.find_module('numpy')
 (None, '/usr/local/lib/python2.7/dist-packages/numpy', ('', '', 5))
 ```
@@ -120,7 +121,7 @@ You can also `import` and arbitrary Python source as a module using `imp.load_so
 except imports our module using `imp` instead of by manipulating `sys.path`:
 
 ```python
-import sys, os
+import sys, os, imp
 
 # Create a hi module in your home directory.
 home_dir = os.path.expanduser("~")

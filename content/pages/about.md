@@ -1,4 +1,6 @@
 Title: About
+
+
 My name is Lee Mendelowitz, and I am a PhD student in [Scientific Computation](http://amsc.umd.edu) at the University of Maryland.
 I am studying computational and statistical methods for working with next generation sequencing data,
 particularly in the area of genome assembly.
