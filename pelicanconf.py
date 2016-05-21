@@ -19,6 +19,7 @@ STATIC_PATHS = ['images', 'computing_for_data_analysis/figure/',
 
 TAGLINE = "My blog about coding and stuff."
 PROFILE_IMG_URL = "/images/avatar.jpeg"
+COVER_IMG_URL = ""
 # COVER_IMG_URL = "/images/ss3.psd.png"
 
 DISPLAY_PAGES_ON_MENU = False
