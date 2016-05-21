@@ -8,6 +8,7 @@ OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 GOOGLEFILE=$(BASEDIR)/googlebcde9b29305aa6cd.html
+GITHUB_REMOTE=github
 
 FTP_HOST=localhost
 FTP_USER=anonymous
@@ -109,7 +110,7 @@ cf_upload: publish
 	cd $(OUTPUTDIR) && swift -v -A https://auth.api.rackspacecloud.com/v1.0 -U $(CLOUDFILES_USERNAME) -K $(CLOUDFILES_API_KEY) upload -c $(CLOUDFILES_CONTAINER) .
 
 github: publish
-	ghp-import -r github -b gh-pages -m "Blog update" $(OUTPUTDIR)
-	git push github gh-pages
+	ghp-import -r $(GITHUB_REMOTE) -b gh-pages -m "Blog update" $(OUTPUTDIR)
+	git push $(GITHUB_REMOTE) gh-pages
 
 .PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github

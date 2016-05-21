@@ -8,19 +8,16 @@ This I how I set everything up for myself. You can follow similar steps to get y
 ## Install dependencies
 
 ```bash
-sudo pip install pelican ghp-import markdown
+pip install pelican ghp-import markdown
 ```
 
-## Set up remote
+## Clone the repository
 
 ```bash
-git remote add github git@github.com:LeeMendelowitz/blog.git
+git clone https://github.com/LeeMendelowitz/blog.git blog
 ```
 
-Only I have write access to this remote repo, but if you are setting up your own blog
-simply replace my repo with yours!
-
-# Add content
+## Add content
 
 Add an article to the ```content``` directory.
 
@@ -40,8 +37,30 @@ You can preview the blog locally by running the server and visiting [http://loca
 make serve
 ```
 
-## Publish to github
+## Publish to GitHub Pages
+
+These instructions are if you want to publish the blog to [GitHub Pages](https://pages.github.com/).
+This requires that you first create a GitHub repo to host the blog. Then modify the GitHub repo settings
+to use GitHub pages.
+
+### Set up remote
+
+Once you have your GitHub repo to publish to, add your GitHub repo as a remote.
+Call the remote "github". (Replace the URL below with the URL for your repo!)
+
+```bash
+git remote add github git@github.com:LeeMendelowitz/blog.git
+```
+
+Call the remote `github` as this is the name of the remote where the Makefile will try
+to publish.
+
+To publish to the `gh-pages` branch of your GitHub repo:
+
 ```bash
 make github
 ```
-Now checkout the [blog url](http://leemendelowitz.github.io/blog/).
+
+Now checkout your public [blog url](http://leemendelowitz.github.io/blog/)!
+
+
