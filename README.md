@@ -61,6 +61,6 @@ To publish to the `gh-pages` branch of your GitHub repo:
 make github
 ```
 
-Now checkout your public [blog url](http://leemendelowitz.github.io/blog/)!
+Now checkout your public [blog url](https://leemendelowitz.github.io/blog/)!
 
 
