@@ -11,15 +11,17 @@ TIMEZONE = 'Europe/Paris'
 DEFAULT_LANG = u'en'
 
 GOOGLE_ANALYTICS = "UA-44545448-1"
-THEME = "/Users/lee/pelican-themes/pure-single/"
+THEME = "pure-single"
 ARTICLE_EXCLUDES = ['pages', 'computing_for_data_analysis/rmarkdown']
 STATIC_PATHS = ['images', 'computing_for_data_analysis/figure/',
                 'computing_for_data_analysis/rmarkdown/',
                 'code']
 
 TAGLINE = "My blog about coding and stuff."
-PROFILE_IMG_URL = "images/twitter_img.png"
-COVER_IMG_URL = "images/ss3.psd.png"
+PROFILE_IMG_URL = "/images/avatar.jpeg"
+# COVER_IMG_URL = "/images/ss3.psd.png"
+
+DISPLAY_PAGES_ON_MENU = False
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None

@@ -1,0 +1,3 @@
+[submodule "pure-single"]
+	path = pure-single
+    url = https://github.com/LeeMendelowitz/pure-single.git
