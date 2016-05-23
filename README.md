@@ -15,6 +15,9 @@ pip install pelican ghp-import markdown
 
 ```bash
 git clone https://github.com/LeeMendelowitz/blog.git blog
+cd blog
+git submodule init
+git submodule update
 ```
 
 ## Add content
