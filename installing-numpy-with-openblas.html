@@ -60,21 +60,21 @@
             </section>
             <p>I just went through the frustrating but in the end rewarding experience of trying to install numpy in my school computing RHEL5 environment where I don't have sudo privileges or much control over the environment. In the end, I learned quite a bit!</p>
 <p>My first attempt to install was through the normal path, where I activate a virtual environment created with <code>virtualenv</code> and then use pip to install numpy:</p>
-<div class="highlight"><pre><span class="nb">cd</span> ~
+<div class="highlight"><pre><span></span><span class="nb">cd</span> ~
 virtualenv venv
-<span class="nb">source </span>venv/bin/activate
+<span class="nb">source</span> venv/bin/activate
 pip install numpy
 </pre></div>
 
 
 <p>But trying to build numpy in my environment led to this error:</p>
-<div class="highlight"><pre><span class="n">ImportError</span><span class="o">:</span> <span class="n">home</span><span class="sr">/venv/lib/python2.7/site-packages/numpy/linalg/</span><span class="n">lapack_lite</span><span class="o">.</span><span class="na">so</span><span class="o">:</span> <span class="kc">undefined</span> <span class="n">symbol</span><span class="o">:</span> <span class="n">zgelsd_</span>
+<div class="highlight"><pre><span></span><span class="n">ImportError</span><span class="o">:</span> <span class="n">home</span><span class="sr">/venv/lib/python2.7/site-packages/numpy/linalg/</span><span class="n">lapack_lite</span><span class="o">.</span><span class="na">so</span><span class="o">:</span> <span class="kc">undefined</span> <span class="n">symbol</span><span class="o">:</span> <span class="n">zgelsd_</span>
 </pre></div>
 
 
 <p>So that's the clue - something is wrong with the lapack library numpy is trying to use from my environment. It's probably linked against something broken or something incompatible... or something missing.</p>
 <p>Here's what <code>ldd</code> on the <strong>broken</strong> lapack_lite.so gives:</p>
-<div class="highlight"><pre>ldd home/venv/lib/python2.7/site-packages/numpy/linalg/lapack_lite.so
+<div class="highlight"><pre><span></span>ldd home/venv/lib/python2.7/site-packages/numpy/linalg/lapack_lite.so
         linux-vdso.so.1 <span class="o">=</span>&gt;  <span class="o">(</span>0x00007fff08126000<span class="o">)</span>
         libpython2.7.so.1.0 <span class="o">=</span>&gt; not found
         libpthread.so.0 <span class="o">=</span>&gt; /lib64/libpthread.so.0 <span class="o">(</span>0x00002b39c2bc9000<span class="o">)</span>
@@ -86,7 +86,7 @@ pip install numpy
 <p>So, after some searching around, it seems like the best option was to compile the <a href="https://github.com/xianyi/OpenBLAS">OpenBlas</a> library and use that during the numpy build. I was able to salvage bits from <a href="https://gist.github.com/sniderbr/5891950">this</a>, and <a href="http://gromgull.net/blog/2013/07/multithreaded-scipynumpy-with-openblas-on-debian/">this</a> to get it to work.</p>
 <h1>Build OpenBlas</h1>
 <p>Untar the OpenBlas distribution <a href="http://www.openblas.net/">available here</a> and build using the makefile:</p>
-<div class="highlight"><pre>make <span class="nv">BINARY</span><span class="o">=</span>64 <span class="nv">FC</span><span class="o">=</span>gfortran <span class="nv">USE_THREAD</span><span class="o">=</span>1
+<div class="highlight"><pre><span></span>make <span class="nv">BINARY</span><span class="o">=</span><span class="m">64</span> <span class="nv">FC</span><span class="o">=</span>gfortran <span class="nv">USE_THREAD</span><span class="o">=</span>1
 make <span class="nv">PREFIX</span><span class="o">=</span>/path/to/openblas install
 </pre></div>
 
@@ -94,19 +94,19 @@ make <span class="nv">PREFIX</span><span class="o">=</span>/path/to/openblas ins
 <p>where <code>/path/to/openblas</code> is the path where you'd like to install openblas. Again, since I did have <code>sudo</code> privilegs, I chose a non-standard location.</p>
 <h1>Build Numpy</h1>
 <p>We need to build numpy and link it with the OpenBlas library. I couldn't achieve this with the default <code>pip</code> install, so things had to be done manually as suggested in <a href="http://gromgull.net/blog/2013/07/multithreaded-scipynumpy-with-openblas-on-debian/">this post</a>:</p>
-<div class="highlight"><pre><span class="nb">source </span>venv/bin/activate
-pip uninstall numpy <span class="c"># Uninstall the broken installation</span>
+<div class="highlight"><pre><span></span><span class="nb">source</span> venv/bin/activate
+pip uninstall numpy <span class="c1"># Uninstall the broken installation</span>
 mkdir venv/download
 pip install -d venv/download numpy
 mkdir venv/build
-<span class="nb">cd </span>venv/build
+<span class="nb">cd</span> venv/build
 tar xzf ../download/numpy-1.9.0.tar.gz
-<span class="nb">cd </span>numpy-1.9.0
+<span class="nb">cd</span> numpy-1.9.0
 </pre></div>
 
 
 <p>In the <code>numpy-1.9.0</code> directory, create the <code>site.cfg</code> file to customize the libraries that numpy uses on install. We need to point things to OpenBlas. Check out the <code>site.cfg.example</code> file for what options you can set. This worked for me:  </p>
-<div class="highlight"><pre><span class="o">[</span>DEFAULT<span class="o">]</span>
+<div class="highlight"><pre><span></span><span class="o">[</span>DEFAULT<span class="o">]</span>
 <span class="nv">library_dirs</span> <span class="o">=</span> /path/to/openblas/lib
 <span class="nv">include_dirs</span> <span class="o">=</span> /path/to/openblas/include
 
@@ -122,31 +122,31 @@ tar xzf ../download/numpy-1.9.0.tar.gz
 
 
 <p>Next, build numpy <strong>being sure to specify the same fortran compiler that was used to build the OpenBlas library</strong> (important point mentioned in the <a href="http://docs.scipy.org/doc/numpy/user/install.html">scipy install docs</a>). For good measure, I cleaned out all of the standard compile and linking flags from my environment to make sure I wasn't contaminating the build:</p>
-<div class="highlight"><pre><span class="nb">unset </span>CPPFLAGS
-<span class="nb">unset </span>LDFLAGS
+<div class="highlight"><pre><span></span><span class="nb">unset</span> CPPFLAGS
+<span class="nb">unset</span> LDFLAGS
 python setup.py build --fcompiler<span class="o">=</span>gnu95
 </pre></div>
 
 
 <p>When the build completes, install:</p>
-<div class="highlight"><pre>python setup.py install
+<div class="highlight"><pre><span></span>python setup.py install
 </pre></div>
 
 
 <p>Since the virtual environment is active, this will install to the virtual environment.</p>
 <p>Finally, here's what <code>ldd</code> on the working <code>lapack_lite.so</code> library gives:</p>
-<div class="highlight"><pre><span class="n">ldd</span> <span class="n">home</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">linalg</span><span class="o">/</span><span class="n">lapack_lite</span><span class="p">.</span><span class="n">so</span>
-<span class="p">(</span><span class="n">venv</span><span class="p">)</span><span class="n">bash</span><span class="o">-</span><span class="mf">3.2</span><span class="err">$</span> <span class="n">ldd</span> <span class="n">lapack_lite</span><span class="p">.</span><span class="n">so</span>
-        <span class="n">linux</span><span class="o">-</span><span class="n">vdso</span><span class="p">.</span><span class="n">so</span><span class="mf">.1</span> <span class="o">=&gt;</span>  <span class="p">(</span><span class="mh">0x00007ffff40b9000</span><span class="p">)</span>
-        <span class="n">libopenblas</span><span class="p">.</span><span class="n">so</span><span class="mf">.0</span> <span class="o">=&gt;</span> <span class="p">..</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libopenblas</span><span class="p">.</span><span class="n">so</span><span class="mf">.0</span> <span class="p">(</span><span class="mh">0x00002b098e0a1000</span><span class="p">)</span>
-        <span class="n">libpython2</span><span class="mf">.7</span><span class="p">.</span><span class="n">so</span><span class="mf">.1.0</span> <span class="o">=&gt;</span> <span class="n">not</span> <span class="n">found</span>
-        <span class="n">libgfortran</span><span class="p">.</span><span class="n">so</span><span class="mf">.3</span> <span class="o">=&gt;</span> <span class="p">...</span><span class="o">/</span><span class="n">libgfortran</span><span class="p">.</span><span class="n">so</span><span class="mf">.3</span> <span class="p">(</span><span class="mh">0x00002b098f00c000</span><span class="p">)</span>
-        <span class="n">libm</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libm</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span> <span class="p">(</span><span class="mh">0x00002b098f331000</span><span class="p">)</span>
-        <span class="n">libgcc_s</span><span class="p">.</span><span class="n">so</span><span class="mf">.1</span> <span class="o">=&gt;</span> <span class="p">...</span><span class="o">/</span><span class="n">libgcc_s</span><span class="p">.</span><span class="n">so</span><span class="mf">.1</span> <span class="p">(</span><span class="mh">0x00002b098f5b4000</span><span class="p">)</span>
-        <span class="n">libquadmath</span><span class="p">.</span><span class="n">so</span><span class="mf">.0</span> <span class="o">=&gt;</span> <span class="p">...</span><span class="o">/</span><span class="n">libquadmath</span><span class="p">.</span><span class="n">so</span><span class="mf">.0</span> <span class="p">(</span><span class="mh">0x00002b098f7cb000</span><span class="p">)</span>
-        <span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span> <span class="p">(</span><span class="mh">0x00002b098fa07000</span><span class="p">)</span>
-        <span class="n">libpthread</span><span class="p">.</span><span class="n">so</span><span class="mf">.0</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libpthread</span><span class="p">.</span><span class="n">so</span><span class="mf">.0</span> <span class="p">(</span><span class="mh">0x00002b098fd60000</span><span class="p">)</span>
-        <span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">ld</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mf">64.</span><span class="n">so</span><span class="mf">.2</span> <span class="p">(</span><span class="mh">0x0000003185e00000</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>ldd home/venv/lib/python2.7/site-packages/numpy/linalg/lapack_lite.so
+(venv)bash-3.2$ ldd lapack_lite.so
+        linux-vdso.so.1 =&gt;  (0x00007ffff40b9000)
+        libopenblas.so.0 =&gt; ../lib/libopenblas.so.0 (0x00002b098e0a1000)
+        libpython2.7.so.1.0 =&gt; not found
+        libgfortran.so.3 =&gt; .../libgfortran.so.3 (0x00002b098f00c000)
+        libm.so.6 =&gt; /lib64/libm.so.6 (0x00002b098f331000)
+        libgcc_s.so.1 =&gt; .../libgcc_s.so.1 (0x00002b098f5b4000)
+        libquadmath.so.0 =&gt; .../libquadmath.so.0 (0x00002b098f7cb000)
+        libc.so.6 =&gt; /lib64/libc.so.6 (0x00002b098fa07000)
+        libpthread.so.0 =&gt; /lib64/libpthread.so.0 (0x00002b098fd60000)
+        /lib64/ld-linux-x86-64.so.2 (0x0000003185e00000)
 </pre></div>
 
 

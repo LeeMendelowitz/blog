@@ -63,85 +63,85 @@
 <p><a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/mapply.rmd">Download as R Markdown</a>.</p>
 <p><code>mapply</code> gives us a way to call a non-vectorized function in a vectorized way.</p>
 <p>From the R Documentation:</p>
-<div class="highlight"><pre><span class="n">mapply</span> <span class="n">is</span> <span class="n">a</span> <span class="n">multivariate</span> <span class="n">version</span> <span class="n">of</span> <span class="n">sapply</span><span class="p">.</span> <span class="n">mapply</span> <span class="n">applies</span> <span class="n">FUN</span> <span class="n">to</span>
-<span class="n">the</span> <span class="n">first</span> <span class="n">elements</span> <span class="n">of</span> <span class="n">each</span> <span class="p">...</span> <span class="n">argument</span><span class="p">,</span> <span class="n">the</span> <span class="n">second</span> <span class="n">elements</span><span class="p">,</span>
-<span class="n">the</span> <span class="n">third</span> <span class="n">elements</span><span class="p">,</span> <span class="n">and</span> <span class="n">so</span> <span class="n">on</span><span class="p">.</span> <span class="n">Arguments</span> <span class="n">are</span> <span class="n">recycled</span> <span class="k">if</span> <span class="n">necessary</span><span class="p">.</span>
+<div class="highlight"><pre><span></span>mapply is a multivariate version of sapply. mapply applies FUN to
+the first elements of each ... argument, the second elements,
+the third elements, and so on. Arguments are recycled if necessary.
 
-<span class="n">mapply</span><span class="p">(</span><span class="n">FUN</span><span class="p">,</span> <span class="p">...,</span> <span class="n">MoreArgs</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">SIMPLIFY</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span>
-       <span class="n">USE</span><span class="p">.</span><span class="n">NAMES</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span>
+mapply(FUN, ..., MoreArgs = NULL, SIMPLIFY = TRUE,
+       USE.NAMES = TRUE)
 </pre></div>
 
 
 <h3>Example</h3>
-<div class="highlight"><pre>list<span class="p">(</span>rep<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">4</span><span class="p">),</span> rep<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">),</span> rep<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> rep<span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="kt">list</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">4</span><span class="p">),</span> <span class="kp">rep</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">),</span> <span class="kp">rep</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="kp">rep</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## [[1]]</span>
-<span class="c">## [1] 1 1 1 1</span>
-<span class="c">## </span>
-<span class="c">## [[2]]</span>
-<span class="c">## [1] 2 2 2</span>
-<span class="c">## </span>
-<span class="c">## [[3]]</span>
-<span class="c">## [1] 3 3</span>
-<span class="c">## </span>
-<span class="c">## [[4]]</span>
-<span class="c">## [1] 4</span>
+<div class="highlight"><pre><span></span>## [[1]]
+## [1] 1 1 1 1
+## 
+## [[2]]
+## [1] 2 2 2
+## 
+## [[3]]
+## [1] 3 3
+## 
+## [[4]]
+## [1] 4
 </pre></div>
 
 
 <p>We see that we are repeatedly calling the same function (<code>rep</code>) where the first argument varies from 1 to 4, and the second argument varies from 4 to 1.
 Instead, we can use <code>mapply</code>:</p>
-<div class="highlight"><pre>mapply<span class="p">(</span>rep<span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="o">:</span><span class="m">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="kp">mapply</span><span class="p">(</span><span class="kp">rep</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="o">:</span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## [[1]]</span>
-<span class="c">## [1] 1 1 1 1</span>
-<span class="c">## </span>
-<span class="c">## [[2]]</span>
-<span class="c">## [1] 2 2 2</span>
-<span class="c">## </span>
-<span class="c">## [[3]]</span>
-<span class="c">## [1] 3 3</span>
-<span class="c">## </span>
-<span class="c">## [[4]]</span>
-<span class="c">## [1] 4</span>
+<div class="highlight"><pre><span></span>## [[1]]
+## [1] 1 1 1 1
+## 
+## [[2]]
+## [1] 2 2 2
+## 
+## [[3]]
+## [1] 3 3
+## 
+## [[4]]
+## [1] 4
 </pre></div>
 
 
 <h3>Example</h3>
-<div class="highlight"><pre>noise <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">,</span> mean<span class="p">,</span> std<span class="p">)</span> <span class="p">{</span>
-    rnorm<span class="p">(</span>n<span class="p">,</span> mean<span class="p">,</span> std<span class="p">)</span>
+<div class="highlight"><pre><span></span>noise <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">,</span> <span class="kp">mean</span><span class="p">,</span> std<span class="p">)</span> <span class="p">{</span>
+    rnorm<span class="p">(</span>n<span class="p">,</span> <span class="kp">mean</span><span class="p">,</span> std<span class="p">)</span>
 <span class="p">}</span>
 noise<span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## [1] 0.84136 0.04806 1.89196 2.76464 4.95360</span>
+<div class="highlight"><pre><span></span>## [1] 0.84136 0.04806 1.89196 2.76464 4.95360
 </pre></div>
 
 
 <p>The noise function is not vectorized. <code>mapply</code> gives us a way to make a vectorized call to  <code>noise</code>:</p>
-<div class="highlight"><pre>mapply<span class="p">(</span>noise<span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="kp">mapply</span><span class="p">(</span>noise<span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## [[1]]</span>
-<span class="c">## [1] 1.625</span>
-<span class="c">## </span>
-<span class="c">## [[2]]</span>
-<span class="c">## [1]  2.928 -1.840</span>
-<span class="c">## </span>
-<span class="c">## [[3]]</span>
-<span class="c">## [1] 2.459 4.195 1.939</span>
-<span class="c">## </span>
-<span class="c">## [[4]]</span>
-<span class="c">## [1] 5.195 3.731 5.249 2.959</span>
-<span class="c">## </span>
-<span class="c">## [[5]]</span>
-<span class="c">## [1] 8.291 1.949 5.751 4.250 4.868</span>
+<div class="highlight"><pre><span></span>## [[1]]
+## [1] 1.625
+## 
+## [[2]]
+## [1]  2.928 -1.840
+## 
+## [[3]]
+## [1] 2.459 4.195 1.939
+## 
+## [[4]]
+## [1] 5.195 3.731 5.249 2.959
+## 
+## [[5]]
+## [1] 8.291 1.949 5.751 4.250 4.868
 </pre></div>
             <a href="#" class="go-top">Go Top</a>
     <div class="comments">

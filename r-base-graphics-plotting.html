@@ -85,10 +85,10 @@
 <li><strong>axis</strong>: add axis tick/labels</li>
 </ul>
 <h3>Example 1</h3>
-<div class="highlight"><pre>x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
 y <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
-plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> pch <span class="o">=</span> <span class="m">21</span><span class="p">,</span> mar <span class="o">=</span> c<span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> bg <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> xlim <span class="o">=</span> c<span class="p">(</span><span class="m">-3</span><span class="p">,</span> 
-    <span class="m">3</span><span class="p">),</span> ylim <span class="o">=</span> c<span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">3</span><span class="p">))</span>
+plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> pch <span class="o">=</span> <span class="m">21</span><span class="p">,</span> mar <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> bg <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> xlim <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> 
+    <span class="m">3</span><span class="p">),</span> ylim <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">3</span><span class="p">))</span>
 fit <span class="o">&lt;-</span> lm<span class="p">(</span>y <span class="o">~</span> x<span class="p">)</span>
 abline<span class="p">(</span>fit<span class="p">,</span> lwd <span class="o">=</span> <span class="m">3</span><span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">)</span>
 title<span class="p">(</span><span class="s">&quot;My plot&quot;</span><span class="p">)</span>
@@ -101,10 +101,10 @@ legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span cl
 <h3>Example 2</h3>
 <p>To use multiple plots per page, give a <code>mfrow</code> argument to plot. Then the plots will be filled from left to right across the rows. (Specifying <code>mfcol</code> will fill in plots from top to bottom down the 
 columns. )</p>
-<div class="highlight"><pre>z <span class="o">&lt;-</span> rpois<span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>z <span class="o">&lt;-</span> rpois<span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
 plot.new<span class="p">()</span>
-par<span class="p">(</span>mfrow <span class="o">=</span> c<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
-par<span class="p">(</span>mar <span class="o">=</span> c<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+par<span class="p">(</span>mfrow <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+par<span class="p">(</span>mar <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
 plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> pch <span class="o">=</span> <span class="m">20</span><span class="p">,</span> main <span class="o">=</span> <span class="s">&quot;plot 1&quot;</span><span class="p">)</span>
 plot<span class="p">(</span>x<span class="p">,</span> z<span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">,</span> main <span class="o">=</span> <span class="s">&quot;plot 2&quot;</span><span class="p">)</span>
 plot<span class="p">(</span>y<span class="p">,</span> z<span class="p">,</span> pch <span class="o">=</span> <span class="m">1</span><span class="p">,</span> main <span class="o">=</span> <span class="s">&quot;plot 3&quot;</span><span class="p">)</span>
@@ -114,22 +114,22 @@ plot<span class="p">(</span>y<span class="p">,</span> z<span class="p">,</span> 
 <p><img alt="plot of chunk example2" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example2.png" /> </p>
 <h3>Example 3</h3>
 <p>The <code>points</code> function is useful for adding points to a plot for different groups.</p>
-<div class="highlight"><pre>plot.new<span class="p">()</span>
+<div class="highlight"><pre><span></span>plot.new<span class="p">()</span>
 x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
 y <span class="o">&lt;-</span> x <span class="o">+</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
-g <span class="o">&lt;-</span> gl<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> labels <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;Male&quot;</span><span class="p">,</span> <span class="s">&quot;Female&quot;</span><span class="p">))</span>
+g <span class="o">&lt;-</span> <span class="kp">gl</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> labels <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Male&quot;</span><span class="p">,</span> <span class="s">&quot;Female&quot;</span><span class="p">))</span>
 str<span class="p">(</span>g<span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">##  Factor w/ 2 levels &quot;Male&quot;,&quot;Female&quot;: 1 1 1 1 1 1 1 1 1 1 ...</span>
+<div class="highlight"><pre><span></span>##  Factor w/ 2 levels &quot;Male&quot;,&quot;Female&quot;: 1 1 1 1 1 1 1 1 1 1 ...
 </pre></div>
 
 
-<div class="highlight"><pre>plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;n&quot;</span><span class="p">)</span>  <span class="c1"># Draws no points</span>
+<div class="highlight"><pre><span></span>plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;n&quot;</span><span class="p">)</span>  <span class="c1"># Draws no points</span>
 points<span class="p">(</span>x<span class="p">[</span>g <span class="o">==</span> <span class="s">&quot;Male&quot;</span><span class="p">],</span> y<span class="p">[</span>g <span class="o">==</span> <span class="s">&quot;Male&quot;</span><span class="p">],</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> pch <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 points<span class="p">(</span>x<span class="p">[</span>g <span class="o">==</span> <span class="s">&quot;Female&quot;</span><span class="p">],</span> y<span class="p">[</span>g <span class="o">==</span> <span class="s">&quot;Female&quot;</span><span class="p">],</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">)</span>
-legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> c<span class="p">(</span><span class="s">&quot;Male&quot;</span><span class="p">,</span> <span class="s">&quot;Female&quot;</span><span class="p">),</span> col <span class="o">=</span> c<span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">),</span> pch <span class="o">=</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">19</span><span class="p">))</span>
+legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Male&quot;</span><span class="p">,</span> <span class="s">&quot;Female&quot;</span><span class="p">),</span> col <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">),</span> pch <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">19</span><span class="p">))</span>
 </pre></div>
 
 

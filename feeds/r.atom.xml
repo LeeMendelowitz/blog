@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lee On Coding</title><link href="https://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="https://leemendelowitz.github.io/blog/feeds/r.atom.xml" rel="self"></link><id>https://leemendelowitz.github.io/blog/</id><updated>2013-10-15T00:00:00+02:00</updated><entry><title>Mathematical expressions in plots</title><link href="https://leemendelowitz.github.io/blog/mathematical-expressions-in-plots.html" rel="alternate"></link><updated>2013-10-15T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-15:blog/mathematical-expressions-in-plots.html</id><summary type="html">&lt;p&gt;&lt;a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/plotmath.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lee On Coding</title><link href="https://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="https://leemendelowitz.github.io/blog/feeds/r.atom.xml" rel="self"></link><id>https://leemendelowitz.github.io/blog/</id><updated>2013-10-15T00:00:00+02:00</updated><entry><title>Mathematical expressions in plots</title><link href="https://leemendelowitz.github.io/blog/mathematical-expressions-in-plots.html" rel="alternate"></link><published>2013-10-15T00:00:00+02:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-15:blog/mathematical-expressions-in-plots.html</id><summary type="html">&lt;p&gt;&lt;a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/plotmath.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Mathematical expressions can be included in the plot title or axis labels. For more information, see &lt;code&gt;?plotmath&lt;/code&gt; or run the demo with &lt;code&gt;demo(plotmath)&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Here are some quick examples.&lt;/p&gt;
 &lt;h3&gt;Example 1&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;plot&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; main &lt;span class="o"&gt;=&lt;/span&gt; expression&lt;span class="p"&gt;(&lt;/span&gt;theta &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; ylab &lt;span class="o"&gt;=&lt;/span&gt; expression&lt;span class="p"&gt;(&lt;/span&gt;hat&lt;span class="p"&gt;(&lt;/span&gt;gamma&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; 
-    xlab &lt;span class="o"&gt;=&lt;/span&gt; expression&lt;span class="p"&gt;(&lt;/span&gt;sum&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;[&lt;/span&gt;i&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; y&lt;span class="p"&gt;[&lt;/span&gt;i&lt;span class="p"&gt;],&lt;/span&gt; i &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; n&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;plot&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; main &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;expression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;theta &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; ylab &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;expression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;hat&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;gamma&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; 
+    xlab &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;expression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;[&lt;/span&gt;i&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; y&lt;span class="p"&gt;[&lt;/span&gt;i&lt;span class="p"&gt;],&lt;/span&gt; i &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; n&lt;span class="p"&gt;)))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="plot of chunk example1" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example1.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;Example 2&lt;/h3&gt;
 &lt;p&gt;Strings can be pasted together with mathematic expressions:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;x &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-hist&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; xlab &lt;span class="o"&gt;=&lt;/span&gt; expression&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;The mean (&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; bar&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;) is &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; sum&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;[&lt;/span&gt;i&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;n&lt;span class="p"&gt;,&lt;/span&gt; i &lt;span class="o"&gt;==&lt;/span&gt; 
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;x &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+hist&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; xlab &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;expression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;The mean (&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; bar&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;) is &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="kp"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;[&lt;/span&gt;i&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;n&lt;span class="p"&gt;,&lt;/span&gt; i &lt;span class="o"&gt;==&lt;/span&gt; 
     &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; n&lt;span class="p"&gt;)))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -21,98 +21,98 @@ hist&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; xl
 &lt;h3&gt;Example 3&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;subsitute&lt;/code&gt; function can be used to substitute values into a
 mathematical expression.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;x &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;x &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 y &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; x &lt;span class="o"&gt;+&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; sd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-plot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; xlab &lt;span class="o"&gt;=&lt;/span&gt; substitute&lt;span class="p"&gt;(&lt;/span&gt;bar&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; k&lt;span class="p"&gt;,&lt;/span&gt; list&lt;span class="p"&gt;(&lt;/span&gt;k &lt;span class="o"&gt;=&lt;/span&gt; mean&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;))),&lt;/span&gt; ylab &lt;span class="o"&gt;=&lt;/span&gt; substitute&lt;span class="p"&gt;(&lt;/span&gt;bar&lt;span class="p"&gt;(&lt;/span&gt;y&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; 
-    k&lt;span class="p"&gt;,&lt;/span&gt; list&lt;span class="p"&gt;(&lt;/span&gt;k &lt;span class="o"&gt;=&lt;/span&gt; mean&lt;span class="p"&gt;(&lt;/span&gt;y&lt;span class="p"&gt;))))&lt;/span&gt;
+plot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; xlab &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;substitute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;bar&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; k&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;k &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;))),&lt;/span&gt; ylab &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;substitute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;bar&lt;span class="p"&gt;(&lt;/span&gt;y&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; 
+    k&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;k &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;y&lt;span class="p"&gt;))))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk example3" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example3.png" /&gt; &lt;/p&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>Plotting with Lattice</title><link href="https://leemendelowitz.github.io/blog/plotting-with-lattice.html" rel="alternate"></link><updated>2013-10-14T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-14:blog/plotting-with-lattice.html</id><summary type="html">&lt;p&gt;&lt;a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/lattice_demo.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="plot of chunk example3" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example3.png" /&gt; &lt;/p&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>Plotting with Lattice</title><link href="https://leemendelowitz.github.io/blog/plotting-with-lattice.html" rel="alternate"></link><published>2013-10-14T00:00:00+02:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-14:blog/plotting-with-lattice.html</id><summary type="html">&lt;p&gt;&lt;a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/lattice_demo.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The lattice library is useful for quickly making plots of multivariate data. It's easy to make plots which condition on one or more variables.&lt;/p&gt;
 &lt;h3&gt;Load the lattice library&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;library&lt;span class="p"&gt;(&lt;/span&gt;lattice&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lattice&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Ask for general information about the lattice package&lt;/span&gt;
 &lt;span class="sb"&gt;`?`&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;package&lt;span class="p"&gt;,&lt;/span&gt; lattice&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="c1"&gt;# See what is inside of the lattice package. It includes some datasets.&lt;/span&gt;
-library&lt;span class="p"&gt;(&lt;/span&gt;help &lt;span class="o"&gt;=&lt;/span&gt; lattice&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;help &lt;span class="o"&gt;=&lt;/span&gt; lattice&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Load the New York City environmental dataset.&lt;/span&gt;
 data&lt;span class="p"&gt;(&lt;/span&gt;environmental&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="sb"&gt;`?`&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;environmental&lt;span class="p"&gt;)&lt;/span&gt;
-head&lt;span class="p"&gt;(&lt;/span&gt;environmental&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kp"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;environmental&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;##   ozone radiation temperature wind&lt;/span&gt;
-&lt;span class="c"&gt;## 1    41       190          67  7.4&lt;/span&gt;
-&lt;span class="c"&gt;## 2    36       118          72  8.0&lt;/span&gt;
-&lt;span class="c"&gt;## 3    12       149          74 12.6&lt;/span&gt;
-&lt;span class="c"&gt;## 4    18       313          62 11.5&lt;/span&gt;
-&lt;span class="c"&gt;## 5    23       299          65  8.6&lt;/span&gt;
-&lt;span class="c"&gt;## 6    19        99          59 13.8&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;##   ozone radiation temperature wind
+## 1    41       190          67  7.4
+## 2    36       118          72  8.0
+## 3    12       149          74 12.6
+## 4    18       313          62 11.5
+## 5    23       299          65  8.6
+## 6    19        99          59 13.8
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Plot ozone vs. radiation using xyplot&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; main &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Ozone vs. Radiation&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; main &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Ozone vs. Radiation&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="plot of chunk section1" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section1.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;Investigate the relationship between ozone and radiation change as temperature changes&lt;/h3&gt;
 &lt;p&gt;To address this, break temperature into 4 overlapping ranges using the &lt;code&gt;equal.count&lt;/code&gt; function.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;summary&lt;span class="p"&gt;(&lt;/span&gt;environmental&lt;span class="o"&gt;$&lt;/span&gt;temperature&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;environmental&lt;span class="o"&gt;$&lt;/span&gt;temperature&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. &lt;/span&gt;
-&lt;span class="c"&gt;##    57.0    71.0    79.0    77.8    84.5    97.0&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    57.0    71.0    79.0    77.8    84.5    97.0
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# Cut the temperature variable into four different ranges.&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Cut the temperature variable into four different ranges.&lt;/span&gt;
 temp.cut &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; equal.count&lt;span class="p"&gt;(&lt;/span&gt;environmental&lt;span class="o"&gt;$&lt;/span&gt;temperature&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 temp.cut
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## Data:&lt;/span&gt;
-&lt;span class="c"&gt;##   [1] 67 72 74 62 65 59 61 69 66 68 58 64 66 57 68 62 59 73 61 61 67 81 79&lt;/span&gt;
-&lt;span class="c"&gt;##  [24] 76 82 90 87 82 77 72 65 73 76 84 85 81 83 83 88 92 92 89 73 81 80 81&lt;/span&gt;
-&lt;span class="c"&gt;##  [47] 82 84 87 85 74 86 85 82 86 88 86 83 81 81 81 82 89 90 90 86 82 80 77&lt;/span&gt;
-&lt;span class="c"&gt;##  [70] 79 76 78 78 77 72 79 81 86 97 94 96 94 91 92 93 93 87 84 80 78 75 73&lt;/span&gt;
-&lt;span class="c"&gt;##  [93] 81 76 77 71 71 78 67 76 68 82 64 71 81 69 63 70 75 76 68&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## Intervals:&lt;/span&gt;
-&lt;span class="c"&gt;##    min  max count&lt;/span&gt;
-&lt;span class="c"&gt;## 1 56.5 76.5    46&lt;/span&gt;
-&lt;span class="c"&gt;## 2 67.5 81.5    51&lt;/span&gt;
-&lt;span class="c"&gt;## 3 75.5 86.5    51&lt;/span&gt;
-&lt;span class="c"&gt;## 4 80.5 97.5    51&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## Overlap between adjacent intervals:&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 27 30 31&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## 
+## Data:
+##   [1] 67 72 74 62 65 59 61 69 66 68 58 64 66 57 68 62 59 73 61 61 67 81 79
+##  [24] 76 82 90 87 82 77 72 65 73 76 84 85 81 83 83 88 92 92 89 73 81 80 81
+##  [47] 82 84 87 85 74 86 85 82 86 88 86 83 81 81 81 82 89 90 90 86 82 80 77
+##  [70] 79 76 78 78 77 72 79 81 86 97 94 96 94 91 92 93 93 87 84 80 78 75 73
+##  [93] 81 76 77 71 71 78 67 76 68 82 64 71 81 69 63 70 75 76 68
+## 
+## Intervals:
+##    min  max count
+## 1 56.5 76.5    46
+## 2 67.5 81.5    51
+## 3 75.5 86.5    51
+## 4 80.5 97.5    51
+## 
+## Overlap between adjacent intervals:
+## [1] 27 30 31
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# Default layout. This orders panel from left to right, bottom to top.&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Default layout. This orders panel from left to right, bottom to top.&lt;/span&gt;
 xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="plot of chunk section2a" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section2a1.png" /&gt; &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# One column layout.&lt;/span&gt;
-xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; layout &lt;span class="o"&gt;=&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# One column layout.&lt;/span&gt;
+xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; layout &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="plot of chunk section2a" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section2a2.png" /&gt; &lt;/p&gt;
 &lt;p&gt;Use the &lt;code&gt;as.table&lt;/code&gt; argument to draw panels in order from left to right, top to bottom.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# One column, in ascending order of temperature range.&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# One column, in ascending order of temperature range.&lt;/span&gt;
 xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -120,7 +120,7 @@ xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span
 &lt;p&gt;&lt;img alt="plot of chunk section2b" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section2b.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;Add a fit to each panel.&lt;/h3&gt;
 &lt;p&gt;Add a fit to each panel using a custom panel function. Note the use of &lt;code&gt;...&lt;/code&gt; which allows for the &lt;code&gt;xyplot&lt;/code&gt; parameters such as &lt;code&gt;pch&lt;/code&gt; to be passed through the custom panel function.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; layout &lt;span class="o"&gt;=&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; 
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; layout &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; 
     as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; panel &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         panel.xyplot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         fit &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lm&lt;span class="p"&gt;(&lt;/span&gt;y &lt;span class="o"&gt;~&lt;/span&gt; x&lt;span class="p"&gt;)&lt;/span&gt;
@@ -130,7 +130,7 @@ xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span
 
 
 &lt;p&gt;&lt;img alt="plot of chunk section3" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section31.png" /&gt; &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
     pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; panel &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         panel.xyplot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         panel.loess&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -140,35 +140,35 @@ xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span
 
 &lt;p&gt;&lt;img alt="plot of chunk section3" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section32.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;Condition on both wind and temperature.&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;wind.cut &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; equal.count&lt;span class="p"&gt;(&lt;/span&gt;environmental&lt;span class="o"&gt;$&lt;/span&gt;wind&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wind.cut &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; equal.count&lt;span class="p"&gt;(&lt;/span&gt;environmental&lt;span class="o"&gt;$&lt;/span&gt;wind&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 wind.cut
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## Data:&lt;/span&gt;
-&lt;span class="c"&gt;##   [1]  7.4  8.0 12.6 11.5  8.6 13.8 20.1  9.7  9.2 10.9 13.2 11.5 12.0 18.4&lt;/span&gt;
-&lt;span class="c"&gt;##  [15] 11.5  9.7  9.7 16.6  9.7 12.0 12.0 14.9  5.7  7.4  9.7 13.8 11.5  8.0&lt;/span&gt;
-&lt;span class="c"&gt;##  [29] 14.9 20.7  9.2 11.5 10.3  4.0  9.2  9.2  4.6 10.9  5.1  6.3  5.7  7.4&lt;/span&gt;
-&lt;span class="c"&gt;##  [43] 14.3 14.9 14.3  6.9 10.3  6.3  5.1 11.5  6.9  8.6  8.0  8.6 12.0  7.4&lt;/span&gt;
-&lt;span class="c"&gt;##  [57]  7.4  7.4  9.2  6.9 13.8  7.4  4.0 10.3  8.0 11.5 11.5  9.7 10.3  6.3&lt;/span&gt;
-&lt;span class="c"&gt;##  [71]  7.4 10.9 10.3 15.5 14.3  9.7  3.4  8.0  9.7  2.3  6.3  6.3  6.9  5.1&lt;/span&gt;
-&lt;span class="c"&gt;##  [85]  2.8  4.6  7.4 15.5 10.9 10.3 10.9  9.7 14.9 15.5  6.3 10.9 11.5  6.9&lt;/span&gt;
-&lt;span class="c"&gt;##  [99] 13.8 10.3 10.3  8.0 12.6  9.2 10.3 10.3 16.6  6.9 14.3  8.0 11.5&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## Intervals:&lt;/span&gt;
-&lt;span class="c"&gt;##     min   max count&lt;/span&gt;
-&lt;span class="c"&gt;## 1  2.05  9.45    49&lt;/span&gt;
-&lt;span class="c"&gt;## 2  6.65 10.55    50&lt;/span&gt;
-&lt;span class="c"&gt;## 3  8.95 12.85    47&lt;/span&gt;
-&lt;span class="c"&gt;## 4 10.05 20.95    53&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## Overlap between adjacent intervals:&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 31 25 32&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## 
+## Data:
+##   [1]  7.4  8.0 12.6 11.5  8.6 13.8 20.1  9.7  9.2 10.9 13.2 11.5 12.0 18.4
+##  [15] 11.5  9.7  9.7 16.6  9.7 12.0 12.0 14.9  5.7  7.4  9.7 13.8 11.5  8.0
+##  [29] 14.9 20.7  9.2 11.5 10.3  4.0  9.2  9.2  4.6 10.9  5.1  6.3  5.7  7.4
+##  [43] 14.3 14.9 14.3  6.9 10.3  6.3  5.1 11.5  6.9  8.6  8.0  8.6 12.0  7.4
+##  [57]  7.4  7.4  9.2  6.9 13.8  7.4  4.0 10.3  8.0 11.5 11.5  9.7 10.3  6.3
+##  [71]  7.4 10.9 10.3 15.5 14.3  9.7  3.4  8.0  9.7  2.3  6.3  6.3  6.9  5.1
+##  [85]  2.8  4.6  7.4 15.5 10.9 10.3 10.9  9.7 14.9 15.5  6.3 10.9 11.5  6.9
+##  [99] 13.8 10.3 10.3  8.0 12.6  9.2 10.3 10.3 16.6  6.9 14.3  8.0 11.5
+## 
+## Intervals:
+##     min   max count
+## 1  2.05  9.45    49
+## 2  6.65 10.55    50
+## 3  8.95 12.85    47
+## 4 10.05 20.95    53
+## 
+## Overlap between adjacent intervals:
+## [1] 31 25 32
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut &lt;span class="o"&gt;*&lt;/span&gt; wind.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xyplot&lt;span class="p"&gt;(&lt;/span&gt;ozone &lt;span class="o"&gt;~&lt;/span&gt; radiation &lt;span class="o"&gt;|&lt;/span&gt; temp.cut &lt;span class="o"&gt;*&lt;/span&gt; wind.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
     pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; panel &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         panel.xyplot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         panel.loess&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;)&lt;/span&gt;
@@ -179,111 +179,111 @@ wind.cut
 &lt;p&gt;&lt;img alt="plot of chunk section4" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section4.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;splom&lt;/h3&gt;
 &lt;p&gt;Use splom to draw conditional scatter plot matrices.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;splom&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;environmental&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;splom&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;environmental&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="plot of chunk section5" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section5.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;histogram&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;histogram&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;temperature &lt;span class="o"&gt;|&lt;/span&gt; wind.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;histogram&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;temperature &lt;span class="o"&gt;|&lt;/span&gt; wind.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="plot of chunk section 6" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section_61.png" /&gt; &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;histogram&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;ozone &lt;span class="o"&gt;|&lt;/span&gt; wind.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;histogram&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;ozone &lt;span class="o"&gt;|&lt;/span&gt; wind.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="plot of chunk section 6" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section_62.png" /&gt; &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;histogram&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;ozone &lt;span class="o"&gt;|&lt;/span&gt; wind.cut &lt;span class="o"&gt;*&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;histogram&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;ozone &lt;span class="o"&gt;|&lt;/span&gt; wind.cut &lt;span class="o"&gt;*&lt;/span&gt; temp.cut&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; environmental&lt;span class="p"&gt;,&lt;/span&gt; as.table &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk section 6" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section_63.png" /&gt; &lt;/p&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>mapply</title><link href="https://leemendelowitz.github.io/blog/mapply.html" rel="alternate"></link><updated>2013-10-13T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-13:blog/mapply.html</id><summary type="html">&lt;!--- mapply --&gt;
+&lt;p&gt;&lt;img alt="plot of chunk section 6" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/latticeplotting_section_63.png" /&gt; &lt;/p&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>mapply</title><link href="https://leemendelowitz.github.io/blog/mapply.html" rel="alternate"></link><published>2013-10-13T00:00:00+02:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-13:blog/mapply.html</id><summary type="html">&lt;!--- mapply --&gt;
 
 &lt;p&gt;&lt;a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/mapply.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;mapply&lt;/code&gt; gives us a way to call a non-vectorized function in a vectorized way.&lt;/p&gt;
 &lt;p&gt;From the R Documentation:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;mapply&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;multivariate&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;sapply&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;mapply&lt;/span&gt; &lt;span class="n"&gt;applies&lt;/span&gt; &lt;span class="n"&gt;FUN&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt;
-&lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="n"&gt;elements&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="n"&gt;argument&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;second&lt;/span&gt; &lt;span class="n"&gt;elements&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;third&lt;/span&gt; &lt;span class="n"&gt;elements&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;so&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Arguments&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;recycled&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;necessary&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mapply is a multivariate version of sapply. mapply applies FUN to
+the first elements of each ... argument, the second elements,
+the third elements, and so on. Arguments are recycled if necessary.
 
-&lt;span class="n"&gt;mapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;FUN&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;...,&lt;/span&gt; &lt;span class="n"&gt;MoreArgs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;SIMPLIFY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-       &lt;span class="n"&gt;USE&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;NAMES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+mapply(FUN, ..., MoreArgs = NULL, SIMPLIFY = TRUE,
+       USE.NAMES = TRUE)
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Example&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;list&lt;span class="p"&gt;(&lt;/span&gt;rep&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; rep&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; rep&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; rep&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;rep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="kp"&gt;rep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="kp"&gt;rep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="kp"&gt;rep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## [[1]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 1 1 1 1&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## [[2]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 2 2 2&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## [[3]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 3 3&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## [[4]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 4&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## [[1]]
+## [1] 1 1 1 1
+## 
+## [[2]]
+## [1] 2 2 2
+## 
+## [[3]]
+## [1] 3 3
+## 
+## [[4]]
+## [1] 4
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;We see that we are repeatedly calling the same function (&lt;code&gt;rep&lt;/code&gt;) where the first argument varies from 1 to 4, and the second argument varies from 4 to 1.
 Instead, we can use &lt;code&gt;mapply&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;mapply&lt;span class="p"&gt;(&lt;/span&gt;rep&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;mapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;rep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## [[1]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 1 1 1 1&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## [[2]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 2 2 2&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## [[3]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 3 3&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## [[4]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 4&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## [[1]]
+## [1] 1 1 1 1
+## 
+## [[2]]
+## [1] 2 2 2
+## 
+## [[3]]
+## [1] 3 3
+## 
+## [[4]]
+## [1] 4
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Example&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;noise &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;n&lt;span class="p"&gt;,&lt;/span&gt; mean&lt;span class="p"&gt;,&lt;/span&gt; std&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    rnorm&lt;span class="p"&gt;(&lt;/span&gt;n&lt;span class="p"&gt;,&lt;/span&gt; mean&lt;span class="p"&gt;,&lt;/span&gt; std&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;noise &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;n&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; std&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    rnorm&lt;span class="p"&gt;(&lt;/span&gt;n&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; std&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 noise&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## [1] 0.84136 0.04806 1.89196 2.76464 4.95360&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## [1] 0.84136 0.04806 1.89196 2.76464 4.95360
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The noise function is not vectorized. &lt;code&gt;mapply&lt;/code&gt; gives us a way to make a vectorized call to  &lt;code&gt;noise&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;mapply&lt;span class="p"&gt;(&lt;/span&gt;noise&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;mapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;noise&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## [[1]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 1.625&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## [[2]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1]  2.928 -1.840&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## [[3]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 2.459 4.195 1.939&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## [[4]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 5.195 3.731 5.249 2.959&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## [[5]]&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 8.291 1.949 5.751 4.250 4.868&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>R Base Graphics Plotting</title><link href="https://leemendelowitz.github.io/blog/r-base-graphics-plotting.html" rel="alternate"></link><updated>2013-10-13T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-13:blog/r-base-graphics-plotting.html</id><summary type="html">&lt;!--- R Base Graphics Plotting --&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## [[1]]
+## [1] 1.625
+## 
+## [[2]]
+## [1]  2.928 -1.840
+## 
+## [[3]]
+## [1] 2.459 4.195 1.939
+## 
+## [[4]]
+## [1] 5.195 3.731 5.249 2.959
+## 
+## [[5]]
+## [1] 8.291 1.949 5.751 4.250 4.868
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>R Base Graphics Plotting</title><link href="https://leemendelowitz.github.io/blog/r-base-graphics-plotting.html" rel="alternate"></link><published>2013-10-13T00:00:00+02:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-13:blog/r-base-graphics-plotting.html</id><summary type="html">&lt;!--- R Base Graphics Plotting --&gt;
 
 &lt;p&gt;&lt;a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/basePlotting.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;Important parameters&lt;/h3&gt;
@@ -310,10 +310,10 @@ noise&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt
 &lt;li&gt;&lt;strong&gt;axis&lt;/strong&gt;: add axis tick/labels&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Example 1&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;x &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;x &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 y &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-plot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;21&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; mar &lt;span class="o"&gt;=&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; bg &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; xlim &lt;span class="o"&gt;=&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;-3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
-    &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; ylim &lt;span class="o"&gt;=&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;-3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+plot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;21&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; mar &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; bg &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;black&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; xlim &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;-3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+    &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; ylim &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;-3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 fit &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lm&lt;span class="p"&gt;(&lt;/span&gt;y &lt;span class="o"&gt;~&lt;/span&gt; x&lt;span class="p"&gt;)&lt;/span&gt;
 abline&lt;span class="p"&gt;(&lt;/span&gt;fit&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 title&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;My plot&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -326,10 +326,10 @@ legend&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;toplef
 &lt;h3&gt;Example 2&lt;/h3&gt;
 &lt;p&gt;To use multiple plots per page, give a &lt;code&gt;mfrow&lt;/code&gt; argument to plot. Then the plots will be filled from left to right across the rows. (Specifying &lt;code&gt;mfcol&lt;/code&gt; will fill in plots from top to bottom down the 
 columns. )&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;z &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rpois&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;z &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rpois&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 plot.new&lt;span class="p"&gt;()&lt;/span&gt;
-par&lt;span class="p"&gt;(&lt;/span&gt;mfrow &lt;span class="o"&gt;=&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-par&lt;span class="p"&gt;(&lt;/span&gt;mar &lt;span class="o"&gt;=&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+par&lt;span class="p"&gt;(&lt;/span&gt;mfrow &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+par&lt;span class="p"&gt;(&lt;/span&gt;mar &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 plot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; main &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;plot 1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 plot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; z&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; main &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;plot 2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 plot&lt;span class="p"&gt;(&lt;/span&gt;y&lt;span class="p"&gt;,&lt;/span&gt; z&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; main &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;plot 3&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -339,79 +339,79 @@ plot&lt;span class="p"&gt;(&lt;/span&gt;y&lt;span class="p"&gt;,&lt;/span&gt; z&
 &lt;p&gt;&lt;img alt="plot of chunk example2" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example2.png" /&gt; &lt;/p&gt;
 &lt;h3&gt;Example 3&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;points&lt;/code&gt; function is useful for adding points to a plot for different groups.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;plot.new&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;plot.new&lt;span class="p"&gt;()&lt;/span&gt;
 x &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 y &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; x &lt;span class="o"&gt;+&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-g &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; gl&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; labels &lt;span class="o"&gt;=&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+g &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;gl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; labels &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 str&lt;span class="p"&gt;(&lt;/span&gt;g&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;##  Factor w/ 2 levels &amp;quot;Male&amp;quot;,&amp;quot;Female&amp;quot;: 1 1 1 1 1 1 1 1 1 1 ...&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;##  Factor w/ 2 levels &amp;quot;Male&amp;quot;,&amp;quot;Female&amp;quot;: 1 1 1 1 1 1 1 1 1 1 ...
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;plot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; type &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Draws no points&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;plot&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; y&lt;span class="p"&gt;,&lt;/span&gt; type &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Draws no points&lt;/span&gt;
 points&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;[&lt;/span&gt;g &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; y&lt;span class="p"&gt;[&lt;/span&gt;g &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 points&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;[&lt;/span&gt;g &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; y&lt;span class="p"&gt;[&lt;/span&gt;g &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-legend&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;topleft&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+legend&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;topleft&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="plot of chunk example3" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example3.png" /&gt; &lt;/p&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>tapply and split</title><link href="https://leemendelowitz.github.io/blog/tapply-and-split.html" rel="alternate"></link><updated>2013-10-13T00:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-13:blog/tapply-and-split.html</id><summary type="html">&lt;!--- tapply and split --&gt;
+&lt;p&gt;&lt;img alt="plot of chunk example3" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/baseplotting_example3.png" /&gt; &lt;/p&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry><entry><title>tapply and split</title><link href="https://leemendelowitz.github.io/blog/tapply-and-split.html" rel="alternate"></link><published>2013-10-13T00:00:00+02:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-13:blog/tapply-and-split.html</id><summary type="html">&lt;!--- tapply and split --&gt;
 
 &lt;p&gt;&lt;a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/tapply_and_split.rmd"&gt;Download as R Markdown&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;tapply&lt;/h2&gt;
 &lt;p&gt;Apply a function over subsets of a vector.&lt;/p&gt;
 &lt;h3&gt;Example: Take group means with tapply.&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;x &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; runif&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;x &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; runif&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 x
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;##  [1] -2.04333  0.72651  1.55476 -0.12411  1.08133 -0.30514  1.38638&lt;/span&gt;
-&lt;span class="c"&gt;##  [8]  0.35047  0.88147  1.80250  0.56072  0.54421  0.19270  0.67049&lt;/span&gt;
-&lt;span class="c"&gt;## [15]  0.83034  0.02640  0.98629  0.11223  0.10747  0.85049  1.37510&lt;/span&gt;
-&lt;span class="c"&gt;## [22]  0.56575  0.34138  1.01877  1.33956 -0.07667  2.12114  0.70827&lt;/span&gt;
-&lt;span class="c"&gt;## [29]  0.53336  2.15315&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;##  [1] -2.04333  0.72651  1.55476 -0.12411  1.08133 -0.30514  1.38638
+##  [8]  0.35047  0.88147  1.80250  0.56072  0.54421  0.19270  0.67049
+## [15]  0.83034  0.02640  0.98629  0.11223  0.10747  0.85049  1.37510
+## [22]  0.56575  0.34138  1.01877  1.33956 -0.07667  2.12114  0.70827
+## [29]  0.53336  2.15315
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;f &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; gl&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Generator factors&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;f &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;gl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Generator factors&lt;/span&gt;
 f
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;##  [1] 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3&lt;/span&gt;
-&lt;span class="c"&gt;## Levels: 1 2 3&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;##  [1] 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3
+## Levels: 1 2 3
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;By default, if the applied function returns a scalar, then tapply
 returns a vector. In this case we are applying the mean function,
 so the output of tapply is a numeric vector.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;tapply&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; f&lt;span class="p"&gt;,&lt;/span&gt; mean&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Take the mean of each group. Returns a vector.&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;tapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; f&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Take the mean of each group. Returns a vector.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;##      1      2      3 &lt;/span&gt;
-&lt;span class="c"&gt;## 0.5311 0.4881 1.0080&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;##      1      2      3 
+## 0.5311 0.4881 1.0080
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Without simplification, tapply always returns a list.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;tapply&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; f&lt;span class="p"&gt;,&lt;/span&gt; mean&lt;span class="p"&gt;,&lt;/span&gt; simplify &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;tapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; f&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; simplify &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## $`1`&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 0.5311&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`2`&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 0.4881&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`3`&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 1.008&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## $`1`
+## [1] 0.5311
+## 
+## $`2`
+## [1] 0.4881
+## 
+## $`3`
+## [1] 1.008
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -419,18 +419,18 @@ so the output of tapply is a numeric vector.&lt;/p&gt;
 &lt;p&gt;Range returns the minimum and maximum value for each group.
 Note that since the range function returns a vector, tapply returns
 a list.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;tapply&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; f&lt;span class="p"&gt;,&lt;/span&gt; range&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;tapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; f&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;range&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## $`1`&lt;/span&gt;
-&lt;span class="c"&gt;## [1] -2.043  1.803&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`2`&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 0.0264 0.9863&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`3`&lt;/span&gt;
-&lt;span class="c"&gt;## [1] -0.07667  2.15315&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## $`1`
+## [1] -2.043  1.803
+## 
+## $`2`
+## [1] 0.0264 0.9863
+## 
+## $`3`
+## [1] -0.07667  2.15315
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -438,208 +438,208 @@ a list.&lt;/p&gt;
 &lt;p&gt;The split function splits a vector int groups using a factor.
 Using split and then applying a function with lapply produces the same 
 resule as tapply:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;split&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; f&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; f&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## $`1`&lt;/span&gt;
-&lt;span class="c"&gt;##  [1] -2.0433  0.7265  1.5548 -0.1241  1.0813 -0.3051  1.3864  0.3505&lt;/span&gt;
-&lt;span class="c"&gt;##  [9]  0.8815  1.8025&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`2`&lt;/span&gt;
-&lt;span class="c"&gt;##  [1] 0.5607 0.5442 0.1927 0.6705 0.8303 0.0264 0.9863 0.1122 0.1075 0.8505&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`3`&lt;/span&gt;
-&lt;span class="c"&gt;##  [1]  1.37510  0.56575  0.34138  1.01877  1.33956 -0.07667  2.12114&lt;/span&gt;
-&lt;span class="c"&gt;##  [8]  0.70827  0.53336  2.15315&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## $`1`
+##  [1] -2.0433  0.7265  1.5548 -0.1241  1.0813 -0.3051  1.3864  0.3505
+##  [9]  0.8815  1.8025
+## 
+## $`2`
+##  [1] 0.5607 0.5442 0.1927 0.6705 0.8303 0.0264 0.9863 0.1122 0.1075 0.8505
+## 
+## $`3`
+##  [1]  1.37510  0.56575  0.34138  1.01877  1.33956 -0.07667  2.12114
+##  [8]  0.70827  0.53336  2.15315
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;lapply&lt;span class="p"&gt;(&lt;/span&gt;split&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; f&lt;span class="p"&gt;),&lt;/span&gt; mean&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Instead of tapply&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;lapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; f&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="kp"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Instead of tapply&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## $`1`&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 0.5311&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`2`&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 0.4881&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`3`&lt;/span&gt;
-&lt;span class="c"&gt;## [1] 1.008&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## $`1`
+## [1] 0.5311
+## 
+## $`2`
+## [1] 0.4881
+## 
+## $`3`
+## [1] 1.008
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Example: Air Quality by month&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;library&lt;span class="p"&gt;(&lt;/span&gt;datasets&lt;span class="p"&gt;)&lt;/span&gt;
-head&lt;span class="p"&gt;(&lt;/span&gt;airquality&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;datasets&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kp"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;airquality&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;##   Ozone Solar.R Wind Temp Month Day&lt;/span&gt;
-&lt;span class="c"&gt;## 1    41     190  7.4   67     5   1&lt;/span&gt;
-&lt;span class="c"&gt;## 2    36     118  8.0   72     5   2&lt;/span&gt;
-&lt;span class="c"&gt;## 3    12     149 12.6   74     5   3&lt;/span&gt;
-&lt;span class="c"&gt;## 4    18     313 11.5   62     5   4&lt;/span&gt;
-&lt;span class="c"&gt;## 5    NA      NA 14.3   56     5   5&lt;/span&gt;
-&lt;span class="c"&gt;## 6    28      NA 14.9   66     5   6&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;##   Ozone Solar.R Wind Temp Month Day
+## 1    41     190  7.4   67     5   1
+## 2    36     118  8.0   72     5   2
+## 3    12     149 12.6   74     5   3
+## 4    18     313 11.5   62     5   4
+## 5    NA      NA 14.3   56     5   5
+## 6    28      NA 14.9   66     5   6
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;s &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; split&lt;span class="p"&gt;(&lt;/span&gt;airquality&lt;span class="p"&gt;,&lt;/span&gt; airquality&lt;span class="o"&gt;$&lt;/span&gt;Month&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;s &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;airquality&lt;span class="p"&gt;,&lt;/span&gt; airquality&lt;span class="o"&gt;$&lt;/span&gt;Month&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;code&gt;s&lt;/code&gt; is a list of dataframes split by month:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;class&lt;span class="p"&gt;(&lt;/span&gt;s&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;class&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;s&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## [1] &amp;quot;list&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## [1] &amp;quot;list&amp;quot;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;class&lt;span class="p"&gt;(&lt;/span&gt;s&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;class&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;s&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## [1] &amp;quot;data.frame&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## [1] &amp;quot;data.frame&amp;quot;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;lapply&lt;span class="p"&gt;(&lt;/span&gt;s&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; head&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; n &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;lapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;s&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kp"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; n &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## $`5`&lt;/span&gt;
-&lt;span class="c"&gt;##   Ozone Solar.R Wind Temp Month Day&lt;/span&gt;
-&lt;span class="c"&gt;## 1    41     190  7.4   67     5   1&lt;/span&gt;
-&lt;span class="c"&gt;## 2    36     118  8.0   72     5   2&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`6`&lt;/span&gt;
-&lt;span class="c"&gt;##    Ozone Solar.R Wind Temp Month Day&lt;/span&gt;
-&lt;span class="c"&gt;## 32    NA     286  8.6   78     6   1&lt;/span&gt;
-&lt;span class="c"&gt;## 33    NA     287  9.7   74     6   2&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`7`&lt;/span&gt;
-&lt;span class="c"&gt;##    Ozone Solar.R Wind Temp Month Day&lt;/span&gt;
-&lt;span class="c"&gt;## 62   135     269  4.1   84     7   1&lt;/span&gt;
-&lt;span class="c"&gt;## 63    49     248  9.2   85     7   2&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`8`&lt;/span&gt;
-&lt;span class="c"&gt;##    Ozone Solar.R Wind Temp Month Day&lt;/span&gt;
-&lt;span class="c"&gt;## 93    39      83  6.9   81     8   1&lt;/span&gt;
-&lt;span class="c"&gt;## 94     9      24 13.8   81     8   2&lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`9`&lt;/span&gt;
-&lt;span class="c"&gt;##     Ozone Solar.R Wind Temp Month Day&lt;/span&gt;
-&lt;span class="c"&gt;## 124    96     167  6.9   91     9   1&lt;/span&gt;
-&lt;span class="c"&gt;## 125    78     197  5.1   92     9   2&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## $`5`
+##   Ozone Solar.R Wind Temp Month Day
+## 1    41     190  7.4   67     5   1
+## 2    36     118  8.0   72     5   2
+## 
+## $`6`
+##    Ozone Solar.R Wind Temp Month Day
+## 32    NA     286  8.6   78     6   1
+## 33    NA     287  9.7   74     6   2
+## 
+## $`7`
+##    Ozone Solar.R Wind Temp Month Day
+## 62   135     269  4.1   84     7   1
+## 63    49     248  9.2   85     7   2
+## 
+## $`8`
+##    Ozone Solar.R Wind Temp Month Day
+## 93    39      83  6.9   81     8   1
+## 94     9      24 13.8   81     8   2
+## 
+## $`9`
+##     Ozone Solar.R Wind Temp Month Day
+## 124    96     167  6.9   91     9   1
+## 125    78     197  5.1   92     9   2
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;After splitting by month, we can use &lt;code&gt;lapply&lt;/code&gt; to take the column means:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;takeMeans &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; colMeans&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;[,&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Ozone&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Solar.R&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Wind&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; na.rm &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-lapply&lt;span class="p"&gt;(&lt;/span&gt;s&lt;span class="p"&gt;,&lt;/span&gt; takeMeans&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;takeMeans &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kp"&gt;colMeans&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;[,&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Ozone&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Solar.R&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Wind&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; na.rm &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kp"&gt;lapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;s&lt;span class="p"&gt;,&lt;/span&gt; takeMeans&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## $`5`&lt;/span&gt;
-&lt;span class="c"&gt;##   Ozone Solar.R    Wind &lt;/span&gt;
-&lt;span class="c"&gt;##   23.62  181.30   11.62 &lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`6`&lt;/span&gt;
-&lt;span class="c"&gt;##   Ozone Solar.R    Wind &lt;/span&gt;
-&lt;span class="c"&gt;##   29.44  190.17   10.27 &lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`7`&lt;/span&gt;
-&lt;span class="c"&gt;##   Ozone Solar.R    Wind &lt;/span&gt;
-&lt;span class="c"&gt;##  59.115 216.484   8.942 &lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`8`&lt;/span&gt;
-&lt;span class="c"&gt;##   Ozone Solar.R    Wind &lt;/span&gt;
-&lt;span class="c"&gt;##  59.962 171.857   8.794 &lt;/span&gt;
-&lt;span class="c"&gt;## &lt;/span&gt;
-&lt;span class="c"&gt;## $`9`&lt;/span&gt;
-&lt;span class="c"&gt;##   Ozone Solar.R    Wind &lt;/span&gt;
-&lt;span class="c"&gt;##   31.45  167.43   10.18&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## $`5`
+##   Ozone Solar.R    Wind 
+##   23.62  181.30   11.62 
+## 
+## $`6`
+##   Ozone Solar.R    Wind 
+##   29.44  190.17   10.27 
+## 
+## $`7`
+##   Ozone Solar.R    Wind 
+##  59.115 216.484   8.942 
+## 
+## $`8`
+##   Ozone Solar.R    Wind 
+##  59.962 171.857   8.794 
+## 
+## $`9`
+##   Ozone Solar.R    Wind 
+##   31.45  167.43   10.18
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Using &lt;code&gt;sapply&lt;/code&gt; instead of &lt;code&gt;lapply&lt;/code&gt; simplifies the output into a matrix,
 so we can easily see the mean values by month.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;sapply&lt;span class="p"&gt;(&lt;/span&gt;s&lt;span class="p"&gt;,&lt;/span&gt; takeMeans&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;sapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;s&lt;span class="p"&gt;,&lt;/span&gt; takeMeans&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;##              5      6       7       8      9&lt;/span&gt;
-&lt;span class="c"&gt;## Ozone    23.62  29.44  59.115  59.962  31.45&lt;/span&gt;
-&lt;span class="c"&gt;## Solar.R 181.30 190.17 216.484 171.857 167.43&lt;/span&gt;
-&lt;span class="c"&gt;## Wind     11.62  10.27   8.942   8.794  10.18&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;##              5      6       7       8      9
+## Ozone    23.62  29.44  59.115  59.962  31.45
+## Solar.R 181.30 190.17 216.484 171.857 167.43
+## Wind     11.62  10.27   8.942   8.794  10.18
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Splitting on more than one level&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;x &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-f1 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; gl&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Create a factor with two levels&lt;/span&gt;
-f2 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; gl&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Create a factor with five levels&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;x &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rnorm&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+f1 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;gl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Create a factor with two levels&lt;/span&gt;
+f2 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;gl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Create a factor with five levels&lt;/span&gt;
 str&lt;span class="p"&gt;(&lt;/span&gt;f1&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;##  Factor w/ 2 levels &amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;: 1 1 1 1 1 2 2 2 2 2&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;##  Factor w/ 2 levels &amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;: 1 1 1 1 1 2 2 2 2 2
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;str&lt;span class="p"&gt;(&lt;/span&gt;f2&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;str&lt;span class="p"&gt;(&lt;/span&gt;f2&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;##  Factor w/ 5 levels &amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;,&amp;quot;4&amp;quot;,..: 1 1 2 2 3 3 4 4 5 5&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;##  Factor w/ 5 levels &amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;,&amp;quot;4&amp;quot;,..: 1 1 2 2 3 3 4 4 5 5
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;interaction&lt;span class="p"&gt;(&lt;/span&gt;f1&lt;span class="p"&gt;,&lt;/span&gt; f2&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Compute a factor with 10 levels, which is the interaction of the two factors&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;interaction&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;f1&lt;span class="p"&gt;,&lt;/span&gt; f2&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Compute a factor with 10 levels, which is the interaction of the two factors&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;##  [1] 1.1 1.1 1.2 1.2 1.3 2.3 2.4 2.4 2.5 2.5&lt;/span&gt;
-&lt;span class="c"&gt;## Levels: 1.1 2.1 1.2 2.2 1.3 2.3 1.4 2.4 1.5 2.5&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;##  [1] 1.1 1.1 1.2 1.2 1.3 2.3 2.4 2.4 2.5 2.5
+## Levels: 1.1 2.1 1.2 2.2 1.3 2.3 1.4 2.4 1.5 2.5
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Note that some levels of the interaction are empty for our data vector &lt;code&gt;x&lt;/code&gt;. For example, none of the samples in &lt;code&gt;x&lt;/code&gt; have level 2.1.&lt;/p&gt;
 &lt;p&gt;We can use multiple factor levels with &lt;code&gt;split&lt;/code&gt; by passing the interaction
 factor. Instead of calling &lt;code&gt;interaction&lt;/code&gt; explicitly, if we pass the factors in a list, the &lt;code&gt;interaction&lt;/code&gt; function is automatically called:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;str&lt;span class="p"&gt;(&lt;/span&gt;split&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; list&lt;span class="p"&gt;(&lt;/span&gt;f1&lt;span class="p"&gt;,&lt;/span&gt; f2&lt;span class="p"&gt;)))&lt;/span&gt;  &lt;span class="c1"&gt;# Automatically calls interaction(f1,f2)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;str&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;f1&lt;span class="p"&gt;,&lt;/span&gt; f2&lt;span class="p"&gt;)))&lt;/span&gt;  &lt;span class="c1"&gt;# Automatically calls interaction(f1,f2)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## List of 10&lt;/span&gt;
-&lt;span class="c"&gt;##  $ 1.1: num [1:2] 0.993 0.939&lt;/span&gt;
-&lt;span class="c"&gt;##  $ 2.1: num(0) &lt;/span&gt;
-&lt;span class="c"&gt;##  $ 1.2: num [1:2] 1.092 -0.382&lt;/span&gt;
-&lt;span class="c"&gt;##  $ 2.2: num(0) &lt;/span&gt;
-&lt;span class="c"&gt;##  $ 1.3: num -0.985&lt;/span&gt;
-&lt;span class="c"&gt;##  $ 2.3: num 1.53&lt;/span&gt;
-&lt;span class="c"&gt;##  $ 1.4: num(0) &lt;/span&gt;
-&lt;span class="c"&gt;##  $ 2.4: num [1:2] -0.066 -1.64&lt;/span&gt;
-&lt;span class="c"&gt;##  $ 1.5: num(0) &lt;/span&gt;
-&lt;span class="c"&gt;##  $ 2.5: num [1:2] 0.452 -1.324&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## List of 10
+##  $ 1.1: num [1:2] 0.993 0.939
+##  $ 2.1: num(0) 
+##  $ 1.2: num [1:2] 1.092 -0.382
+##  $ 2.2: num(0) 
+##  $ 1.3: num -0.985
+##  $ 2.3: num 1.53
+##  $ 1.4: num(0) 
+##  $ 2.4: num [1:2] -0.066 -1.64
+##  $ 1.5: num(0) 
+##  $ 2.5: num [1:2] 0.452 -1.324
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Note that some levels are empty, but they still appear in list output by
 &lt;code&gt;split&lt;/code&gt;.  Empty levels can be dropped by passing  &lt;code&gt;drop = TRUE&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;str&lt;span class="p"&gt;(&lt;/span&gt;split&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; list&lt;span class="p"&gt;(&lt;/span&gt;f1&lt;span class="p"&gt;,&lt;/span&gt; f2&lt;span class="p"&gt;),&lt;/span&gt; drop &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;str&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;f1&lt;span class="p"&gt;,&lt;/span&gt; f2&lt;span class="p"&gt;),&lt;/span&gt; drop &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;## List of 6&lt;/span&gt;
-&lt;span class="c"&gt;##  $ 1.1: num [1:2] 0.993 0.939&lt;/span&gt;
-&lt;span class="c"&gt;##  $ 1.2: num [1:2] 1.092 -0.382&lt;/span&gt;
-&lt;span class="c"&gt;##  $ 1.3: num -0.985&lt;/span&gt;
-&lt;span class="c"&gt;##  $ 2.3: num 1.53&lt;/span&gt;
-&lt;span class="c"&gt;##  $ 2.4: num [1:2] -0.066 -1.64&lt;/span&gt;
-&lt;span class="c"&gt;##  $ 2.5: num [1:2] 0.452 -1.324&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;## List of 6
+##  $ 1.1: num [1:2] 0.993 0.939
+##  $ 1.2: num [1:2] 1.092 -0.382
+##  $ 1.3: num -0.985
+##  $ 2.3: num 1.53
+##  $ 2.4: num [1:2] -0.066 -1.64
+##  $ 2.5: num [1:2] 0.452 -1.324
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="R"></category><category term="Computing For Data Analysis"></category></entry></feed>

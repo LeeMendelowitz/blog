@@ -62,7 +62,7 @@
 <h2><code>sys.path</code></h2>
 <p>Python imports work by searching the directories listed in <code>sys.path</code>. </p>
 <p>Using my default Ubuntu 14.04 Python:</p>
-<div class="highlight"><pre>&gt; import sys
+<div class="highlight"><pre><span></span>&gt; import sys
 &gt; print <span class="s1">&#39;\n&#39;</span>.join<span class="o">(</span>sys.path<span class="o">)</span>
 
 /usr/lib/python2.7
@@ -88,25 +88,25 @@ any manipulations made to it by the <code>site</code> module.</p>
 <p>It's a bit involved.</p>
 <h3>You can manipulate <code>sys.path</code></h3>
 <p>You can manipulate <code>sys.path</code> during a Python session and this will change how Python finds modules. For example:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
 
-<span class="c"># This won&#39;t work - there is no hi module</span>
+<span class="c1"># This won&#39;t work - there is no hi module</span>
 <span class="kn">import</span> <span class="nn">hi</span> 
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">ImportError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="n">hi</span>
 
-<span class="c"># Create a hi module in your home directory.</span>
-<span class="n">home_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">&quot;~&quot;</span><span class="p">)</span>
-<span class="n">my_module_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">home_dir</span><span class="p">,</span> <span class="s">&quot;hi.py&quot;</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">my_module_file</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;print &quot;hi&quot;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;a=10</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="c1"># Create a hi module in your home directory.</span>
+<span class="n">home_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span>
+<span class="n">my_module_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">home_dir</span><span class="p">,</span> <span class="s2">&quot;hi.py&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">my_module_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;print &quot;hi&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;a=10</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="c"># Add the home directory to sys.path</span>
+<span class="c1"># Add the home directory to sys.path</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span>
 
-<span class="c"># Now this works, and prints hi!</span>
+<span class="c1"># Now this works, and prints hi!</span>
 <span class="kn">import</span> <span class="nn">hi</span> 
 <span class="k">print</span> <span class="n">hi</span><span class="o">.</span><span class="n">a</span>
 </pre></div>
@@ -114,9 +114,9 @@ any manipulations made to it by the <code>site</code> module.</p>
 
 <h3>The module <code>__file__</code> attribute</h3>
 <p>When you import a module, you usually can check the <code>__file__</code> attribute of the module to see where the module is in your filesystem:</p>
-<div class="highlight"><pre><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="o">&gt;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">__file__</span>
-<span class="s">&#39;/usr/local/lib/python2.7/dist-packages/numpy/__init__.pyc&#39;</span>
+<span class="s1">&#39;/usr/local/lib/python2.7/dist-packages/numpy/__init__.pyc&#39;</span>
 </pre></div>
 
 
@@ -125,11 +125,11 @@ any manipulations made to it by the <code>site</code> module.</p>
 <p>The <strong>file</strong> attribute is not present for C modules that are statically linked into the interpreter; for extension modules loaded dynamically from a shared library, it is the pathname of the shared library file.</p>
 </blockquote>
 <p>So, for example this doesn't work:</p>
-<div class="highlight"><pre><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">sys</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">sys</span>
 <span class="o">&gt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">__file__</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="s">&#39;module&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s">&#39;__file__&#39;</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;module&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;__file__&#39;</span>
 </pre></div>
 
 
@@ -138,30 +138,30 @@ any manipulations made to it by the <code>site</code> module.</p>
 <p>Python exposes the entire <code>import</code> system through the <a href="https://docs.python.org/2.7/library/imp.html"><code>imp</code> module</a>. 
 That's pretty cool that all of this stuff is exposed for us to abuse, if we wanted to.</p>
 <p><code>imp.find_module</code> can be used to find a module:</p>
-<div class="highlight"><pre><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">imp</span>
-<span class="o">&gt;</span> <span class="n">imp</span><span class="o">.</span><span class="n">find_module</span><span class="p">(</span><span class="s">&#39;numpy&#39;</span><span class="p">)</span>
-<span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">&#39;/usr/local/lib/python2.7/dist-packages/numpy&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">imp</span>
+<span class="o">&gt;</span> <span class="n">imp</span><span class="o">.</span><span class="n">find_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;/usr/local/lib/python2.7/dist-packages/numpy&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 </pre></div>
 
 
 <p>You can also <code>import</code> and arbitrary Python source as a module using <code>imp.load_source</code>. This is the same example before,
 except imports our module using <code>imp</code> instead of by manipulating <code>sys.path</code>:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">imp</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">imp</span>
 
-<span class="c"># Create a hi module in your home directory.</span>
-<span class="n">home_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">&quot;~&quot;</span><span class="p">)</span>
-<span class="n">my_module_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">home_dir</span><span class="p">,</span> <span class="s">&quot;hi.py&quot;</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">my_module_file</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;print &quot;hi&quot;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;a=10</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="c1"># Create a hi module in your home directory.</span>
+<span class="n">home_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span>
+<span class="n">my_module_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">home_dir</span><span class="p">,</span> <span class="s2">&quot;hi.py&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">my_module_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;print &quot;hi&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;a=10</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="c"># Load the hi module using imp</span>
-<span class="n">hi</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="s">&#39;hi&#39;</span><span class="p">,</span> <span class="n">my_module_file</span><span class="p">)</span>
+<span class="c1"># Load the hi module using imp</span>
+<span class="n">hi</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="n">my_module_file</span><span class="p">)</span>
 
-<span class="c"># Now this works, and prints hi!</span>
+<span class="c1"># Now this works, and prints hi!</span>
 <span class="kn">import</span> <span class="nn">hi</span> 
-<span class="k">print</span> <span class="n">hi</span><span class="o">.</span><span class="n">a</span> <span class="c"># a is 10!</span>
-<span class="k">print</span> <span class="nb">type</span><span class="p">(</span><span class="n">hi</span><span class="p">)</span> <span class="c"># it&#39;s a module!</span>
+<span class="k">print</span> <span class="n">hi</span><span class="o">.</span><span class="n">a</span> <span class="c1"># a is 10!</span>
+<span class="k">print</span> <span class="nb">type</span><span class="p">(</span><span class="n">hi</span><span class="p">)</span> <span class="c1"># it&#39;s a module!</span>
 </pre></div>
 
 
@@ -171,7 +171,7 @@ except imports our module using <code>imp</code> instead of by manipulating <cod
 <code>sys.path</code> from both the Ubuntu Python, which resides at <code>/usr/bin/python</code>, and the newly installed Python, which
 resides at <code>/usr/local/bin/python</code>, I could sort things out:</p>
 <h3>Ubuntu Python (<code>/usr/bin/python</code>):</h3>
-<div class="highlight"><pre>&gt;&gt;&gt; import sys
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; import sys
 &gt;&gt;&gt; print <span class="s1">&#39;\n&#39;</span>.join<span class="o">(</span>sys.path<span class="o">)</span>
 
 /usr/lib/python2.7
@@ -185,10 +185,9 @@ resides at <code>/usr/local/bin/python</code>, I could sort things out:</p>
 
 
 <h3>Python compiled from source (<code>/usr/local/bin/python</code>)</h3>
-<div class="highlight"><pre>&gt;&gt;&gt; import sys
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; import sys
 &gt;&gt;&gt; print <span class="s1">&#39;\n&#39;</span>.join<span class="o">(</span>sys.path<span class="o">)</span>
 
-/usr/local/lib/python2.7/dist-packages
 /usr/local/lib/python27.zip
 /usr/local/lib/python2.7
 /usr/local/lib/python2.7/plat-linux2
@@ -199,13 +198,13 @@ resides at <code>/usr/local/bin/python</code>, I could sort things out:</p>
 </pre></div>
 
 
-<p>Turns out what mattered for me was <code>dist-packages</code> vs. <code>site-packages</code>. Using Ubuntu's Python, my packges were installed to <code>/usr/local/lib/python2.7/dist-packages</code>, whereas the new Python I installed expects packages to be installed to <code>/usr/local/lib/python2.7/site-packages</code>. I just had to manipulate the <code>PYTHONPATH</code> environment variable to point to <code>dist-packages</code> in order to gain access to the previously installed packaged with the newly installed version of Python.</p>
+<p>Turns out what mattered for me was <code>dist-packages</code> vs. <code>site-packages</code>. Using Ubuntu's Python, my packages were installed to <code>/usr/local/lib/python2.7/dist-packages</code>, whereas the new Python I installed expects packages to be installed to <code>/usr/local/lib/python2.7/site-packages</code>. I just had to manipulate the <code>PYTHONPATH</code> environment variable to point to <code>dist-packages</code> in order to gain access to the previously installed packaged with the newly installed version of Python.</p>
 <h4>How did Ubuntu manipulate the <code>sys.path</code>?</h4>
 <p>So how does the Ubuntu distribution of Python know to use <code>/usr/local/lib/python2.7/dist-packages</code> in <code>sys.path</code>? It's hardcoded
 into their <code>site</code> module! First, find where the <code>site</code> module code lives:</p>
-<div class="highlight"><pre><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">site</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">site</span>
 <span class="o">&gt;</span> <span class="n">site</span><span class="o">.</span><span class="n">__file__</span>
-<span class="s">&#39;/usr/lib/python2.7/site.pyc&#39;</span>
+<span class="s1">&#39;/usr/lib/python2.7/site.pyc&#39;</span>
 </pre></div>
 
 
@@ -219,7 +218,7 @@ install into /usr/{lib,share}/python<version>/dist-packages.
 </blockquote>
 <p>OK so there you have it. They explain how the Debian distribution of Python is different.</p>
 <p>And now, for the code that implementes this change:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">getsitepackages</span><span class="p">():</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getsitepackages</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Returns a list containing all global site-packages directories</span>
 <span class="sd">    (and possibly site-python).</span>
 
@@ -235,27 +234,27 @@ install into /usr/{lib,share}/python<version>/dist-packages.
             <span class="k">continue</span>
         <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;os2emx&#39;</span><span class="p">,</span> <span class="s">&#39;riscos&#39;</span><span class="p">):</span>
-            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s">&quot;Lib&quot;</span><span class="p">,</span> <span class="s">&quot;site-packages&quot;</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">==</span> <span class="s">&#39;/&#39;</span><span class="p">:</span>
-            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s">&quot;local/lib&quot;</span><span class="p">,</span>
-                                        <span class="s">&quot;python&quot;</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span>
-                                        <span class="s">&quot;dist-packages&quot;</span><span class="p">))</span>
-            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s">&quot;lib&quot;</span><span class="p">,</span>
-                                        <span class="s">&quot;python&quot;</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span>
-                                        <span class="s">&quot;dist-packages&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;os2emx&#39;</span><span class="p">,</span> <span class="s1">&#39;riscos&#39;</span><span class="p">):</span>
+            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s2">&quot;Lib&quot;</span><span class="p">,</span> <span class="s2">&quot;site-packages&quot;</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">==</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span>
+            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s2">&quot;local/lib&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;python&quot;</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span>
+                                        <span class="s2">&quot;dist-packages&quot;</span><span class="p">))</span>
+            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s2">&quot;lib&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;python&quot;</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span>
+                                        <span class="s2">&quot;dist-packages&quot;</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
-            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s">&quot;lib&quot;</span><span class="p">,</span> <span class="s">&quot;site-packages&quot;</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s">&quot;darwin&quot;</span><span class="p">:</span>
-            <span class="c"># for framework builds *only* we add the standard Apple</span>
-            <span class="c"># locations.</span>
+            <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s2">&quot;lib&quot;</span><span class="p">,</span> <span class="s2">&quot;site-packages&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;darwin&quot;</span><span class="p">:</span>
+            <span class="c1"># for framework builds *only* we add the standard Apple</span>
+            <span class="c1"># locations.</span>
             <span class="kn">from</span> <span class="nn">sysconfig</span> <span class="kn">import</span> <span class="n">get_config_var</span>
-            <span class="n">framework</span> <span class="o">=</span> <span class="n">get_config_var</span><span class="p">(</span><span class="s">&quot;PYTHONFRAMEWORK&quot;</span><span class="p">)</span>
+            <span class="n">framework</span> <span class="o">=</span> <span class="n">get_config_var</span><span class="p">(</span><span class="s2">&quot;PYTHONFRAMEWORK&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">framework</span><span class="p">:</span>
                 <span class="n">sitepackages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;/Library&quot;</span><span class="p">,</span> <span class="n">framework</span><span class="p">,</span>
-                            <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="s">&quot;site-packages&quot;</span><span class="p">))</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;/Library&quot;</span><span class="p">,</span> <span class="n">framework</span><span class="p">,</span>
+                            <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;site-packages&quot;</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">sitepackages</span>
 </pre></div>
 

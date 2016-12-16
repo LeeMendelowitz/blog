@@ -60,20 +60,20 @@
             <p>Today I came up with a cool Python snippet that I'd like to share.
 In my work I frequently write functions which write to or read from files, taking a <code>file</code>-like
 instance as the first argument <code>f</code>:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">write_to_file</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;hi!</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">write_to_file</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hi!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
 
 <p>To make things more flexible, we can modify the function to accept a <code>file</code>-like instance or
 a <code>str</code> specifying the path to the file to open:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">write_to_file_ver2</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">write_to_file_ver2</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
     <span class="n">close</span> <span class="o">=</span> <span class="bp">False</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> 
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> 
         <span class="n">close</span> <span class="o">=</span> <span class="bp">True</span>
 
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;hi!</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hi!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
         <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -81,38 +81,38 @@ a <code>str</code> specifying the path to the file to open:</p>
 
 
 <p>Now we can pass this function a <code>file</code> or a <code>str</code> with a file path:</p>
-<div class="highlight"><pre><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;hi.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;hi.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
 <span class="n">write_to_file_ver2</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<span class="c"># Or</span>
+<span class="c1"># Or</span>
 
-<span class="n">write_to_file_ver2</span><span class="p">(</span><span class="s">&#39;hi.txt&#39;</span><span class="p">)</span>
+<span class="n">write_to_file_ver2</span><span class="p">(</span><span class="s1">&#39;hi.txt&#39;</span><span class="p">)</span>
 </pre></div>
 
 
 <p>This pattern is common enough that it's worth creating a decorator for it. We can wrap functions so they 
 accept either a <code>file</code>-like handle as the first argument, or a <code>str</code> to a file.</p>
 <p>The decorated function <code>write_hi_ver3</code> below is identical to <code>write_hi_ver2</code> above, but with less code.</p>
-<div class="highlight"><pre><span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;w&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">write_hi_ver_3</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;hi!</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hi!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
 
 <p>The decorator can also wrap a function which takes multiple file handles by specifiying
 multiple file access modes: </p>
-<div class="highlight"><pre><span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">copy_file</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
     <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
-<span class="n">copy_file</span><span class="p">(</span><span class="s">&#39;hi.txt&#39;</span><span class="p">,</span> <span class="s">&#39;hi.copy.txt&#39;</span><span class="p">)</span>
+<span class="n">copy_file</span><span class="p">(</span><span class="s1">&#39;hi.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;hi.copy.txt&#39;</span><span class="p">)</span>
 </pre></div>
 
 
 <p>Here is the <a href="https://gist.github.com/LeeMendelowitz/36941676def5c521a960">source</a> for the decorator, which also takes care to close any files it opens
 in the event that the wrapped function throws an exception:</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">wrap_file_function</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">wrap_file_function</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
   <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Wrap a function which takes a file or a str as it&#39;s first argument.</span>
 <span class="sd">  If a str is provided, replace the first argument of the wrapped function</span>
@@ -134,14 +134,14 @@ in the event that the wrapped function throws an exception:</p>
 <span class="sd">  &quot;&quot;&quot;</span>
 
   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="o">=</span> <span class="n">args</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="p">(</span><span class="s">&#39;r&#39;</span><span class="p">,)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">modes</span> <span class="o">=</span> <span class="n">args</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,)</span>
 
   <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
-      <span class="n">close</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># Files that should be closed</span>
-      <span class="n">files</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># File handles that should be passed to func</span>
+      <span class="n">close</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Files that should be closed</span>
+      <span class="n">files</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># File handles that should be passed to func</span>
       <span class="n">num_files</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modes</span><span class="p">)</span>
 
       <span class="k">try</span><span class="p">:</span>
@@ -156,10 +156,10 @@ in the event that the wrapped function throws an exception:</p>
 
           <span class="n">files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 
-        <span class="c"># Replace the files in args when calling func</span>
+        <span class="c1"># Replace the files in args when calling func</span>
         <span class="n">args</span> <span class="o">=</span> <span class="n">files</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">num_files</span><span class="p">:])</span>
 
-        <span class="c"># Make function call and return value</span>
+        <span class="c1"># Make function call and return value</span>
         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
       <span class="k">finally</span><span class="p">:</span>
@@ -171,73 +171,73 @@ in the event that the wrapped function throws an exception:</p>
 
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
-  <span class="c"># Demonstration of wrapping a function which writes to a file.</span>
-  <span class="k">print</span> <span class="s">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span>
-  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;w&#39;</span><span class="p">)</span>
+  <span class="c1"># Demonstration of wrapping a function which writes to a file.</span>
+  <span class="k">print</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span>
+  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
   <span class="k">def</span> <span class="nf">write_hi</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;hi!</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hi!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
-  <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
   <span class="n">write_hi</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
   <span class="n">write_hi</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
   <span class="n">write_hi</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
   <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-  <span class="n">write_hi</span><span class="p">(</span><span class="s">&#39;temp2.txt&#39;</span><span class="p">)</span>
+  <span class="n">write_hi</span><span class="p">(</span><span class="s1">&#39;temp2.txt&#39;</span><span class="p">)</span>
 
 
-  <span class="c"># Demonstration of wrapping a function which reads from a file.</span>
-  <span class="k">print</span> <span class="s">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span>
+  <span class="c1"># Demonstration of wrapping a function which reads from a file.</span>
+  <span class="k">print</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span>
   <span class="nd">@wrap_file_function</span><span class="p">()</span>
   <span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
       <span class="k">print</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
-  <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;temp.txt&#39;</span><span class="p">)</span>
-  <span class="k">print</span> <span class="s">&#39;Reading file temp.txt from handle f:&#39;</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">)</span>
+  <span class="k">print</span> <span class="s1">&#39;Reading file temp.txt from handle f:&#39;</span>
   <span class="n">read_file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-  <span class="k">print</span> <span class="s">&#39;Reading file temp2.txt&#39;</span>
-  <span class="n">read_file</span><span class="p">(</span><span class="s">&#39;temp2.txt&#39;</span><span class="p">)</span>
+  <span class="k">print</span> <span class="s1">&#39;Reading file temp2.txt&#39;</span>
+  <span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;temp2.txt&#39;</span><span class="p">)</span>
 
-  <span class="c"># Demonstration of wrapping a function takes multiple files</span>
-  <span class="k">print</span> <span class="s">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span>
-  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+  <span class="c1"># Demonstration of wrapping a function takes multiple files</span>
+  <span class="k">print</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span>
+  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
   <span class="k">def</span> <span class="nf">read_files</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
-      <span class="k">print</span> <span class="s">&#39;reading f1: &#39;</span>
+      <span class="k">print</span> <span class="s1">&#39;reading f1: &#39;</span>
       <span class="k">print</span> <span class="n">f1</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-      <span class="k">print</span> <span class="s">&#39;reading f2: &#39;</span>
+      <span class="k">print</span> <span class="s1">&#39;reading f2: &#39;</span>
       <span class="k">print</span> <span class="n">f2</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
-  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
   <span class="k">def</span> <span class="nf">read_write</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
     <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
-  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
   <span class="k">def</span> <span class="nf">write_to_from</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">f1</span><span class="p">):</span>
     <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
-  <span class="n">read_files</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">&#39;temp.txt&#39;</span><span class="p">),</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;temp2.txt&#39;</span><span class="p">))</span>
-  <span class="n">read_files</span><span class="p">(</span><span class="s">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s">&#39;temp2.txt&#39;</span><span class="p">)</span>
-  <span class="n">read_write</span><span class="p">(</span><span class="s">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s">&#39;temp.copy.txt&#39;</span><span class="p">)</span>
+  <span class="n">read_files</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">),</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temp2.txt&#39;</span><span class="p">))</span>
+  <span class="n">read_files</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;temp2.txt&#39;</span><span class="p">)</span>
+  <span class="n">read_write</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;temp.copy.txt&#39;</span><span class="p">)</span>
 
   <span class="kn">import</span> <span class="nn">sys</span>
-  <span class="k">print</span> <span class="s">&#39;writing temp.txt to stdout:&#39;</span>
-  <span class="n">read_write</span><span class="p">(</span><span class="s">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+  <span class="k">print</span> <span class="s1">&#39;writing temp.txt to stdout:&#39;</span>
+  <span class="n">read_write</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
 
-  <span class="k">print</span> <span class="s">&#39;Contents of temp.copy.txt:&#39;</span>
-  <span class="n">read_file</span><span class="p">(</span><span class="s">&#39;temp.copy.txt&#39;</span><span class="p">)</span>
+  <span class="k">print</span> <span class="s1">&#39;Contents of temp.copy.txt:&#39;</span>
+  <span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;temp.copy.txt&#39;</span><span class="p">)</span>
 
-  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s">&#39;w&#39;</span><span class="p">)</span>
+  <span class="nd">@wrap_file_function</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
   <span class="k">def</span> <span class="nf">throw_exception</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;BLAH!&#39;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;BLAH!&#39;</span><span class="p">)</span>
 
-  <span class="k">print</span> <span class="s">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span>
-  <span class="k">print</span> <span class="s">&#39;Reading a file that does not exist:&#39;</span>
-  <span class="n">write_to_from</span><span class="p">(</span><span class="s">&#39;dest.txt&#39;</span><span class="p">,</span> <span class="s">&#39;file_doesnt_exist.txt&#39;</span><span class="p">)</span>
+  <span class="k">print</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span>
+  <span class="k">print</span> <span class="s1">&#39;Reading a file that does not exist:&#39;</span>
+  <span class="n">write_to_from</span><span class="p">(</span><span class="s1">&#39;dest.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;file_doesnt_exist.txt&#39;</span><span class="p">)</span>
 
-  <span class="c">#print &#39;-&#39;*50</span>
-  <span class="c">#throw_exception(&#39;exception.txt&#39;)</span>
+  <span class="c1">#print &#39;-&#39;*50</span>
+  <span class="c1">#throw_exception(&#39;exception.txt&#39;)</span>
 </pre></div>
 
 

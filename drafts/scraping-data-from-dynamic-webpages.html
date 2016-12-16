@@ -69,36 +69,36 @@ nuisance for other common Unix utilities like GNU's <code>head</code>, <code>tai
 <h1>Using tr</h1>
 <h3>Mac (<code>\r</code>) to Unix (<code>\n</code>)</h3>
 <p>To replace those <code>^M</code>'s with Unix line endings, use the <code>tr</code> utility:</p>
-<div class="highlight"><pre>tr <span class="s1">&#39;\r&#39;</span> <span class="s1">&#39;\n&#39;</span> &lt; DC_Metrorail_Ridership.mac.csv &gt; DC_Metrorail_Ridership.unix.csv
+<div class="highlight"><pre><span></span>tr <span class="s1">&#39;\r&#39;</span> <span class="s1">&#39;\n&#39;</span> &lt; DC_Metrorail_Ridership.mac.csv &gt; DC_Metrorail_Ridership.unix.csv
 </pre></div>
 
 
 <p>This will replace all carriage returns with line feeds.</p>
 <h3>Windows (<code>\r\n</code>) to Unix (<code>\n</code>)</h3>
 <p>Windows line endings use carriage return followed by line feed, so to convert Microsoft text files line endings to Unix use the following:</p>
-<div class="highlight"><pre>tr -d <span class="s1">&#39;\r&#39;</span> &lt; DC_Metrorail_Ridership.windows.csv &gt; DC_Metrorail_Ridership.unix.csv
+<div class="highlight"><pre><span></span>tr -d <span class="s1">&#39;\r&#39;</span> &lt; DC_Metrorail_Ridership.windows.csv &gt; DC_Metrorail_Ridership.unix.csv
 </pre></div>
 
 
 <h1>Using dos2unix or mac2unix</h1>
 <p>Another option is to use the <code>dos2unix</code> utility. To install on Mac OS X using Homebrew:</p>
-<div class="highlight"><pre>brew update
+<div class="highlight"><pre><span></span>brew update
 brew install dos2unix
 </pre></div>
 
 
 <h3>Mac (<code>\r</code>) to Unix (<code>\n</code>)</h3>
-<div class="highlight"><pre>mac2unix -n DC_Metrorail_Ridership.mac.csv DC_Metrorail_Ridership.unix.csv
+<div class="highlight"><pre><span></span>mac2unix -n DC_Metrorail_Ridership.mac.csv DC_Metrorail_Ridership.unix.csv
 </pre></div>
 
 
 <h3>Windows (<code>\r\n</code>) to Unix (<code>\n</code>)</h3>
-<div class="highlight"><pre>dos2unix -n DC_Metrorail_Ridership.windows.csv DC_Metrorail_Ridership.unix.csv
+<div class="highlight"><pre><span></span>dos2unix -n DC_Metrorail_Ridership.windows.csv DC_Metrorail_Ridership.unix.csv
 </pre></div>
 
 
 <p>I made a <a href="https://gist.github.com/LeeMendelowitz/7509ae7cfeaf1072822a">GitHub gist</a> where you can test all of this out. Clone the gist with:</p>
-<div class="highlight"><pre>git clone https://gist.github.com/7509ae7cfeaf1072822a.git
+<div class="highlight"><pre><span></span>git clone https://gist.github.com/7509ae7cfeaf1072822a.git
 </pre></div>
             <a href="#" class="go-top">Go Top</a>
     <div class="comments">

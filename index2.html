@@ -54,7 +54,7 @@
                             <p class="post-meta"><p><a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/lattice_demo.rmd">Download as R Markdown</a>.</p>
 <p>The lattice library is useful for quickly making plots of multivariate data. It's easy to make plots which condition on one or more variables.</p>
 <h3>Load the lattice library</h3>
-<div class="highlight"><pre>library<span class="p">(</span>lattice<span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="kn">library</span><span class="p">(</span>lattice<span class="p">)</span>
 
 <span class="c1"># Ask for general information about the lattice package</span>
 <span class="sb">`?`</span><span class="p">(</span>package<span class="p">,</span> lattice<span class="p">)</span>
@@ -73,9 +73,9 @@
 <p><a href="https://leemendelowitz.github.io/blog/computing_for_data_analysis/rmarkdown/mapply.rmd">Download as R Markdown</a>.</p>
 <p><code>mapply</code> gives us a way to call a non-vectorized function in a vectorized way.</p>
 <p>From the R Documentation:</p>
-<div class="highlight"><pre><span class="n">mapply</span> <span class="n">is</span> <span class="n">a</span> <span class="n">multivariate</span> <span class="n">version</span> <span class="n">of</span> <span class="n">sapply</span><span class="p">.</span> <span class="n">mapply</span> <span class="n">applies</span> <span class="n">FUN</span> <span class="n">to</span>
-<span class="n">the</span> <span class="n">first</span> <span class="n">elements</span> <span class="n">of</span> <span class="n">each</span> <span class="p">...</span> <span class="n">argument</span><span class="p">,</span> <span class="n">the</span> <span class="n">second</span> <span class="n">elements</span><span class="p">,</span>
-<span class="n">the</span> <span class="n">third</span> <span class="n">elements</span><span class="p">,</span> <span class="n">and</span> <span class="n">so</span> <span class="n">on</span><span class="p">.</span> <span class="n">Arguments</span> <span class="n">are ...</span></pre></div></!---></p>
+<div class="highlight"><pre><span></span>mapply is a multivariate version of sapply. mapply applies FUN to
+the first elements of each ... argument, the second elements,
+the third elements, and so on. Arguments are ...</pre></div></!---></p>
                             <p class="post-meta">
                                 in <a href="https://leemendelowitz.github.io/blog/category/r.html">R</a> &middot; Sun 13 October 2013
                             </p>
@@ -113,13 +113,13 @@
 <h2>tapply</h2>
 <p>Apply a function over subsets of a vector.</p>
 <h3>Example: Take group means with tapply.</h3>
-<div class="highlight"><pre>x <span class="o">&lt;-</span> c<span class="p">(</span>rnorm<span class="p">(</span><span class="m">10</span><span class="p">),</span> runif<span class="p">(</span><span class="m">10</span><span class="p">),</span> rnorm<span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+<div class="highlight"><pre><span></span>x <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>rnorm<span class="p">(</span><span class="m">10</span><span class="p">),</span> runif<span class="p">(</span><span class="m">10</span><span class="p">),</span> rnorm<span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
 x
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">##  [1] -2.04333  0.72651  1.55476 -0.12411  1.08133 -0.30514  1.38638</span>
-<span class="c">##  [8]  0.35047  0.88147  1 ...</span></pre></div></!---></p>
+<div class="highlight"><pre><span></span>##  [1] -2.04333  0.72651  1.55476 -0.12411  1.08133 -0.30514  1.38638
+##  [8]  0.35047  0.88147  1 ...</pre></div></!---></p>
                             <p class="post-meta">
                                 in <a href="https://leemendelowitz.github.io/blog/category/r.html">R</a> &middot; Sun 13 October 2013
                             </p>

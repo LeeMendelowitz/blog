@@ -67,7 +67,7 @@ after a while.</p>
 <p>IPython has really useful object introspection and tab-completion features, but they aren't
 useful in this situation. A simple hack is to implement a class which sets the instance attributes
 using the key/value pairs stored in a dictionary.</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">DictWrap</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DictWrap</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to wrap a python dictionary.</span>
 <span class="sd">    This helps with tab completion for object introspection in IPython</span>
@@ -88,10 +88,10 @@ using the key/value pairs stored in a dictionary.</p>
 
 
 <p>Now in the IPython shell, you can easily inspect your dictionaries using tab-completion!</p>
-<div class="highlight"><pre><span class="n">myD</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;one&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;two&#39;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;three&#39;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><span class="n">myD</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;one&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">DictWrap</span><span class="p">(</span><span class="n">myD</span><span class="p">)</span>
-<span class="n">d</span><span class="o">.&lt;</span><span class="n">TAB</span><span class="o">&gt;</span> <span class="c"># prints d.one d.two d.three</span>
-<span class="n">d</span><span class="o">.</span><span class="n">t</span><span class="o">&lt;</span><span class="n">TAB</span><span class="o">&gt;</span> <span class="c"># prints d.two d.three</span>
+<span class="n">d</span><span class="o">.&lt;</span><span class="n">TAB</span><span class="o">&gt;</span> <span class="c1"># prints d.one d.two d.three</span>
+<span class="n">d</span><span class="o">.</span><span class="n">t</span><span class="o">&lt;</span><span class="n">TAB</span><span class="o">&gt;</span> <span class="c1"># prints d.two d.three</span>
 </pre></div>
             <a href="#" class="go-top">Go Top</a>
     <div class="comments">

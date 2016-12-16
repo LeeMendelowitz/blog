@@ -62,16 +62,16 @@
 <p>Mathematical expressions can be included in the plot title or axis labels. For more information, see <code>?plotmath</code> or run the demo with <code>demo(plotmath)</code>.</p>
 <p>Here are some quick examples.</p>
 <h3>Example 1</h3>
-<div class="highlight"><pre>plot<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> main <span class="o">=</span> expression<span class="p">(</span>theta <span class="o">==</span> <span class="m">0</span><span class="p">),</span> ylab <span class="o">=</span> expression<span class="p">(</span>hat<span class="p">(</span>gamma<span class="p">)</span> <span class="o">==</span> <span class="m">0</span><span class="p">),</span> 
-    xlab <span class="o">=</span> expression<span class="p">(</span>sum<span class="p">(</span>x<span class="p">[</span>i<span class="p">]</span> <span class="o">*</span> y<span class="p">[</span>i<span class="p">],</span> i <span class="o">==</span> <span class="m">1</span><span class="p">,</span> n<span class="p">)))</span>
+<div class="highlight"><pre><span></span>plot<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> main <span class="o">=</span> <span class="kp">expression</span><span class="p">(</span>theta <span class="o">==</span> <span class="m">0</span><span class="p">),</span> ylab <span class="o">=</span> <span class="kp">expression</span><span class="p">(</span>hat<span class="p">(</span><span class="kp">gamma</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span><span class="p">),</span> 
+    xlab <span class="o">=</span> <span class="kp">expression</span><span class="p">(</span><span class="kp">sum</span><span class="p">(</span>x<span class="p">[</span>i<span class="p">]</span> <span class="o">*</span> y<span class="p">[</span>i<span class="p">],</span> i <span class="o">==</span> <span class="m">1</span><span class="p">,</span> n<span class="p">)))</span>
 </pre></div>
 
 
 <p><img alt="plot of chunk example1" src="https://leemendelowitz.github.io/blog/computing_for_data_analysis/figure/plotmath_example1.png" /> </p>
 <h3>Example 2</h3>
 <p>Strings can be pasted together with mathematic expressions:</p>
-<div class="highlight"><pre>x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
-hist<span class="p">(</span>x<span class="p">,</span> xlab <span class="o">=</span> expression<span class="p">(</span><span class="s">&quot;The mean (&quot;</span> <span class="o">*</span> bar<span class="p">(</span>x<span class="p">)</span> <span class="o">*</span> <span class="s">&quot;) is &quot;</span> <span class="o">*</span> sum<span class="p">(</span>x<span class="p">[</span>i<span class="p">]</span><span class="o">/</span>n<span class="p">,</span> i <span class="o">==</span> 
+<div class="highlight"><pre><span></span>x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
+hist<span class="p">(</span>x<span class="p">,</span> xlab <span class="o">=</span> <span class="kp">expression</span><span class="p">(</span><span class="s">&quot;The mean (&quot;</span> <span class="o">*</span> bar<span class="p">(</span>x<span class="p">)</span> <span class="o">*</span> <span class="s">&quot;) is &quot;</span> <span class="o">*</span> <span class="kp">sum</span><span class="p">(</span>x<span class="p">[</span>i<span class="p">]</span><span class="o">/</span>n<span class="p">,</span> i <span class="o">==</span> 
     <span class="m">1</span><span class="p">,</span> n<span class="p">)))</span>
 </pre></div>
 
@@ -80,10 +80,10 @@ hist<span class="p">(</span>x<span class="p">,</span> xlab <span class="o">=</sp
 <h3>Example 3</h3>
 <p>The <code>subsitute</code> function can be used to substitute values into a
 mathematical expression.</p>
-<div class="highlight"><pre>x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span>
 y <span class="o">&lt;-</span> x <span class="o">+</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">,</span> sd <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span>
-plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> xlab <span class="o">=</span> substitute<span class="p">(</span>bar<span class="p">(</span>x<span class="p">)</span> <span class="o">==</span> k<span class="p">,</span> list<span class="p">(</span>k <span class="o">=</span> mean<span class="p">(</span>x<span class="p">))),</span> ylab <span class="o">=</span> substitute<span class="p">(</span>bar<span class="p">(</span>y<span class="p">)</span> <span class="o">==</span> 
-    k<span class="p">,</span> list<span class="p">(</span>k <span class="o">=</span> mean<span class="p">(</span>y<span class="p">))))</span>
+plot<span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> xlab <span class="o">=</span> <span class="kp">substitute</span><span class="p">(</span>bar<span class="p">(</span>x<span class="p">)</span> <span class="o">==</span> k<span class="p">,</span> <span class="kt">list</span><span class="p">(</span>k <span class="o">=</span> <span class="kp">mean</span><span class="p">(</span>x<span class="p">))),</span> ylab <span class="o">=</span> <span class="kp">substitute</span><span class="p">(</span>bar<span class="p">(</span>y<span class="p">)</span> <span class="o">==</span> 
+    k<span class="p">,</span> <span class="kt">list</span><span class="p">(</span>k <span class="o">=</span> <span class="kp">mean</span><span class="p">(</span>y<span class="p">))))</span>
 </pre></div>
 
 

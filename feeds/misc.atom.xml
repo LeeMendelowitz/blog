@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lee On Coding</title><link href="https://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="https://leemendelowitz.github.io/blog/feeds/misc.atom.xml" rel="self"></link><id>https://leemendelowitz.github.io/blog/</id><updated>2015-03-04T17:30:00+01:00</updated><entry><title>How does python find packages?</title><link href="https://leemendelowitz.github.io/blog/how-does-python-find-packages.html" rel="alternate"></link><updated>2015-03-04T17:30:00+01:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2015-03-04:blog/how-does-python-find-packages.html</id><summary type="html">&lt;p&gt;I just ran into a situation where I compiled and installed Python 2.7.9 from source on Ubuntu, but Python could not find the packages I had previously installed. This naturally raises the question - how does Python know where to find packages when you call &lt;code&gt;import&lt;/code&gt;? This post applies specifically to Python 2.7.9, but I'm guessing Python 3x works very similarly.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lee On Coding</title><link href="https://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="https://leemendelowitz.github.io/blog/feeds/misc.atom.xml" rel="self"></link><id>https://leemendelowitz.github.io/blog/</id><updated>2015-03-04T17:30:00+01:00</updated><entry><title>How does python find packages?</title><link href="https://leemendelowitz.github.io/blog/how-does-python-find-packages.html" rel="alternate"></link><published>2015-03-04T17:30:00+01:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2015-03-04:blog/how-does-python-find-packages.html</id><summary type="html">&lt;p&gt;I just ran into a situation where I compiled and installed Python 2.7.9 from source on Ubuntu, but Python could not find the packages I had previously installed. This naturally raises the question - how does Python know where to find packages when you call &lt;code&gt;import&lt;/code&gt;? This post applies specifically to Python 2.7.9, but I'm guessing Python 3x works very similarly.&lt;/p&gt;
 &lt;p&gt;In this post I first describe how Python finds packages, and then I'll finish with the discovery I made regarding the default Python that ships with Ubuntu and how it differs from vanilla Python in how it finds packages.&lt;/p&gt;
 &lt;h2&gt;&lt;code&gt;sys.path&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;Python imports work by searching the directories listed in &lt;code&gt;sys.path&lt;/code&gt;. &lt;/p&gt;
 &lt;p&gt;Using my default Ubuntu 14.04 Python:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; import sys
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; import sys
 &amp;gt; print &lt;span class="s1"&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;.join&lt;span class="o"&gt;(&lt;/span&gt;sys.path&lt;span class="o"&gt;)&lt;/span&gt;
 
 /usr/lib/python2.7
@@ -30,25 +30,25 @@ any manipulations made to it by the &lt;code&gt;site&lt;/code&gt; module.&lt;/p&
 &lt;p&gt;It's a bit involved.&lt;/p&gt;
 &lt;h3&gt;You can manipulate &lt;code&gt;sys.path&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;You can manipulate &lt;code&gt;sys.path&lt;/code&gt; during a Python session and this will change how Python finds modules. For example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 
-&lt;span class="c"&gt;# This won&amp;#39;t work - there is no hi module&lt;/span&gt;
+&lt;span class="c1"&gt;# This won&amp;#39;t work - there is no hi module&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;hi&lt;/span&gt; 
 &lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;stdin&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;stdin&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
 &lt;span class="ne"&gt;ImportError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;No&lt;/span&gt; &lt;span class="n"&gt;module&lt;/span&gt; &lt;span class="n"&gt;named&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;
 
-&lt;span class="c"&gt;# Create a hi module in your home directory.&lt;/span&gt;
-&lt;span class="n"&gt;home_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;expanduser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;~&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;my_module_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;home_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hi.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;my_module_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-  &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;print &amp;quot;hi&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;a=10&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# Create a hi module in your home directory.&lt;/span&gt;
+&lt;span class="n"&gt;home_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;expanduser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;~&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;my_module_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;home_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hi.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;my_module_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;print &amp;quot;hi&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a=10&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="c"&gt;# Add the home directory to sys.path&lt;/span&gt;
+&lt;span class="c1"&gt;# Add the home directory to sys.path&lt;/span&gt;
 &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;home_dir&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="c"&gt;# Now this works, and prints hi!&lt;/span&gt;
+&lt;span class="c1"&gt;# Now this works, and prints hi!&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;hi&lt;/span&gt; 
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -56,9 +56,9 @@ any manipulations made to it by the &lt;code&gt;site&lt;/code&gt; module.&lt;/p&
 
 &lt;h3&gt;The module &lt;code&gt;__file__&lt;/code&gt; attribute&lt;/h3&gt;
 &lt;p&gt;When you import a module, you usually can check the &lt;code&gt;__file__&lt;/code&gt; attribute of the module to see where the module is in your filesystem:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;numpy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__file__&lt;/span&gt;
-&lt;span class="s"&gt;&amp;#39;/usr/local/lib/python2.7/dist-packages/numpy/__init__.pyc&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;/usr/local/lib/python2.7/dist-packages/numpy/__init__.pyc&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -67,11 +67,11 @@ any manipulations made to it by the &lt;code&gt;site&lt;/code&gt; module.&lt;/p&
 &lt;p&gt;The &lt;strong&gt;file&lt;/strong&gt; attribute is not present for C modules that are statically linked into the interpreter; for extension modules loaded dynamically from a shared library, it is the pathname of the shared library file.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;So, for example this doesn't work:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__file__&lt;/span&gt;
 &lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;stdin&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="ne"&gt;AttributeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;module&amp;#39;&lt;/span&gt; &lt;span class="nb"&gt;object&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;attribute&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;__file__&amp;#39;&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;stdin&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="ne"&gt;AttributeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;module&amp;#39;&lt;/span&gt; &lt;span class="nb"&gt;object&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;attribute&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__file__&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -80,30 +80,30 @@ any manipulations made to it by the &lt;code&gt;site&lt;/code&gt; module.&lt;/p&
 &lt;p&gt;Python exposes the entire &lt;code&gt;import&lt;/code&gt; system through the &lt;a href="https://docs.python.org/2.7/library/imp.html"&gt;&lt;code&gt;imp&lt;/code&gt; module&lt;/a&gt;. 
 That's pretty cool that all of this stuff is exposed for us to abuse, if we wanted to.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;imp.find_module&lt;/code&gt; can be used to find a module:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;imp&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;imp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_module&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;numpy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/usr/local/lib/python2.7/dist-packages/numpy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;imp&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;imp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_module&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;numpy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/usr/local/lib/python2.7/dist-packages/numpy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;You can also &lt;code&gt;import&lt;/code&gt; and arbitrary Python source as a module using &lt;code&gt;imp.load_source&lt;/code&gt;. This is the same example before,
 except imports our module using &lt;code&gt;imp&lt;/code&gt; instead of by manipulating &lt;code&gt;sys.path&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;imp&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;imp&lt;/span&gt;
 
-&lt;span class="c"&gt;# Create a hi module in your home directory.&lt;/span&gt;
-&lt;span class="n"&gt;home_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;expanduser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;~&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;my_module_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;home_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;hi.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;my_module_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-  &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;print &amp;quot;hi&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;a=10&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# Create a hi module in your home directory.&lt;/span&gt;
+&lt;span class="n"&gt;home_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;expanduser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;~&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;my_module_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;home_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hi.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;my_module_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;print &amp;quot;hi&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a=10&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="c"&gt;# Load the hi module using imp&lt;/span&gt;
-&lt;span class="n"&gt;hi&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;imp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load_source&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;my_module_file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# Load the hi module using imp&lt;/span&gt;
+&lt;span class="n"&gt;hi&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;imp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load_source&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;hi&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;my_module_file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="c"&gt;# Now this works, and prints hi!&lt;/span&gt;
+&lt;span class="c1"&gt;# Now this works, and prints hi!&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;hi&lt;/span&gt; 
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="c"&gt;# a is 10!&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;# it&amp;#39;s a module!&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="c1"&gt;# a is 10!&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# it&amp;#39;s a module!&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -113,7 +113,7 @@ except imports our module using &lt;code&gt;imp&lt;/code&gt; instead of by manip
 &lt;code&gt;sys.path&lt;/code&gt; from both the Ubuntu Python, which resides at &lt;code&gt;/usr/bin/python&lt;/code&gt;, and the newly installed Python, which
 resides at &lt;code&gt;/usr/local/bin/python&lt;/code&gt;, I could sort things out:&lt;/p&gt;
 &lt;h3&gt;Ubuntu Python (&lt;code&gt;/usr/bin/python&lt;/code&gt;):&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; import sys
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; import sys
 &amp;gt;&amp;gt;&amp;gt; print &lt;span class="s1"&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;.join&lt;span class="o"&gt;(&lt;/span&gt;sys.path&lt;span class="o"&gt;)&lt;/span&gt;
 
 /usr/lib/python2.7
@@ -127,10 +127,9 @@ resides at &lt;code&gt;/usr/local/bin/python&lt;/code&gt;, I could sort things o
 
 
 &lt;h3&gt;Python compiled from source (&lt;code&gt;/usr/local/bin/python&lt;/code&gt;)&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; import sys
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; import sys
 &amp;gt;&amp;gt;&amp;gt; print &lt;span class="s1"&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;.join&lt;span class="o"&gt;(&lt;/span&gt;sys.path&lt;span class="o"&gt;)&lt;/span&gt;
 
-/usr/local/lib/python2.7/dist-packages
 /usr/local/lib/python27.zip
 /usr/local/lib/python2.7
 /usr/local/lib/python2.7/plat-linux2
@@ -141,13 +140,13 @@ resides at &lt;code&gt;/usr/local/bin/python&lt;/code&gt;, I could sort things o
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Turns out what mattered for me was &lt;code&gt;dist-packages&lt;/code&gt; vs. &lt;code&gt;site-packages&lt;/code&gt;. Using Ubuntu's Python, my packges were installed to &lt;code&gt;/usr/local/lib/python2.7/dist-packages&lt;/code&gt;, whereas the new Python I installed expects packages to be installed to &lt;code&gt;/usr/local/lib/python2.7/site-packages&lt;/code&gt;. I just had to manipulate the &lt;code&gt;PYTHONPATH&lt;/code&gt; environment variable to point to &lt;code&gt;dist-packages&lt;/code&gt; in order to gain access to the previously installed packaged with the newly installed version of Python.&lt;/p&gt;
+&lt;p&gt;Turns out what mattered for me was &lt;code&gt;dist-packages&lt;/code&gt; vs. &lt;code&gt;site-packages&lt;/code&gt;. Using Ubuntu's Python, my packages were installed to &lt;code&gt;/usr/local/lib/python2.7/dist-packages&lt;/code&gt;, whereas the new Python I installed expects packages to be installed to &lt;code&gt;/usr/local/lib/python2.7/site-packages&lt;/code&gt;. I just had to manipulate the &lt;code&gt;PYTHONPATH&lt;/code&gt; environment variable to point to &lt;code&gt;dist-packages&lt;/code&gt; in order to gain access to the previously installed packaged with the newly installed version of Python.&lt;/p&gt;
 &lt;h4&gt;How did Ubuntu manipulate the &lt;code&gt;sys.path&lt;/code&gt;?&lt;/h4&gt;
 &lt;p&gt;So how does the Ubuntu distribution of Python know to use &lt;code&gt;/usr/local/lib/python2.7/dist-packages&lt;/code&gt; in &lt;code&gt;sys.path&lt;/code&gt;? It's hardcoded
 into their &lt;code&gt;site&lt;/code&gt; module! First, find where the &lt;code&gt;site&lt;/code&gt; module code lives:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;site&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;site&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__file__&lt;/span&gt;
-&lt;span class="s"&gt;&amp;#39;/usr/lib/python2.7/site.pyc&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;/usr/lib/python2.7/site.pyc&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -161,7 +160,7 @@ install into /usr/{lib,share}/python&lt;version&gt;/dist-packages.
 &lt;/blockquote&gt;
 &lt;p&gt;OK so there you have it. They explain how the Debian distribution of Python is different.&lt;/p&gt;
 &lt;p&gt;And now, for the code that implementes this change:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;getsitepackages&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;getsitepackages&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Returns a list containing all global site-packages directories&lt;/span&gt;
 &lt;span class="sd"&gt;    (and possibly site-python).&lt;/span&gt;
 
@@ -177,32 +176,32 @@ install into /usr/{lib,share}/python&lt;version&gt;/dist-packages.
             &lt;span class="k"&gt;continue&lt;/span&gt;
         &lt;span class="n"&gt;seen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;platform&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;os2emx&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;riscos&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;site-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-        &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sep&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;local/lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                                        &lt;span class="s"&gt;&amp;quot;python&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-                                        &lt;span class="s"&gt;&amp;quot;dist-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                                        &lt;span class="s"&gt;&amp;quot;python&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-                                        &lt;span class="s"&gt;&amp;quot;dist-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;platform&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;os2emx&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;riscos&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;site-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sep&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;local/lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                        &lt;span class="s2"&gt;&amp;quot;python&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                                        &lt;span class="s2"&gt;&amp;quot;dist-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                        &lt;span class="s2"&gt;&amp;quot;python&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                                        &lt;span class="s2"&gt;&amp;quot;dist-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
         &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
             &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;site-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;platform&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;darwin&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="c"&gt;# for framework builds *only* we add the standard Apple&lt;/span&gt;
-            &lt;span class="c"&gt;# locations.&lt;/span&gt;
+            &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;lib&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;site-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;platform&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;darwin&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="c1"&gt;# for framework builds *only* we add the standard Apple&lt;/span&gt;
+            &lt;span class="c1"&gt;# locations.&lt;/span&gt;
             &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sysconfig&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;get_config_var&lt;/span&gt;
-            &lt;span class="n"&gt;framework&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_config_var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;PYTHONFRAMEWORK&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;framework&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_config_var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;PYTHONFRAMEWORK&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
             &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;framework&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
                 &lt;span class="n"&gt;sitepackages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-                        &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/Library&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;framework&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                            &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;site-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+                        &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/Library&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;framework&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;site-packages&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;sitepackages&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;It's all there, if you are crazy enough to dig this deep.&lt;/p&gt;</summary><category term="Python"></category></entry><entry><title>Fix the pesky "^M" carriage return control character using tr</title><link href="https://leemendelowitz.github.io/blog/remove-carriage-return-control-character.html" rel="alternate"></link><updated>2015-02-04T03:20:00+01:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2015-02-04:blog/remove-carriage-return-control-character.html</id><summary type="html">&lt;p&gt;When working with Microsoft Excel 2011 on Mac OS X, it will export spreadsheets to comma separated .csv files or
+&lt;p&gt;It's all there, if you are crazy enough to dig this deep.&lt;/p&gt;</summary><category term="Python"></category></entry><entry><title>Fix the pesky "^M" carriage return control character using tr</title><link href="https://leemendelowitz.github.io/blog/remove-carriage-return-control-character.html" rel="alternate"></link><published>2015-02-04T03:20:00+01:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2015-02-04:blog/remove-carriage-return-control-character.html</id><summary type="html">&lt;p&gt;When working with Microsoft Excel 2011 on Mac OS X, it will export spreadsheets to comma separated .csv files or
 tab delimited .txt plain text files using the old Mac OS 9 line endings of a carriage return (&lt;code&gt;\r&lt;/code&gt;).
 When viewed with &lt;code&gt;less&lt;/code&gt; or &lt;code&gt;vi&lt;/code&gt;, these characters appear as &lt;code&gt;^M&lt;/code&gt;, and the text file appears as one massively long line.&lt;/p&gt;
 &lt;p&gt;These end of line characters can be handled when importing data using R or Python's pandas library, but it's still a 
@@ -211,53 +210,53 @@ nuisance for other common Unix utilities like GNU's &lt;code&gt;head&lt;/code&gt
 &lt;h1&gt;Using tr&lt;/h1&gt;
 &lt;h3&gt;Mac (&lt;code&gt;\r&lt;/code&gt;) to Unix (&lt;code&gt;\n&lt;/code&gt;)&lt;/h3&gt;
 &lt;p&gt;To replace those &lt;code&gt;^M&lt;/code&gt;'s with Unix line endings, use the &lt;code&gt;tr&lt;/code&gt; utility:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;tr &lt;span class="s1"&gt;&amp;#39;\r&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;\n&amp;#39;&lt;/span&gt; &amp;lt; DC_Metrorail_Ridership.mac.csv &amp;gt; DC_Metrorail_Ridership.unix.csv
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tr &lt;span class="s1"&gt;&amp;#39;\r&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;\n&amp;#39;&lt;/span&gt; &amp;lt; DC_Metrorail_Ridership.mac.csv &amp;gt; DC_Metrorail_Ridership.unix.csv
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This will replace all carriage returns with line feeds.&lt;/p&gt;
 &lt;h3&gt;Windows (&lt;code&gt;\r\n&lt;/code&gt;) to Unix (&lt;code&gt;\n&lt;/code&gt;)&lt;/h3&gt;
 &lt;p&gt;Windows line endings use carriage return followed by line feed, so to convert Microsoft text files line endings to Unix use the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;tr -d &lt;span class="s1"&gt;&amp;#39;\r&amp;#39;&lt;/span&gt; &amp;lt; DC_Metrorail_Ridership.windows.csv &amp;gt; DC_Metrorail_Ridership.unix.csv
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tr -d &lt;span class="s1"&gt;&amp;#39;\r&amp;#39;&lt;/span&gt; &amp;lt; DC_Metrorail_Ridership.windows.csv &amp;gt; DC_Metrorail_Ridership.unix.csv
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h1&gt;Using dos2unix or mac2unix&lt;/h1&gt;
 &lt;p&gt;Another option is to use the &lt;code&gt;dos2unix&lt;/code&gt; utility. To install on Mac OS X using Homebrew:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;brew update
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew update
 brew install dos2unix
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Mac (&lt;code&gt;\r&lt;/code&gt;) to Unix (&lt;code&gt;\n&lt;/code&gt;)&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;mac2unix -n DC_Metrorail_Ridership.mac.csv DC_Metrorail_Ridership.unix.csv
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mac2unix -n DC_Metrorail_Ridership.mac.csv DC_Metrorail_Ridership.unix.csv
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Windows (&lt;code&gt;\r\n&lt;/code&gt;) to Unix (&lt;code&gt;\n&lt;/code&gt;)&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;dos2unix -n DC_Metrorail_Ridership.windows.csv DC_Metrorail_Ridership.unix.csv
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dos2unix -n DC_Metrorail_Ridership.windows.csv DC_Metrorail_Ridership.unix.csv
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I made a &lt;a href="https://gist.github.com/LeeMendelowitz/7509ae7cfeaf1072822a"&gt;GitHub gist&lt;/a&gt; where you can test all of this out. Clone the gist with:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;git clone https://gist.github.com/7509ae7cfeaf1072822a.git
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Installing Numpy with OpenBlas</title><link href="https://leemendelowitz.github.io/blog/installing-numpy-with-openblas.html" rel="alternate"></link><updated>2014-10-23T09:20:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2014-10-23:blog/installing-numpy-with-openblas.html</id><summary type="html">&lt;p&gt;I just went through the frustrating but in the end rewarding experience of trying to install numpy in my school computing RHEL5 environment where I don't have sudo privileges or much control over the environment. In the end, I learned quite a bit!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone https://gist.github.com/7509ae7cfeaf1072822a.git
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Installing Numpy with OpenBlas</title><link href="https://leemendelowitz.github.io/blog/installing-numpy-with-openblas.html" rel="alternate"></link><published>2014-10-23T09:20:00+02:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2014-10-23:blog/installing-numpy-with-openblas.html</id><summary type="html">&lt;p&gt;I just went through the frustrating but in the end rewarding experience of trying to install numpy in my school computing RHEL5 environment where I don't have sudo privileges or much control over the environment. In the end, I learned quite a bit!&lt;/p&gt;
 &lt;p&gt;My first attempt to install was through the normal path, where I activate a virtual environment created with &lt;code&gt;virtualenv&lt;/code&gt; and then use pip to install numpy:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~
 virtualenv venv
-&lt;span class="nb"&gt;source &lt;/span&gt;venv/bin/activate
+&lt;span class="nb"&gt;source&lt;/span&gt; venv/bin/activate
 pip install numpy
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;But trying to build numpy in my environment led to this error:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ImportError&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="sr"&gt;/venv/lib/python2.7/site-packages/numpy/linalg/&lt;/span&gt;&lt;span class="n"&gt;lapack_lite&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;so&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;undefined&lt;/span&gt; &lt;span class="n"&gt;symbol&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;zgelsd_&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ImportError&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="sr"&gt;/venv/lib/python2.7/site-packages/numpy/linalg/&lt;/span&gt;&lt;span class="n"&gt;lapack_lite&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;so&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;undefined&lt;/span&gt; &lt;span class="n"&gt;symbol&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;zgelsd_&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;So that's the clue - something is wrong with the lapack library numpy is trying to use from my environment. It's probably linked against something broken or something incompatible... or something missing.&lt;/p&gt;
 &lt;p&gt;Here's what &lt;code&gt;ldd&lt;/code&gt; on the &lt;strong&gt;broken&lt;/strong&gt; lapack_lite.so gives:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ldd home/venv/lib/python2.7/site-packages/numpy/linalg/lapack_lite.so
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ldd home/venv/lib/python2.7/site-packages/numpy/linalg/lapack_lite.so
         linux-vdso.so.1 &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt;  &lt;span class="o"&gt;(&lt;/span&gt;0x00007fff08126000&lt;span class="o"&gt;)&lt;/span&gt;
         libpython2.7.so.1.0 &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; not found
         libpthread.so.0 &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; /lib64/libpthread.so.0 &lt;span class="o"&gt;(&lt;/span&gt;0x00002b39c2bc9000&lt;span class="o"&gt;)&lt;/span&gt;
@@ -269,7 +268,7 @@ pip install numpy
 &lt;p&gt;So, after some searching around, it seems like the best option was to compile the &lt;a href="https://github.com/xianyi/OpenBLAS"&gt;OpenBlas&lt;/a&gt; library and use that during the numpy build. I was able to salvage bits from &lt;a href="https://gist.github.com/sniderbr/5891950"&gt;this&lt;/a&gt;, and &lt;a href="http://gromgull.net/blog/2013/07/multithreaded-scipynumpy-with-openblas-on-debian/"&gt;this&lt;/a&gt; to get it to work.&lt;/p&gt;
 &lt;h1&gt;Build OpenBlas&lt;/h1&gt;
 &lt;p&gt;Untar the OpenBlas distribution &lt;a href="http://www.openblas.net/"&gt;available here&lt;/a&gt; and build using the makefile:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;make &lt;span class="nv"&gt;BINARY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;64 &lt;span class="nv"&gt;FC&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;gfortran &lt;span class="nv"&gt;USE_THREAD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;make &lt;span class="nv"&gt;BINARY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;64&lt;/span&gt; &lt;span class="nv"&gt;FC&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;gfortran &lt;span class="nv"&gt;USE_THREAD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1
 make &lt;span class="nv"&gt;PREFIX&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/path/to/openblas install
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -277,19 +276,19 @@ make &lt;span class="nv"&gt;PREFIX&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&
 &lt;p&gt;where &lt;code&gt;/path/to/openblas&lt;/code&gt; is the path where you'd like to install openblas. Again, since I did have &lt;code&gt;sudo&lt;/code&gt; privilegs, I chose a non-standard location.&lt;/p&gt;
 &lt;h1&gt;Build Numpy&lt;/h1&gt;
 &lt;p&gt;We need to build numpy and link it with the OpenBlas library. I couldn't achieve this with the default &lt;code&gt;pip&lt;/code&gt; install, so things had to be done manually as suggested in &lt;a href="http://gromgull.net/blog/2013/07/multithreaded-scipynumpy-with-openblas-on-debian/"&gt;this post&lt;/a&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;source &lt;/span&gt;venv/bin/activate
-pip uninstall numpy &lt;span class="c"&gt;# Uninstall the broken installation&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt; venv/bin/activate
+pip uninstall numpy &lt;span class="c1"&gt;# Uninstall the broken installation&lt;/span&gt;
 mkdir venv/download
 pip install -d venv/download numpy
 mkdir venv/build
-&lt;span class="nb"&gt;cd &lt;/span&gt;venv/build
+&lt;span class="nb"&gt;cd&lt;/span&gt; venv/build
 tar xzf ../download/numpy-1.9.0.tar.gz
-&lt;span class="nb"&gt;cd &lt;/span&gt;numpy-1.9.0
+&lt;span class="nb"&gt;cd&lt;/span&gt; numpy-1.9.0
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;In the &lt;code&gt;numpy-1.9.0&lt;/code&gt; directory, create the &lt;code&gt;site.cfg&lt;/code&gt; file to customize the libraries that numpy uses on install. We need to point things to OpenBlas. Check out the &lt;code&gt;site.cfg.example&lt;/code&gt; file for what options you can set. This worked for me:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;DEFAULT&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;DEFAULT&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;span class="nv"&gt;library_dirs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /path/to/openblas/lib
 &lt;span class="nv"&gt;include_dirs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /path/to/openblas/include
 
@@ -305,31 +304,31 @@ tar xzf ../download/numpy-1.9.0.tar.gz
 
 
 &lt;p&gt;Next, build numpy &lt;strong&gt;being sure to specify the same fortran compiler that was used to build the OpenBlas library&lt;/strong&gt; (important point mentioned in the &lt;a href="http://docs.scipy.org/doc/numpy/user/install.html"&gt;scipy install docs&lt;/a&gt;). For good measure, I cleaned out all of the standard compile and linking flags from my environment to make sure I wasn't contaminating the build:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;unset &lt;/span&gt;CPPFLAGS
-&lt;span class="nb"&gt;unset &lt;/span&gt;LDFLAGS
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;unset&lt;/span&gt; CPPFLAGS
+&lt;span class="nb"&gt;unset&lt;/span&gt; LDFLAGS
 python setup.py build --fcompiler&lt;span class="o"&gt;=&lt;/span&gt;gnu95
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;When the build completes, install:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;python setup.py install
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python setup.py install
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Since the virtual environment is active, this will install to the virtual environment.&lt;/p&gt;
 &lt;p&gt;Finally, here's what &lt;code&gt;ldd&lt;/code&gt; on the working &lt;code&gt;lapack_lite.so&lt;/code&gt; library gives:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ldd&lt;/span&gt; &lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;venv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;python2&lt;/span&gt;&lt;span class="mf"&gt;.7&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;numpy&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;linalg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lapack_lite&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;venv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;3.2&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;ldd&lt;/span&gt; &lt;span class="n"&gt;lapack_lite&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;
-        &lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;vdso&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x00007ffff40b9000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;libopenblas&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;..&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libopenblas&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x00002b098e0a1000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;libpython2&lt;/span&gt;&lt;span class="mf"&gt;.7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.1.0&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;found&lt;/span&gt;
-        &lt;span class="n"&gt;libgfortran&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.3&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libgfortran&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.3&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x00002b098f00c000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;libm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.6&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libm&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.6&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x00002b098f331000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;libgcc_s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libgcc_s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x00002b098f5b4000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;libquadmath&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libquadmath&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x00002b098f7cb000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;libc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.6&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.6&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x00002b098fa07000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;libpthread&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libpthread&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.0&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x00002b098fd60000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ld&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x86&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;64.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="mf"&gt;.2&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x0000003185e00000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ldd home/venv/lib/python2.7/site-packages/numpy/linalg/lapack_lite.so
+(venv)bash-3.2$ ldd lapack_lite.so
+        linux-vdso.so.1 =&amp;gt;  (0x00007ffff40b9000)
+        libopenblas.so.0 =&amp;gt; ../lib/libopenblas.so.0 (0x00002b098e0a1000)
+        libpython2.7.so.1.0 =&amp;gt; not found
+        libgfortran.so.3 =&amp;gt; .../libgfortran.so.3 (0x00002b098f00c000)
+        libm.so.6 =&amp;gt; /lib64/libm.so.6 (0x00002b098f331000)
+        libgcc_s.so.1 =&amp;gt; .../libgcc_s.so.1 (0x00002b098f5b4000)
+        libquadmath.so.0 =&amp;gt; .../libquadmath.so.0 (0x00002b098f7cb000)
+        libc.so.6 =&amp;gt; /lib64/libc.so.6 (0x00002b098fa07000)
+        libpthread.so.0 =&amp;gt; /lib64/libpthread.so.0 (0x00002b098fd60000)
+        /lib64/ld-linux-x86-64.so.2 (0x0000003185e00000)
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -337,7 +336,7 @@ python setup.py build --fcompiler&lt;span class="o"&gt;=&lt;/span&gt;gnu95
 &lt;h1&gt;Summary&lt;/h1&gt;
 &lt;p&gt;I was able to install &lt;code&gt;numpy&lt;/code&gt; by first building and installing OpenBlas to a non-standard location, and then
 manually building &lt;code&gt;numpy&lt;/code&gt; by creating the &lt;code&gt;site.cfg&lt;/code&gt; file to point to the OpenBlas libraries
-and specifying which Fortan compiler to use.&lt;/p&gt;</summary><category term="python"></category><category term="numpy"></category></entry><entry><title>Ubuntu Server Virtual Machine with SSH using VirtualBox on Mac OS X</title><link href="https://leemendelowitz.github.io/blog/ubuntu-server-virtualbox.html" rel="alternate"></link><updated>2014-10-13T12:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2014-10-13:blog/ubuntu-server-virtualbox.html</id><summary type="html">&lt;p&gt;My laptop is a late 2011 MacBook Pro running OS X 10.9 Mavericks. It's my personal laptop, so I use it for everything - browsing, e-mail, and programming. While the OS X experience is wonderful, application development can be frustrating. For example, right now I'm trying to develop a Boost Python module, and I am having trouble compiling it on OS X.&lt;/p&gt;
+and specifying which Fortan compiler to use.&lt;/p&gt;</summary><category term="python"></category><category term="numpy"></category></entry><entry><title>Ubuntu Server Virtual Machine with SSH using VirtualBox on Mac OS X</title><link href="https://leemendelowitz.github.io/blog/ubuntu-server-virtualbox.html" rel="alternate"></link><published>2014-10-13T12:00:00+02:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2014-10-13:blog/ubuntu-server-virtualbox.html</id><summary type="html">&lt;p&gt;My laptop is a late 2011 MacBook Pro running OS X 10.9 Mavericks. It's my personal laptop, so I use it for everything - browsing, e-mail, and programming. While the OS X experience is wonderful, application development can be frustrating. For example, right now I'm trying to develop a Boost Python module, and I am having trouble compiling it on OS X.&lt;/p&gt;
 &lt;p&gt;I intend to run my application in a Linux environment, so instead of learning the intricacies of porting my code and makefile to Mac OS X, I decided to install a local Ubuntu Server virtual machine (VM) on my MacBook. I installed Ubuntu Server instead of Ubuntu Desktop because I wanted to run a lightweight Linux environment, which should save laptop resources. I simply run the VM in the background, and ssh into it from the Mac terminal. Easy and awesome!&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt; This entire tutorial should take approximately 20 minutes (not including download times). &lt;/strong&gt;&lt;/p&gt;
 &lt;h2&gt;Install VirtualBox&lt;/h2&gt;
@@ -353,23 +352,23 @@ drive loaded with the Ubuntu Server disk image, and allocate 1 GB of RAM. We als
 attach a network card and set up port forwarding. &lt;/p&gt;
 &lt;!-- All of these settings can be easily changed in the future (except expanding the virtual hard ddrive size is kind of tricky because you'll have to [resize the drive partition](http://www.howtogeek.com/124622/how-to-enlarge-a-virtual-machines-disk-in-virtualbox-or-vmware/)). If you are curious, you can read more about these vboxmanage commands by referring to the [VirtualBox documentation](https://www.virtualbox.org/manual/ch08.html). --&gt;
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/VirtualBox&lt;span class="se"&gt;\ &lt;/span&gt;VMs/
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/VirtualBox&lt;span class="se"&gt;\ &lt;/span&gt;VMs/
 
-&lt;span class="c"&gt;# Change these variables as needed&lt;/span&gt;
+&lt;span class="c1"&gt;# Change these variables as needed&lt;/span&gt;
 &lt;span class="nv"&gt;VM_NAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;UbuntuServer&amp;quot;&lt;/span&gt;
 &lt;span class="nv"&gt;UBUNTU_ISO_PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;~/Downloads/ubuntu-14.04.1-server-amd64.iso
-&lt;span class="nv"&gt;VM_HD_PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;UbuntuServer.vdi&amp;quot;&lt;/span&gt; &lt;span class="c"&gt;# The path to VM hard disk (to be created).&lt;/span&gt;
-&lt;span class="nv"&gt;SHARED_PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;~ &lt;span class="c"&gt;# Share home directory with the VM&lt;/span&gt;
+&lt;span class="nv"&gt;VM_HD_PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;UbuntuServer.vdi&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;# The path to VM hard disk (to be created).&lt;/span&gt;
+&lt;span class="nv"&gt;SHARED_PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;~ &lt;span class="c1"&gt;# Share home directory with the VM&lt;/span&gt;
 
 
 vboxmanage createvm --name &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --ostype Ubuntu_64 --register
 vboxmanage createhd --filename &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt;.vdi --size 32768
 vboxmanage storagectl &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --name &lt;span class="s2"&gt;&amp;quot;SATA Controller&amp;quot;&lt;/span&gt; --add sata --controller IntelAHCI
-vboxmanage storageattach &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --storagectl &lt;span class="s2"&gt;&amp;quot;SATA Controller&amp;quot;&lt;/span&gt; --port 0 --device 0 --type hdd --medium &lt;span class="nv"&gt;$VM_HD_PATH&lt;/span&gt;
+vboxmanage storageattach &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --storagectl &lt;span class="s2"&gt;&amp;quot;SATA Controller&amp;quot;&lt;/span&gt; --port &lt;span class="m"&gt;0&lt;/span&gt; --device &lt;span class="m"&gt;0&lt;/span&gt; --type hdd --medium &lt;span class="nv"&gt;$VM_HD_PATH&lt;/span&gt;
 vboxmanage storagectl &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --name &lt;span class="s2"&gt;&amp;quot;IDE Controller&amp;quot;&lt;/span&gt; --add ide
-vboxmanage storageattach &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --storagectl &lt;span class="s2"&gt;&amp;quot;IDE Controller&amp;quot;&lt;/span&gt; --port 0 --device 0 --type dvddrive --medium &lt;span class="nv"&gt;$UBUNTU_ISO_PATH&lt;/span&gt;
+vboxmanage storageattach &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --storagectl &lt;span class="s2"&gt;&amp;quot;IDE Controller&amp;quot;&lt;/span&gt; --port &lt;span class="m"&gt;0&lt;/span&gt; --device &lt;span class="m"&gt;0&lt;/span&gt; --type dvddrive --medium &lt;span class="nv"&gt;$UBUNTU_ISO_PATH&lt;/span&gt;
 vboxmanage modifyvm &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --ioapic on
-vboxmanage modifyvm &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --memory 1024 --vram 128
+vboxmanage modifyvm &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --memory &lt;span class="m"&gt;1024&lt;/span&gt; --vram 128
 vboxmanage modifyvm &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --nic1 nat
 vboxmanage modifyvm &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --natpf1 &lt;span class="s2"&gt;&amp;quot;guestssh,tcp,,2222,,22&amp;quot;&lt;/span&gt;
 vboxmanage modifyvm &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --natdnshostresolver1 on
@@ -380,7 +379,7 @@ vboxmanage sharedfolder add &lt;span class="nv"&gt;$VM_NAME&lt;/span&gt; --name 
 &lt;h3&gt;Start the VM for the first time&lt;/h3&gt;
 &lt;p&gt;For the first boot, we will start the VM with a graphical display so we can install
 the Ubuntu operating system. &lt;strong&gt;From your OS X terminal&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vboxmanage startvm UbuntuServer
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vboxmanage startvm UbuntuServer
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -391,13 +390,13 @@ the Ubuntu operating system. &lt;strong&gt;From your OS X terminal&lt;/strong&gt
 &lt;p&gt;&lt;strong&gt;Hint&lt;/strong&gt;: If you accidentally click on the VM GUI window, VirtualBox may "hijack" your mouse pointer to try passing it to the VM. If this happens and you lose your mouse pointer, press the left command key to get your mouse pointer back.&lt;/p&gt;
 &lt;h3&gt;Install the OpenSSH Server&lt;/h3&gt;
 &lt;p&gt;After installing the Ubuntu operating system and logging in to VM, to install the ssh server, issue the following command &lt;strong&gt;in the Ubuntu VM&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-get update
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get update
 sudo apt-get install -y openssh-server
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Now you can try logging into your virtual machine over ssh through port 2222, which has been set up to forward to port 22 of your VM. &lt;strong&gt;From the OS X terminal&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ssh -p 2222 &amp;lt;username&amp;gt;@localhost
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh -p &lt;span class="m"&gt;2222&lt;/span&gt; &amp;lt;username&amp;gt;@localhost
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -407,19 +406,19 @@ sudo apt-get install -y openssh-server
 &lt;p&gt;To share a folder from your host machine (i.e. Mac) with the VM, you need to install
 the VirtualBox Guest Additions in the VM. &lt;/p&gt;
 &lt;p&gt;Before you can install the Guest additions, you need to install &lt;code&gt;gcc&lt;/code&gt; and &lt;code&gt;make&lt;/code&gt; into the VM. Make sure your laptop is connected to the internet (&lt;strong&gt;in the VM&lt;/strong&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-get -y install gcc make linux-headers-&lt;span class="k"&gt;$(&lt;/span&gt;uname -r&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get -y install gcc make linux-headers-&lt;span class="k"&gt;$(&lt;/span&gt;uname -r&lt;span class="k"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;From the VirtualBox VM GUI window menu, select "Devices -&amp;gt; Insert Guest Additions CD Image...". If prompted, choose "Force Unmount". &lt;/p&gt;
 &lt;p&gt;This will insert the VirtualBox GuestAdditions installation CD into the VM's DVD drive. From the VM terminal (or, more comfortably, the ssh terminal), mount the CD drive and run the installation script. &lt;strong&gt;In the VM&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;sudo mount /dev/sr0 /media/cdrom
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mount /dev/sr0 /media/cdrom
 sudo /media/cdrom/VBoxLinuxAdditions.run
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Finally, add your user to the &lt;code&gt;vboxsf&lt;/code&gt; group so you can access shared folders (&lt;strong&gt;in the VM&lt;/strong&gt;)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;sudo usermod -g vboxsf &amp;lt;username&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo usermod -g vboxsf &amp;lt;username&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -433,15 +432,15 @@ sudo /media/cdrom/VBoxLinuxAdditions.run
 &lt;li&gt;From the Mac terminal, issue &lt;code&gt;vboxmanage controlvm UbuntuServer poweroff&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Next, start the VM without a GUI from the OS X terminal:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vboxmanage startvm UbuntuServer --type headless
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vboxmanage startvm UbuntuServer --type headless
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The VM will be running in the background. Give the VM a few moments to boot up, and then you can try to log in again over ssh as before from the OX X terminal: &lt;code&gt;ssh -p 2222 &amp;lt;username&amp;gt;@localhost&lt;/code&gt;.&lt;/p&gt;
 &lt;h3&gt;Access shared folders&lt;/h3&gt;
 &lt;p&gt;To access your Mac home directory from the VM:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sf_shared&lt;/span&gt;
-&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cd /media/sf_shared
+ls -l
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -449,22 +448,22 @@ sudo /media/cdrom/VBoxLinuxAdditions.run
 &lt;p&gt;Contratulations. Now you have a local lightweight Linux environment that you can access over ssh!&lt;/p&gt;
 &lt;h2&gt;Quick Reference&lt;/h2&gt;
 &lt;p&gt;To shutdown the VM:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vboxmanage controlvm UbuntuServer poweroff
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vboxmanage controlvm UbuntuServer poweroff
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;You can also pause the VM instead of shutting it down:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vboxmanage controlvm UbuntuServer savestate
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vboxmanage controlvm UbuntuServer savestate
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;To start the VM:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vboxmanage startvm UbuntuServer --type headless
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vboxmanage startvm UbuntuServer --type headless
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;To log into the VM over ssh:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ssh -p 2222 &amp;lt;username&amp;gt;@localhost
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh -p &lt;span class="m"&gt;2222&lt;/span&gt; &amp;lt;username&amp;gt;@localhost
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -474,7 +473,7 @@ sudo /media/cdrom/VBoxLinuxAdditions.run
 &lt;p&gt;On one occasion I powered off the VM while it was booting. The next time time I tried to start the VM without the GUI, I could not log in over ssh because, unknown to me at the time, the VM was sitting in the GRUB bootloader menu waiting for my input. &lt;/p&gt;
 &lt;p&gt;You can configure GRUB to timeout by editing the VM's GRUB configuration file at
 &lt;code&gt;/etc/default/grub&lt;/code&gt; with the line:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;GRUB_RECORDFAIL_TIMEOUT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;GRUB_RECORDFAIL_TIMEOUT=2
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -484,23 +483,23 @@ is started after the last boot failed. For more info, see the &lt;a href="https:
 &lt;h3&gt;Keeping SSH Alive when laptop sleeps&lt;/h3&gt;
 &lt;p&gt;Configure the VM ssh server to keep connections alive by editing the VM's config file
 &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; and adding the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ClientAliveInterval 300
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ClientAliveInterval 300
 ClientAliveCountMax 2
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;When your laptop sleeps, you may find that your ssh connection to the VM is terimnated.
 This is the result of some &lt;a href="https://www.virtualbox.org/ticket/12441"&gt;VirtualBox bug&lt;/a&gt; which has since been resolved provided that you change the VM's DNS resolution setting:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;VBoxManage modifyvm UbuntuServer --natdnshostresolver1 on
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;VBoxManage modifyvm UbuntuServer --natdnshostresolver1 on
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;That did the trick for me.&lt;/p&gt;</summary><category term="Ubuntu"></category><category term="VirtualBox"></category></entry><entry><title>D3 Update Enter Exit Selections</title><link href="https://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html" rel="alternate"></link><updated>2014-04-28T12:00:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2014-04-28:blog/d3-update-enter-exit-selections.html</id><summary type="html">&lt;p&gt;Lately I've been playing around with the D3 javascript library for data visualizations in a browser. D3 stands for "Data Driven Documents" and provides utilities for manipulating elements on a webpage based on data. The D3 &lt;a href="https://github.com/mbostock/d3/wiki/Gallery"&gt;gallery&lt;/a&gt; is very impressive.&lt;/p&gt;
+&lt;p&gt;That did the trick for me.&lt;/p&gt;</summary><category term="Ubuntu"></category><category term="VirtualBox"></category></entry><entry><title>D3 Update Enter Exit Selections</title><link href="https://leemendelowitz.github.io/blog/d3-update-enter-exit-selections.html" rel="alternate"></link><published>2014-04-28T12:00:00+02:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2014-04-28:blog/d3-update-enter-exit-selections.html</id><summary type="html">&lt;p&gt;Lately I've been playing around with the D3 javascript library for data visualizations in a browser. D3 stands for "Data Driven Documents" and provides utilities for manipulating elements on a webpage based on data. The D3 &lt;a href="https://github.com/mbostock/d3/wiki/Gallery"&gt;gallery&lt;/a&gt; is very impressive.&lt;/p&gt;
 &lt;p&gt;I've had trouble wrapping my head around the update, enter, and exit selections, which provide a mechanism for updating, inserting, and removing elements from a page based on changes in data.&lt;/p&gt;
 &lt;p&gt;There are already some great &lt;a href="https://github.com/mbostock/d3/wiki/Tutorials"&gt;tutorials&lt;/a&gt; by Mike Bostock and others on &lt;a href="http://bost.ocks.org/mike/join/"&gt;joins&lt;/a&gt;, &lt;a href="http://bl.ocks.org/mbostock/3808234"&gt;updates&lt;/a&gt; and &lt;a href="http://bost.ocks.org/mike/selection/"&gt;selections&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I challenged myself to create a demo which illustrates populating a table with changing data using the full update pattern. The table is a little more challenging because the data is nested; data is first bound to each row as an array of values, then data is bound to each cell of the row as a single value. We have to handle cases where cells are added to or deleted from existing rows, and where entire rows are added or deleted.&lt;/p&gt;
 &lt;p&gt;You can see the demo below and check out the source &lt;a href="http://bl.ocks.org/LeeMendelowitz/11383724"&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;iframe src="code/d3_updating_table.html" marginwidth="0" marginheight="0" width="600" height="1000"&gt;&lt;/iframe&gt;</summary><category term="d3"></category><category term="javascript"></category></entry><entry><title>Python OS X Mavericks Issues</title><link href="https://leemendelowitz.github.io/blog/python-mavericks-issues.html" rel="alternate"></link><updated>2014-03-29T02:00:00+01:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2014-03-29:blog/python-mavericks-issues.html</id><summary type="html">&lt;p&gt;Yesterday I decided to upgrade OS X on my Late-2011 Mac Book Pro from 10.7 Lion to 10.9 Mavericks. I felt no rush to upgrade - "If it ain't broke, don't fix it!" - but after reading about the new features, particularly the improved support for multiple displays - I decided to give it a shot.&lt;/p&gt;
+&lt;iframe src="code/d3_updating_table.html" marginwidth="0" marginheight="0" width="600" height="1000"&gt;&lt;/iframe&gt;</summary><category term="d3"></category><category term="javascript"></category></entry><entry><title>Python OS X Mavericks Issues</title><link href="https://leemendelowitz.github.io/blog/python-mavericks-issues.html" rel="alternate"></link><published>2014-03-29T02:00:00+01:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2014-03-29:blog/python-mavericks-issues.html</id><summary type="html">&lt;p&gt;Yesterday I decided to upgrade OS X on my Late-2011 Mac Book Pro from 10.7 Lion to 10.9 Mavericks. I felt no rush to upgrade - "If it ain't broke, don't fix it!" - but after reading about the new features, particularly the improved support for multiple displays - I decided to give it a shot.&lt;/p&gt;
 &lt;p&gt;Everything went smoothly - except that my Python installation completely broke. This was a big break - I work in Python almost everyday. By broke, I mean that Apple wiped out all of the python libraries I've installed - pip, virtualenv, numpy, matplotlib, ipython, pandas, flask, greenlet - all gone.&lt;/p&gt;
 &lt;p&gt;In retrospect, it was my mistake. I was installing packages in &lt;code&gt;/Library/Python/2.7/site-packages&lt;/code&gt;, which Apple wiped clean when I upgraded to Mavericks.&lt;/p&gt;
 &lt;p&gt;I recovered by installing Python using Homebrew. It's a much better option because:&lt;/p&gt;
@@ -519,7 +518,7 @@ This is the result of some &lt;a href="https://www.virtualbox.org/ticket/12441"&
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install Python with &lt;a href="http://brew.sh"&gt;Homebrew&lt;/a&gt; instead of using the Python interpreter which ships with Mavericks. Homebrew will install the latest Python v2.7.6, while Mavericks ships with v2.7.5:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;brew update
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew update
 brew install python
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -527,7 +526,7 @@ brew install python
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Upgrade setuptools and pip, as suggested:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;pip install --upgrade setuptools
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install --upgrade setuptools
 pip install --upgrade pip
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -535,7 +534,7 @@ pip install --upgrade pip
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install your favorite package&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;pip install numpy, ipython, matplotlib, pandas, flask, yolk
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install numpy, ipython, matplotlib, pandas, flask, yolk
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -543,7 +542,7 @@ pip install --upgrade pip
 &lt;/ol&gt;
 &lt;p&gt;These will be installed to &lt;code&gt;/usr/local/lib/python2.7/site-packages&lt;/code&gt;, which is a safe zone. Future OS X upgrades won't wipe out your installed packages.&lt;/p&gt;
 &lt;p&gt;I'm still getting build errors on scipy that I have not yet resolved, but I'll save that for another rainy day.&lt;/p&gt;
-&lt;p&gt;In conclusion, use Homebrew to stay &lt;em&gt;mostly&lt;/em&gt; sane.&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>Start Me Up!</title><link href="https://leemendelowitz.github.io/blog/start-me-up.html" rel="alternate"></link><updated>2013-10-02T07:35:00+02:00</updated><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-02:blog/start-me-up.html</id><summary type="html">&lt;!--- #Status: draft --&gt;
+&lt;p&gt;In conclusion, use Homebrew to stay &lt;em&gt;mostly&lt;/em&gt; sane.&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>Start Me Up!</title><link href="https://leemendelowitz.github.io/blog/start-me-up.html" rel="alternate"></link><published>2013-10-02T07:35:00+02:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2013-10-02:blog/start-me-up.html</id><summary type="html">&lt;!--- #Status: draft --&gt;
 
 &lt;p&gt;Welcome to the blog!&lt;/p&gt;
 &lt;p&gt;After a nice cup of coffee this morning, I impulsively created this blog because I don't

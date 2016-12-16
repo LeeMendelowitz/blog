@@ -64,54 +64,54 @@
 <h2>tapply</h2>
 <p>Apply a function over subsets of a vector.</p>
 <h3>Example: Take group means with tapply.</h3>
-<div class="highlight"><pre>x <span class="o">&lt;-</span> c<span class="p">(</span>rnorm<span class="p">(</span><span class="m">10</span><span class="p">),</span> runif<span class="p">(</span><span class="m">10</span><span class="p">),</span> rnorm<span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+<div class="highlight"><pre><span></span>x <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>rnorm<span class="p">(</span><span class="m">10</span><span class="p">),</span> runif<span class="p">(</span><span class="m">10</span><span class="p">),</span> rnorm<span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
 x
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">##  [1] -2.04333  0.72651  1.55476 -0.12411  1.08133 -0.30514  1.38638</span>
-<span class="c">##  [8]  0.35047  0.88147  1.80250  0.56072  0.54421  0.19270  0.67049</span>
-<span class="c">## [15]  0.83034  0.02640  0.98629  0.11223  0.10747  0.85049  1.37510</span>
-<span class="c">## [22]  0.56575  0.34138  1.01877  1.33956 -0.07667  2.12114  0.70827</span>
-<span class="c">## [29]  0.53336  2.15315</span>
+<div class="highlight"><pre><span></span>##  [1] -2.04333  0.72651  1.55476 -0.12411  1.08133 -0.30514  1.38638
+##  [8]  0.35047  0.88147  1.80250  0.56072  0.54421  0.19270  0.67049
+## [15]  0.83034  0.02640  0.98629  0.11223  0.10747  0.85049  1.37510
+## [22]  0.56575  0.34138  1.01877  1.33956 -0.07667  2.12114  0.70827
+## [29]  0.53336  2.15315
 </pre></div>
 
 
-<div class="highlight"><pre>f <span class="o">&lt;-</span> gl<span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>  <span class="c1"># Generator factors</span>
+<div class="highlight"><pre><span></span>f <span class="o">&lt;-</span> <span class="kp">gl</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>  <span class="c1"># Generator factors</span>
 f
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">##  [1] 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3</span>
-<span class="c">## Levels: 1 2 3</span>
+<div class="highlight"><pre><span></span>##  [1] 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3
+## Levels: 1 2 3
 </pre></div>
 
 
 <p>By default, if the applied function returns a scalar, then tapply
 returns a vector. In this case we are applying the mean function,
 so the output of tapply is a numeric vector.</p>
-<div class="highlight"><pre>tapply<span class="p">(</span>x<span class="p">,</span> f<span class="p">,</span> mean<span class="p">)</span>  <span class="c1"># Take the mean of each group. Returns a vector.</span>
+<div class="highlight"><pre><span></span><span class="kp">tapply</span><span class="p">(</span>x<span class="p">,</span> f<span class="p">,</span> <span class="kp">mean</span><span class="p">)</span>  <span class="c1"># Take the mean of each group. Returns a vector.</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">##      1      2      3 </span>
-<span class="c">## 0.5311 0.4881 1.0080</span>
+<div class="highlight"><pre><span></span>##      1      2      3 
+## 0.5311 0.4881 1.0080
 </pre></div>
 
 
 <p>Without simplification, tapply always returns a list.</p>
-<div class="highlight"><pre>tapply<span class="p">(</span>x<span class="p">,</span> f<span class="p">,</span> mean<span class="p">,</span> simplify <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="kp">tapply</span><span class="p">(</span>x<span class="p">,</span> f<span class="p">,</span> <span class="kp">mean</span><span class="p">,</span> simplify <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## $`1`</span>
-<span class="c">## [1] 0.5311</span>
-<span class="c">## </span>
-<span class="c">## $`2`</span>
-<span class="c">## [1] 0.4881</span>
-<span class="c">## </span>
-<span class="c">## $`3`</span>
-<span class="c">## [1] 1.008</span>
+<div class="highlight"><pre><span></span>## $`1`
+## [1] 0.5311
+## 
+## $`2`
+## [1] 0.4881
+## 
+## $`3`
+## [1] 1.008
 </pre></div>
 
 
@@ -119,18 +119,18 @@ so the output of tapply is a numeric vector.</p>
 <p>Range returns the minimum and maximum value for each group.
 Note that since the range function returns a vector, tapply returns
 a list.</p>
-<div class="highlight"><pre>tapply<span class="p">(</span>x<span class="p">,</span> f<span class="p">,</span> range<span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="kp">tapply</span><span class="p">(</span>x<span class="p">,</span> f<span class="p">,</span> <span class="kp">range</span><span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## $`1`</span>
-<span class="c">## [1] -2.043  1.803</span>
-<span class="c">## </span>
-<span class="c">## $`2`</span>
-<span class="c">## [1] 0.0264 0.9863</span>
-<span class="c">## </span>
-<span class="c">## $`3`</span>
-<span class="c">## [1] -0.07667  2.15315</span>
+<div class="highlight"><pre><span></span>## $`1`
+## [1] -2.043  1.803
+## 
+## $`2`
+## [1] 0.0264 0.9863
+## 
+## $`3`
+## [1] -0.07667  2.15315
 </pre></div>
 
 
@@ -138,210 +138,210 @@ a list.</p>
 <p>The split function splits a vector int groups using a factor.
 Using split and then applying a function with lapply produces the same 
 resule as tapply:</p>
-<div class="highlight"><pre>split<span class="p">(</span>x<span class="p">,</span> f<span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="kp">split</span><span class="p">(</span>x<span class="p">,</span> f<span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## $`1`</span>
-<span class="c">##  [1] -2.0433  0.7265  1.5548 -0.1241  1.0813 -0.3051  1.3864  0.3505</span>
-<span class="c">##  [9]  0.8815  1.8025</span>
-<span class="c">## </span>
-<span class="c">## $`2`</span>
-<span class="c">##  [1] 0.5607 0.5442 0.1927 0.6705 0.8303 0.0264 0.9863 0.1122 0.1075 0.8505</span>
-<span class="c">## </span>
-<span class="c">## $`3`</span>
-<span class="c">##  [1]  1.37510  0.56575  0.34138  1.01877  1.33956 -0.07667  2.12114</span>
-<span class="c">##  [8]  0.70827  0.53336  2.15315</span>
+<div class="highlight"><pre><span></span>## $`1`
+##  [1] -2.0433  0.7265  1.5548 -0.1241  1.0813 -0.3051  1.3864  0.3505
+##  [9]  0.8815  1.8025
+## 
+## $`2`
+##  [1] 0.5607 0.5442 0.1927 0.6705 0.8303 0.0264 0.9863 0.1122 0.1075 0.8505
+## 
+## $`3`
+##  [1]  1.37510  0.56575  0.34138  1.01877  1.33956 -0.07667  2.12114
+##  [8]  0.70827  0.53336  2.15315
 </pre></div>
 
 
-<div class="highlight"><pre>lapply<span class="p">(</span>split<span class="p">(</span>x<span class="p">,</span> f<span class="p">),</span> mean<span class="p">)</span>  <span class="c1"># Instead of tapply</span>
+<div class="highlight"><pre><span></span><span class="kp">lapply</span><span class="p">(</span><span class="kp">split</span><span class="p">(</span>x<span class="p">,</span> f<span class="p">),</span> <span class="kp">mean</span><span class="p">)</span>  <span class="c1"># Instead of tapply</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## $`1`</span>
-<span class="c">## [1] 0.5311</span>
-<span class="c">## </span>
-<span class="c">## $`2`</span>
-<span class="c">## [1] 0.4881</span>
-<span class="c">## </span>
-<span class="c">## $`3`</span>
-<span class="c">## [1] 1.008</span>
+<div class="highlight"><pre><span></span>## $`1`
+## [1] 0.5311
+## 
+## $`2`
+## [1] 0.4881
+## 
+## $`3`
+## [1] 1.008
 </pre></div>
 
 
 <h3>Example: Air Quality by month</h3>
-<div class="highlight"><pre>library<span class="p">(</span>datasets<span class="p">)</span>
-head<span class="p">(</span>airquality<span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="kn">library</span><span class="p">(</span>datasets<span class="p">)</span>
+<span class="kp">head</span><span class="p">(</span>airquality<span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">##   Ozone Solar.R Wind Temp Month Day</span>
-<span class="c">## 1    41     190  7.4   67     5   1</span>
-<span class="c">## 2    36     118  8.0   72     5   2</span>
-<span class="c">## 3    12     149 12.6   74     5   3</span>
-<span class="c">## 4    18     313 11.5   62     5   4</span>
-<span class="c">## 5    NA      NA 14.3   56     5   5</span>
-<span class="c">## 6    28      NA 14.9   66     5   6</span>
+<div class="highlight"><pre><span></span>##   Ozone Solar.R Wind Temp Month Day
+## 1    41     190  7.4   67     5   1
+## 2    36     118  8.0   72     5   2
+## 3    12     149 12.6   74     5   3
+## 4    18     313 11.5   62     5   4
+## 5    NA      NA 14.3   56     5   5
+## 6    28      NA 14.9   66     5   6
 </pre></div>
 
 
-<div class="highlight"><pre>s <span class="o">&lt;-</span> split<span class="p">(</span>airquality<span class="p">,</span> airquality<span class="o">$</span>Month<span class="p">)</span>
+<div class="highlight"><pre><span></span>s <span class="o">&lt;-</span> <span class="kp">split</span><span class="p">(</span>airquality<span class="p">,</span> airquality<span class="o">$</span>Month<span class="p">)</span>
 </pre></div>
 
 
 <p><code>s</code> is a list of dataframes split by month:</p>
-<div class="highlight"><pre>class<span class="p">(</span>s<span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="kp">class</span><span class="p">(</span>s<span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## [1] &quot;list&quot;</span>
+<div class="highlight"><pre><span></span>## [1] &quot;list&quot;
 </pre></div>
 
 
-<div class="highlight"><pre>class<span class="p">(</span>s<span class="p">[[</span><span class="m">1</span><span class="p">]])</span>
+<div class="highlight"><pre><span></span><span class="kp">class</span><span class="p">(</span>s<span class="p">[[</span><span class="m">1</span><span class="p">]])</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## [1] &quot;data.frame&quot;</span>
+<div class="highlight"><pre><span></span>## [1] &quot;data.frame&quot;
 </pre></div>
 
 
-<div class="highlight"><pre>lapply<span class="p">(</span>s<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> head<span class="p">(</span>x<span class="p">,</span> n <span class="o">=</span> <span class="m">2</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="kp">lapply</span><span class="p">(</span>s<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="kp">head</span><span class="p">(</span>x<span class="p">,</span> n <span class="o">=</span> <span class="m">2</span><span class="p">))</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## $`5`</span>
-<span class="c">##   Ozone Solar.R Wind Temp Month Day</span>
-<span class="c">## 1    41     190  7.4   67     5   1</span>
-<span class="c">## 2    36     118  8.0   72     5   2</span>
-<span class="c">## </span>
-<span class="c">## $`6`</span>
-<span class="c">##    Ozone Solar.R Wind Temp Month Day</span>
-<span class="c">## 32    NA     286  8.6   78     6   1</span>
-<span class="c">## 33    NA     287  9.7   74     6   2</span>
-<span class="c">## </span>
-<span class="c">## $`7`</span>
-<span class="c">##    Ozone Solar.R Wind Temp Month Day</span>
-<span class="c">## 62   135     269  4.1   84     7   1</span>
-<span class="c">## 63    49     248  9.2   85     7   2</span>
-<span class="c">## </span>
-<span class="c">## $`8`</span>
-<span class="c">##    Ozone Solar.R Wind Temp Month Day</span>
-<span class="c">## 93    39      83  6.9   81     8   1</span>
-<span class="c">## 94     9      24 13.8   81     8   2</span>
-<span class="c">## </span>
-<span class="c">## $`9`</span>
-<span class="c">##     Ozone Solar.R Wind Temp Month Day</span>
-<span class="c">## 124    96     167  6.9   91     9   1</span>
-<span class="c">## 125    78     197  5.1   92     9   2</span>
+<div class="highlight"><pre><span></span>## $`5`
+##   Ozone Solar.R Wind Temp Month Day
+## 1    41     190  7.4   67     5   1
+## 2    36     118  8.0   72     5   2
+## 
+## $`6`
+##    Ozone Solar.R Wind Temp Month Day
+## 32    NA     286  8.6   78     6   1
+## 33    NA     287  9.7   74     6   2
+## 
+## $`7`
+##    Ozone Solar.R Wind Temp Month Day
+## 62   135     269  4.1   84     7   1
+## 63    49     248  9.2   85     7   2
+## 
+## $`8`
+##    Ozone Solar.R Wind Temp Month Day
+## 93    39      83  6.9   81     8   1
+## 94     9      24 13.8   81     8   2
+## 
+## $`9`
+##     Ozone Solar.R Wind Temp Month Day
+## 124    96     167  6.9   91     9   1
+## 125    78     197  5.1   92     9   2
 </pre></div>
 
 
 <p>After splitting by month, we can use <code>lapply</code> to take the column means:</p>
-<div class="highlight"><pre>takeMeans <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> colMeans<span class="p">(</span>x<span class="p">[,</span> c<span class="p">(</span><span class="s">&quot;Ozone&quot;</span><span class="p">,</span> <span class="s">&quot;Solar.R&quot;</span><span class="p">,</span> <span class="s">&quot;Wind&quot;</span><span class="p">)],</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
-lapply<span class="p">(</span>s<span class="p">,</span> takeMeans<span class="p">)</span>
+<div class="highlight"><pre><span></span>takeMeans <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="kp">colMeans</span><span class="p">(</span>x<span class="p">[,</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Ozone&quot;</span><span class="p">,</span> <span class="s">&quot;Solar.R&quot;</span><span class="p">,</span> <span class="s">&quot;Wind&quot;</span><span class="p">)],</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="kp">lapply</span><span class="p">(</span>s<span class="p">,</span> takeMeans<span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## $`5`</span>
-<span class="c">##   Ozone Solar.R    Wind </span>
-<span class="c">##   23.62  181.30   11.62 </span>
-<span class="c">## </span>
-<span class="c">## $`6`</span>
-<span class="c">##   Ozone Solar.R    Wind </span>
-<span class="c">##   29.44  190.17   10.27 </span>
-<span class="c">## </span>
-<span class="c">## $`7`</span>
-<span class="c">##   Ozone Solar.R    Wind </span>
-<span class="c">##  59.115 216.484   8.942 </span>
-<span class="c">## </span>
-<span class="c">## $`8`</span>
-<span class="c">##   Ozone Solar.R    Wind </span>
-<span class="c">##  59.962 171.857   8.794 </span>
-<span class="c">## </span>
-<span class="c">## $`9`</span>
-<span class="c">##   Ozone Solar.R    Wind </span>
-<span class="c">##   31.45  167.43   10.18</span>
+<div class="highlight"><pre><span></span>## $`5`
+##   Ozone Solar.R    Wind 
+##   23.62  181.30   11.62 
+## 
+## $`6`
+##   Ozone Solar.R    Wind 
+##   29.44  190.17   10.27 
+## 
+## $`7`
+##   Ozone Solar.R    Wind 
+##  59.115 216.484   8.942 
+## 
+## $`8`
+##   Ozone Solar.R    Wind 
+##  59.962 171.857   8.794 
+## 
+## $`9`
+##   Ozone Solar.R    Wind 
+##   31.45  167.43   10.18
 </pre></div>
 
 
 <p>Using <code>sapply</code> instead of <code>lapply</code> simplifies the output into a matrix,
 so we can easily see the mean values by month.</p>
-<div class="highlight"><pre>sapply<span class="p">(</span>s<span class="p">,</span> takeMeans<span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="kp">sapply</span><span class="p">(</span>s<span class="p">,</span> takeMeans<span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">##              5      6       7       8      9</span>
-<span class="c">## Ozone    23.62  29.44  59.115  59.962  31.45</span>
-<span class="c">## Solar.R 181.30 190.17 216.484 171.857 167.43</span>
-<span class="c">## Wind     11.62  10.27   8.942   8.794  10.18</span>
+<div class="highlight"><pre><span></span>##              5      6       7       8      9
+## Ozone    23.62  29.44  59.115  59.962  31.45
+## Solar.R 181.30 190.17 216.484 171.857 167.43
+## Wind     11.62  10.27   8.942   8.794  10.18
 </pre></div>
 
 
 <h3>Splitting on more than one level</h3>
-<div class="highlight"><pre>x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">10</span><span class="p">)</span>
-f1 <span class="o">&lt;-</span> gl<span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span>  <span class="c1"># Create a factor with two levels</span>
-f2 <span class="o">&lt;-</span> gl<span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>  <span class="c1"># Create a factor with five levels</span>
+<div class="highlight"><pre><span></span>x <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">10</span><span class="p">)</span>
+f1 <span class="o">&lt;-</span> <span class="kp">gl</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span>  <span class="c1"># Create a factor with two levels</span>
+f2 <span class="o">&lt;-</span> <span class="kp">gl</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>  <span class="c1"># Create a factor with five levels</span>
 str<span class="p">(</span>f1<span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">##  Factor w/ 2 levels &quot;1&quot;,&quot;2&quot;: 1 1 1 1 1 2 2 2 2 2</span>
+<div class="highlight"><pre><span></span>##  Factor w/ 2 levels &quot;1&quot;,&quot;2&quot;: 1 1 1 1 1 2 2 2 2 2
 </pre></div>
 
 
-<div class="highlight"><pre>str<span class="p">(</span>f2<span class="p">)</span>
+<div class="highlight"><pre><span></span>str<span class="p">(</span>f2<span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">##  Factor w/ 5 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 1 1 2 2 3 3 4 4 5 5</span>
+<div class="highlight"><pre><span></span>##  Factor w/ 5 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 1 1 2 2 3 3 4 4 5 5
 </pre></div>
 
 
-<div class="highlight"><pre>interaction<span class="p">(</span>f1<span class="p">,</span> f2<span class="p">)</span>  <span class="c1"># Compute a factor with 10 levels, which is the interaction of the two factors</span>
+<div class="highlight"><pre><span></span><span class="kp">interaction</span><span class="p">(</span>f1<span class="p">,</span> f2<span class="p">)</span>  <span class="c1"># Compute a factor with 10 levels, which is the interaction of the two factors</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">##  [1] 1.1 1.1 1.2 1.2 1.3 2.3 2.4 2.4 2.5 2.5</span>
-<span class="c">## Levels: 1.1 2.1 1.2 2.2 1.3 2.3 1.4 2.4 1.5 2.5</span>
+<div class="highlight"><pre><span></span>##  [1] 1.1 1.1 1.2 1.2 1.3 2.3 2.4 2.4 2.5 2.5
+## Levels: 1.1 2.1 1.2 2.2 1.3 2.3 1.4 2.4 1.5 2.5
 </pre></div>
 
 
 <p>Note that some levels of the interaction are empty for our data vector <code>x</code>. For example, none of the samples in <code>x</code> have level 2.1.</p>
 <p>We can use multiple factor levels with <code>split</code> by passing the interaction
 factor. Instead of calling <code>interaction</code> explicitly, if we pass the factors in a list, the <code>interaction</code> function is automatically called:</p>
-<div class="highlight"><pre>str<span class="p">(</span>split<span class="p">(</span>x<span class="p">,</span> list<span class="p">(</span>f1<span class="p">,</span> f2<span class="p">)))</span>  <span class="c1"># Automatically calls interaction(f1,f2)</span>
+<div class="highlight"><pre><span></span>str<span class="p">(</span><span class="kp">split</span><span class="p">(</span>x<span class="p">,</span> <span class="kt">list</span><span class="p">(</span>f1<span class="p">,</span> f2<span class="p">)))</span>  <span class="c1"># Automatically calls interaction(f1,f2)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## List of 10</span>
-<span class="c">##  $ 1.1: num [1:2] 0.993 0.939</span>
-<span class="c">##  $ 2.1: num(0) </span>
-<span class="c">##  $ 1.2: num [1:2] 1.092 -0.382</span>
-<span class="c">##  $ 2.2: num(0) </span>
-<span class="c">##  $ 1.3: num -0.985</span>
-<span class="c">##  $ 2.3: num 1.53</span>
-<span class="c">##  $ 1.4: num(0) </span>
-<span class="c">##  $ 2.4: num [1:2] -0.066 -1.64</span>
-<span class="c">##  $ 1.5: num(0) </span>
-<span class="c">##  $ 2.5: num [1:2] 0.452 -1.324</span>
+<div class="highlight"><pre><span></span>## List of 10
+##  $ 1.1: num [1:2] 0.993 0.939
+##  $ 2.1: num(0) 
+##  $ 1.2: num [1:2] 1.092 -0.382
+##  $ 2.2: num(0) 
+##  $ 1.3: num -0.985
+##  $ 2.3: num 1.53
+##  $ 1.4: num(0) 
+##  $ 2.4: num [1:2] -0.066 -1.64
+##  $ 1.5: num(0) 
+##  $ 2.5: num [1:2] 0.452 -1.324
 </pre></div>
 
 
 <p>Note that some levels are empty, but they still appear in list output by
 <code>split</code>.  Empty levels can be dropped by passing  <code>drop = TRUE</code>.</p>
-<div class="highlight"><pre>str<span class="p">(</span>split<span class="p">(</span>x<span class="p">,</span> list<span class="p">(</span>f1<span class="p">,</span> f2<span class="p">),</span> drop <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
+<div class="highlight"><pre><span></span>str<span class="p">(</span><span class="kp">split</span><span class="p">(</span>x<span class="p">,</span> <span class="kt">list</span><span class="p">(</span>f1<span class="p">,</span> f2<span class="p">),</span> drop <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="c">## List of 6</span>
-<span class="c">##  $ 1.1: num [1:2] 0.993 0.939</span>
-<span class="c">##  $ 1.2: num [1:2] 1.092 -0.382</span>
-<span class="c">##  $ 1.3: num -0.985</span>
-<span class="c">##  $ 2.3: num 1.53</span>
-<span class="c">##  $ 2.4: num [1:2] -0.066 -1.64</span>
-<span class="c">##  $ 2.5: num [1:2] 0.452 -1.324</span>
+<div class="highlight"><pre><span></span>## List of 6
+##  $ 1.1: num [1:2] 0.993 0.939
+##  $ 1.2: num [1:2] 1.092 -0.382
+##  $ 1.3: num -0.985
+##  $ 2.3: num 1.53
+##  $ 2.4: num [1:2] -0.066 -1.64
+##  $ 2.5: num [1:2] 0.452 -1.324
 </pre></div>
             <a href="#" class="go-top">Go Top</a>
     <div class="comments">
