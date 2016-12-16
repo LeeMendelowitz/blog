@@ -164,11 +164,11 @@ resides at `/usr/local/bin/python`, I could sort things out:
 ```
 
 ### Python compiled from source (`/usr/local/bin/python`)
+
 ```bash
 >>> import sys
 >>> print '\n'.join(sys.path)
 
-/usr/local/lib/python2.7/dist-packages
 /usr/local/lib/python27.zip
 /usr/local/lib/python2.7
 /usr/local/lib/python2.7/plat-linux2
@@ -178,7 +178,7 @@ resides at `/usr/local/bin/python`, I could sort things out:
 /usr/local/lib/python2.7/site-packages
 ```
 
-Turns out what mattered for me was `dist-packages` vs. `site-packages`. Using Ubuntu's Python, my packges were installed to `/usr/local/lib/python2.7/dist-packages`, whereas the new Python I installed expects packages to be installed to `/usr/local/lib/python2.7/site-packages`. I just had to manipulate the `PYTHONPATH` environment variable to point to `dist-packages` in order to gain access to the previously installed packaged with the newly installed version of Python.
+Turns out what mattered for me was `dist-packages` vs. `site-packages`. Using Ubuntu's Python, my packages were installed to `/usr/local/lib/python2.7/dist-packages`, whereas the new Python I installed expects packages to be installed to `/usr/local/lib/python2.7/site-packages`. I just had to manipulate the `PYTHONPATH` environment variable to point to `dist-packages` in order to gain access to the previously installed packaged with the newly installed version of Python.
 
 #### How did Ubuntu manipulate the `sys.path`?
 
