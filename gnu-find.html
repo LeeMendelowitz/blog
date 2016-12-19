@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lee On Coding, My blog about coding and stuff.">
+
+        <link rel="alternate"  href="https://leemendelowitz.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" title="Lee On Coding Full Atom Feed"/>
+
+        <title>Finding files with GNU find! // Lee On Coding // My blog about coding and stuff.</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://leemendelowitz.github.io/blog/theme/css/pure.css">
+    <link rel="stylesheet" href="https://leemendelowitz.github.io/blog/theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <div class="cover-img" style="background: none repeat scroll 0% 0% #3D3F5D">
+                <div class="cover-body">
+                    <header class="header">
+                        <hgroup>
+                            <img class="avatar" src="https://leemendelowitz.github.io/blog//images/avatar.jpeg">
+                            <h1 class="brand-main"><a href="https://leemendelowitz.github.io/blog">Lee On Coding</a></h1>
+                            <p class="tagline">My blog about coding and stuff.</p>
+                                <p class="social">
+                                    <a href="http://twitter.com/lmendy7">
+                                        <i class="fa fa-twitter fa-3x"></i>
+                                    </a>
+                                    <a href="https://github.com/LeeMendelowitz">
+                                        <i class="fa fa-github fa-3x"></i>
+                                    </a>
+                                </p>
+                        </hgroup>
+                    </header>
+                </div>
+            </div>
+        </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Finding files with GNU find!</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="https://leemendelowitz.github.io/blog/tag/linux.html">Linux</a>
+                        </p>
+                </header>
+            </section>
+            <p>If you want to learn how to use your computer like a boss, it's a good idea
+to get comfortable working on the command line <a href="http://linuxcommand.org/lc3_learning_the_shell.php" target="_blank">with a shell</a>. Oftentimes it's a more effective way to get certain things done.</p>
+<p>If you are on MacOS or Linux, you probably already have the <code>bash</code> shell installed. Limited <code>bash</code> support was added to Windows in Windows 10. Once you are comfortable working in the shell you'll want to learn to use command line
+utilities like <code>find</code>, <code>xargs</code>, <code>grep</code> (and much more) to get stuff done and make your day to day computing life easy.</p>
+<p>There are so many practical applications of these utilities. In this post, I'll introduce <code>find</code> which is a utility for finding files based on criteria like name, file size, or the timestamp when the file was created or last accessed or modified. In </p>
+<p>Let's say I've got a bunch of files in a folder, and I want to copy some (but not all) of the files to Dropbox. I only want to copy image files that have been created in the last week. We will explore the use of command line tools to get this job done.</p>
+<h3>Using <code>ls</code> to list files by extension</h3>
+<p>The <code>ls</code> utility can be used to list the files in the current directory:</p>
+<div class="highlight"><pre><span></span>ls -1 *.jpg
+</pre></div>
+
+
+<p>This works well in simple situations, but it's not the most robust solution. What if some files have the extension '.JPG' or '.jpeg' or '.png'? And how do we only list some files based on creation time? <code>ls</code> cannot handle these situations.</p>
+<h3>Using <code>find</code> to list files by extensions</h3>
+<p>The <code>find</code> utility can be used to find files based on various search criteria. To filter files by name pattern, ignoring case:</p>
+<div class="highlight"><pre><span></span>find . -iname <span class="s1">&#39;*.jpg&#39;</span>
+</pre></div>
+
+
+<p>This means "find in this directory or the subdirectories contained therein
+any file that has an extension .jpg, case insensitive." You can use <code>-name</code> for case sensitive searches.</p>
+<p>Note the quotes around the pattern: '*.jpg'. We must use quotes to prevent the shell from performing <a href="http://linuxcommand.org/lc3_lts0080.php" target="_blank">shell expansion</a>.</p>
+<h3>Multiple Criteria</h3>
+<p>To accommodate multiple possible extensions, we must add arguments to
+<code>find</code>,</p>
+<p>By default, each criteria provided to <code>find</code> is added using AND logic (i.e. all the listed criteria must be true for a file to match). Here we must use <code>-o</code> to add criteria using OR logic, where a file must match only some of the search criteria.</p>
+<div class="highlight"><pre><span></span>find .  <span class="se">\</span>
+ -iname <span class="s1">&#39;*.jpg&#39;</span> <span class="se">\</span>
+ -o -iname <span class="s1">&#39;*.jpeg&#39;</span> <span class="se">\</span>
+ -o -iname <span class="s1">&#39;*.png&#39;</span>
+</pre></div>
+
+
+<p>This means "find in this directory or the subdirectories contained therein
+any file that has an extension '.jpg', or '.jpeg' or '.png', case insensitive".</p>
+<p>If you forgot the <code>-o</code> flags then <code>find</code> would come up empty because file names cannot end in '.jpg' AND '.jpeg'.</p>
+<h3>Using maxdepth</h3>
+<p>We can make this search even more robust by requiring the file be a regular file (i.e. not a directory) and the results be in the current working directory, but not a subdirectory. </p>
+<p>The argument <code>-maxdepth 1</code> says look in this folder, but not any deeper. The argument <code>-type f</code> means look for regular files, but not directories.</p>
+<p>To get the OR logic to work right, we need to group our file name criteria in the matching parentheses <code>\(</code> and <code>\)</code>. The parentheses must be escaped with the backlash (common practice when working on the command line. (Sometimes you gotta escape stuff.)</p>
+<div class="highlight"><pre><span></span>find .  <span class="se">\</span>
+ -maxdepth <span class="m">1</span> <span class="se">\</span>
+ -type f <span class="se">\</span>
+ <span class="se">\(</span> <span class="se">\</span>
+     -iname <span class="s1">&#39;*.jpg&#39;</span> <span class="se">\</span>
+     -o -iname <span class="s1">&#39;*.jpeg&#39;</span> <span class="se">\</span>
+     -o -iname <span class="s1">&#39;*.png&#39;</span> <span class="se">\</span>
+ <span class="se">\)</span>
+</pre></div>
+
+
+<h3>Using <code>-ctime</code> for creation time</h3>
+<p>We use the <code>-ctime</code> argument to find files based on file creation time. To find created in the last 7 days, we use <code>-ctime -7</code></p>
+<div class="highlight"><pre><span></span>find .  <span class="se">\</span>
+ -maxdepth <span class="m">1</span> <span class="se">\</span>
+ -type f <span class="se">\</span>
+ -ctime -7 <span class="se">\</span>
+ <span class="se">\(</span> <span class="se">\</span>
+     -iname <span class="s1">&#39;*.jpg&#39;</span> <span class="se">\</span>
+     -o -iname <span class="s1">&#39;*.jpeg&#39;</span> <span class="se">\</span>
+     -o -iname <span class="s1">&#39;*.png&#39;</span> <span class="se">\</span>
+ <span class="se">\)</span> 
+</pre></div>
+
+
+<h3>Using <code>find</code> + <code>xargs</code></h3>
+<p>Alright, we are novice experts at finding files now. I want to find files and do something with those files I find - like move them to Dropbox.</p>
+<p>Since I've installed Dropbox on my MacBook, if I copy files into <code>~/Dropbox</code> the Dropbox app will sync them to the Dropbox service. We can use the <code>xargs</code> utility to do the heavy lifting.</p>
+<p><code>xargs</code> is processor of sorts: for each argument in its input, it runs a program and constructs the command line argumants passed to that program.</p>
+<p>For example, I effectively want to do something like this:</p>
+<div class="highlight"><pre><span></span>cp photo1.jpg ~/Dropbox
+cp photo2.jpg ~/Dropbox
+cp photo3.jpg ~/Dropbox
+</pre></div>
+
+
+<p>etc., but 100 times. or 1000 times, once for each photo. This is a job for <code>xargs</code>. You can pass the results of <code>find</code> into <code>xargs</code> using the pipe operator <code>|</code>, as so:</p>
+<div class="highlight"><pre><span></span>find .  <span class="se">\</span>
+ -maxdepth <span class="m">1</span> <span class="se">\</span>
+ -type f <span class="se">\</span>
+ -ctime -7 <span class="se">\</span>
+ <span class="se">\(</span> <span class="se">\</span>
+     -iname <span class="s1">&#39;*.jpg&#39;</span> <span class="se">\</span>
+     -o -iname <span class="s1">&#39;*.jpeg&#39;</span> <span class="se">\</span>
+     -o -iname <span class="s1">&#39;*.png&#39;</span> <span class="se">\</span>
+ <span class="se">\)</span> <span class="se">\</span>
+ <span class="p">|</span> xargs -I <span class="o">{}</span> cp <span class="o">{}</span> ~/Dropbox
+</pre></div>
+
+
+<p>For each file returned by <code>find</code> (photo1.jpg, photo2.jpg, etc.), <code>xargs</code> will run <code>cp {} ~/Dropbox</code> where the placeholder <code>{}</code> is replaced by the arguments. </p>
+<p>There is one gotcha - sometimes filenames have spaces (boooo!). This can create a problem for this <code>find</code> into <code>xargs</code> pipeline. The solution is to instruct <code>find</code> to separate results with a null character, and then have <code>xargs</code> parse it's input list of arguments using this separator. We use <code>-print0</code> argument with <code>find</code>, and <code>-0</code> with xargs:</p>
+<div class="highlight"><pre><span></span>find . <span class="se">\</span>
+ -maxdepth <span class="m">1</span> <span class="se">\</span>
+ -type f <span class="se">\</span>
+ -ctime -7 <span class="se">\</span>
+ <span class="se">\(</span> <span class="se">\</span>
+     -iname <span class="s1">&#39;*.jpg&#39;</span> <span class="se">\</span>
+     -o -iname <span class="s1">&#39;*.jpeg&#39;</span> <span class="se">\</span>
+     -o -iname <span class="s1">&#39;*.png&#39;</span> <span class="se">\</span>
+ <span class="se">\)</span> <span class="se">\</span>
+ -print0 <span class="se">\</span>
+ <span class="p">|</span> xargs -0 -I <span class="o">{}</span> cp <span class="o">{}</span> ~/Dropbox
+</pre></div>
+
+
+<p><code>-print0</code> must come at the end, after the search criteria.</p>
+<p>Alright good stuff. This is nice, powerful, and flexible!</p>
+<h2>Other arguments to find</h2>
+<h3>File size</h3>
+<p>Use '-size' to search based on file size. Here's a way to search for large files over 100 MB in your home directory:</p>
+<div class="highlight"><pre><span></span>find ~ -type f -size +100M
+</pre></div>
+
+
+<p>use <code>k</code> for kilobytes, 'M' for Megbytes, <code>G</code> for gigabytes.</p>
+<h3>Timestamps in depth</h3>
+<p>Use <code>-ctime</code>, <code>-mtime</code>, <code>-atime</code> to find files that have been created, modified, accessed n days ago. There are some rounding affects, where fractional parts of days are ignored. Check out the manpage (<code>man find</code>) for more information. Here are some quick examples:</p>
+<p>To find files modified between 1 and 2 days ago, supply argument <code>-mtime 1</code>.</p>
+<div class="highlight"><pre><span></span>find . -mtime 1
+</pre></div>
+
+
+<p>Since the fractional part of days are ignored, files modified 1.001 days and 1.999 days ago both match <code>-mtime 1</code> exactly.</p>
+<p>To find files modified less than 1 days ago:</p>
+<div class="highlight"><pre><span></span>find . -mtime -1
+</pre></div>
+
+
+<p>Find files modified more than 1 days ago:</p>
+<div class="highlight"><pre><span></span>find . -mtime +1
+</pre></div>
+
+
+<p>Notice how the <code>+</code> and <code>-</code> affect the search. Like all of the <code>find</code> criteria, you can combine them. For example:</p>
+<div class="highlight"><pre><span></span>find . -mtime +0 -mtime -2
+</pre></div>
+
+
+<p>means find files that have modified 1 or more days ago (<code>-mtime +0</code>) <strong>and</strong> less than 2 days ago (<code>-mtime -2</code>). This is the same as <code>find . -mtime 1</code>.</p>
+<p>Use <code>-cmin</code>, <code>-mmin</code>, <code>-amin</code> to find files that have been created, modified, accessed n minutes ago. This works just like the examples above, accept where n represents minutes instead of days.</p>
+<h2>Conclusion</h2>
+<p><code>find</code> is a very useful utility for finding files. It works great with <code>xargs</code>, for running additional commands for every file that matches your search criteria.</p>
+            <a href="#" class="go-top">Go Top</a>
+    <div class="comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = "leeoncoding"; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+<footer class="footer">
+    <p>&copy; Lee Mendelowitz &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+    </div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-44545448-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+
+</body>
+</html>

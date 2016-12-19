@@ -1,5 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Lee On Coding</title><link href="https://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="https://leemendelowitz.github.io/blog/feeds/lee-mendelowitz.atom.xml" rel="self"></link><id>https://leemendelowitz.github.io/blog/</id><updated>2015-03-04T17:30:00+01:00</updated><entry><title>How does python find packages?</title><link href="https://leemendelowitz.github.io/blog/how-does-python-find-packages.html" rel="alternate"></link><published>2015-03-04T17:30:00+01:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2015-03-04:blog/how-does-python-find-packages.html</id><summary type="html">&lt;p&gt;I just ran into a situation where I compiled and installed Python 2.7.9 from source on Ubuntu, but Python could not find the packages I had previously installed. This naturally raises the question - how does Python know where to find packages when you call &lt;code&gt;import&lt;/code&gt;? This post applies specifically to Python 2.7.9, but I'm guessing Python 3x works very similarly.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Lee On Coding</title><link href="https://leemendelowitz.github.io/blog/" rel="alternate"></link><link href="https://leemendelowitz.github.io/blog/feeds/lee-mendelowitz.atom.xml" rel="self"></link><id>https://leemendelowitz.github.io/blog/</id><updated>2016-12-16T00:00:00+01:00</updated><entry><title>Finding files with GNU find!</title><link href="https://leemendelowitz.github.io/blog/gnu-find.html" rel="alternate"></link><published>2016-12-16T00:00:00+01:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2016-12-16:blog/gnu-find.html</id><summary type="html">&lt;p&gt;If you want to learn how to use your computer like a boss, it's a good idea
+to get comfortable working on the command line &lt;a href="http://linuxcommand.org/lc3_learning_the_shell.php" target="_blank"&gt;with a shell&lt;/a&gt;. Oftentimes it's a more effective way to get certain things done.&lt;/p&gt;
+&lt;p&gt;If you are on MacOS or Linux, you probably already have the &lt;code&gt;bash&lt;/code&gt; shell installed. Limited &lt;code&gt;bash&lt;/code&gt; support was added to Windows in Windows 10. Once you are comfortable working in the shell you'll want to learn to use command line
+utilities like &lt;code&gt;find&lt;/code&gt;, &lt;code&gt;xargs&lt;/code&gt;, &lt;code&gt;grep&lt;/code&gt; (and much more) to get stuff done and make your day to day computing life easy.&lt;/p&gt;
+&lt;p&gt;There are so many practical applications of these utilities. In this post, I'll introduce &lt;code&gt;find&lt;/code&gt; which is a utility for finding files based on criteria like name, file size, or the timestamp when the file was created or last accessed or modified. In &lt;/p&gt;
+&lt;p&gt;Let's say I've got a bunch of files in a folder, and I want to copy some (but not all) of the files to Dropbox. I only want to copy image files that have been created in the last week. We will explore the use of command line tools to get this job done.&lt;/p&gt;
+&lt;h3&gt;Using &lt;code&gt;ls&lt;/code&gt; to list files by extension&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;ls&lt;/code&gt; utility can be used to list the files in the current directory:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ls -1 *.jpg
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This works well in simple situations, but it's not the most robust solution. What if some files have the extension '.JPG' or '.jpeg' or '.png'? And how do we only list some files based on creation time? &lt;code&gt;ls&lt;/code&gt; cannot handle these situations.&lt;/p&gt;
+&lt;h3&gt;Using &lt;code&gt;find&lt;/code&gt; to list files by extensions&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;find&lt;/code&gt; utility can be used to find files based on various search criteria. To filter files by name pattern, ignoring case:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find . -iname &lt;span class="s1"&gt;&amp;#39;*.jpg&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This means "find in this directory or the subdirectories contained therein
+any file that has an extension .jpg, case insensitive." You can use &lt;code&gt;-name&lt;/code&gt; for case sensitive searches.&lt;/p&gt;
+&lt;p&gt;Note the quotes around the pattern: '*.jpg'. We must use quotes to prevent the shell from performing &lt;a href="http://linuxcommand.org/lc3_lts0080.php" target="_blank"&gt;shell expansion&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Multiple Criteria&lt;/h3&gt;
+&lt;p&gt;To accommodate multiple possible extensions, we must add arguments to
+&lt;code&gt;find&lt;/code&gt;,&lt;/p&gt;
+&lt;p&gt;By default, each criteria provided to &lt;code&gt;find&lt;/code&gt; is added using AND logic (i.e. all the listed criteria must be true for a file to match). Here we must use &lt;code&gt;-o&lt;/code&gt; to add criteria using OR logic, where a file must match only some of the search criteria.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find .  &lt;span class="se"&gt;\&lt;/span&gt;
+ -iname &lt;span class="s1"&gt;&amp;#39;*.jpg&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ -o -iname &lt;span class="s1"&gt;&amp;#39;*.jpeg&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ -o -iname &lt;span class="s1"&gt;&amp;#39;*.png&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This means "find in this directory or the subdirectories contained therein
+any file that has an extension '.jpg', or '.jpeg' or '.png', case insensitive".&lt;/p&gt;
+&lt;p&gt;If you forgot the &lt;code&gt;-o&lt;/code&gt; flags then &lt;code&gt;find&lt;/code&gt; would come up empty because file names cannot end in '.jpg' AND '.jpeg'.&lt;/p&gt;
+&lt;h3&gt;Using maxdepth&lt;/h3&gt;
+&lt;p&gt;We can make this search even more robust by requiring the file be a regular file (i.e. not a directory) and the results be in the current working directory, but not a subdirectory. &lt;/p&gt;
+&lt;p&gt;The argument &lt;code&gt;-maxdepth 1&lt;/code&gt; says look in this folder, but not any deeper. The argument &lt;code&gt;-type f&lt;/code&gt; means look for regular files, but not directories.&lt;/p&gt;
+&lt;p&gt;To get the OR logic to work right, we need to group our file name criteria in the matching parentheses &lt;code&gt;\(&lt;/code&gt; and &lt;code&gt;\)&lt;/code&gt;. The parentheses must be escaped with the backlash (common practice when working on the command line. (Sometimes you gotta escape stuff.)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find .  &lt;span class="se"&gt;\&lt;/span&gt;
+ -maxdepth &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ -type f &lt;span class="se"&gt;\&lt;/span&gt;
+ &lt;span class="se"&gt;\(&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+     -iname &lt;span class="s1"&gt;&amp;#39;*.jpg&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+     -o -iname &lt;span class="s1"&gt;&amp;#39;*.jpeg&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+     -o -iname &lt;span class="s1"&gt;&amp;#39;*.png&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ &lt;span class="se"&gt;\)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Using &lt;code&gt;-ctime&lt;/code&gt; for creation time&lt;/h3&gt;
+&lt;p&gt;We use the &lt;code&gt;-ctime&lt;/code&gt; argument to find files based on file creation time. To find created in the last 7 days, we use &lt;code&gt;-ctime -7&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find .  &lt;span class="se"&gt;\&lt;/span&gt;
+ -maxdepth &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ -type f &lt;span class="se"&gt;\&lt;/span&gt;
+ -ctime -7 &lt;span class="se"&gt;\&lt;/span&gt;
+ &lt;span class="se"&gt;\(&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+     -iname &lt;span class="s1"&gt;&amp;#39;*.jpg&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+     -o -iname &lt;span class="s1"&gt;&amp;#39;*.jpeg&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+     -o -iname &lt;span class="s1"&gt;&amp;#39;*.png&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ &lt;span class="se"&gt;\)&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Using &lt;code&gt;find&lt;/code&gt; + &lt;code&gt;xargs&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Alright, we are novice experts at finding files now. I want to find files and do something with those files I find - like move them to Dropbox.&lt;/p&gt;
+&lt;p&gt;Since I've installed Dropbox on my MacBook, if I copy files into &lt;code&gt;~/Dropbox&lt;/code&gt; the Dropbox app will sync them to the Dropbox service. We can use the &lt;code&gt;xargs&lt;/code&gt; utility to do the heavy lifting.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;xargs&lt;/code&gt; is processor of sorts: for each argument in its input, it runs a program and constructs the command line argumants passed to that program.&lt;/p&gt;
+&lt;p&gt;For example, I effectively want to do something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp photo1.jpg ~/Dropbox
+cp photo2.jpg ~/Dropbox
+cp photo3.jpg ~/Dropbox
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;etc., but 100 times. or 1000 times, once for each photo. This is a job for &lt;code&gt;xargs&lt;/code&gt;. You can pass the results of &lt;code&gt;find&lt;/code&gt; into &lt;code&gt;xargs&lt;/code&gt; using the pipe operator &lt;code&gt;|&lt;/code&gt;, as so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find .  &lt;span class="se"&gt;\&lt;/span&gt;
+ -maxdepth &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ -type f &lt;span class="se"&gt;\&lt;/span&gt;
+ -ctime -7 &lt;span class="se"&gt;\&lt;/span&gt;
+ &lt;span class="se"&gt;\(&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+     -iname &lt;span class="s1"&gt;&amp;#39;*.jpg&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+     -o -iname &lt;span class="s1"&gt;&amp;#39;*.jpeg&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+     -o -iname &lt;span class="s1"&gt;&amp;#39;*.png&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ &lt;span class="se"&gt;\)&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ &lt;span class="p"&gt;|&lt;/span&gt; xargs -I &lt;span class="o"&gt;{}&lt;/span&gt; cp &lt;span class="o"&gt;{}&lt;/span&gt; ~/Dropbox
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For each file returned by &lt;code&gt;find&lt;/code&gt; (photo1.jpg, photo2.jpg, etc.), &lt;code&gt;xargs&lt;/code&gt; will run &lt;code&gt;cp {} ~/Dropbox&lt;/code&gt; where the placeholder &lt;code&gt;{}&lt;/code&gt; is replaced by the arguments. &lt;/p&gt;
+&lt;p&gt;There is one gotcha - sometimes filenames have spaces (boooo!). This can create a problem for this &lt;code&gt;find&lt;/code&gt; into &lt;code&gt;xargs&lt;/code&gt; pipeline. The solution is to instruct &lt;code&gt;find&lt;/code&gt; to separate results with a null character, and then have &lt;code&gt;xargs&lt;/code&gt; parse it's input list of arguments using this separator. We use &lt;code&gt;-print0&lt;/code&gt; argument with &lt;code&gt;find&lt;/code&gt;, and &lt;code&gt;-0&lt;/code&gt; with xargs:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find . &lt;span class="se"&gt;\&lt;/span&gt;
+ -maxdepth &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ -type f &lt;span class="se"&gt;\&lt;/span&gt;
+ -ctime -7 &lt;span class="se"&gt;\&lt;/span&gt;
+ &lt;span class="se"&gt;\(&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+     -iname &lt;span class="s1"&gt;&amp;#39;*.jpg&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+     -o -iname &lt;span class="s1"&gt;&amp;#39;*.jpeg&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+     -o -iname &lt;span class="s1"&gt;&amp;#39;*.png&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ &lt;span class="se"&gt;\)&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ -print0 &lt;span class="se"&gt;\&lt;/span&gt;
+ &lt;span class="p"&gt;|&lt;/span&gt; xargs -0 -I &lt;span class="o"&gt;{}&lt;/span&gt; cp &lt;span class="o"&gt;{}&lt;/span&gt; ~/Dropbox
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;-print0&lt;/code&gt; must come at the end, after the search criteria.&lt;/p&gt;
+&lt;p&gt;Alright good stuff. This is nice, powerful, and flexible!&lt;/p&gt;
+&lt;h2&gt;Other arguments to find&lt;/h2&gt;
+&lt;h3&gt;File size&lt;/h3&gt;
+&lt;p&gt;Use '-size' to search based on file size. Here's a way to search for large files over 100 MB in your home directory:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find ~ -type f -size +100M
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;use &lt;code&gt;k&lt;/code&gt; for kilobytes, 'M' for Megbytes, &lt;code&gt;G&lt;/code&gt; for gigabytes.&lt;/p&gt;
+&lt;h3&gt;Timestamps in depth&lt;/h3&gt;
+&lt;p&gt;Use &lt;code&gt;-ctime&lt;/code&gt;, &lt;code&gt;-mtime&lt;/code&gt;, &lt;code&gt;-atime&lt;/code&gt; to find files that have been created, modified, accessed n days ago. There are some rounding affects, where fractional parts of days are ignored. Check out the manpage (&lt;code&gt;man find&lt;/code&gt;) for more information. Here are some quick examples:&lt;/p&gt;
+&lt;p&gt;To find files modified between 1 and 2 days ago, supply argument &lt;code&gt;-mtime 1&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find . -mtime 1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Since the fractional part of days are ignored, files modified 1.001 days and 1.999 days ago both match &lt;code&gt;-mtime 1&lt;/code&gt; exactly.&lt;/p&gt;
+&lt;p&gt;To find files modified less than 1 days ago:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find . -mtime -1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Find files modified more than 1 days ago:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find . -mtime +1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Notice how the &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;-&lt;/code&gt; affect the search. Like all of the &lt;code&gt;find&lt;/code&gt; criteria, you can combine them. For example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find . -mtime +0 -mtime -2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;means find files that have modified 1 or more days ago (&lt;code&gt;-mtime +0&lt;/code&gt;) &lt;strong&gt;and&lt;/strong&gt; less than 2 days ago (&lt;code&gt;-mtime -2&lt;/code&gt;). This is the same as &lt;code&gt;find . -mtime 1&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Use &lt;code&gt;-cmin&lt;/code&gt;, &lt;code&gt;-mmin&lt;/code&gt;, &lt;code&gt;-amin&lt;/code&gt; to find files that have been created, modified, accessed n minutes ago. This works just like the examples above, accept where n represents minutes instead of days.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;find&lt;/code&gt; is a very useful utility for finding files. It works great with &lt;code&gt;xargs&lt;/code&gt;, for running additional commands for every file that matches your search criteria.&lt;/p&gt;</summary><category term="Linux"></category></entry><entry><title>How does python find packages?</title><link href="https://leemendelowitz.github.io/blog/how-does-python-find-packages.html" rel="alternate"></link><published>2015-03-04T17:30:00+01:00</published><author><name>Lee Mendelowitz</name></author><id>tag:leemendelowitz.github.io,2015-03-04:blog/how-does-python-find-packages.html</id><summary type="html">&lt;p&gt;I just ran into a situation where I compiled and installed Python 2.7.9 from source on Ubuntu, but Python could not find the packages I had previously installed. This naturally raises the question - how does Python know where to find packages when you call &lt;code&gt;import&lt;/code&gt;? This post applies specifically to Python 2.7.9, but I'm guessing Python 3x works very similarly.&lt;/p&gt;
 &lt;p&gt;In this post I first describe how Python finds packages, and then I'll finish with the discovery I made regarding the default Python that ships with Ubuntu and how it differs from vanilla Python in how it finds packages.&lt;/p&gt;
 &lt;h2&gt;&lt;code&gt;sys.path&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;Python imports work by searching the directories listed in &lt;code&gt;sys.path&lt;/code&gt;. &lt;/p&gt;
