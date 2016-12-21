@@ -3,7 +3,7 @@
 to get comfortable working on the command line &lt;a href="http://linuxcommand.org/lc3_learning_the_shell.php" target="_blank"&gt;with a shell&lt;/a&gt;. Oftentimes it's a more effective way to get certain things done.&lt;/p&gt;
 &lt;p&gt;If you are on MacOS or Linux, you probably already have the &lt;code&gt;bash&lt;/code&gt; shell installed. Limited &lt;code&gt;bash&lt;/code&gt; support was added to Windows in Windows 10. Once you are comfortable working in the shell you'll want to learn to use command line
 utilities like &lt;code&gt;find&lt;/code&gt;, &lt;code&gt;xargs&lt;/code&gt;, &lt;code&gt;grep&lt;/code&gt; (and much more) to get stuff done and make your day to day computing life easy.&lt;/p&gt;
-&lt;p&gt;There are so many practical applications of these utilities. In this post, I'll introduce &lt;code&gt;find&lt;/code&gt; which is a utility for finding files based on criteria like name, file size, or the timestamp when the file was created or last accessed or modified. In &lt;/p&gt;
+&lt;p&gt;There are so many practical applications of these utilities. In this post, I'll introduce &lt;code&gt;find&lt;/code&gt; which is a utility for finding files based on criteria like name, file size, or the timestamp when the file was created or last accessed or modified.&lt;/p&gt;
 &lt;p&gt;Let's say I've got a bunch of files in a folder, and I want to copy some (but not all) of the files to Dropbox. I only want to copy image files that have been created in the last week. We will explore the use of command line tools to get this job done.&lt;/p&gt;
 &lt;h3&gt;Using &lt;code&gt;ls&lt;/code&gt; to list files by extension&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;ls&lt;/code&gt; utility can be used to list the files in the current directory:&lt;/p&gt;
